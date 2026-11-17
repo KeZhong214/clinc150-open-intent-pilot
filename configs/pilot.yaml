@@ -1,0 +1,83 @@
+# Gate-0 reference configuration.
+# The CLI values in README.md must stay in sync with this file.  The protocol
+# tests check the frozen manifests, not this YAML, but these are the intended
+# settings for the pilot.
+
+project:
+  name: "面向少样本智能客服的开放意图识别与自适应拒识方法研究"
+  english_name: "Few-Shot Open Intent Classification with Adaptive Prototype and Rejection Decisions"
+  gate: 0
+  status: "data_and_environment_frozen"
+
+data:
+  dataset: "CLINC150 / OOS-Eval"
+  repository: "https://github.com/clinc/oos-eval"
+  revision: "828f8093932c8fe6ca7936c3d2e52903b1c523de"
+  data_full_sha256: "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0"
+  domains_sha256: "b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a"
+  license: "CC BY 3.0"
+  expected_counts:
+    train: 15000
+    val: 3000
+    test: 4500
+    oos_train: 100
+    oos_val: 100
+    oos_test: 1000
+
+selection:
+  seed: 42
+  known_classes: 20
+  per_domain: 2
+  rule: "SHA-256 rank within each official domain; first 2 per domain"
+  reuse_across_methods: true
+
+support:
+  seeds: [42, 43, 44]
+  shots: [5, 10]
+  source_split: "train"
+  rule: "SHA-256 rank within each selected intent; K=5 nested in K=10"
+  leakage_filter: "exclude train candidates whose normalized text occurs in any official eval split"
+
+evaluation:
+  known_val: 400          # 20 classes x 20 official val rows
+  known_test: 600         # 20 classes x 30 official test rows
+  oos_val: 100            # official oos_val
+  oos_test: 1000          # official oos_test
+  objective: "maximize validation OOS recall subject to validation known acceptance rate >= 0.90"
+
+models:
+  bge:
+    id: "BAAI/bge-small-en-v1.5"
+    revision: "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+    license: "MIT"
+    device: "cpu_first"
+    max_seq_length: 128
+    normalize_embeddings: true
+    instruction: ""
+  qwen:
+    id: "Qwen/Qwen3-Embedding-0.6B"
+    revision: "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    license: "Apache-2.0"
+    device: "cuda:0"
+    dtype: "float16"
+    max_seq_length: 128
+    batch_sizes: [4, 8]
+    # Same instruction prefix for support and query text.  This is a fixed
+    # task instruction, not the web-search prompt shipped in the model card.
+    prompt: "Instruct: Given a customer service message, identify the supported intent it expresses.\nQuery: "
+    prompt_sha256: "4bbdf1c169061f64ba742f64bca5e422d05e94ccc7261d29495c233ed9a90005"
+    trust_remote_code: false
+    flash_attention_2: false
+
+methods:
+  B0: "single prototype + global threshold"
+  B1: "adaptive multi-prototype (2 prototypes for top-25% dispersion classes) + global threshold"
+  B2: "single prototype + class-aware threshold + margin gate"
+  B3: "adaptive multi-prototype + class-aware threshold + margin gate"
+  priority: ["B0", "B2", "B1", "B3"]
+
+protocol:
+  test_policy: "final test is read once for fixed configurations only"
+  calibration: "official val for the 20 selected intents + official oos_val"
+  oos_train: "not used for prototype training"
+  extra_labels: "class-aware thresholds use labeled validation rows beyond K-shot support"

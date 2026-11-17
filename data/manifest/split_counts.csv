@@ -1,0 +1,7 @@
+source_split,role,total,total_known,total_oos,selected_known,selected_oos,selected_total
+train,support_pool,15000,15000,0,2000,0,2000
+val,calibration_known,3000,3000,0,400,0,400
+test,final_known_test,4500,4500,0,600,0,600
+oos_train,not_used,100,0,100,0,0,0
+oos_val,calibration_oos,100,0,100,0,100,100
+oos_test,final_oos_test,1000,0,1000,0,1000,1000

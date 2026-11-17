@@ -1,0 +1,103 @@
+{
+  "schema_version": "gate0-environment-v1",
+  "generated_at_utc": "2026-11-17T15:40:20+00:00",
+  "system": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "os_name": "nt",
+    "windows_version": "10.0.26200",
+    "machine": "AMD64",
+    "processor": "AMD Ryzen 9 8940HX with Radeon Graphics",
+    "logical_cpus": 32,
+    "python_version": "3.14.4",
+    "python_executable": "D:\\code\\intent-open-set\\.venv\\Scripts\\python.exe",
+    "python_prefix": "D:\\code\\intent-open-set\\.venv",
+    "python_base_prefix": "D:\\Environment",
+    "is_venv": true,
+    "venv_uses_system_site_packages": true,
+    "cwd": "D:\\code\\intent-open-set",
+    "project_root": "D:\\code\\intent-open-set"
+  },
+  "memory": {
+    "total_physical_mib": 15583.3,
+    "available_physical_mib": 1830.0,
+    "total_pagefile_mib": 36350.1,
+    "available_pagefile_mib": 4126.1,
+    "memory_load_percent": 88
+  },
+  "disks": {
+    "C:": {
+      "total_gib": 191.24,
+      "used_gib": 180.33,
+      "free_gib": 10.91
+    },
+    "D:": {
+      "total_gib": 439.45,
+      "used_gib": 377.68,
+      "free_gib": 61.77
+    },
+    "E:": {
+      "total_gib": 292.97,
+      "used_gib": 271.34,
+      "free_gib": 21.62
+    }
+  },
+  "cuda": {
+    "ok": true,
+    "returncode": 0,
+    "stdout": "0, NVIDIA GeForce RTX 5070 Laptop GPU, 8151, 596.13, 12.0",
+    "stderr": ""
+  },
+  "torch": {
+    "import_ok": true,
+    "version": "2.11.0+cu128",
+    "cuda_built_version": "12.8",
+    "cudnn_version": 91900,
+    "cuda_available": true,
+    "device_count": 1,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 5070 Laptop GPU",
+        "capability": "12.0",
+        "total_vram_mib": 8150.6
+      }
+    ],
+    "current_device": {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "free_vram_mib_at_check": 7012.0,
+      "total_vram_mib": 8150.6
+    }
+  },
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.1",
+    "sentence-transformers": "6.3.0",
+    "transformers": "5.23.0",
+    "huggingface-hub": "2.4.0",
+    "tokenizers": "0.23.3",
+    "safetensors": "0.8.0",
+    "PyYAML": "6.0.3",
+    "psutil": "7.2.2"
+  },
+  "environment_variables": {
+    "HF_HOME": "D:\\code\\intent-open-set\\data\\model_cache",
+    "HF_HUB_CACHE": null,
+    "TRANSFORMERS_CACHE": null,
+    "PIP_INDEX_URL": null,
+    "CUDA_VISIBLE_DEVICES": null
+  },
+  "git": {
+    "ok": false,
+    "project_git_head": null,
+    "stderr": "fatal: not a git repository (or any of the parent directories): .git"
+  },
+  "notes": [
+    "Torch and several numerical packages are inherited from the base Python environment via a venv created with --system-site-packages.",
+    "This was deliberate: the verified base already contains torch 2.11.0+cu128 for the RTX 5070 Laptop (sm_120); duplicating a CUDA torch install would consume several GB.",
+    "Qwen weights were not downloaded or loaded for this inventory."
+  ]
+}

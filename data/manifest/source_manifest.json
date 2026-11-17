@@ -1,0 +1,261 @@
+{
+  "schema_version": "gate0-source-v1",
+  "generated_at_utc": "2026-11-17T15:36:39+00:00",
+  "dataset": {
+    "name": "CLINC150 / OOS-Eval",
+    "repository": "https://github.com/clinc/oos-eval",
+    "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+    "license": "CC BY 3.0",
+    "data_file": {
+      "path": "D:\\code\\intent-open-set\\data\\raw\\data_full.json",
+      "bytes": 2495390,
+      "sha256": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0"
+    },
+    "domains_file": {
+      "path": "D:\\code\\intent-open-set\\data\\raw\\domains.json",
+      "bytes": 3818,
+      "sha256": "b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a"
+    }
+  },
+  "schema": {
+    "top_level_keys": [
+      "train",
+      "val",
+      "test",
+      "oos_train",
+      "oos_val",
+      "oos_test"
+    ],
+    "record_format": "[text: str, label: str]",
+    "raw_oos_label": "oos",
+    "open_set_oos_label": "OOS"
+  },
+  "counts": {
+    "train": 15000,
+    "val": 3000,
+    "test": 4500,
+    "oos_train": 100,
+    "oos_val": 100,
+    "oos_test": 1000
+  },
+  "known_intents": 150,
+  "domains": 10,
+  "selection": {
+    "seed": 42,
+    "known_classes": 20,
+    "per_domain": 2,
+    "rule": "For each official domain, sort intents by ascending SHA-256('class-selection|<seed>|<domain>|<intent>'); take the first per_domain. No validation/test labels or metrics are used.",
+    "selected_intents": [
+      "uber",
+      "directions",
+      "balance",
+      "routing",
+      "report_lost_card",
+      "credit_score",
+      "reminder",
+      "reminder_update",
+      "meal_suggestion",
+      "restaurant_reviews",
+      "user_name",
+      "change_ai_name",
+      "who_made_you",
+      "are_you_a_bot",
+      "plug_type",
+      "exchange_rate",
+      "measurement_conversion",
+      "spelling",
+      "insurance",
+      "insurance_change"
+    ]
+  },
+  "support": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "shots": [
+      5,
+      10
+    ],
+    "source_split": "train",
+    "rule": "Within each intent, sort train rows by ascending SHA-256('support|<seed>|<intent>|<sample_id>'); take the first max(shots). K=5 is therefore a nested subset of K=10. Rows whose normalized text also occurs in an official eval split are excluded from the support candidate pool and listed in leakage_report.json.",
+    "leakage_filter_applied": true,
+    "n_excluded_candidates": 0
+  },
+  "evaluation": {
+    "calibration_known": 400,
+    "calibration_oos": 100,
+    "final_known_test": 600,
+    "final_oos_test": 1000,
+    "test_policy": "Official test rows are indexed here only. They must not be used for model selection, prompt choice, threshold tuning, or seed choice."
+  },
+  "leakage_audit": {
+    "official_cross_split_shared_normalized_hashes": 5,
+    "within_split_duplicates": {
+      "train": {
+        "rows": 15000,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "val": {
+        "rows": 3000,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "test": {
+        "rows": 4500,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "oos_train": {
+        "rows": 100,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "oos_val": {
+        "rows": 100,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "oos_test": {
+        "rows": 1000,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      }
+    },
+    "cross_split_pairs": [
+      {
+        "split_a": "train",
+        "split_b": "val",
+        "n_shared_normalized_hashes": 3,
+        "examples": [
+          [
+            {
+              "sample_id": "clinc150:train:07424",
+              "label": "todo_list",
+              "text": "what is on my to do list"
+            },
+            {
+              "sample_id": "clinc150:val:01011",
+              "label": "reminder",
+              "text": "what is on my to do list"
+            }
+          ],
+          [
+            {
+              "sample_id": "clinc150:train:11130",
+              "label": "whisper_mode",
+              "text": "turn up your volume"
+            },
+            {
+              "sample_id": "clinc150:val:01794",
+              "label": "change_volume",
+              "text": "turn up your volume"
+            }
+          ],
+          [
+            {
+              "sample_id": "clinc150:train:11896",
+              "label": "greeting",
+              "text": "hey what's up"
+            },
+            {
+              "sample_id": "clinc150:val:02369",
+              "label": "greeting",
+              "text": "hey what's up"
+            }
+          ]
+        ]
+      },
+      {
+        "split_a": "train",
+        "split_b": "test",
+        "n_shared_normalized_hashes": 2,
+        "examples": [
+          [
+            {
+              "sample_id": "clinc150:train:12066",
+              "label": "what_is_your_name",
+              "text": "what's your designation"
+            },
+            {
+              "sample_id": "clinc150:test:00938",
+              "label": "user_name",
+              "text": "what's your designation"
+            }
+          ],
+          [
+            {
+              "sample_id": "clinc150:train:14018",
+              "label": "how_old_are_you",
+              "text": "where did you grow up"
+            },
+            {
+              "sample_id": "clinc150:test:00599",
+              "label": "where_are_you_from",
+              "text": "where did you grow up"
+            }
+          ]
+        ]
+      }
+    ],
+    "support_eval_overlap_after_filter": {
+      "seed42_shot5": {
+        "support_rows": 100,
+        "id_overlap": 0,
+        "normalized_text_overlap_hashes": 0,
+        "id_examples": [],
+        "text_hash_examples": []
+      },
+      "seed42_shot10": {
+        "support_rows": 200,
+        "id_overlap": 0,
+        "normalized_text_overlap_hashes": 0,
+        "id_examples": [],
+        "text_hash_examples": []
+      },
+      "seed43_shot5": {
+        "support_rows": 100,
+        "id_overlap": 0,
+        "normalized_text_overlap_hashes": 0,
+        "id_examples": [],
+        "text_hash_examples": []
+      },
+      "seed43_shot10": {
+        "support_rows": 200,
+        "id_overlap": 0,
+        "normalized_text_overlap_hashes": 0,
+        "id_examples": [],
+        "text_hash_examples": []
+      },
+      "seed44_shot5": {
+        "support_rows": 100,
+        "id_overlap": 0,
+        "normalized_text_overlap_hashes": 0,
+        "id_examples": [],
+        "text_hash_examples": []
+      },
+      "seed44_shot10": {
+        "support_rows": 200,
+        "id_overlap": 0,
+        "normalized_text_overlap_hashes": 0,
+        "id_examples": [],
+        "text_hash_examples": []
+      }
+    },
+    "policy": "Official rows are never deleted or relabeled. Cross-split text collisions are documented in leakage_report.json. Only support candidate selection excludes colliding train rows; val/test/OOS evaluation rows remain untouched."
+  }
+}

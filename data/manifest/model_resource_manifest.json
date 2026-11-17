@@ -1,0 +1,168 @@
+{
+  "schema_version": "gate0-models-v1",
+  "generated_at_utc": "2026-11-17T15:42:07+00:00",
+  "project_root": "D:\\code\\intent-open-set",
+  "cache": {
+    "before": {
+      "cache_root": "D:\\code\\intent-open-set\\data\\model_cache",
+      "bge_cache_present": true,
+      "bge_cache_bytes": 134505940,
+      "qwen_cache_present": false,
+      "qwen_cache_bytes": 0
+    },
+    "after": {
+      "cache_root": "D:\\code\\intent-open-set\\data\\model_cache",
+      "bge_cache_present": true,
+      "bge_cache_bytes": 134505940,
+      "qwen_cache_present": false,
+      "qwen_cache_bytes": 0
+    },
+    "policy": "All model files and embeddings must stay on D:. Qwen weights are not downloaded in Gate 0."
+  },
+  "models": {
+    "bge": {
+      "id": "BAAI/bge-small-en-v1.5",
+      "role": "lightweight comparison model",
+      "requested_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "hub_revision_at_check": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+      "revision_matches_pin": true,
+      "license": "mit",
+      "pipeline_tag": "feature-extraction",
+      "library_name": "sentence-transformers",
+      "total_repo_mib": 382.53,
+      "total_repo_gb_decimal": 0.401,
+      "weight_files": [
+        {
+          "path": "model.safetensors",
+          "bytes": 133466304,
+          "mib": 127.28
+        },
+        {
+          "path": "onnx/model.onnx",
+          "bytes": 133093490,
+          "mib": 126.93
+        },
+        {
+          "path": "pytorch_model.bin",
+          "bytes": 133508397,
+          "mib": 127.32
+        }
+      ],
+      "n_files": 14,
+      "metadata_url": "https://huggingface.co/api/models/BAAI/bge-small-en-v1.5?blobs=true"
+    },
+    "qwen": {
+      "id": "Qwen/Qwen3-Embedding-0.6B",
+      "role": "primary embedding model",
+      "requested_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "hub_revision_at_check": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "revision_matches_pin": true,
+      "license": "apache-2.0",
+      "pipeline_tag": "feature-extraction",
+      "library_name": "sentence-transformers",
+      "total_repo_mib": 1151.55,
+      "total_repo_gb_decimal": 1.207,
+      "weight_files": [
+        {
+          "path": "model.safetensors",
+          "bytes": 1191586416,
+          "mib": 1136.39
+        }
+      ],
+      "n_files": 12,
+      "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen3-Embedding-0.6B?blobs=true"
+    }
+  },
+  "bge_smoke_test": {
+    "status": "ok",
+    "model_id": "BAAI/bge-small-en-v1.5",
+    "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+    "device": "cpu",
+    "dtype": "float32",
+    "max_seq_length": 128,
+    "embedding_dim": 384,
+    "parameter_count": 33360000,
+    "n_texts": 3,
+    "texts": [
+      "I need to reset my card PIN.",
+      "My card was swallowed by the ATM.",
+      "What is the weather in Paris?"
+    ],
+    "token_lengths": [
+      10,
+      10,
+      10
+    ],
+    "shape": [
+      3,
+      384
+    ],
+    "finite": true,
+    "norms": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "norm_max_abs_error_from_1": 0.0,
+    "cosine_matrix": [
+      [
+        1.0,
+        0.685914,
+        0.325725
+      ],
+      [
+        0.685914,
+        1.0,
+        0.304475
+      ],
+      [
+        0.325725,
+        0.304475,
+        1.0
+      ]
+    ],
+    "load_seconds": 2.947,
+    "encode_seconds": 0.126,
+    "texts_per_second": 23.861,
+    "cache_bytes_before": 134589097,
+    "cache_bytes_after": 134589097,
+    "cache_downloaded_bytes_approx": 0,
+    "rss_before_mib": 752.3,
+    "rss_after_load_mib": 903.3,
+    "rss_after_encode_mib": 934.7,
+    "cuda_used": false,
+    "cuda_peak_mib": null,
+    "torch_version": "2.11.0+cu128",
+    "sentence_transformers_version": "6.3.0",
+    "transformers_version": "5.23.0"
+  },
+  "qwen": {
+    "status": "metadata_only_not_downloaded",
+    "download_weights": false,
+    "weights_cached": false,
+    "load_test": false,
+    "planned_device": "cuda:0 (RTX 5070 Laptop, 8 GiB) after Gate 1 approval",
+    "planned_dtype": "float16",
+    "planned_max_seq_length": 128,
+    "planned_batch_sizes": [
+      4,
+      8
+    ],
+    "vram_planning_range_mib": [
+      3072,
+      6144
+    ],
+    "prompt_contract": {
+      "prompt": "Instruct: Given a customer service message, identify the supported intent it expresses.\nQuery: ",
+      "prompt_sha256": "4bbdf1c169061f64ba742f64bca5e422d05e94ccc7261d29495c233ed9a90005",
+      "scope": "support/query/validation/test all receive the same prefix"
+    },
+    "note": "These are planning values, not measured Qwen memory use. The fixed task instruction is frozen in configs/pilot.yaml and is applied identically to support and query text. It is not the model card's web-search prompt."
+  },
+  "risks": [
+    "System RAM is only ~15.2 GiB total and was ~1.1 GiB available during Gate 0.",
+    "Qwen FP16 weights are ~1.14 GiB; model load plus CUDA context and tokenizer can exceed the free-RAM headroom even though 8 GiB VRAM is nominally enough.",
+    "Windows WDDM can page/spill GPU memory; peak VRAM must be measured, not assumed.",
+    "RTX 5070 Laptop is sm_120; the inherited torch 2.11.0+cu128 reports CUDA available, but a real Qwen forward pass is still untested."
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "schema_version": "gate0-leakage-v1",
+  "generated_at_utc": "2026-11-17T15:36:39+00:00",
+  "official_data": {
+    "within_split": {
+      "train": {
+        "rows": 15000,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "val": {
+        "rows": 3000,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "test": {
+        "rows": 4500,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "oos_train": {
+        "rows": 100,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "oos_val": {
+        "rows": 100,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      },
+      "oos_test": {
+        "rows": 1000,
+        "exact_duplicate_groups": 0,
+        "exact_extra_rows": 0,
+        "normalized_duplicate_groups": 0,
+        "normalized_extra_rows": 0
+      }
+    },
+    "cross_split_normalized_text": {
+      "n_shared_hashes_total": 5,
+      "pairs": [
+        {
+          "split_a": "train",
+          "split_b": "val",
+          "n_shared_normalized_hashes": 3,
+          "examples": [
+            [
+              {
+                "sample_id": "clinc150:train:07424",
+                "label": "todo_list",
+                "text": "what is on my to do list"
+              },
+              {
+                "sample_id": "clinc150:val:01011",
+                "label": "reminder",
+                "text": "what is on my to do list"
+              }
+            ],
+            [
+              {
+                "sample_id": "clinc150:train:11130",
+                "label": "whisper_mode",
+                "text": "turn up your volume"
+              },
+              {
+                "sample_id": "clinc150:val:01794",
+                "label": "change_volume",
+                "text": "turn up your volume"
+              }
+            ],
+            [
+              {
+                "sample_id": "clinc150:train:11896",
+                "label": "greeting",
+                "text": "hey what's up"
+              },
+              {
+                "sample_id": "clinc150:val:02369",
+                "label": "greeting",
+                "text": "hey what's up"
+              }
+            ]
+          ]
+        },
+        {
+          "split_a": "train",
+          "split_b": "test",
+          "n_shared_normalized_hashes": 2,
+          "examples": [
+            [
+              {
+                "sample_id": "clinc150:train:12066",
+                "label": "what_is_your_name",
+                "text": "what's your designation"
+              },
+              {
+                "sample_id": "clinc150:test:00938",
+                "label": "user_name",
+                "text": "what's your designation"
+              }
+            ],
+            [
+              {
+                "sample_id": "clinc150:train:14018",
+                "label": "how_old_are_you",
+                "text": "where did you grow up"
+              },
+              {
+                "sample_id": "clinc150:test:00599",
+                "label": "where_are_you_from",
+                "text": "where did you grow up"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    "id_overlap_possible": false,
+    "id_note": "Sample IDs embed the source split, so ID-set intersection is zero by construction. Text hashes are the meaningful leakage check."
+  },
+  "support_candidate_exclusions": [],
+  "support_eval_overlap_after_filter": {
+    "seed42_shot5": {
+      "support_rows": 100,
+      "id_overlap": 0,
+      "normalized_text_overlap_hashes": 0,
+      "id_examples": [],
+      "text_hash_examples": []
+    },
+    "seed42_shot10": {
+      "support_rows": 200,
+      "id_overlap": 0,
+      "normalized_text_overlap_hashes": 0,
+      "id_examples": [],
+      "text_hash_examples": []
+    },
+    "seed43_shot5": {
+      "support_rows": 100,
+      "id_overlap": 0,
+      "normalized_text_overlap_hashes": 0,
+      "id_examples": [],
+      "text_hash_examples": []
+    },
+    "seed43_shot10": {
+      "support_rows": 200,
+      "id_overlap": 0,
+      "normalized_text_overlap_hashes": 0,
+      "id_examples": [],
+      "text_hash_examples": []
+    },
+    "seed44_shot5": {
+      "support_rows": 100,
+      "id_overlap": 0,
+      "normalized_text_overlap_hashes": 0,
+      "id_examples": [],
+      "text_hash_examples": []
+    },
+    "seed44_shot10": {
+      "support_rows": 200,
+      "id_overlap": 0,
+      "normalized_text_overlap_hashes": 0,
+      "id_examples": [],
+      "text_hash_examples": []
+    }
+  },
+  "decision": "No official row was deleted or relabeled. Cross-split text collisions are reported. Support candidates whose normalized text also occurs in an official eval split were excluded before K-shot ranking; official eval rows were untouched. With this filter, support/eval ID and normalized-text overlap is zero for every seed/shot.",
+  "limitations": [
+    "The upstream dataset has no explicit duplicate policy across splits.",
+    "Excluding a support candidate is a protocol safeguard, not a repair of the official splits.",
+    "Normalized-text matching cannot detect paraphrase-level leakage."
+  ]
+}

@@ -1,0 +1,25 @@
+# Project-specific Python requirements.
+#
+# Important: this project reuses the already verified CUDA PyTorch from the
+# base Python installation (D:\Environment) through a venv created with
+# --system-site-packages.  Do not let pip replace torch with a CPU wheel.
+#
+# Verified on 2026-11-17:
+#   Python 3.14.4
+#   torch 2.11.0+cu128
+#   CUDA available on RTX 5070 Laptop (sm_120)
+#
+# If rebuilding on another machine, install a compatible PyTorch build first,
+# then install these packages.
+
+numpy==2.4.4
+pandas==3.0.2
+scipy==1.17.1
+scikit-learn==1.9.1
+sentence-transformers==6.3.0
+transformers==5.23.0
+huggingface-hub==2.4.0
+tokenizers==0.23.3
+safetensors==0.8.0
+PyYAML==6.0.3
+psutil==7.2.2

@@ -1,0 +1,62 @@
+{
+  "schema_version": "gate0-download-v1",
+  "retrieved_at_utc": "2026-11-17T15:36:36+00:00",
+  "dataset": "CLINC150 / OOS-Eval",
+  "repository": "https://github.com/clinc/oos-eval",
+  "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+  "license": "CC BY 3.0 (see official LICENSE)",
+  "raw_base_url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de",
+  "files": {
+    "data_full.json": {
+      "repo_path": "data/data_full.json",
+      "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/data_full.json",
+      "path": "D:\\code\\intent-open-set\\data\\raw\\data_full.json",
+      "bytes": 2495390,
+      "sha256": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0",
+      "status": "cached"
+    },
+    "domains.json": {
+      "repo_path": "data/domains.json",
+      "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/domains.json",
+      "path": "D:\\code\\intent-open-set\\data\\raw\\domains.json",
+      "bytes": 3818,
+      "sha256": "b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a",
+      "status": "cached"
+    },
+    "LICENSE": {
+      "repo_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/LICENSE",
+      "path": "D:\\code\\intent-open-set\\data\\raw\\LICENSE",
+      "bytes": 19467,
+      "sha256": "e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76",
+      "status": "cached"
+    },
+    "README_clinc.md": {
+      "repo_path": "README.md",
+      "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/README.md",
+      "path": "D:\\code\\intent-open-set\\data\\raw\\README_clinc.md",
+      "bytes": 2668,
+      "sha256": "8a8df26c4de3d25b6c4cff385ca23602c30e4e56828b015206cbc202f6db363a",
+      "status": "cached"
+    }
+  },
+  "validation": {
+    "counts": {
+      "oos_val": 100,
+      "val": 3000,
+      "train": 15000,
+      "oos_test": 1000,
+      "test": 4500,
+      "oos_train": 100
+    },
+    "top_level_keys": [
+      "oos_test",
+      "oos_train",
+      "oos_val",
+      "test",
+      "train",
+      "val"
+    ]
+  },
+  "note": "Only official source files are stored here. No row was deleted, rewritten, translated, or relabeled."
+}

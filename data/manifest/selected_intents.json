@@ -1,0 +1,227 @@
+{
+  "schema_version": "gate0-selected-v1",
+  "frozen_at_utc": "2026-11-17T15:36:39+00:00",
+  "dataset": {
+    "name": "CLINC150 / OOS-Eval",
+    "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+    "data_sha256": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0"
+  },
+  "selection": {
+    "seed": 42,
+    "known_classes": 20,
+    "per_domain": 2,
+    "rule": "For each official domain, sort intents by ascending SHA-256('class-selection|<seed>|<domain>|<intent>'); take the first per_domain. No validation/test labels or metrics are used.",
+    "frozen": true,
+    "reuse_across_methods": true
+  },
+  "domains": {
+    "auto_and_commute": [
+      "directions",
+      "uber"
+    ],
+    "banking": [
+      "balance",
+      "routing"
+    ],
+    "credit_cards": [
+      "credit_score",
+      "report_lost_card"
+    ],
+    "home": [
+      "reminder",
+      "reminder_update"
+    ],
+    "kitchen_and_dining": [
+      "meal_suggestion",
+      "restaurant_reviews"
+    ],
+    "meta": [
+      "change_ai_name",
+      "user_name"
+    ],
+    "small_talk": [
+      "are_you_a_bot",
+      "who_made_you"
+    ],
+    "travel": [
+      "exchange_rate",
+      "plug_type"
+    ],
+    "utility": [
+      "measurement_conversion",
+      "spelling"
+    ],
+    "work": [
+      "insurance",
+      "insurance_change"
+    ]
+  },
+  "intents": [
+    {
+      "intent": "uber",
+      "domain": "auto_and_commute",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "directions",
+      "domain": "auto_and_commute",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "balance",
+      "domain": "banking",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "routing",
+      "domain": "banking",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "report_lost_card",
+      "domain": "credit_cards",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "credit_score",
+      "domain": "credit_cards",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "reminder",
+      "domain": "home",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "reminder_update",
+      "domain": "home",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "meal_suggestion",
+      "domain": "kitchen_and_dining",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "restaurant_reviews",
+      "domain": "kitchen_and_dining",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "user_name",
+      "domain": "meta",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "change_ai_name",
+      "domain": "meta",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "who_made_you",
+      "domain": "small_talk",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "are_you_a_bot",
+      "domain": "small_talk",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "plug_type",
+      "domain": "travel",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "exchange_rate",
+      "domain": "travel",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "measurement_conversion",
+      "domain": "utility",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "spelling",
+      "domain": "utility",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "insurance",
+      "domain": "work",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    },
+    {
+      "intent": "insurance_change",
+      "domain": "work",
+      "train": 100,
+      "val": 20,
+      "test": 30
+    }
+  ],
+  "support": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "shots": [
+      5,
+      10
+    ],
+    "source_split": "train",
+    "k5_is_subset_of_k10": true,
+    "leakage_filter_applied": true
+  },
+  "evaluation": {
+    "known_val": 400,
+    "known_test": 600,
+    "oos_val": 100,
+    "oos_test": 1000,
+    "extra_validation_labels_required_for_calibration": true
+  },
+  "prohibited_uses": [
+    "Do not change this list after observing validation or test metrics.",
+    "Do not use final test rows for threshold or method selection.",
+    "Do not train on OOS rows in this pilot."
+  ]
+}
