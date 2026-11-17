@@ -1,0 +1,36 @@
+{
+  "model": "bge",
+  "model_id": "BAAI/bge-small-en-v1.5",
+  "model_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+  "seed": 42,
+  "shot": 5,
+  "method": "B0",
+  "tau": 0.7520966804027557,
+  "validation": {
+    "tau": 0.7520966804027557,
+    "known_acceptance_val": 0.91,
+    "oos_recall_val": 0.98,
+    "constraint_met": true,
+    "objective": "max validation OOS recall subject to validation known acceptance >= 0.90; ties: known acceptance, then tau",
+    "n_candidates": 101,
+    "candidate_rule": "unique quantiles 0..1 (101 points) of validation known top-1 cosine scores"
+  },
+  "selected_at_utc": "2026-11-17T16:10:07+00:00",
+  "validation_metrics": {
+    "n_known": 400,
+    "n_oos": 100,
+    "known_acceptance": 0.91,
+    "known_correct_routing": 0.89,
+    "known_macro_f1": 0.9275821063705536,
+    "top1_closed_set_accuracy": 0.9725,
+    "oos_recall": 0.98,
+    "oos_false_acceptance": 0.020000000000000018,
+    "oos_auroc": 0.99075,
+    "open_set_macro_f1": 0.9210156813976553,
+    "open_set_accuracy": 0.908,
+    "known_rejected": 36,
+    "oos_rejected": 98,
+    "oos_accepted": 2
+  },
+  "test_protocol": "Thresholds selected on validation only; test evaluated once after freezing."
+}

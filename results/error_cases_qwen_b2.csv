@@ -1,0 +1,6 @@
+category,sample_id,true_label,pred_label,s1,margin,tau_used,text
+correct_known,clinc150:test:00150,insurance_change,insurance_change,0.9128679,0.21772462,0.78996647,i would like to change my insurance policy
+known_misclassified,clinc150:test:00932,user_name,who_made_you,0.74280334,0.00966913,0.72472132,what do i go by
+known_rejected,clinc150:test:00170,insurance_change,OOS,0.75926715,0.11979377,0.78996647,i need to sign up for a new allstate plan
+correct_oos_rejection,clinc150:oos_test:00000,OOS,OOS,0.67806047,0.05101609,0.76633636,how much has the dow changed today
+oos_false_accept,clinc150:oos_test:00028,OOS,balance,0.76393843,0.0868358,0.69034941,can you tell me what credit cards i have open

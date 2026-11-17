@@ -5,6 +5,8 @@
 **执行地点**：本机 Windows 11，项目目录 `D:\code\intent-open-set`  
 **执行日期**：2026-11-17（Asia/Shanghai）  
 **状态**：Gate 0 的真实运行项已完成；**Gate 1 尚未开始**。  
+> 本文件是 Gate 0 完成时的历史报告。Gate 1 的 B0/B2、Qwen 下载与真实指标见
+> [`reports/gate1_baseline.md`](gate1_baseline.md)。
 **结论**：Gate 0 的环境、数据、20 类选择和 K-shot manifest 可以验收；
 建议进入 Gate 1 时先只做 **BGE CPU B0**，Qwen 单独批准后先做小 batch 冒烟，
 不要直接下载全量权重并跑实验。

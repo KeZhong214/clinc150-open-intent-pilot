@@ -2,8 +2,24 @@
 
 课程项目：**面向少样本智能客服的开放意图识别与自适应拒识方法研究**
 
-当前状态：**Gate 0 已完成真实运行；Gate 1 尚未开始。** 仓库中没有任何
-B0/B1/B2/B3 准确率、阈值结果或 Qwen 实测显存数据。
+当前状态：**Gate 0 与 Gate 1 已完成真实运行。** 已完成 seed=42、5-shot 的
+BGE/Qwen B0 与 B2 对照；B1/B3、更多 shot 和其他 seed 尚未展开。
+
+Gate 1 的核心结果（fixed test：600 known + 1000 OOS）：
+
+| Model | Method | Known accept | Known routing | OOS recall | Open-set macro-F1 |
+|---|---|---:|---:|---:|---:|
+| BGE-small | B0 | 0.9117 | 0.8933 | 0.9420 | 0.8929 |
+| BGE-small | B2 | 0.9117 | 0.8950 | **0.9540** | **0.9041** |
+| Qwen3-Emb-0.6B | B0 | **0.9667** | **0.9600** | **0.9740** | **0.9570** |
+| Qwen3-Emb-0.6B | B2 | 0.9617 | 0.9550 | 0.9680 | 0.9499 |
+
+结论：Qwen B0 是本轮最强配置；B2 在 BGE 上小幅度提高 OOS recall 和
+open-set F1，但在 Qwen 上没有复现验证集上的收益，反而略有下降。
+
+明细：[results/gate1_metrics.csv](results/gate1_metrics.csv) ·
+[Gate 1 报告](reports/gate1_baseline.md) ·
+[核心对比图](figures/gate1_b0_b2_comparison.png)
 
 ---
 
@@ -22,11 +38,17 @@ B0/B1/B2/B3 准确率、阈值结果或 Qwen 实测显存数据。
   没有删除或改写官方样本。
 - 建立 D 盘项目专用 venv，完成 NumPy/Pandas/Scikit-learn/BGE 最小
   CPU 编码冒烟测试。
-- 记录 BGE/Qwen 的 Hub revision、许可证、下载体积；**没有下载 Qwen 权重**。
-- 15 个协议/配置/可复现性测试全部通过。
+- Gate 0 只记录 BGE/Qwen 的 Hub revision、许可证和下载体积，未下载 Qwen；
+  Gate 1 才下载并加载 Qwen3-Embedding-0.6B，完成 2200 条文本的 GPU 编码：
+  batch=8，峰值 allocated 1,155.5 MiB，编码 27.7 s，无 OOM。
+- 完成 BGE/Qwen × B0/B2 的 validation 阈值选择和 test 一次评测。
+- 18 个协议、配置、可复现性和 Gate 1 逻辑测试通过。
+- 生成结果表、预测明细、混淆矩阵和核心图表。
 
-详细报告：[reports/gate0_environment.md](reports/gate0_environment.md)  
-修改记录：[reports/gate0_vibe_coding.md](reports/gate0_vibe_coding.md)
+详细报告：[Gate 0 环境与数据](reports/gate0_environment.md)  
+Gate 1 报告：[B0/B2 Baseline 与动态拒识](reports/gate1_baseline.md)  
+修改记录：[Gate 0 Vibe Coding](reports/gate0_vibe_coding.md)、
+[Gate 1 Vibe Coding](reports/gate1_vibe_coding.md)
 
 ---
 
@@ -59,20 +81,30 @@ D:\code\intent-open-set\
 │   │   ├── support_leakage_exclusions.json
 │   │   ├── environment.json
 │   │   └── model_resource_manifest.json
-│   ├── model_cache\                 # BGE only; no Qwen weights
-│   └── cache_embeddings\            # empty until Gate 1
+│   ├── model_cache\                 # BGE + Qwen weights (git-ignored)
+│   └── cache_embeddings\            # Gate 1 vectors (git-ignored)
 ├── src\
 │   ├── download_data.py
 │   ├── prepare_data.py
 │   ├── check_environment.py
-│   └── check_models.py
+│   ├── check_models.py
+│   ├── encode_embeddings.py
+│   ├── run_baseline.py
+│   ├── aggregate_results.py
+│   └── make_figures.py
 ├── tests\
 │   ├── test_protocol.py
 │   ├── test_config.py
-│   └── test_repeatability.py
+│   ├── test_repeatability.py
+│   └── test_gate1_logic.py
 ├── logs\
 ├── reports\
-└── results\ / figures\              # empty until Gate 1
+│   ├── gate0_environment.md
+│   ├── gate0_vibe_coding.md
+│   ├── gate1_baseline.md
+│   └── gate1_vibe_coding.md
+├── results\                         # metrics, predictions, thresholds
+└── figures\                         # Gate 1 PNGs
 ```
 
 ---
@@ -162,7 +194,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 15 tests in ...s
+Ran 18 tests in ...s
 OK
 ```
 
@@ -177,8 +209,9 @@ $env:HF_HOME = "D:\code\intent-open-set\data\model_cache"
 成功输出末尾分别为 `ENVIRONMENT_CHECK_OK` 和 `MODEL_CHECK_OK`。
 
 `--bge-smoke` **只**下载/加载 BGE-small-en-v1.5（约 128 MiB），不会下载
-Qwen。当前结果：3 条文本编码为 `(3, 384)`，向量有限且 L2 norm=1.0；
-缓存后加载约 2.95 s，3 条文本编码约 0.13 s（CPU，不能外推为全量耗时）。
+Qwen；Qwen 是在 Gate 1 单独下载和编码的。BGE 当前结果：3 条文本编码为
+`(3, 384)`，向量有限且 L2 norm=1.0；缓存后加载约 2.95 s，3 条文本编码
+约 0.13 s（CPU，不能外推为全量耗时）。
 
 ### 4.5 第一个验收命令
 
@@ -189,9 +222,32 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 15 个测试。请反馈
+预期最后一行是 `OK`，共 18 个测试。请反馈
 `logs/gate0_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
+
+### 4.6 Gate 1 复现命令（实际已运行）
+
+```powershell
+$env:HF_HOME = "D:\code\intent-open-set\data\model_cache"
+
+# 编码缓存
+.\.venv\Scripts\python.exe -m src.encode_embeddings --model bge --device cpu --batch-size 32
+.\.venv\Scripts\python.exe -m src.encode_embeddings --model qwen --device cuda --batch-size 8
+
+# seed=42 / 5-shot；B0 先跑，B2 再跑
+.\.venv\Scripts\python.exe -m src.run_baseline --model bge  --method B0 --seed 42 --shot 5
+.\.venv\Scripts\python.exe -m src.run_baseline --model qwen --method B0 --seed 42 --shot 5
+.\.venv\Scripts\python.exe -m src.run_baseline --model bge  --method B2 --seed 42 --shot 5
+.\.venv\Scripts\python.exe -m src.run_baseline --model qwen --method B2 --seed 42 --shot 5
+
+# 汇总与图表
+.\.venv\Scripts\python.exe -m src.aggregate_results
+.\.venv\Scripts\python.exe -m src.make_figures
+```
+
+`run_baseline.py` 默认拒绝覆盖已有结果，避免无意中第二次读取 test。
+只有明确写 `--force` 才会重新评测；本轮正式结果没有使用 `--force`。
 
 ---
 
@@ -230,21 +286,25 @@ ID 和规范化文本交集均为 0；但 `user_name` 的一个 test 文本在 t
 
 ## 6. 不要做的事
 
-- 不要在未确认前下载 Qwen3-Embedding-0.6B 权重。
 - 不要用 test 结果倒推阈值、prompt、K、seed 或方法。
 - 不要把 BGE smoke test 当成 B0 准确率。
 - 不要改写或删除官方 CLINC150 样本来“修复”重复文本。
+- 不要无意中用 `--force` 重新评估 test；如果必须重跑，要在报告中审计。
 - 不要把 `Qwen3-0.6B`（生成模型）与
   `Qwen3-Embedding-0.6B`（嵌入模型）混淆。
 
 ---
 
-## 7. 下一步（尚未执行）
+## 7. 当前边界与后续扩展
 
-Gate 1 的建议顺序：
+已完成：seed=42、5-shot、B0/B2、BGE/Qwen、validation-only 阈值选择、
+test 一次评测、结果表和 7 张图（含 2 张混淆矩阵）。
 
-1. 先用 BGE CPU 完成 B0 的 support 原型、validation 阈值选择、test 一次评测；
-2. 再在用户明确批准后，对 Qwen 做 batch=1/2/4 的小样本 GPU 冒烟测试；
-3. 只有冒烟测试记录峰值显存和输出维度后，才提取全量选定样本向量。
+尚未做：
 
-当前没有执行以上任何一步，也没有任何 B0/B2 指标。
+- 10-shot、seed 43/44；
+- B1 多原型和 B3 组合；
+- 更多 prompt / 模型 / 训练策略；
+- Streamlit Demo 和最终报告。
+
+这些是后续扩展，不在本轮自动展开。

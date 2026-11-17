@@ -1,0 +1,36 @@
+{
+  "model": "qwen",
+  "model_id": "Qwen/Qwen3-Embedding-0.6B",
+  "model_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "seed": 42,
+  "shot": 5,
+  "method": "B0",
+  "tau": 0.7521629953384399,
+  "validation": {
+    "tau": 0.7521629953384399,
+    "known_acceptance_val": 0.94,
+    "oos_recall_val": 1.0,
+    "constraint_met": true,
+    "objective": "max validation OOS recall subject to validation known acceptance >= 0.90; ties: known acceptance, then tau",
+    "n_candidates": 101,
+    "candidate_rule": "unique quantiles 0..1 (101 points) of validation known top-1 cosine scores"
+  },
+  "selected_at_utc": "2026-11-17T16:16:36+00:00",
+  "validation_metrics": {
+    "n_known": 400,
+    "n_oos": 100,
+    "known_acceptance": 0.94,
+    "known_correct_routing": 0.935,
+    "known_macro_f1": 0.9626540363382468,
+    "top1_closed_set_accuracy": 0.995,
+    "oos_recall": 1.0,
+    "oos_false_acceptance": 0.0,
+    "oos_auroc": 0.998,
+    "open_set_macro_f1": 0.9593303747439085,
+    "open_set_accuracy": 0.948,
+    "known_rejected": 24,
+    "oos_rejected": 100,
+    "oos_accepted": 0
+  },
+  "test_protocol": "Thresholds selected on validation only; test evaluated once after freezing."
+}

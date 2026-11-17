@@ -1,5 +1,8 @@
 # Gate 0 Vibe Coding / 修改记录
 
+> 本文件记录 Gate 0 当时的状态；Gate 1 的修改见
+> [`reports/gate1_vibe_coding.md`](gate1_vibe_coding.md)。
+
 本文件记录 Gate 0 期间由 AI 协作产生的内容、关键人工可核查决策、真实报错
 与修复。它不是“AI 已完成实验”的证明；实验结论只来自实际运行日志。
 

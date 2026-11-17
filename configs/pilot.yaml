@@ -6,8 +6,8 @@
 project:
   name: "面向少样本智能客服的开放意图识别与自适应拒识方法研究"
   english_name: "Few-Shot Open Intent Classification with Adaptive Prototype and Rejection Decisions"
-  gate: 0
-  status: "data_and_environment_frozen"
+  gate: 1
+  status: "seed42_shot5_B0_B2_complete"
 
 data:
   dataset: "CLINC150 / OOS-Eval"
