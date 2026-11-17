@@ -1,0 +1,186 @@
+{
+  "schema_version": "gate2-validation-diagnostics-v1",
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "model_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "seed": 42,
+  "shot": 5,
+  "thresholds_from_gate1": {
+    "b0_tau": 0.7521629953384399,
+    "b2_tau": 0.7073520565032959,
+    "b2_lambda": 0.5,
+    "b2_gamma": 0.0
+  },
+  "known_val": {
+    "n": 400,
+    "top1_errors": 2,
+    "q_c_old_vs_corrected_max_abs_diff": 0.04192143678665161,
+    "q_c_old_vs_corrected_mean_abs_diff": 0.0020960718393325806,
+    "q_c_definition_old": "10th percentile of top-1 s1 among validation rows with true label c (Gate 1 historical code)",
+    "q_c_definition_corrected": "10th percentile of s_c(x), the score of the true class c"
+  },
+  "original_oos_val": 100,
+  "hard_oos_val": 1300,
+  "hard_oos_val_classes": 65,
+  "existing_thresholds_on_hard_val": {
+    "B0": {
+      "known_acceptance": 0.94,
+      "known_routing": 0.935,
+      "original_oos_recall": 1.0,
+      "hard_oos_recall": 0.9069230769230769,
+      "hard_oos_accepted": 121,
+      "known_rejected": 24,
+      "hard_open_set_macro_f1": 0.8585906510731475
+    },
+    "B2": {
+      "known_acceptance": 0.9525,
+      "known_routing": 0.9475,
+      "original_oos_recall": 1.0,
+      "hard_oos_recall": 0.9,
+      "hard_oos_accepted": 130,
+      "known_rejected": 19,
+      "hard_open_set_macro_f1": 0.8606964331572348
+    }
+  },
+  "hard_class_by_predicted_class": [
+    {
+      "intent": "uber",
+      "n_hard_predicted": 36,
+      "s1_q50": 0.5909460783004761,
+      "s1_q90": 0.6542511582374573,
+      "known_q_c": 0.8118356466293335
+    },
+    {
+      "intent": "directions",
+      "n_hard_predicted": 121,
+      "s1_q50": 0.6328450441360474,
+      "s1_q90": 0.7584493160247803,
+      "known_q_c": 0.8050756454467773
+    },
+    {
+      "intent": "balance",
+      "n_hard_predicted": 177,
+      "s1_q50": 0.6305223703384399,
+      "s1_q90": 0.7161871790885925,
+      "known_q_c": 0.673346757888794
+    },
+    {
+      "intent": "routing",
+      "n_hard_predicted": 24,
+      "s1_q50": 0.6208257675170898,
+      "s1_q90": 0.6631066203117371,
+      "known_q_c": 0.8622782230377197
+    },
+    {
+      "intent": "report_lost_card",
+      "n_hard_predicted": 98,
+      "s1_q50": 0.6708148717880249,
+      "s1_q90": 0.7692857384681702,
+      "known_q_c": 0.8520295023918152
+    },
+    {
+      "intent": "credit_score",
+      "n_hard_predicted": 95,
+      "s1_q50": 0.6655895113945007,
+      "s1_q90": 0.7940900325775146,
+      "known_q_c": 0.8710019588470459
+    },
+    {
+      "intent": "reminder",
+      "n_hard_predicted": 134,
+      "s1_q50": 0.6604702472686768,
+      "s1_q90": 0.7684690952301025,
+      "known_q_c": 0.758943498134613
+    },
+    {
+      "intent": "reminder_update",
+      "n_hard_predicted": 54,
+      "s1_q50": 0.7227019667625427,
+      "s1_q90": 0.7882146239280701,
+      "known_q_c": 0.8500780463218689
+    },
+    {
+      "intent": "meal_suggestion",
+      "n_hard_predicted": 72,
+      "s1_q50": 0.6535576581954956,
+      "s1_q90": 0.7615221738815308,
+      "known_q_c": 0.8318167924880981
+    },
+    {
+      "intent": "restaurant_reviews",
+      "n_hard_predicted": 62,
+      "s1_q50": 0.6061829328536987,
+      "s1_q90": 0.7185600996017456,
+      "known_q_c": 0.7306344509124756
+    },
+    {
+      "intent": "user_name",
+      "n_hard_predicted": 17,
+      "s1_q50": 0.6714590787887573,
+      "s1_q90": 0.7236811518669128,
+      "known_q_c": 0.7913062572479248
+    },
+    {
+      "intent": "change_ai_name",
+      "n_hard_predicted": 129,
+      "s1_q50": 0.6180708408355713,
+      "s1_q90": 0.7334176301956177,
+      "known_q_c": 0.8028450012207031
+    },
+    {
+      "intent": "who_made_you",
+      "n_hard_predicted": 51,
+      "s1_q50": 0.6777454614639282,
+      "s1_q90": 0.7435503005981445,
+      "known_q_c": 0.7420905828475952
+    },
+    {
+      "intent": "are_you_a_bot",
+      "n_hard_predicted": 39,
+      "s1_q50": 0.685952365398407,
+      "s1_q90": 0.7384700179100037,
+      "known_q_c": 0.7950156927108765
+    },
+    {
+      "intent": "plug_type",
+      "n_hard_predicted": 55,
+      "s1_q50": 0.5565845370292664,
+      "s1_q90": 0.6290714740753174,
+      "known_q_c": 0.7203813791275024
+    },
+    {
+      "intent": "exchange_rate",
+      "n_hard_predicted": 10,
+      "s1_q50": 0.6069408655166626,
+      "s1_q90": 0.674384593963623,
+      "known_q_c": 0.8253206610679626
+    },
+    {
+      "intent": "measurement_conversion",
+      "n_hard_predicted": 2,
+      "s1_q50": 0.6048420667648315,
+      "s1_q90": 0.6127522587776184,
+      "known_q_c": 0.8150058388710022
+    },
+    {
+      "intent": "spelling",
+      "n_hard_predicted": 84,
+      "s1_q50": 0.5977829694747925,
+      "s1_q90": 0.6672021150588989,
+      "known_q_c": 0.7855521440505981
+    },
+    {
+      "intent": "insurance",
+      "n_hard_predicted": 33,
+      "s1_q50": 0.6117024421691895,
+      "s1_q90": 0.6742676496505737,
+      "known_q_c": 0.8460745215415955
+    },
+    {
+      "intent": "insurance_change",
+      "n_hard_predicted": 7,
+      "s1_q50": 0.5725440979003906,
+      "s1_q90": 0.6447614431381226,
+      "known_q_c": 0.872580885887146
+    }
+  ]
+}

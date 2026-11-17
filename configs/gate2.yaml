@@ -1,0 +1,49 @@
+schema_version: gate2-config-v1
+model:
+  id: Qwen/Qwen3-Embedding-0.6B
+  revision: 97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3
+  prompt_sha256: 4bbdf1c169061f64ba742f64bca5e422d05e94ccc7261d29495c233ed9a90005
+  frozen: true
+
+data:
+  known_classes: 20
+  seed: 42
+  shot: 5
+  hard_oos_seed: 42
+  dev_classes: 65
+  final_classes: 65
+  hard_oos_val_rows: 1300
+  hard_oos_test_rows: 1950
+
+validation:
+  known_val_rows: 400
+  original_oos_val_rows: 100
+  hard_oos_val_rows: 1300
+  target_known_acceptance: 0.90
+  objective: "max combined OOS recall subject to known acceptance >= 0.90"
+
+b2_v2:
+  formula: >-
+    q_c = 10th percentile of s_c(x) on known validation rows with true label c;
+    u_c = 99th percentile of s1 on hard-OOS validation rows predicted as c;
+    target_c = max(tau, min(u_c, max(tau, q_c)));
+    alpha_c = n_c / (n_c + kappa);
+    tau_c = (1 - alpha_c) * tau + alpha_c * target_c;
+    accept iff s1 >= tau_c and margin >= gamma.
+  kappa: 10
+  u_quantile: 0.99
+  q_c_quantile: 0.10
+  never_lower_than_global_tau: true
+  sparse_class_shrinkage: true
+
+search:
+  tau_points: 101
+  gamma_quantiles: 19
+  gamma_includes_zero: true
+  lambda_values: [0.0, 0.5, 1.0]
+
+test:
+  hard_oos_test_classes: 65
+  hard_oos_test_rows: 1950
+  evaluate_once_after_freeze: true
+  use_original_oos_test_in_new_protocol: false

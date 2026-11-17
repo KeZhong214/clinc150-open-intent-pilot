@@ -9,6 +9,9 @@ open-set macro-F1 从 0.8929 提到 0.9041；但在 Qwen 上没有复现验证�
 open-set macro-F1 降到 0.9499。B2 的 margin gate 在本轮被验证集选为
 `gamma=0`，实际没有启用。
 
+> Gate 2 后续使用独立的 hard-OOS 协议继续尝试 B2 改进，见
+> [`reports/gate2_method.md`](gate2_method.md)。本报告 Gate 1 结果保持冻结。
+
 本报告中的每个数字都来自 `results/` 下的 CSV；没有使用论文数字、占位数字
 或 test 调参。
 

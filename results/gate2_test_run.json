@@ -1,0 +1,61 @@
+{
+  "schema_version": "gate2-test-run-v1",
+  "evaluated_at_utc": "2026-11-17T16:36:58+00:00",
+  "freeze_path": "D:\\code\\intent-open-set\\results\\gate2_freeze.json",
+  "hard_oos_test_rows": 1950,
+  "hard_oos_test_classes": 65,
+  "known_test_rows": 600,
+  "test_metrics": {
+    "B0": {
+      "known_acceptance": 0.905,
+      "known_correct_routing": 0.9033333333333333,
+      "known_macro_f1": 0.9454288260811069,
+      "top1_closed_set_accuracy": 0.9916666666666667,
+      "orig_oos_recall": null,
+      "hard_oos_recall": 0.9425641025641026,
+      "hard_oos_false_acceptance": 0.05743589743589739,
+      "hard_open_set_macro_f1": 0.8796414196621336,
+      "hard_oos_auroc": 0.9796461538461539,
+      "open_set_accuracy": 0.9333333333333333,
+      "n_known": 600,
+      "n_hard_oos": 1950,
+      "known_rejected": 57,
+      "hard_oos_rejected": 1838,
+      "hard_oos_accepted": 112
+    },
+    "B2": {
+      "known_acceptance": 0.8883333333333333,
+      "known_correct_routing": 0.8866666666666667,
+      "known_macro_f1": 0.9339401934278966,
+      "top1_closed_set_accuracy": 0.9916666666666667,
+      "orig_oos_recall": null,
+      "hard_oos_recall": 0.9364102564102564,
+      "hard_oos_false_acceptance": 0.06358974358974356,
+      "hard_open_set_macro_f1": 0.869422505560169,
+      "hard_oos_auroc": 0.9742726495726495,
+      "open_set_accuracy": 0.9247058823529412,
+      "n_known": 600,
+      "n_hard_oos": 1950,
+      "known_rejected": 67,
+      "hard_oos_rejected": 1826,
+      "hard_oos_accepted": 124
+    },
+    "B2_v2": {
+      "known_acceptance": 0.8933333333333333,
+      "known_correct_routing": 0.8916666666666667,
+      "known_macro_f1": 0.9385326034955825,
+      "top1_closed_set_accuracy": 0.9916666666666667,
+      "orig_oos_recall": null,
+      "hard_oos_recall": 0.9482051282051283,
+      "hard_oos_false_acceptance": 0.051794871794871744,
+      "hard_open_set_macro_f1": 0.8794915128966898,
+      "hard_oos_auroc": 0.979965811965812,
+      "open_set_accuracy": 0.9349019607843138,
+      "n_known": 600,
+      "n_hard_oos": 1950,
+      "known_rejected": 64,
+      "hard_oos_rejected": 1849,
+      "hard_oos_accepted": 101
+    }
+  }
+}
