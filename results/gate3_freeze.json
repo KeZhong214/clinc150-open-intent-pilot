@@ -1,0 +1,17 @@
+{
+  "schema_version": "gate3-freeze-v1",
+  "frozen": true,
+  "frozen_at_utc": "2026-11-17T17:11:02+00:00",
+  "config_sha256": "de10af35ed661cc5ed628ba4231409f2333bced02c0481e4798f811ab1ffcacf",
+  "validation_thresholds_sha256": "a21fcfaf497e6e94cbd139e2086e3d610102b7da69099fc034e5ab5864c6c1d6",
+  "validation_metrics_sha256": "34754d2bc2d8b139c5b5da42fa2a0c5cc814d62b3d33d4345e30eb84ac407a24",
+  "dataset_manifest_sha256": {
+    "clinc150": "b21d7355a0d8e003fa5f82a48caaf173ca853dc93ba93710a560799234ccd2a1",
+    "banking77": "f74ed012a8801e6f93362f25198f36acd3d82a58040a2b8a339b86c97bcfe4eb",
+    "massive": "0ed26bb0f81bcbd7824e853484a75d61ae198ef94359da7abf4841e11ed3b567"
+  },
+  "threshold_configs": 72,
+  "test_policy": "The 72 validation-selected thresholds are frozen. The final test is evaluated once; CLINC150 is marked historical because its test was seen in Gate 1/2. No test-driven method change is allowed.",
+  "test_evaluated": true,
+  "test_evaluated_at_utc": "2026-11-17T17:11:38.836574+00:00"
+}

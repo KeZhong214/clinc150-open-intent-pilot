@@ -1,0 +1,53 @@
+schema_version: gate3-config-v1
+seed: 42
+shots: [5, 10]
+datasets:
+  clinc150:
+    role: historical_pilot
+    known_classes: 20
+    dev_unknown_classes: original_oos_val
+    final_unknown_classes: original_oos_test
+    test_previously_seen: true
+  banking77:
+    role: primary_new
+    known_classes: 40
+    dev_unknown_classes: 18
+    final_unknown_classes: 19
+  massive:
+    role: primary_new
+    known_classes: 35
+    dev_unknown_classes: 12
+    final_unknown_classes: 13
+models:
+  bge:
+    id: BAAI/bge-small-en-v1.5
+    revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a
+    prompt: ""
+  qwen:
+    id: Qwen/Qwen3-Embedding-0.6B
+    revision: 97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3
+    prompt: "Instruct: Given a customer service message, identify the supported intent it expresses.\nQuery: "
+  gte:
+    id: Alibaba-NLP/gte-modernbert-base
+    revision: e7f32e3c00f91d699e8c43b53106206bcc72bb22
+    prompt: ""
+  e5:
+    id: intfloat/e5-base-v2
+    revision: f52bf8ec8c7124536f0efb74aca902b2995e5bcd
+    prompt: "query: "
+methods:
+  B0: single prototype + global threshold
+  B3-P: multi-prototype for top 25% support-dispersion classes + global threshold
+  B3-H: B3-P prototype score fused 0.5/0.5 with mean top-2 support-neighbor cosine + global threshold
+validation:
+  target_known_acceptance: 0.90
+  objective: "max open-set macro-F1 subject to known acceptance >= 0.90"
+  threshold_points: 101
+  final_test_policy: "validation thresholds frozen; final test evaluated once"
+adapter:
+  dataset: banking77
+  shot: 5
+  encoder: bge
+  type: residual projection adapter trained with supervised contrastive loss
+  identity_regularization: true
+  note: "SetFit is not used; this is the allowed projection-adapter fallback."

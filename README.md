@@ -1,38 +1,47 @@
-# 少样本智能客服开放意图识别（CLINC150 Pilot）
+# 少样本开放意图识别：多数据集、跨模型与原型—近邻实验
 
-课程项目：**面向少样本智能客服的开放意图识别与自适应拒识方法研究**
+课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测与原型—近邻协同优化**
 
-当前状态：**Gate 0、Gate 1、Gate 2 均已完成真实运行。** 已完成 seed=42、
-5-shot 的 BGE/Qwen B0/B2，以及 Qwen 的 hard-OOS B2-v2 实验。
-B1/B3、更多 shot、其他 seed 尚未展开。
+当前状态：**Gate 0–3 均已完成真实运行。** 3 个数据集、4 个冻结编码器、
+5/10-shot、B0/B3-P/B3-H 的 72 格矩阵已完成；另完成 BANKING77 SetFit-BGE
+训练实验和 Streamlit Demo。
 
-Gate 1 核心结果（fixed test：600 known + 1000 original OOS）：
+Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 
-| Model | Method | Known accept | Known routing | OOS recall | Open-set macro-F1 |
-|---|---|---:|---:|---:|---:|
-| BGE-small | B0 | 0.9117 | 0.8933 | 0.9420 | 0.8929 |
-| BGE-small | B2 | 0.9117 | 0.8950 | **0.9540** | **0.9041** |
-| Qwen3-Emb-0.6B | B0 | **0.9667** | **0.9600** | **0.9740** | **0.9570** |
-| Qwen3-Emb-0.6B | B2 | 0.9617 | 0.9550 | 0.9680 | 0.9499 |
+| Dataset | Best config | Known routing | OOS recall | Open-set macro-F1 |
+|---|---|---:|---:|---:|
+| CLINC150（历史） | Qwen 10-shot B0 | 0.9817 | 0.9010 | 0.9226 |
+| BANKING77 | GTE 10-shot B3-H | 0.8625 | 0.6368 | **0.8306** |
+| MASSIVE en-US | Qwen 10-shot B0 | 0.8272 | 0.5298 | 0.7982 |
 
-Gate 2 使用 65/65 disjoint hard-OOS 类别划分。Validation 上 B2-v2 三项
-都优于 B0；但 held-out hard-OOS test 上收益没有稳健迁移：
+B3-H 的场景差异：
 
-| Qwen | Known routing | Hard-OOS recall | Hard open-set F1 |
-|---|---:|---:|---:|
-| B0 | **0.9033** | 0.9426 | **0.8796** |
-| B2-original | 0.8867 | 0.9364 | 0.8694 |
-| B2-v2 | 0.8917 | **0.9482** | 0.8795 |
+- BANKING77：相对 B0 平均 OOS recall +5.21 pp，open-set F1 +0.99 pp；
+- CLINC150（历史）：OOS recall −1.11 pp，F1 −0.92 pp；
+- MASSIVE：OOS recall −0.43 pp，F1 −1.46 pp。
+- **B3-H 在 BANKING77 有用，在 MASSIVE/CLINC 没有稳定收益。**
 
-结论：**Qwen B0 仍是当前默认方案；B2-v2 在 validation 上有效，但在
-held-out hard-OOS test 上没有超过 B0 的 known routing 和 open-set F1。**
-B2-v2 比原始 B2 好，但不足以推翻 B0。
+训练式对照（BANKING77 5-shot，同一 test）：BGE-B0 open-set F1 0.7505；
+SetFit-BGE 0.6696；投影适配器 0.7394。两者都未超过冻结 BGE-B0。
 
-Gate 1 明细：[results/gate1_metrics.csv](results/gate1_metrics.csv) ·
-[Gate 1 报告](reports/gate1_baseline.md)  
-Gate 2 明细：[results/gate2_test_metrics.csv](results/gate2_test_metrics.csv) ·
-[Gate 2 报告](reports/gate2_method.md) ·
-[核心对比图](figures/gate2_test_comparison.png)
+Gate 1/2 历史结果保持冻结：
+
+| Scope | Model/Method | Key result |
+|---|---|---:|
+| Gate 1 CLINC | Qwen B0 | open-set F1 0.9570 |
+| Gate 1 CLINC | Qwen B2 | open-set F1 0.9499 |
+| Gate 2 hard-OOS | Qwen B0 | hard OOS recall 0.9426 |
+| Gate 2 hard-OOS | Qwen B2-v2 | hard OOS recall 0.9482, known routing −1.17 pp |
+
+详细报告：[Gate 0 环境与数据](reports/gate0_environment.md) ·
+[Gate 1 Baseline](reports/gate1_baseline.md) ·
+[Gate 2 Hard-OOS](reports/gate2_method.md) ·
+[Gate 3 多数据集](reports/gate3_final_report.md)  
+结果索引：[results/gate3_matrix.csv](results/gate3_matrix.csv) ·
+[results/gate3_summary_by_dataset_method.csv](results/gate3_summary_by_dataset_method.csv)  
+图表：[figures/gate3_heatmap_macro_f1.png](figures/gate3_heatmap_macro_f1.png) ·
+[figures/gate3_ablation.png](figures/gate3_ablation.png)  
+Demo：[app.py](app.py) · [真实运行截图](figures/gate3_streamlit_demo.png)
 
 ---
 
@@ -60,15 +69,27 @@ Gate 2 明细：[results/gate2_test_metrics.csv](results/gate2_test_metrics.csv)
 - Gate 2 实现 B2-v2：corrected `q_c`、hard-OOS predicted-class 上尾 `u_c`、
   向全局阈值收缩，并且类别阈值不低于全局 tau。
 - Validation 上冻结 B2-v2 后才编码/评测 held-out test；test 只读一次。
-- 25 个协议、配置、可复现性和 Gate 1/2 逻辑测试通过。
-- 生成 Gate 1/2 结果表、预测明细、混淆矩阵和核心图表。
+- Gate 3 新建 CLINC150/BANKING77/MASSIVE en-US 统一 manifest；BANKING77
+  40/18/19、MASSIVE 35/12/13 类划分，support 5/10 严格嵌套。
+- 完成 4 个冻结编码器（BGE、Qwen、GTE-ModernBERT、E5）在 3 数据集上的
+  向量提取；总 11,011 条文本/模型。
+- 完成 3 数据集 × 4 模型 × 2 shot × B0/B3-P/B3-H 的 72 格矩阵；validation
+  选阈值、freeze 后 test 只评一次。
+- 完成 BANKING77 SetFit-BGE 训练和投影适配器对照，记录训练曲线；两者均
+  未超过 BGE-B0。
+- 完成数据集画像、模型×数据集热图、shot 曲线、B3 消融、阈值权衡、
+  BANKING77 混淆、成本散点和 4 类可追踪错误案例。
+- 完成 Streamlit Demo 并在真实浏览器中运行截图。
+- 29 个协议、配置、可复现性和 Gate 1/2/3 逻辑测试通过。
 
 详细报告：[Gate 0 环境与数据](reports/gate0_environment.md)  
 Gate 1 报告：[B0/B2 Baseline 与动态拒识](reports/gate1_baseline.md)  
 Gate 2 报告：[Hard-OOS 与 B2-v2 类别边界校准](reports/gate2_method.md)  
+Gate 3 报告：[多数据集、跨模型与 B3 实验](reports/gate3_final_report.md)  
 修改记录：[Gate 0](reports/gate0_vibe_coding.md)、
 [Gate 1](reports/gate1_vibe_coding.md)、
-[Gate 2](reports/gate2_vibe_coding.md)
+[Gate 2](reports/gate2_vibe_coding.md)、
+[Gate 3](reports/gate3_vibe_coding.md)
 
 ---
 
@@ -81,9 +102,11 @@ D:\code\intent-open-set\
 ├── requirements.txt
 ├── requirements_lock.txt
 ├── pip_freeze.txt
+├── app.py                           # Streamlit demo
 ├── configs\
 │   ├── pilot.yaml
-│   └── gate2.yaml
+│   ├── gate2.yaml
+│   └── gate3.yaml
 ├── data\
 │   ├── raw\
 │   │   ├── data_full.json
@@ -92,53 +115,47 @@ D:\code\intent-open-set\
 │   │   ├── README_clinc.md
 │   │   ├── download_manifest.json
 │   │   └── model_cards\
+│   ├── gate3\
+│   │   └── raw\                     # BANKING77 parquet + MASSIVE en-US JSONL
 │   ├── manifest\
 │   │   ├── selected_intents.json
-│   │   ├── split_counts.csv
-│   │   ├── source_manifest.json
-│   │   ├── support_manifest.csv
-│   │   ├── eval_manifest.csv
-│   │   ├── leakage_report.json
-│   │   ├── support_leakage_exclusions.json
-│   │   ├── environment.json
-│   │   ├── model_resource_manifest.json
-│   │   ├── gate2_hard_oos_manifest.csv
-│   │   ├── gate2_hard_oos_split.json
-│   │   └── gate2_hard_oos_checks.json
-│   ├── model_cache\                 # BGE + Qwen weights (git-ignored)
-│   └── cache_embeddings\            # Gate 1/2 vectors (git-ignored)
+│   │   ├── gate2_*                  # hard-OOS split/manifests
+│   │   ├── gate3_*                  # 3 datasets, classes, support/cal/test
+│   │   └── ...
+│   ├── model_cache\                 # BGE/Qwen/GTE/E5 weights (git-ignored)
+│   └── cache_embeddings\            # Gate 1/2/3 vectors (git-ignored)
 ├── src\
 │   ├── download_data.py
 │   ├── prepare_data.py
-│   ├── check_environment.py
-│   ├── check_models.py
 │   ├── encode_embeddings.py
 │   ├── run_baseline.py
-│   ├── aggregate_results.py
-│   ├── make_figures.py
-│   ├── prepare_gate2.py
-│   ├── encode_gate2_hard_oos.py
-│   ├── analyze_gate2_validation.py
-│   ├── gate2_hyperparameter_check.py
-│   ├── run_gate2.py
-│   └── make_gate2_figures.py
+│   ├── gate3\
+│   │   ├── prepare.py
+│   │   ├── encode.py
+│   │   ├── methods.py
+│   │   ├── run_matrix.py
+│   │   ├── freeze.py
+│   │   ├── train_adapter.py
+│   │   ├── train_setfit.py
+│   │   ├── aggregate.py
+│   │   └── make_figures.py
+│   └── ...                          # Gate 1/2 scripts retained
 ├── tests\
-│   ├── test_protocol.py
-│   ├── test_config.py
-│   ├── test_repeatability.py
 │   ├── test_gate1_logic.py
-│   ├── test_gate2_logic.py
-│   └── test_gate2_protocol.py
+│   ├── test_gate2_protocol.py
+│   ├── test_gate3_protocol.py
+│   └── ...
 ├── logs\
 ├── reports\
-│   ├── gate0_environment.md
-│   ├── gate0_vibe_coding.md
-│   ├── gate1_baseline.md
-│   ├── gate1_vibe_coding.md
-│   ├── gate2_method.md
-│   └── gate2_vibe_coding.md
-├── results\                         # Gate 1/2 metrics, predictions, thresholds
-└── figures\                         # Gate 1/2 PNGs
+│   ├── gate0_*.md
+│   ├── gate1_*.md
+│   ├── gate2_*.md
+│   ├── gate3_final_report.md
+│   ├── gate3_ppt_outline.md
+│   ├── gate3_speech.md
+│   └── gate3_vibe_coding.md
+├── results\                         # Gate 1/2/3 metrics, predictions, thresholds
+└── figures\                         # Gate 1/2/3 PNGs, Streamlit screenshot
 ```
 
 ---
@@ -228,7 +245,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 25 tests in ...s
+Ran 29 tests in ...s
 OK
 ```
 
@@ -256,8 +273,8 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 25 个测试。请反馈
-`logs/gate2_all_tests.log`；如需环境信息，再反馈
+预期最后一行是 `OK`，共 29 个测试。请反馈
+`logs/gate3_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
 ### 4.6 Gate 1 复现命令（实际已运行）
@@ -311,6 +328,43 @@ $env:HF_HOME = "D:\code\intent-open-set\data\model_cache"
 `run_gate2.py` 在 freeze 前不会编码或评测 hard-OOS test；test 结果文件
 存在后默认拒绝第二次读取。不要用 `--force` 重跑正式 test。
 
+### 4.8 Gate 3 复现命令（实际已运行）
+
+```powershell
+$env:HF_HOME = "D:\code\intent-open-set\data\model_cache"
+
+# 1. 3 数据集统一 manifest
+.\.venv\Scripts\python.exe -m src.gate3.prepare
+
+# 2. 四个冻结编码器，每个模型一次性编码 3 个数据集
+.\.venv\Scripts\python.exe -m src.gate3.encode --model bge
+.\.venv\Scripts\python.exe -m src.gate3.encode --model qwen --device cuda --batch-size 8
+.\.venv\Scripts\python.exe -m src.gate3.encode --model gte --device cuda --batch-size 16
+.\.venv\Scripts\python.exe -m src.gate3.encode --model e5 --device cuda --batch-size 32
+
+# 3. validation-only 的 72 格阈值选择
+.\.venv\Scripts\python.exe -m src.gate3.run_matrix --phase validation
+
+# 4. 冻结后才跑 final test；不要重复
+.\.venv\Scripts\python.exe -m src.gate3.freeze
+.\.venv\Scripts\python.exe -m src.gate3.run_matrix --phase test
+
+# 5. 汇总与图
+.\.venv\Scripts\python.exe -m src.gate3.aggregate
+.\.venv\Scripts\python.exe -m src.gate3.make_figures
+
+# 6. 训练式对照（可选，但本轮已运行）
+.\.venv\Scripts\python.exe -m src.gate3.train_adapter
+.\.venv\Scripts\python.exe -m src.gate3.train_setfit
+
+# 7. Demo
+.\.venv\Scripts\python.exe -m streamlit run app.py
+```
+
+Gate 3 的 test 已在 `results/gate3_freeze.json` 后评测一次；再次运行
+`--phase test` 会被拒绝。SetFit/Adapter 的 BANKING77 test 与矩阵 test 相同，
+因此报告中明确标注“非盲测复用”。
+
 ---
 
 ## 5. 数据协议（冻结）
@@ -344,6 +398,20 @@ Gate 2 不覆盖 Gate 1，也不混用原始 `oos_test`：
 
 详见 `reports/gate2_method.md`。
 
+### Gate 3 的 3 数据集协议
+
+| Dataset | Known / dev-unknown / final-unknown | Support | Calibration known | Known test | Dev unknown | Final unknown |
+|---|---:|---:|---:|---:|---:|---:|
+| CLINC150（历史） | 20 / — / — | 100 / 200 | 400 | 600 | 100 | 1,000 |
+| BANKING77 | 40 / 18 / 19 | 200 / 400 | 800 | 1,600 | 720 | 760 |
+| MASSIVE en-US | 35 / 12 / 13 | 175 / 350 | 1,323 | 1,915 | 407 | 436 |
+
+- 类别选择：固定 SHA-256 seed=42；MASSIVE known 额外要求官方 train ≥10；
+- BANKING77 的 dev/final unknown 来自官方 test 中互不重叠的类别；
+- MASSIVE 的 dev unknown 用官方 `dev`，final unknown 用官方 `test`；
+- 支持集/校准/测试的规范化文本交集为 0；
+- CLINC150 原始 test 已查看，标为 historical，仅作追加分析。
+
 ### 已知的官方数据重复
 
 官方数据内部没有分区内重复，但规范化文本有 **5 处跨分区碰撞**：
@@ -372,22 +440,26 @@ ID 和规范化文本交集均为 0；但 `user_name` 的一个 test 文本在 t
 
 ## 7. 当前边界与后续扩展
 
-已完成：Gate 0、Gate 1、Gate 2；seed=42、5-shot；BGE/Qwen B0/B2；
-Qwen hard-OOS B2-v2；validation-only 阈值选择；两次 test 各自只评测一次；
-结果表和 Gate 2 的 5 张图。
+已完成：Gate 0–3；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
+test 矩阵；BANKING77 SetFit/Adapter 训练对照；数据集画像、热图、shot 曲线、
+消融、阈值权衡、混淆、成本与错误案例；Streamlit Demo 真实截图。
 
-Gate 2 的结论是：B2-v2 在 hard-OOS validation 上三项优于 B0，但在
-65 个 disjoint held-out unknown classes 的 test 上，hard recall +0.56 pp，
-known routing −1.17 pp，hard open-set F1 基本持平。**B0 仍是默认方案。**
+Gate 3 的主要判断：
+
+- B3-H 在 BANKING77 有正收益：OOS recall +5.21 pp，open-set F1 +0.99 pp；
+- B3-H 在 MASSIVE 和 CLINC150 没有稳定收益；
+- Qwen 平均最强，GTE 在 BANKING77 最强且编码成本低；
+- SetFit 和投影适配器都没有超过冻结 BGE-B0；
+- MASSIVE 的 F1-first 阈值选择在 BGE/GTE 上把 known acceptance 推到
+  0.99+，几乎不拒 OOS，说明阈值目标本身是主要限制；本轮没有用 test
+  重新调阈值。
 
 尚未做：
 
-- 10-shot、seed 43/44；
-- B1 多原型和 B3 组合；
-- 新的独立 held-out unknown classes；
-- 更多 prompt / 模型 / 训练策略；
-- Streamlit Demo 和最终报告。
+- 3 个数据集之外的新独立 test / 多 seed 方差；
+- B1/B3-P 的更多原型数、融合权重的系统消融；
+- 近域/远域未知的可靠统一定义；
+- 最终课程报告的精排、PPT 实际排版与演讲录像。
 
-不建议在当前 hard-OOS test 上继续调 B2-v2 参数；若继续，需要一组新的
-独立 unknown classes，否则会变成 test 调参。B1/B3 和更多 seed 仍作为
-后续扩展，不在本轮自动展开。
+不会在当前 Gate 3 test 上继续调 B3 参数；若继续，需要新的独立 unknown
+classes 或明确的新协议。

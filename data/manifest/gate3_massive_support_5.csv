@@ -1,0 +1,176 @@
+shot,support_rank,sample_id,intent,domain,text,open_set_label,text_sha256
+5,1,massive:en-US:train:03774,alarm_remove,alarm,kickball is over i do not need the alarm for kickball on wednesday evening any longer,alarm_remove,fe4edc613ec266ea5c26f45317223c1017bcdaee53e1452141c8e4076158ff1d
+5,2,massive:en-US:train:02961,alarm_remove,alarm,this alarm needs to be permanently silenced,alarm_remove,3d525728ad8e7b2be187ba1c848140404a90bb2a8b7e0037ad29b8e8866632b6
+5,3,massive:en-US:train:02090,alarm_remove,alarm,snooze,alarm_remove,959b65ed7e5323ddd7b372a723f1d132c193d790a6e8735f88fa38d222ddc0d4
+5,4,massive:en-US:train:00201,alarm_remove,alarm,remove the alarm,alarm_remove,c5db75067e094a25249709d33623962e58a740697207254fb9f85aed3817d5b0
+5,5,massive:en-US:train:01614,alarm_remove,alarm,remove alarm of seven thirty am on monday,alarm_remove,57f1fc4c3253a0ca854938d6edb387d13797592d208bac97571b95c04a10a692
+5,1,massive:en-US:train:01389,audio_volume_mute,audio,be quiet,audio_volume_mute,4ee80569fff3aaf979832285112aaf61793dde9ab311b419303035b85a7b4b98
+5,2,massive:en-US:train:05356,audio_volume_mute,audio,enter silence mode,audio_volume_mute,6796a6cbae77281b956cff7ea3699d9dd8b6d816a3fa65348274a73224d69f79
+5,3,massive:en-US:train:05355,audio_volume_mute,audio,stay quiet,audio_volume_mute,72f34b878d1517abc80d84adbca4a8d0e25073f1b846c87c7f7b3cce043aced1
+5,4,massive:en-US:train:05821,audio_volume_mute,audio,turn down the noise,audio_volume_mute,e12f02748315c75bc41006e87c550dbcf2bd7c968b5e22268273428eaa058bb9
+5,5,massive:en-US:train:02755,audio_volume_mute,audio,stop making sounds for forty minutes,audio_volume_mute,49b0d327a62ff9be7e4b62f385ef91557db0d5bdd43736d8713defd64e6628b4
+5,1,massive:en-US:train:04250,audio_volume_up,audio,olly please speak up,audio_volume_up,2ce6ed66e205c793f481a681b4657d1aa141179b80fb975e4be66e848a3b09fe
+5,2,massive:en-US:train:04124,audio_volume_up,audio,turn up the volume on the music,audio_volume_up,a8addbd9b13c4fdf1d246fc434729a7a2d6a26b8894f6a96fafa6dec7fe4c738
+5,3,massive:en-US:train:05622,audio_volume_up,audio,turn up,audio_volume_up,e4cf77dd85e1f5d0f1afbdd6cac831b91b54c6d9e78ba37f2d707eeb8d7dbb5e
+5,4,massive:en-US:train:03565,audio_volume_up,audio,turn up the speakers,audio_volume_up,83fc8388d359d605ab9319f4dec12388d3455898027c6c18059afbcde17a00b4
+5,5,massive:en-US:train:01724,audio_volume_up,audio,set the volume higher,audio_volume_up,9fec2d93ef2bb3762f48849bb86839a8bdea87a41a710454e7f1d44bfeb30a63
+5,1,massive:en-US:train:08511,calendar_query,calendar,check calendar,calendar_query,bd3f80b04a24c0d4f16758f11eff127721f22379f2c0ba081ce7dfb887d9bf23
+5,2,massive:en-US:train:07626,calendar_query,calendar,what event is next,calendar_query,3d83f5e57aa8b2be35e7223d24e7ffd4c76f2f9e4ad24fcc8821436c1e83f218
+5,3,massive:en-US:train:06830,calendar_query,calendar,any events in my calendar today,calendar_query,d4d81dc86905bd73ccefeefccc20219efd3c7d73e8b0c7c7a1af285a2a02eb26
+5,4,massive:en-US:train:07349,calendar_query,calendar,what events are going on next week,calendar_query,79ea4df5392644156872670f9cf6b262325e3b54ce9ebeba3f73ab7b31af6fd2
+5,5,massive:en-US:train:06949,calendar_query,calendar,what is my next event,calendar_query,362fd8e4abf5852607f1a1173b20833e306693e62eb61a57ade159627023d610
+5,1,massive:en-US:train:08024,calendar_remove,calendar,delete any and all events,calendar_remove,5171d62bca9210ea3a91fef0a8bcd20b9490b3d4a5a33d59b0335d3bee2f0796
+5,2,massive:en-US:train:06800,calendar_remove,calendar,empty calendar for this week,calendar_remove,f4fc8130aaca5471589048aedc8825da93ee26e98bb88878428e69df2a4f3380
+5,3,massive:en-US:train:07912,calendar_remove,calendar,could you delete all events on my calendar,calendar_remove,5055600a7092a2913d23a03550acf259ca193f87f07d9dba2f60ceeebdff29f7
+5,4,massive:en-US:train:08622,calendar_remove,calendar,fine,calendar_remove,d14a58bae804a2b80b5b76a010239c88ffca1fc7951a90f8e9131beda1e23c1b
+5,5,massive:en-US:train:07253,calendar_remove,calendar,next event is canceled,calendar_remove,8ee4c3781b02952bbff90a42b7dfa293b9a6a1a2dd24dfe3c10c7e809221dfdd
+5,1,massive:en-US:train:08073,calendar_set,calendar,remind me about my meeting,calendar_set,428d450c447bed97c3ce9663c3be4f55adeeeb65b5c5434e3d42d04786e407e3
+5,2,massive:en-US:train:08880,calendar_set,calendar,remind me about the meeting with dentist on the twenty third of may,calendar_set,eb1860e04299fbcb68855ca983993ffca8e08a9953e8834785ce7e994521379b
+5,3,massive:en-US:train:07974,calendar_set,calendar,please set a reminder for church services on sundays for eleven am,calendar_set,87f6ae48e4e220b42104dda3870a061b8052d670327963ae7c1ec9b2b17c04d1
+5,4,massive:en-US:train:07267,calendar_set,calendar,repeat this event,calendar_set,5eab3efc98ede661ec20c8646ce12db73e97a3cdf95949d2da7d1f19bd17a189
+5,5,massive:en-US:train:07305,calendar_set,calendar,tell person a i want meet him today,calendar_set,957c5c243bedcebd2307c41837e2395e26c9bfa86184c79afd86db7bd6fa492d
+5,1,massive:en-US:train:09762,cooking_recipe,cooking,how to cook spaghetti,cooking_recipe,70b871d94210da88baf92446a9b9f21dd613190d3102e0500224e2dd8d939070
+5,2,massive:en-US:train:09723,cooking_recipe,cooking,what's an easy recipe to cook for food,cooking_recipe,3bc55e4c88c3f20f38fabffb90ee140df5951dc26e20b0f47d453c07586e2db4
+5,3,massive:en-US:train:09846,cooking_recipe,cooking,pleasant,cooking_recipe,54c0bcab0e7334379ea4e9df9706f845ebcd39924b2d291fb78ebc82f1b4317b
+5,4,massive:en-US:train:09876,cooking_recipe,cooking,what is the best tasting cut of beef,cooking_recipe,7b271f7d7163097d8b9bd5fdff5876085bfd0675918cd66103f902dfbebede5d
+5,5,massive:en-US:train:09817,cooking_recipe,cooking,how to barbecue a steak well,cooking_recipe,6761019c6766283c55c37dffa87f546e8aca04823a82294415baa0463b95792b
+5,1,massive:en-US:train:05942,datetime_query,datetime,please tell me the date for the first day of next month,datetime_query,e83a7a0519e9e32c802ff7acbca533795641fcdebef7ba72254b47aa1d7ef81a
+5,2,massive:en-US:train:04164,datetime_query,datetime,what time is it in chicago right now,datetime_query,1d2660dfee2ef95e3b45180da9485bebb4981fbb2835a48027bab01611624767
+5,3,massive:en-US:train:00853,datetime_query,datetime,what time are we looking at right now,datetime_query,fd40ed7dcac388f438d11bd264a3c1d9918006f17dbd99dfa53ce75933a2252f
+5,4,massive:en-US:train:02102,datetime_query,datetime,tell me the time now,datetime_query,e1a1caff1ad5ea19c9e9d8a94ea37fc6396fe8d7a7d28cfd34e5e78eccb9944a
+5,5,massive:en-US:train:01785,datetime_query,datetime,how many seconds are left to complete this hour,datetime_query,debabf4e2b75b61655c444c3f7185b46d0ba6852ee283dfbc05cdeb71cc1b0d6
+5,1,massive:en-US:train:16217,email_querycontact,email,what sapp,email_querycontact,b16ba808b912bf4983b72b2d629f954747860be73d3eb66e2b82821785ad489f
+5,2,massive:en-US:train:16290,email_querycontact,email,show johns office number,email_querycontact,55f532e6acc1ac759612f43e69dc4069f5f1df4ee7fac69535413919902bfe44
+5,3,massive:en-US:train:15598,email_querycontact,email,what is mary s.'s phone number,email_querycontact,993d997e3158b8f7d47d04fc430c6abe97a88e83ea820c02c66252e644e78275
+5,4,massive:en-US:train:16177,email_querycontact,email,open my contact list,email_querycontact,82b935d2dcc176efb64a9b55e776d2e5bc6c35b44e523d5f8bb17133ab8c8408
+5,5,massive:en-US:train:16184,email_querycontact,email,what is my wife's email,email_querycontact,892ff871ea4c7e0fbf38bb96cc7458114d99ae630c9460b60c472c5ce7dad149
+5,1,massive:en-US:train:01206,iot_hue_lightchange,iot,set the color of light to red,iot_hue_lightchange,dd84e071a33caf31088af99cd1fc7eba7ff3f6db6b68749f5ba1d227d2b18b4b
+5,2,massive:en-US:train:00392,iot_hue_lightchange,iot,can you change the light colors into dark in the house,iot_hue_lightchange,49bc5edcec719c62539d59c0611eb4f2ebd92d9513e26b8238f72dd9bc4384a9
+5,3,massive:en-US:train:04496,iot_hue_lightchange,iot,change the lights to my favorite color,iot_hue_lightchange,18105cf1c8bc2285d837591ac5790039823f105501df3e21b71fea09c7bb690a
+5,4,massive:en-US:train:03890,iot_hue_lightchange,iot,make light color red,iot_hue_lightchange,7aa79258f605460036786962bb309bf1dd17181b68195198756e6282275dbbf9
+5,5,massive:en-US:train:01205,iot_hue_lightchange,iot,i like red color for my home change it,iot_hue_lightchange,b065d4e19a919b84893a178865f83aa59d4d62e8810492ea0c8eb4acabd46333
+5,1,massive:en-US:train:02568,iot_hue_lightoff,iot,turn off the kitchen lights,iot_hue_lightoff,c976e7406e13ca05f473c27bfbc214f63cf4d3d9b48bc91c9024ea352c729eb2
+5,2,massive:en-US:train:00559,iot_hue_lightoff,iot,turn the lamp off,iot_hue_lightoff,086a9f7ca210809ba1dbee3adbbf0f05ede2e221503066491db72dcb137effdb
+5,3,massive:en-US:train:04481,iot_hue_lightoff,iot,bedroom lights off now,iot_hue_lightoff,e43dfbaedbe5bbffc42f5a53929047220f6ea13c584fb8391c5433c4199010ea
+5,4,massive:en-US:train:00507,iot_hue_lightoff,iot,by switch off,iot_hue_lightoff,21144aa44ee85c9ed6627e4761d432c4c807d951f513b16d29add95e296f062e
+5,5,massive:en-US:train:05565,iot_hue_lightoff,iot,switch off light,iot_hue_lightoff,5b8ae7af540cb37a64d10088f896e4600f5b0c136431a2a9a01a0097f2ec8030
+5,1,massive:en-US:train:01443,iot_hue_lighton,iot,turn on hall lights,iot_hue_lighton,cb0f6f5757828c2655f1d3b110a478d232f61837e0e643323c87e9b78797b73a
+5,2,massive:en-US:train:01444,iot_hue_lighton,iot,turn on all upstairs lights,iot_hue_lighton,4f7f32c359773cd2c8f56081655478d190250af95260c8b36c02d69efe13af8e
+5,3,massive:en-US:train:03765,iot_hue_lighton,iot,it is dark,iot_hue_lighton,569cab3e8d08524f94f0ee99c0b0be23f15bf8b9468ea6e324c8d9adbcad9756
+5,4,massive:en-US:train:01394,iot_hue_lighton,iot,turn the lights on,iot_hue_lighton,7933eed0c98daa720f35d1503f42da72ac7fe46c0fbcc653b12ea27cefa0e76e
+5,5,massive:en-US:train:02719,iot_hue_lighton,iot,it's dark in the living room,iot_hue_lighton,eb1990aac815ebba819303bf4a4c19771497c14278d037008208a13e78166091
+5,1,massive:en-US:train:02711,iot_hue_lightup,iot,hey olly turn up the lights a little,iot_hue_lightup,85ad99cddcc65fc40bc8464aecf8bd26ba2e63a09e664d9b63b63f05b77d1019
+5,2,massive:en-US:train:04837,iot_hue_lightup,iot,increase the light,iot_hue_lightup,7279767c462cafeffb4e2f9f16a37c4a4b67b07b373db2a35539fdc97e5b0972
+5,3,massive:en-US:train:02004,iot_hue_lightup,iot,do more light,iot_hue_lightup,72b386a6dbcf85421e74588e02c414cac373cf9828317b216097e605be2d3a69
+5,4,massive:en-US:train:02377,iot_hue_lightup,iot,turn the lights brighter,iot_hue_lightup,731f38f04c2f8b6e2e43dc009f036406422540ac57b23fe2d66682892ccd68b3
+5,5,massive:en-US:train:00308,iot_hue_lightup,iot,set lights to full power,iot_hue_lightup,4cd69d6202e3cee0753fa41f35f4121ec2b807a0c6041015dce3b75f22b108ee
+5,1,massive:en-US:train:04421,iot_wemo_off,iot,please switch off on the wemo plug socket,iot_wemo_off,c7bf51058dd1a1d34b783a48a841f05c4630c67ff7dbd71c27c5c1dfa250db36
+5,2,massive:en-US:train:05049,iot_wemo_off,iot,please make the smart socket turn off,iot_wemo_off,59e85c7ca67801fbf0c1b2fc2ee3e2cb80f3e6fc14f8ac36e36eac1773647943
+5,3,massive:en-US:train:03208,iot_wemo_off,iot,please turn off the wemo plug,iot_wemo_off,6c64059d816b9e394394ce0e795b1a39f75fc3ee1634441495fe5e31d8e328aa
+5,4,massive:en-US:train:05233,iot_wemo_off,iot,please turn off wemo socket,iot_wemo_off,abd31154d97f1678cca71cb237bb39ac2498355562fa555359e7a4bc54e2ab92
+5,5,massive:en-US:train:05654,iot_wemo_off,iot,deactivate smart plug socket,iot_wemo_off,235c50cb7d8c6193da17b97f9051a764954f83c3ad561b3f746ef041bd705efe
+5,1,massive:en-US:train:10312,lists_remove,lists,erase,lists_remove,5cf46cd89515601e0d2a3cc601e9b853074d1908a938141a9ba650a02614079a
+5,2,massive:en-US:train:10459,lists_remove,lists,remove a list please,lists_remove,18a1f094e862741232c969e9d3d8bff9214941da7728bf11db0ad8a66fcbe676
+5,3,massive:en-US:train:10807,lists_remove,lists,remove vegetables from the list,lists_remove,8e24c56207d8be9921ae2fd7789223e2bc2506a3a62508705b5915bb178d0604
+5,4,massive:en-US:train:10278,lists_remove,lists,delete item four,lists_remove,0569cd947343acd8c873de3e485ec2b52e22c5ede5905799d20df643147cfd7c
+5,5,massive:en-US:train:10493,lists_remove,lists,find my shopping list and delete it,lists_remove,a1375b8a0ae7c6391305d2a8aae559e95ac4bdf1b194fc5c6cbebb1f1bee5184
+5,1,massive:en-US:train:00268,music_query,music,olly what is the song,music_query,80499c7120da66f49c41338192ddc33151dd9a6fa03fe17e5d4f74f9bb8134be
+5,2,massive:en-US:train:00891,music_query,music,who sings this song,music_query,0805b1796e8352cf4771b4220e2009b1762fbd45dc8cac316d862a0b429083cb
+5,3,massive:en-US:train:03303,music_query,music,who is the singer,music_query,d61d824a6d1f4f911ef741d41c09c4a722dd055a1504999dc1053952db6097ac
+5,4,massive:en-US:train:05321,music_query,music,tell me starting phrase of this music,music_query,b77b20f7c9f638f8dbdf167429b4bc74500a4cf130b033b360f0bdceed15a8a4
+5,5,massive:en-US:train:01942,music_query,music,what are the lyrics to this song playing,music_query,ab84abcbad4ec5dc79cd84cc281346ceae3f67b35a0e1c6f038b30d625e15079
+5,1,massive:en-US:train:05264,news_query,news,get me the news from uc web,news_query,6ef2b4e1a28fee432d1813538dee51b7ca58a28ac3c462a92b0ddc93e346a971
+5,2,massive:en-US:train:00423,news_query,news,read me new headlines,news_query,27a59e1262726e7ecf96cf9949e1acede1bcbfa64fe844ebc125934712d63d67
+5,3,massive:en-US:train:03786,news_query,news,read me titles for international news,news_query,33c715801a5722c11cf23aa854b2c32248fcf218eab3c70d024e392b516bcd88
+5,4,massive:en-US:train:03292,news_query,news,what is the outcome of blank today,news_query,497187261b7bc0c91fbdca2a6e709a879d79eacf114a711c9b0e7ce05a6ceb15
+5,5,massive:en-US:train:03243,news_query,news,update me on the standing rock protest,news_query,2b80d246dd2a7f2a833ab3702f609d3f80f9ce125596f54fd68d3ee7a1da703b
+5,1,massive:en-US:train:09411,play_audiobook,play,olly can you play hunt for red october,play_audiobook,47665227d4da8a916ebec591ebec8eb4f61107da065575031c018b9e0ee24e2e
+5,2,massive:en-US:train:09363,play_audiobook,play,can you play my latest audio book,play_audiobook,05d3460925514f020ea2609ebae5a7d6b72798b1c239bc57cd4a4520d6445611
+5,3,massive:en-US:train:09370,play_audiobook,play,can you pause and rewind the audio then resume,play_audiobook,6efd3046af54ff30c4b6fae28c0679e27b6605637eeb1bf24d003bc39e45d75b
+5,4,massive:en-US:train:09472,play_audiobook,play,open the books and play brains book from chap nine,play_audiobook,1c6bacd13f715d5b7adc35620f42fe2322bd3da07109b257a597a04dd8917b03
+5,5,massive:en-US:train:09437,play_audiobook,play,play the god of small things,play_audiobook,f91d92de2bece48d60c7a1b7ee988001df8d3011e954d98191a76bca73fd74e6
+5,1,massive:en-US:train:09944,play_game,play,play gta vice city game,play_game,12aa51f6a928f1359892e36207866b1e9d2622a2fd27f75e0137d180cb8c59f2
+5,2,massive:en-US:train:09984,play_game,play,play for me the game candy crush,play_game,102854e5cb57a966d08a8021fb701ba86c4ec7578a8cf45603ea0445b4992101
+5,3,massive:en-US:train:09947,play_game,play,would you like to play never have i ever,play_game,be38d2da4292020b8545443f3b5aa6218729912e8368607324be78f6887c19c7
+5,4,massive:en-US:train:10010,play_game,play,play mindsweeper with me,play_game,a57c056cba1cfbcd21111d6a3b96374ef88266d0093b4793df5e991c4c7935e0
+5,5,massive:en-US:train:09962,play_game,play,lets play chess together,play_game,e3f997c327b54a83acab463e0ede7ed4ce7b23687d7c040095f043b8bc4f5b05
+5,1,massive:en-US:train:10880,play_podcasts,play,can you play the next podcast,play_podcasts,120e52747f0df64e52b73c0f25172d912a23668b5f8d16fa3fa7e71076eb7fd0
+5,2,massive:en-US:train:10971,play_podcasts,play,play the young mummy's podcast,play_podcasts,96500142a7b65ea51b944d1c2a72b948819427e3727340b975ff41bb36a1ed0d
+5,3,massive:en-US:train:10914,play_podcasts,play,i want to play the next episode of this podcast,play_podcasts,d14fc33c1237aaaed19f2d1f406f3941daa66fc0f630c4448ecaef1cc48d278c
+5,4,massive:en-US:train:10969,play_podcasts,play,rewind the episode of podcast,play_podcasts,a78fed70964618ec5027e0db6df225570724a8f63b09c8aaac426faff170781e
+5,5,massive:en-US:train:10900,play_podcasts,play,play me a radio drama podcast,play_podcasts,6e40143ba1aba1d0885e8566aa7ee43f71590d9c2adbb169ebea69196a68a4b8
+5,1,massive:en-US:train:13187,qa_currency,qa,what does one u. s. d. equal in aus,qa_currency,cd4940c2c5234d0332ef2924a1d370024b71e511817cde3a1a3009a1a5f5ca7f
+5,2,massive:en-US:train:13157,qa_currency,qa,what is the us dollar euro exchange rate,qa_currency,5aaf89a4b250aa0e971a262debcf77f70a886e4125f34b3f696c6aca559cdb46
+5,3,massive:en-US:train:13196,qa_currency,qa,what is the exchange rate of currency in u. k.,qa_currency,4e6c4344c584ccbe5e810a96eac9b97e70fee52cadb567fa4efdabf949efcd71
+5,4,massive:en-US:train:14305,qa_currency,qa,if i have five u. s. dollars how much is that in australian dollars,qa_currency,079503078add5518b5627fd291059b55d89b71d56213e0bc0d117583466a7f3a
+5,5,massive:en-US:train:14323,qa_currency,qa,what's the ratio of value of the indian rupee and a u. s. dollar,qa_currency,beb7cddc97fd82a9b834988b369b74d30cb8492e3977f78381ea2ac93b44f04f
+5,1,massive:en-US:train:14493,qa_definition,qa,tell me the definition of arrow,qa_definition,a8755bb8e9cd8be3bbfc097ba8e3e38ab1c170c9aff09e16404a700181c6ff0f
+5,2,massive:en-US:train:14484,qa_definition,qa,hey olly what is the definition of survey,qa_definition,77fe4bb31dabc85b99be851b4c498203d7a1a2907e21ddfdb601ae3e7f4622fe
+5,3,massive:en-US:train:12793,qa_definition,qa,define computer game,qa_definition,4c27ebc070f76c713ec6bb734b48fd90fd3e3716c625fdffa1dd36799024f745
+5,4,massive:en-US:train:13490,qa_definition,qa,what does obligatory mean,qa_definition,8ca6f3acd3e4563cfb344007930973e6814be31c866df23b8118f7c9585e00a3
+5,5,massive:en-US:train:13991,qa_definition,qa,please describe about microwave,qa_definition,14e5b4c554b44ca76b8fbb7dd4f78ac0840e99f32015f47288a2ead4ad1bca77
+5,1,massive:en-US:train:13460,qa_factoid,qa,angelina has a birthday when,qa_factoid,61c155e6edaba9c09a676b139245fca552caa30eb610fbdb5c53688f8e8b1515
+5,2,massive:en-US:train:14247,qa_factoid,qa,how long is the nile,qa_factoid,a9e42f2e7392f57661c9d74824f321b4c8f2c2542db889d355945ae82e9d0a7a
+5,3,massive:en-US:train:13307,qa_factoid,qa,where is pategonia,qa_factoid,0ce2d9b121d49ae8e627f3e63161b87e658f5474a2a0172c59c1c297a1d762ef
+5,4,massive:en-US:train:13771,qa_factoid,qa,does spain share its border with morrocco,qa_factoid,01786cb707d654aba78e4562d4c7c662ae94065d66bd057d3b9892893da2b438
+5,5,massive:en-US:train:14139,qa_factoid,qa,is there any affairs of ileana d'cruz,qa_factoid,60bba2c10d8267019cfd8cfcd30ba8880fde4263c09829d32b7997d8862d087a
+5,1,massive:en-US:train:12720,qa_maths,qa,tell me the simple interest of seven with interest in two year,qa_maths,b74a801851ec097cd7a8b26009e694e5458a1b11bf1f8a97acaa2bf916f3cbd0
+5,2,massive:en-US:train:13075,qa_maths,qa,if i have fifty dollars and spend twenty four how many dollars will i have left,qa_maths,779be14cadc8c7253afe1c364ee0b9e2b8db1bee4e9277340fbf33eb72259915
+5,3,massive:en-US:train:14444,qa_maths,qa,solution,qa_maths,8270f2824111e04d9278c01a92b388147d9d02e0b50d946d25d00db375ff1282
+5,4,massive:en-US:train:12589,qa_maths,qa,what is the linear equation,qa_maths,42a0edc0cc08c77cf6be1576b89d4bf0e2d80b4081973b46d76281ffc62c045c
+5,5,massive:en-US:train:12634,qa_maths,qa,what does one plus,qa_maths,67ad1864a7915af300157dc58340e082223a31acab8dbe5da23cfde842529ae2
+5,1,massive:en-US:train:11457,recommendation_events,recommendation,olly find me a zoo or animal park in chicago that open this weekend,recommendation_events,be9ec13269093a1537c3192a6e4a01fa6196646465f9330baf33b8978f6e1a7e
+5,2,massive:en-US:train:11436,recommendation_events,recommendation,what events are happening today,recommendation_events,d9577591c0411db9b487fa55bb112c2d15cb646ca089cdb58f36e8091818c5ae
+5,3,massive:en-US:train:11581,recommendation_events,recommendation,what events are near me,recommendation_events,aec948f8f02aefdf7868487fadf8afbb1383d3634737f7eefa5c500e4c505f96
+5,4,massive:en-US:train:11454,recommendation_events,recommendation,are there concerts this weekend in chicago,recommendation_events,cb6175fb4792c0ee3fed6d7b2f915ad6511b1d6a6f6483497399dafadf73419e
+5,5,massive:en-US:train:11624,recommendation_events,recommendation,local area events,recommendation_events,bb8f5ff53f3340c3823397352600a0f9ef61e3f8a82defae8d468ed44437d7f6
+5,1,massive:en-US:train:11578,recommendation_locations,recommendation,please list shops within one miles from me,recommendation_locations,a8eba2c4d8cf2d3d9d17fbf9e4881fc1251e2119517be3b0323baebcc8bd31dd
+5,2,massive:en-US:train:11511,recommendation_locations,recommendation,give me some cafes near downtown fort lauderdale,recommendation_locations,2cad6da841a81131b45df9dd274a08bbe170159641e11fe709bf4c87180517ab
+5,3,massive:en-US:train:11549,recommendation_locations,recommendation,where is the closest bar,recommendation_locations,41600697337b1dfcdf600d31b8c3113f4ead566832dac6881894aa6424626903
+5,4,massive:en-US:train:11251,recommendation_locations,recommendation,tell me a nice chinese restaurant,recommendation_locations,4faa2e1a5400ebfba0431c6f52a6a9ed7b87f8949023d2ec15ae64633d9458bd
+5,5,massive:en-US:train:11545,recommendation_locations,recommendation,where can i shop around here,recommendation_locations,6f8bb8c6778706da0f23adde88a3fdb8bdb0f9e0801d02c22f6bc1a35c6325c2
+5,1,massive:en-US:train:14536,recommendation_movies,recommendation,what movie do you recommend tonight,recommendation_movies,d22d7997a1c3c007601d0672cf1d408f131f9bb02ffcd75d22bbecb748269a91
+5,2,massive:en-US:train:11672,recommendation_movies,recommendation,what's playing in the roosendaal cinema,recommendation_movies,13eb0e8db5cd3e107ac84a13a45974df39e96f8ac6a7655e45ebd1fb7c4d21f3
+5,3,massive:en-US:train:11288,recommendation_movies,recommendation,what movies is out there in the local cinema,recommendation_movies,fc72b2cf18308fdfbdc99e342df4c84026e2cba57c611505ea651ab9384d370b
+5,4,massive:en-US:train:11568,recommendation_movies,recommendation,olly what's playing at brea plaza five,recommendation_movies,bfd7126f8c95c345fdc4b9bef1f0913268da8c829e279bbdee178d25f4810db1
+5,5,massive:en-US:train:11461,recommendation_movies,recommendation,do you recommend any movies that are currently playing in me area,recommendation_movies,bc39aecaf507b7af7fd848a628795351bbeab19cc39f4b8c58b6f6f338904a7e
+5,1,massive:en-US:train:15081,social_post,social,post a facebook status engaged,social_post,d0743eefe29acafda477569f9a0e1f94fbd3fc9ff1e12900d495d6ee7395ac66
+5,2,massive:en-US:train:14956,social_post,social,send a tweet to safeway about water in my gas,social_post,58537ff21320a7b746e5a0d4bec60651b0e730c420a7f0745bc6e34b789fc375
+5,3,massive:en-US:train:14974,social_post,social,let wendy's know i hate them,social_post,de6f4150be20cb91ef4c2ff26b15a0056f4d17593013df1e5e9be085838a784e
+5,4,massive:en-US:train:14913,social_post,social,please create a new tweet,social_post,70ecb23bfe7504a40544558b65d586438c47e870c38dbc9a3eeeb47e719ac6e7
+5,5,massive:en-US:train:14867,social_post,social,tweet consumer service that the goods are of low quality,social_post,6dd6bd25b9a170824821664c0649fb723ccf8076587ef9be148dbaab98c78f75
+5,1,massive:en-US:train:14626,social_query,social,what's trending on twitter,social_query,6aababa18e576073f81de399dab41decf7f2b9b58ffb975f6a9c55dcab9ced34
+5,2,massive:en-US:train:14568,social_query,social,do i have new likes,social_query,35bf735576cd064ff5190799ae73627f713d4713f79525c5debea1acb6297db3
+5,3,massive:en-US:train:14729,social_query,social,show me my social media notifications,social_query,b35999b0b2d1f1e388fff6f1368b67bd70efe53f93d7f931e0f85af0770f01bb
+5,4,massive:en-US:train:14601,social_query,social,let me know if i get a new personal message from martha on facebook today,social_query,abf42bf0eed05f0080ca77e70ca6b6515a89efbc280a3349bb21f9137488f413
+5,5,massive:en-US:train:14766,social_query,social,show me my husbands facebook posts today,social_query,06df3800ccf09ec0dacdf846ad12b0f743e6d301070c266725299f3cbc824ced
+5,1,massive:en-US:train:01360,takeaway_order,takeaway,i want to order some food,takeaway_order,8a75e6769ff60c7d6f59cd8bcc1ca364b411918d36794e1893d3686f1620afee
+5,2,massive:en-US:train:00090,takeaway_order,takeaway,can i order takeaway dinner from byron's,takeaway_order,22c42f55c99edf7ce33a511b64b9fbad983d5e6a54f2be60e04dcaa5bd84f223
+5,3,massive:en-US:train:04018,takeaway_order,takeaway,can you order me a pizza today from dominoes,takeaway_order,0a58e4334e759808bc000b7bc12f02e0999aac9cedd59f46ab23020606e11231
+5,4,massive:en-US:train:01461,takeaway_order,takeaway,order a smoked meat platter from beanos,takeaway_order,25f44ed2e2ea880fb1d49e28d3a9d6c319942afd7083f0e71b72f6538c687def
+5,5,massive:en-US:train:03757,takeaway_order,takeaway,please call china wok and order number seven,takeaway_order,73446826a13cebbf9553ef2b921f41e940368093aac0c2b7767b72744b2d8840
+5,1,massive:en-US:train:02886,takeaway_query,takeaway,does dominoes deliver,takeaway_query,5ee0f88154a2af86c2c3e1132f8f3661ab399d372ba8940d988bf792ce5f5219
+5,2,massive:en-US:train:03818,takeaway_query,takeaway,where is an olive garden that does takeaway,takeaway_query,8db7d01cd12cb351cad2fea5733a3d998aa107c83ee14b275590b007a0e57a38
+5,3,massive:en-US:train:04080,takeaway_query,takeaway,where is my pizza from domino's at,takeaway_query,d8ba76eee6993dd29e3c454c84d2b986e984f4ec7de58d2080a06b24874c56eb
+5,4,massive:en-US:train:01327,takeaway_query,takeaway,olly does panda garden deliver,takeaway_query,8047548f910f5a1887429c616897e577379c2cbb92b4b4e1746c4ea09b6a2ae7
+5,5,massive:en-US:train:00987,takeaway_query,takeaway,i want to know if the olive garden provides takeaway,takeaway_query,3a4a6b8868ae0f40248b6becbe04127ada3e6e8e5d6251cbf5d756455fb2ecd3
+5,1,massive:en-US:train:11808,transport_query,transport,what is the fastest route to my grandmother's house,transport_query,8799ee84e44206ee0940c753ab8f6ba9a5f3bde7438e0e3a86135ef58fc19202
+5,2,massive:en-US:train:12325,transport_query,transport,find a train going from prague to brno,transport_query,be3ea2edb00aaa86a3497306ac3d1db58a4e1649631db9a53dfee90fe165f419
+5,3,massive:en-US:train:11904,transport_query,transport,how far is the distance to rccg ikoyi lagos from here by train,transport_query,903f6dbb4235f7dd85d99d8be4a38f41ea6079fff142083d2b3ddbd2052d82ea
+5,4,massive:en-US:train:12025,transport_query,transport,open train routes,transport_query,efe3cc744d74c417bce0d04885c23a768be13783ef4c335daf9fce92cc212f9e
+5,5,massive:en-US:train:12124,transport_query,transport,can i find the cheapest train ticket for this destination,transport_query,05e062445af21e267d1201d1125c66481a9d0f5758bb55b2296ac2f3da06ca07
+5,1,massive:en-US:train:12426,transport_taxi,transport,call rta and book a taxi for three o'clock in the morning,transport_taxi,a2acb775ba8017122df6c03faf81b5cf65ca6fa15e666a7bbced09364061a39b
+5,2,massive:en-US:train:12042,transport_taxi,transport,can you get me a taxi home,transport_taxi,97520a9545c02f693e6a80c84fea86e971523ad86e098857b2270171d9c50355
+5,3,massive:en-US:train:11745,transport_taxi,transport,flag me an uber for ten p. m. tonight,transport_taxi,c4ddbfec82e2a7b3fa023fcd921c1cc8422fbf8804eec164adea1643abe8e8ec
+5,4,massive:en-US:train:12384,transport_taxi,transport,book a local cab,transport_taxi,960bf159a1b92a17ab1879446f12ca7d94db4b411ee8b2a713c7ee7c48fd5fff
+5,5,massive:en-US:train:12270,transport_taxi,transport,book me a taxi to the mall of america please,transport_taxi,2ec6c598c2d3377912f8b5015ced7e150767954127c6753516c5f7fde8bb459a
+5,1,massive:en-US:train:12123,transport_ticket,transport,buy a train ticket to cleveland for april fourteenth,transport_ticket,064f85c1caef80d965e51c1cfad4a72cfd925a00852e4f838ae1e0ad2b6ff6f1
+5,2,massive:en-US:train:11923,transport_ticket,transport,could you make a train ticket for me,transport_ticket,377703278bb38ed9eb0cc99d82c3a8c39dae75ce1ee12a3be3e596a65e98e266
+5,3,massive:en-US:train:11728,transport_ticket,transport,get me a train ticket to go to,transport_ticket,be73e4af63386fb0fbeb26850b83709e219ce2673871ca9da6083e9f3103a9ae
+5,4,massive:en-US:train:11718,transport_ticket,transport,olly i need to get to bristol friday night can you book me a ticket please,transport_ticket,8f7f46890bf45d2f9d4ea027c644eb31552522b2db97bbd5324e2359b0c5777d
+5,5,massive:en-US:train:11917,transport_ticket,transport,book a train ticket with a berth seat to lucknow for next week,transport_ticket,c53e1bbb84418b89a12c3afe2c60c9559cd6ea6f11b771ff6e9c0709542ea88a
+5,1,massive:en-US:train:04475,weather_query,weather,is it supposed to rain tomorrow,weather_query,ee320d7eaaa0c3a2d32b298f4c3d486546aea3103ba26edf64240074d7191de4
+5,2,massive:en-US:train:05068,weather_query,weather,do i need to bring a coat today,weather_query,1eead36900ab40cd359ade19f4d24f8516f0f3b0a17e004e1fa57c9130a0c89e
+5,3,massive:en-US:train:03803,weather_query,weather,is it cold out,weather_query,cf32edf430dda385157910d33376dc8474d73af75829c8c712e1afa89dca2955
+5,4,massive:en-US:train:01715,weather_query,weather,is it cold weather there,weather_query,04bc407636d56187601daf1bac7737e2f2fba3714f305c36dae58966e113756f
+5,5,massive:en-US:train:05136,weather_query,weather,show me yesterdays weather,weather_query,66cfe15cffe0a200a9633c1654056f09490fc1b981339893cbc2808379c8ec38

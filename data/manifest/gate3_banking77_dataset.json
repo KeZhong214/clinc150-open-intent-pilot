@@ -1,0 +1,492 @@
+{
+  "schema_version": "gate3-dataset-v1",
+  "generated_at_utc": "2026-11-17T17:02:32+00:00",
+  "dataset": "banking77",
+  "seed": 42,
+  "known_classes": [
+    "declined_cash_withdrawal",
+    "balance_not_updated_after_bank_transfer",
+    "exchange_via_app",
+    "transfer_not_received_by_recipient",
+    "fiat_currency_support",
+    "pending_top_up",
+    "change_pin",
+    "card_arrival",
+    "transfer_timing",
+    "lost_or_stolen_phone",
+    "card_payment_wrong_exchange_rate",
+    "Refund_not_showing_up",
+    "cancel_transfer",
+    "card_payment_not_recognised",
+    "contactless_not_working",
+    "disposable_card_limits",
+    "card_about_to_expire",
+    "top_up_by_card_charge",
+    "cash_withdrawal_not_recognised",
+    "top_up_reverted",
+    "card_payment_fee_charged",
+    "top_up_by_cash_or_cheque",
+    "card_not_working",
+    "wrong_exchange_rate_for_cash_withdrawal",
+    "verify_source_of_funds",
+    "top_up_failed",
+    "get_physical_card",
+    "transfer_fee_charged",
+    "balance_not_updated_after_cheque_or_cash_deposit",
+    "age_limit",
+    "activate_my_card",
+    "virtual_card_not_working",
+    "card_acceptance",
+    "verify_top_up",
+    "terminate_account",
+    "unable_to_verify_identity",
+    "card_linking",
+    "top_up_by_bank_transfer_charge",
+    "beneficiary_not_allowed",
+    "transfer_into_account"
+  ],
+  "dev_unknown_classes": [
+    "pending_transfer",
+    "getting_virtual_card",
+    "reverted_card_payment?",
+    "transaction_charged_twice",
+    "card_delivery_estimate",
+    "wrong_amount_of_cash_received",
+    "failed_transfer",
+    "pending_cash_withdrawal",
+    "request_refund",
+    "top_up_limits",
+    "declined_card_payment",
+    "edit_personal_details",
+    "direct_debit_payment_not_recognised",
+    "getting_spare_card",
+    "get_disposable_virtual_card",
+    "exchange_rate",
+    "supported_cards_and_currencies",
+    "order_physical_card"
+  ],
+  "final_unknown_classes": [
+    "compromised_card",
+    "why_verify_identity",
+    "automatic_top_up",
+    "verify_my_identity",
+    "cash_withdrawal_charge",
+    "atm_support",
+    "topping_up_by_card",
+    "visa_or_mastercard",
+    "exchange_charge",
+    "apple_pay_or_google_pay",
+    "extra_charge_on_statement",
+    "passcode_forgotten",
+    "receiving_money",
+    "card_swallowed",
+    "lost_or_stolen_card",
+    "declined_transfer",
+    "pin_blocked",
+    "country_support",
+    "pending_card_payment"
+  ],
+  "class_domain": {
+    "declined_cash_withdrawal": "banking",
+    "balance_not_updated_after_bank_transfer": "banking",
+    "exchange_via_app": "banking",
+    "transfer_not_received_by_recipient": "banking",
+    "fiat_currency_support": "banking",
+    "pending_top_up": "banking",
+    "change_pin": "banking",
+    "card_arrival": "banking",
+    "transfer_timing": "banking",
+    "lost_or_stolen_phone": "banking",
+    "card_payment_wrong_exchange_rate": "banking",
+    "Refund_not_showing_up": "banking",
+    "cancel_transfer": "banking",
+    "card_payment_not_recognised": "banking",
+    "contactless_not_working": "banking",
+    "disposable_card_limits": "banking",
+    "card_about_to_expire": "banking",
+    "top_up_by_card_charge": "banking",
+    "cash_withdrawal_not_recognised": "banking",
+    "top_up_reverted": "banking",
+    "card_payment_fee_charged": "banking",
+    "top_up_by_cash_or_cheque": "banking",
+    "card_not_working": "banking",
+    "wrong_exchange_rate_for_cash_withdrawal": "banking",
+    "verify_source_of_funds": "banking",
+    "top_up_failed": "banking",
+    "get_physical_card": "banking",
+    "transfer_fee_charged": "banking",
+    "balance_not_updated_after_cheque_or_cash_deposit": "banking",
+    "age_limit": "banking",
+    "activate_my_card": "banking",
+    "virtual_card_not_working": "banking",
+    "card_acceptance": "banking",
+    "verify_top_up": "banking",
+    "terminate_account": "banking",
+    "unable_to_verify_identity": "banking",
+    "card_linking": "banking",
+    "top_up_by_bank_transfer_charge": "banking",
+    "beneficiary_not_allowed": "banking",
+    "transfer_into_account": "banking",
+    "pending_transfer": "banking",
+    "getting_virtual_card": "banking",
+    "reverted_card_payment?": "banking",
+    "transaction_charged_twice": "banking",
+    "card_delivery_estimate": "banking",
+    "wrong_amount_of_cash_received": "banking",
+    "failed_transfer": "banking",
+    "pending_cash_withdrawal": "banking",
+    "request_refund": "banking",
+    "top_up_limits": "banking",
+    "declined_card_payment": "banking",
+    "edit_personal_details": "banking",
+    "direct_debit_payment_not_recognised": "banking",
+    "getting_spare_card": "banking",
+    "get_disposable_virtual_card": "banking",
+    "exchange_rate": "banking",
+    "supported_cards_and_currencies": "banking",
+    "order_physical_card": "banking",
+    "compromised_card": "banking",
+    "why_verify_identity": "banking",
+    "automatic_top_up": "banking",
+    "verify_my_identity": "banking",
+    "cash_withdrawal_charge": "banking",
+    "atm_support": "banking",
+    "topping_up_by_card": "banking",
+    "visa_or_mastercard": "banking",
+    "exchange_charge": "banking",
+    "apple_pay_or_google_pay": "banking",
+    "extra_charge_on_statement": "banking",
+    "passcode_forgotten": "banking",
+    "receiving_money": "banking",
+    "card_swallowed": "banking",
+    "lost_or_stolen_card": "banking",
+    "declined_transfer": "banking",
+    "pin_blocked": "banking",
+    "country_support": "banking",
+    "pending_card_payment": "banking"
+  },
+  "counts": {
+    "support": 400,
+    "calibration_known": 800,
+    "known_test": 1600,
+    "dev_unknown": 720,
+    "final_unknown": 760
+  },
+  "support_5_rows": 200,
+  "support_10_rows": 400,
+  "class_counts": [
+    {
+      "intent": "declined_cash_withdrawal",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "balance_not_updated_after_bank_transfer",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "exchange_via_app",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "transfer_not_received_by_recipient",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "fiat_currency_support",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "pending_top_up",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "change_pin",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_arrival",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "transfer_timing",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "lost_or_stolen_phone",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_payment_wrong_exchange_rate",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "Refund_not_showing_up",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "cancel_transfer",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_payment_not_recognised",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "contactless_not_working",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "disposable_card_limits",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_about_to_expire",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "top_up_by_card_charge",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "cash_withdrawal_not_recognised",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "top_up_reverted",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_payment_fee_charged",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "top_up_by_cash_or_cheque",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_not_working",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "wrong_exchange_rate_for_cash_withdrawal",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "verify_source_of_funds",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "top_up_failed",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "get_physical_card",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "transfer_fee_charged",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "balance_not_updated_after_cheque_or_cash_deposit",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "age_limit",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "activate_my_card",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "virtual_card_not_working",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_acceptance",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "verify_top_up",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "terminate_account",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "unable_to_verify_identity",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "card_linking",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "top_up_by_bank_transfer_charge",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "beneficiary_not_allowed",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    },
+    {
+      "intent": "transfer_into_account",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 40
+    }
+  ],
+  "text_overlap": {
+    "support10_vs_known_test": 0,
+    "support5_vs_known_test": 0,
+    "support10_vs_calibration": 0,
+    "support10_vs_dev_unknown": 0,
+    "support10_vs_final_unknown": 0,
+    "calibration_vs_known_test": 0,
+    "calibration_vs_dev_unknown": 0,
+    "calibration_vs_final_unknown": 0,
+    "dev_unknown_vs_final_unknown": 0,
+    "dev_unknown_vs_known_test": 0
+  },
+  "fields": [
+    "dataset",
+    "intent",
+    "domain",
+    "split",
+    "role",
+    "sample_id",
+    "text",
+    "open_set_label",
+    "support_rank",
+    "text_sha256",
+    "text_norm_sha256"
+  ],
+  "source": {
+    "id": "PolyAI/banking77",
+    "revision": "1846984189f2bc0ac51c6fc3a600fa9e1714e0c6",
+    "license": "CC BY 4.0",
+    "train_rows": 10003,
+    "test_rows": 3080
+  },
+  "class_rule": "hash 40/18/19; all test rows used; train support/calibration"
+}

@@ -1,0 +1,101 @@
+shot,support_rank,sample_id,intent,domain,text,open_set_label,text_sha256
+5,1,clinc150:train:13324,are_you_a_bot,small_talk,so are you a bot,are_you_a_bot,afd12bcb66c6aa356bbe7841620ebeed0ffc8c5807ecd5e9ff644956c9cbd6bd
+5,2,clinc150:train:13304,are_you_a_bot,small_talk,are your real or artificial,are_you_a_bot,582750fd9aa8a7dbb5fa8f5fc6dece697996ffa9a9fe75939d318f7485bf8e19
+5,3,clinc150:train:13395,are_you_a_bot,small_talk,tell me if you are a human or a computer,are_you_a_bot,c653663b7d8a845a73b9712fe4f9e1648c87de5b4ce738cdf654f5ea4a8e129b
+5,4,clinc150:train:13315,are_you_a_bot,small_talk,"are you ai, or a person",are_you_a_bot,5fed37f887d41a297710614b1e42db0fabbfc4d56d861a0eea7251de616b1f60
+5,5,clinc150:train:13377,are_you_a_bot,small_talk,are you an ai or person,are_you_a_bot,d06b6fe773fe777ed31eea9631be47b2671412a3a1efd4a5438bd8a06cc80afe
+5,1,clinc150:train:02538,balance,banking,tell me what i have in my money market account,balance,7a4cab0157368e6a304b23dc29615105ace2a41729800abac2cc027ad2b77eed
+5,2,clinc150:train:02587,balance,banking,what is my balance,balance,d8b98c9319370b176d213ff515f58c9ee14517b2f5c7a0ee706cf598e8d89836
+5,3,clinc150:train:02550,balance,banking,i want to get a new shirt; will the money in my td ameritrade account cover it,balance,595e932087f16058293149f62f940b3dc8b0fb394bba061870774d6dc2c131c5
+5,4,clinc150:train:02598,balance,banking,what is my bank balance for all accounts,balance,3633751dfe8f42a12159e8e3eb4b392fb726fd543c73f214d5123d40e73123c5
+5,5,clinc150:train:02524,balance,banking,how much money is in my checking account,balance,5190d3d51e02d9c77c273f80a167d6281374bb4d2eff7919975b5d8ab4cf3d1f
+5,1,clinc150:train:13998,change_ai_name,meta,can i rename you,change_ai_name,f489b9e7e60d52397d0dda824946cf431b2506fd9de04bd645bab81fa1277274
+5,2,clinc150:train:13904,change_ai_name,meta,i will call you zander,change_ai_name,8dad3c646ee0c59d6c74d7c9e3e48ef56a36e84b49f37419339a037da3374476
+5,3,clinc150:train:13924,change_ai_name,meta,what other names can i give you,change_ai_name,1c2418e1a97a09db87720974691208e8457e7ba7b75fe3479a3b8b5851d8be00
+5,4,clinc150:train:13944,change_ai_name,meta,please change the ai name,change_ai_name,56cbf341a7199e00419f5f251e2258a0bf90bdea290af3be0850559978f67d02
+5,5,clinc150:train:13935,change_ai_name,meta,do you mind if call you nikolai,change_ai_name,17a8f6bde5a2a0d8cd955520d343f03454fe6b335363629c635834e9e1c87f32
+5,1,clinc150:train:04089,credit_score,credit_cards,where can i see my credit score,credit_score,a42f86f00dbc6fcb56dcb8ea8261e1665640793653133e6dfbd8f6523ac06434
+5,2,clinc150:train:04008,credit_score,credit_cards,i want my credit score,credit_score,3492674b5da27efa949fcaf6bbe2941780281acd85ab2fcc9de3f8466a2f73a2
+5,3,clinc150:train:04022,credit_score,credit_cards,tell me my credit score please,credit_score,bda1f91c37d5a6ed73863f23e7ec2425e63f34e07d768670d43ad74a7d5d9467
+5,4,clinc150:train:04071,credit_score,credit_cards,lets look up my credit score,credit_score,af4d94dec52053c2e1c15475a2d3797ed060581bde9e5547fe16546a00cf511e
+5,5,clinc150:train:04092,credit_score,credit_cards,please notify me of my credit rating,credit_score,4cf39fa459b7e7ee080021dbe02631dedeaba022ab0c1aeb267c16ec4b4c0cf9
+5,1,clinc150:train:11627,directions,auto_and_commute,where can i find the mall closest to here,directions,f0a92bf3bf3a1eb7d87573409e7565f092b88a70a99b1b09d8ccd1ad7a1c6a3e
+5,2,clinc150:train:11664,directions,auto_and_commute,what's the direction for foot traffic to get to the eiffel tower,directions,fc453f8fc6c31e6941d0d353862e011e544b2b94165802ff8dd74fda19041852
+5,3,clinc150:train:11622,directions,auto_and_commute,what steps do i need to take to take a bus to detroit,directions,637500846f72a1f5778be0eefae996a6db576d1b8b3b05fc620739aaf0b58b60
+5,4,clinc150:train:11649,directions,auto_and_commute,take me to the closest walmart,directions,7a23709b51fe0de729ce4306e295a4ba05ab411025a40095e248eae3431cc23a
+5,5,clinc150:train:11644,directions,auto_and_commute,how do i get to the nearest post office,directions,64898a1047afc12300092f749372198ef5d45b13a0208c02ae76af5ed1832c24
+5,1,clinc150:train:08790,exchange_rate,travel,convert krugerrands to saudi riyal,exchange_rate,45e408b10cfadd2a71f4e33154adeedab5c177e68925ea18b1697e5801e3d223
+5,2,clinc150:train:08707,exchange_rate,travel,whats pesos australian dollars in 20,exchange_rate,3571b2cc5e379cb934f895426c9699759ebd10ec7ef5eb4ba9947569a18b771c
+5,3,clinc150:train:08715,exchange_rate,travel,tell me the exchange rate between rubles and dollars,exchange_rate,aa47cf7331841a8b011b0b4030369837d2f03f432e295965cf7cb3960e868481
+5,4,clinc150:train:08751,exchange_rate,travel,tell me how many pesos equal 500 dollars,exchange_rate,3155304f083b844f8360fc20843f0b8d12e538a1b5e5f36e0eed4ffc0cf324da
+5,5,clinc150:train:08786,exchange_rate,travel,"if i have 20,000 yen, how much is that in usd",exchange_rate,ec63bd2cfb0a4e82b806f722acadac11fd184d5705147d52f3ce966ca4cd6999
+5,1,clinc150:train:04803,insurance,work,what are the health benefits i have,insurance,51acd7d7a3741ca9cb9298a3003df6b381cbf36bb6027faa84329ecdc252d2d6
+5,2,clinc150:train:04808,insurance,work,i need to know more about my health plan,insurance,60752448bd890d59341403e09beba75a9ac7e7a290eae5b7822d7ad3aa7fd92a
+5,3,clinc150:train:04878,insurance,work,where is the list of my insurance benefits,insurance,57063edf8bc1574f5c972048d97a50c0d2c43a1182bb431271521f19b2e87cf0
+5,4,clinc150:train:04849,insurance,work,please find the benefits provided by my insurance,insurance,8f39e1ffb5f4b8c40557c626bec963b1ff5c5b7107ec0d0cd596670fb152d02d
+5,5,clinc150:train:04869,insurance,work,what was my health plan again,insurance,a3644f7fdfa92c615b2fd4bb6b958480412500dfb57ff3a309a4de2fac6eae82
+5,1,clinc150:train:00516,insurance_change,work,how do i alter my insurance policy,insurance_change,8f140bd501f8b06bf00cf9d3fc301dcb61b6d291604ae2d2ab5c820d052b2840
+5,2,clinc150:train:00552,insurance_change,work,can i get a new pet insurance plan,insurance_change,5e59871153c5cf58f3cbd6f94d88f5db140f84c77fd100143d66881bbd67a04b
+5,3,clinc150:train:00583,insurance_change,work,help me find new insurance providers,insurance_change,58b8c5d4458eb56e98363f046ec9eb1f4f45aa8e98a7e8f394365be24f82560b
+5,4,clinc150:train:00549,insurance_change,work,i'd like a new life insurance plan,insurance_change,8dbe0efce381c883eb37d105119a10bc74ff8ea17412e6d1372d7f03b77ee905
+5,5,clinc150:train:00597,insurance_change,work,i want to switch my insurance coverage,insurance_change,ba3474afe2048752aaeb1a274c2ef65783e35373dee690a1db0386ffd5c96bdb
+5,1,clinc150:train:14382,meal_suggestion,kitchen_and_dining,need some good dinner ideas,meal_suggestion,3381b2d82d5990bdb787d1115b82797820a0a2deaca15ff1cad8573b8c1110df
+5,2,clinc150:train:14330,meal_suggestion,kitchen_and_dining,i'd like to get dinner suggestions for thai food,meal_suggestion,51b0f46d437cbbacec6f98e832cfd8d9e19a2610f61306142736c3841d5635fd
+5,3,clinc150:train:14391,meal_suggestion,kitchen_and_dining,suggest a meal from india to me,meal_suggestion,dc871cc40b24e08ff83c1e2cc28cfc7b1bc398297af20eaac4150664d80af1aa
+5,4,clinc150:train:14305,meal_suggestion,kitchen_and_dining,"suggest a meal from thailand to me, please",meal_suggestion,b91e8227b9042a5dda537f2a7ecc154897862557cf8d9c8c348647e0552f4470
+5,5,clinc150:train:14316,meal_suggestion,kitchen_and_dining,can you suggest meals from italy to me,meal_suggestion,6810c6ca0ba6d912f9434c78ea7d86e3e6923b1aabf937828ff714772b92ac2c
+5,1,clinc150:train:10441,measurement_conversion,utility,how do i convert four inches into centimeters,measurement_conversion,8ea32ec0b41225b312fba1900ba32db3adc0fa0849f9661b2814d82e88d38a41
+5,2,clinc150:train:10422,measurement_conversion,utility,what is 15 ounces in grams,measurement_conversion,153d59be015b1f068078a093368e6e4e6cc61f57eb09e58e778d404841f97069
+5,3,clinc150:train:10442,measurement_conversion,utility,what are four inches in centimeters,measurement_conversion,4445c3f7ce82f7d4bb49cd4c870a994a6f247b58d93fce112b21705487afa57a
+5,4,clinc150:train:10445,measurement_conversion,utility,what would be the conversion between tablespoons and teaspoons,measurement_conversion,a9e8edbaf43d25e8382bd259aac795f2b85df83691bf9d63b4115f4fc8af6ff7
+5,5,clinc150:train:10415,measurement_conversion,utility,how do you convert ounces to pounds,measurement_conversion,3e80dc1573a26ad637771d7b43e148a229b317b283dadc395f653e93ee6427d1
+5,1,clinc150:train:08565,plug_type,travel,are barcelona plugs compatible,plug_type,cd80884803f43d734f97cbdc5f9ca19aaf140f2558e089486c0e08e737185548
+5,2,clinc150:train:08596,plug_type,travel,do i need a socket converter if i'm going to be in sweden,plug_type,de0bdf9297d5f52ec45585918a9634e82223d2eba663437f6ed1e8bd43dfdbc9
+5,3,clinc150:train:08556,plug_type,travel,what plug type does russia use,plug_type,5af533144c560c5e0e5c3a6db3fc88bdec82e893e59315cef3e5c9814b095ff8
+5,4,clinc150:train:08533,plug_type,travel,what kind of plug does the country use,plug_type,f52a32b4f2abc38347d39cc3203623e0d817f26f7ee3e40f86d00248d1fffc05
+5,5,clinc150:train:08581,plug_type,travel,would it be smart to get a plug converter when i visit israel,plug_type,6b41a9e109c87f0a522d32c0474cc5e6c2e93d506a5ccae627ef3c0a71514012
+5,1,clinc150:train:05006,reminder,home,is mop the floor already in my reminders,reminder,527b9bde4601b83b60e5413d51572cb5d9e6eded968381c7622ae66817ba89a5
+5,2,clinc150:train:05083,reminder,home,what did i include on my list of things to remember,reminder,d1786353b32681255af74349cc0f827b41f128e6b23483f2e447a6c00d7bab14
+5,3,clinc150:train:05018,reminder,home,tell my all my reminders,reminder,0e8e3f8a7825a0547c3a8eca98efcdbcd7a85a5f37c51d9dbea793b788ea57b8
+5,4,clinc150:train:05024,reminder,home,iterate the items on my reminder list,reminder,b65bb6ea7ad500b05825b5712a9b1b5f91278e622b86ef5384f1279c609ecb63
+5,5,clinc150:train:05094,reminder,home,tell me what i had wanted to remember earlier,reminder,18023f53b10ae1962ea331645d7402a537d74e09621fa21371ccd49f59027716
+5,1,clinc150:train:06907,reminder_update,home,set a reminder for me to call my brother at 8 pm,reminder_update,e2e5df2986e59dcfd9b6abc9e7f55cfbfa2a4527ac50e5063a374b9ee8bd5672
+5,2,clinc150:train:06994,reminder_update,home,remind me to take out the trash,reminder_update,ffcac68264725b037cc6e5183c07ea1d95be2fe95ea542df205069265464fe32
+5,3,clinc150:train:06958,reminder_update,home,help me set a reminder to work out,reminder_update,c2047279e1b642ea5b0b3100757df0d0585a74f368bc31dfa8608984d2d196a5
+5,4,clinc150:train:06951,reminder_update,home,set a reminder to feed the dogs,reminder_update,7c04e9190a6b6239d9ba5273e4577b6b954315a892a2f6ee9259f070c6509a87
+5,5,clinc150:train:06913,reminder_update,home,please give me a reminder,reminder_update,adc760c06098916c622043d14c3e63e5bfb9d151d90f561ee77a779065697fe7
+5,1,clinc150:train:07010,report_lost_card,credit_cards,i think my visa card was stolen,report_lost_card,37f92f8bc397f2575988171364682ebfb8f0ba70faf0c6c071883964ff6fe8dc
+5,2,clinc150:train:07098,report_lost_card,credit_cards,i can't find my student id card and i want to report it as lost,report_lost_card,7a725383e997d166ce55e5dcbc828a1ecd678279b5c427bd686446a59df717ee
+5,3,clinc150:train:07009,report_lost_card,credit_cards,my visa card got stolen,report_lost_card,b14d335dc56455b3d1b2fd09d0e4e02a3abef672de22e110d593d2e706f5b733
+5,4,clinc150:train:07045,report_lost_card,credit_cards,"i lost my card, what do i do",report_lost_card,af3538b0906367284b4e5d2e840de80eb3a114c4efc064ba2b18f04bbd24a3a8
+5,5,clinc150:train:07004,report_lost_card,credit_cards,can you report my td bank card as lost,report_lost_card,3703c067aa54a56cc222f1ce46d6122c91e62fad0a4744f014a3735ac6f42d2e
+5,1,clinc150:train:08066,restaurant_reviews,kitchen_and_dining,is there any opinions on the sushi at yakamoto,restaurant_reviews,a4167e8a7ab0681578a749900eef24fc126a905ec160f5226bcbf10dee9a9eb8
+5,2,clinc150:train:08029,restaurant_reviews,kitchen_and_dining,what reviews does miyabi have,restaurant_reviews,b71bcd68434c0193dec884f4d12c6ea3b953f31a18b810568dc4f281f75d42bd
+5,3,clinc150:train:08037,restaurant_reviews,kitchen_and_dining,how many stars does la vignette have,restaurant_reviews,b1c47aa1b0de4ad578fdd251b8774f36edc76415e17d0df1156ff1440922a02c
+5,4,clinc150:train:08005,restaurant_reviews,kitchen_and_dining,does outback steakhouse have good reviews,restaurant_reviews,35f260129f6abe9e1b495468d0998dbab476990bb8962b6d15f1fda82124f75a
+5,5,clinc150:train:08002,restaurant_reviews,kitchen_and_dining,how are the donuts reviews at tgi,restaurant_reviews,bd6d4c78b866d7e965913686044298285e4c60ffd4b14a2851dc908e6512126b
+5,1,clinc150:train:08168,routing,banking,what's my pioneer routing number,routing,429f3a4915046f21a8b6e6feec20e40f8537fe3dcc2429da19aa3a4a87e311bd
+5,2,clinc150:train:08138,routing,banking,please tell me what my bank routing number is,routing,c30a5710615a798675d9f71a9ce5b35353267561eed66332226b62fb4cfed7eb
+5,3,clinc150:train:08116,routing,banking,where do i find the routing number for great western bank,routing,de8154f9fa4b4fa2d63bd6a556efd5db6048ff4ba41cc9db8ab8d3f44aec7e81
+5,4,clinc150:train:08115,routing,banking,can you tell me the routing number of wells fargo,routing,38e997a62614dc6a02b858976da1e2300ecf008fa72daa6f4205c397703c5f63
+5,5,clinc150:train:08177,routing,banking,what's the routing number for my chase account,routing,de002ca3c088d6c7d0f62d6931fe77c1d37729d218424e309a7a30cb685b981d
+5,1,clinc150:train:11775,spelling,utility,tell how many a's are in the word happiness,spelling,729f4beb0699c0d06560dce47d85aec09474e985737830ee3f34088d159cbe9a
+5,2,clinc150:train:11791,spelling,utility,i don't know how to spell apparently,spelling,8d7060d6b05898a5af419b89f78b84946708315c134eab0929a345fd53755e16
+5,3,clinc150:train:11774,spelling,utility,"find all the ""a""s in happiness",spelling,42bdb358746562fb19b75461663dc5810ce13408074eac290bc1232368f3bcc4
+5,4,clinc150:train:11788,spelling,utility,i don't know how to spell anethesia,spelling,ca8c2bc100cb8f93ff82e24365865f184edf8040f4f9a9e548c9bf190c519e28
+5,5,clinc150:train:11755,spelling,utility,i wish i knew how to spell mississippi,spelling,231fc9d7972e65de56ae34dbc399fe56d4eac8de351c19883af14ced286685dd
+5,1,clinc150:train:05729,uber,auto_and_commute,find an uber xl to take me to the kroger near me,uber,e8a01da26712ecb2170efca67ac3a5a900a253edb1489f3667a07608abdedc14
+5,2,clinc150:train:05794,uber,auto_and_commute,help me get an uber,uber,c164b187a8bbebf7e2a06ec24e43d10df0027d4e1df9d44eda9922f2a1a2c9c3
+5,3,clinc150:train:05710,uber,auto_and_commute,please book an uber for chima's,uber,7278be5dd51dd5e766cf37a1bb3089a11b42af854d53ee24e51850f2a3d635ad
+5,4,clinc150:train:05713,uber,auto_and_commute,i need an uber for 5 people to go to wendys,uber,840522cd8b8fa6c1a1702c136cec25d8ec8788d0658866efbb18888fcc5a5bac
+5,5,clinc150:train:05748,uber,auto_and_commute,can you get me an uber to the science museum,uber,612713bbd9e199ffe86609fb800b777af254ee012804ca18fa598533fb755a77
+5,1,clinc150:train:03162,user_name,meta,can you tell me what you call me,user_name,8c7ac149a4214a4f77f94c7f49111d18b6d3fc08fbd138dc26576c80317c0f1c
+5,2,clinc150:train:03154,user_name,meta,what is the name you have listed for my identity,user_name,b81cea28023f346ebcb61ddec806c463db1118f089d0ad5eb928e388aa8ab277
+5,3,clinc150:train:03191,user_name,meta,what is the name you call me,user_name,5b2b558a25ad0f2b44d50e3d0a96963384d084a89f81c0acaaa238e645946a98
+5,4,clinc150:train:03173,user_name,meta,what is my name saved as,user_name,28f4e918fb606865096c59285df3d990dcf702dcc37ebaafbc55293089c9006d
+5,5,clinc150:train:03134,user_name,meta,the name you have for me is what,user_name,5690f20c995b524c01a7b30dc003824003f8c2537d8af4f48cebba2332e190fa
+5,1,clinc150:train:02979,who_made_you,small_talk,how was this ai created,who_made_you,18a94e404edb105240ce601b9e37b2adc059648d0b1dc222d1eb6d1468d80d2e
+5,2,clinc150:train:02906,who_made_you,small_talk,what company owns your code,who_made_you,c555cf9b6cbe844283158e24b32adc469afc5d1316866872ccd4eaedcb0fb38c
+5,3,clinc150:train:02960,who_made_you,small_talk,tell me your brand,who_made_you,3256fa767c412d1b3b0d248e09af4b4bef29f7d89ce8d4e2523c401359216054
+5,4,clinc150:train:02905,who_made_you,small_talk,what company wrote your code,who_made_you,d3459a93ca69e60b0f642f5c2a7401314518c91b3d277698b3a0c241daa51aeb
+5,5,clinc150:train:02924,who_made_you,small_talk,i am wanting to know who programmed you,who_made_you,2975bb09af7bb511e1e553f065af80d3a4c7f925df44a3e88a86f43ab4eec40e

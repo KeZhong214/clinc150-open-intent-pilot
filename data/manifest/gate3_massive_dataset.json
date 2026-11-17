@@ -1,0 +1,425 @@
+{
+  "schema_version": "gate3-dataset-v1",
+  "generated_at_utc": "2026-11-17T17:02:32+00:00",
+  "dataset": "massive",
+  "seed": 42,
+  "known_classes": [
+    "qa_maths",
+    "audio_volume_up",
+    "calendar_query",
+    "email_querycontact",
+    "play_audiobook",
+    "transport_query",
+    "takeaway_order",
+    "calendar_set",
+    "recommendation_events",
+    "weather_query",
+    "takeaway_query",
+    "transport_taxi",
+    "calendar_remove",
+    "qa_definition",
+    "iot_hue_lighton",
+    "social_query",
+    "transport_ticket",
+    "iot_hue_lightoff",
+    "cooking_recipe",
+    "recommendation_locations",
+    "news_query",
+    "qa_currency",
+    "audio_volume_mute",
+    "lists_remove",
+    "iot_hue_lightup",
+    "play_podcasts",
+    "qa_factoid",
+    "recommendation_movies",
+    "play_game",
+    "datetime_query",
+    "iot_hue_lightchange",
+    "alarm_remove",
+    "iot_wemo_off",
+    "music_query",
+    "social_post"
+  ],
+  "dev_unknown_classes": [
+    "cooking_query",
+    "general_greet",
+    "audio_volume_down",
+    "email_query",
+    "alarm_set",
+    "play_music",
+    "alarm_query",
+    "play_radio",
+    "email_sendemail",
+    "music_likeness",
+    "music_dislikeness",
+    "transport_traffic"
+  ],
+  "final_unknown_classes": [
+    "audio_volume_other",
+    "iot_cleaning",
+    "iot_hue_lightdim",
+    "general_quirky",
+    "music_settings",
+    "general_joke",
+    "email_addcontact",
+    "lists_createoradd",
+    "iot_wemo_on",
+    "lists_query",
+    "iot_coffee",
+    "datetime_convert",
+    "qa_stock"
+  ],
+  "class_domain": {
+    "qa_maths": "qa",
+    "audio_volume_up": "audio",
+    "calendar_query": "calendar",
+    "email_querycontact": "email",
+    "play_audiobook": "play",
+    "transport_query": "transport",
+    "takeaway_order": "takeaway",
+    "calendar_set": "calendar",
+    "recommendation_events": "recommendation",
+    "weather_query": "weather",
+    "takeaway_query": "takeaway",
+    "transport_taxi": "transport",
+    "calendar_remove": "calendar",
+    "qa_definition": "qa",
+    "iot_hue_lighton": "iot",
+    "social_query": "social",
+    "transport_ticket": "transport",
+    "iot_hue_lightoff": "iot",
+    "cooking_recipe": "cooking",
+    "recommendation_locations": "recommendation",
+    "news_query": "news",
+    "qa_currency": "qa",
+    "audio_volume_mute": "audio",
+    "lists_remove": "lists",
+    "iot_hue_lightup": "iot",
+    "play_podcasts": "play",
+    "qa_factoid": "qa",
+    "recommendation_movies": "recommendation",
+    "play_game": "play",
+    "datetime_query": "datetime",
+    "iot_hue_lightchange": "iot",
+    "alarm_remove": "alarm",
+    "iot_wemo_off": "iot",
+    "music_query": "music",
+    "social_post": "social",
+    "cooking_query": "cooking",
+    "general_greet": "general",
+    "audio_volume_down": "audio",
+    "email_query": "email",
+    "alarm_set": "alarm",
+    "play_music": "play",
+    "alarm_query": "alarm",
+    "play_radio": "play",
+    "email_sendemail": "email",
+    "music_likeness": "music",
+    "music_dislikeness": "music",
+    "transport_traffic": "transport",
+    "audio_volume_other": "audio",
+    "iot_cleaning": "iot",
+    "iot_hue_lightdim": "iot",
+    "general_quirky": "general",
+    "music_settings": "music",
+    "general_joke": "general",
+    "email_addcontact": "email",
+    "lists_createoradd": "lists",
+    "iot_wemo_on": "iot",
+    "lists_query": "lists",
+    "iot_coffee": "iot",
+    "datetime_convert": "datetime",
+    "qa_stock": "qa"
+  },
+  "counts": {
+    "support": 350,
+    "calibration_known": 1323,
+    "known_test": 1915,
+    "dev_unknown": 407,
+    "final_unknown": 436
+  },
+  "support_5_rows": 175,
+  "support_10_rows": 350,
+  "class_counts": [
+    {
+      "intent": "qa_maths",
+      "domain": "qa",
+      "support": 10,
+      "calibration": 13,
+      "known_test": 25
+    },
+    {
+      "intent": "audio_volume_up",
+      "domain": "audio",
+      "support": 10,
+      "calibration": 12,
+      "known_test": 13
+    },
+    {
+      "intent": "calendar_query",
+      "domain": "calendar",
+      "support": 10,
+      "calibration": 102,
+      "known_test": 126
+    },
+    {
+      "intent": "email_querycontact",
+      "domain": "email",
+      "support": 10,
+      "calibration": 16,
+      "known_test": 26
+    },
+    {
+      "intent": "play_audiobook",
+      "domain": "play",
+      "support": 10,
+      "calibration": 34,
+      "known_test": 41
+    },
+    {
+      "intent": "transport_query",
+      "domain": "transport",
+      "support": 10,
+      "calibration": 36,
+      "known_test": 51
+    },
+    {
+      "intent": "takeaway_order",
+      "domain": "takeaway",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 22
+    },
+    {
+      "intent": "calendar_set",
+      "domain": "calendar",
+      "support": 10,
+      "calibration": 131,
+      "known_test": 209
+    },
+    {
+      "intent": "recommendation_events",
+      "domain": "recommendation",
+      "support": 10,
+      "calibration": 26,
+      "known_test": 43
+    },
+    {
+      "intent": "weather_query",
+      "domain": "weather",
+      "support": 10,
+      "calibration": 126,
+      "known_test": 156
+    },
+    {
+      "intent": "takeaway_query",
+      "domain": "takeaway",
+      "support": 10,
+      "calibration": 24,
+      "known_test": 35
+    },
+    {
+      "intent": "transport_taxi",
+      "domain": "transport",
+      "support": 10,
+      "calibration": 27,
+      "known_test": 23
+    },
+    {
+      "intent": "calendar_remove",
+      "domain": "calendar",
+      "support": 10,
+      "calibration": 47,
+      "known_test": 67
+    },
+    {
+      "intent": "qa_definition",
+      "domain": "qa",
+      "support": 10,
+      "calibration": 55,
+      "known_test": 57
+    },
+    {
+      "intent": "iot_hue_lighton",
+      "domain": "iot",
+      "support": 10,
+      "calibration": 5,
+      "known_test": 3
+    },
+    {
+      "intent": "social_query",
+      "domain": "social",
+      "support": 10,
+      "calibration": 18,
+      "known_test": 25
+    },
+    {
+      "intent": "transport_ticket",
+      "domain": "transport",
+      "support": 10,
+      "calibration": 25,
+      "known_test": 35
+    },
+    {
+      "intent": "iot_hue_lightoff",
+      "domain": "iot",
+      "support": 10,
+      "calibration": 17,
+      "known_test": 43
+    },
+    {
+      "intent": "cooking_recipe",
+      "domain": "cooking",
+      "support": 10,
+      "calibration": 41,
+      "known_test": 72
+    },
+    {
+      "intent": "recommendation_locations",
+      "domain": "recommendation",
+      "support": 10,
+      "calibration": 31,
+      "known_test": 31
+    },
+    {
+      "intent": "news_query",
+      "domain": "news",
+      "support": 10,
+      "calibration": 82,
+      "known_test": 124
+    },
+    {
+      "intent": "qa_currency",
+      "domain": "qa",
+      "support": 10,
+      "calibration": 31,
+      "known_test": 39
+    },
+    {
+      "intent": "audio_volume_mute",
+      "domain": "audio",
+      "support": 10,
+      "calibration": 15,
+      "known_test": 32
+    },
+    {
+      "intent": "lists_remove",
+      "domain": "lists",
+      "support": 10,
+      "calibration": 37,
+      "known_test": 52
+    },
+    {
+      "intent": "iot_hue_lightup",
+      "domain": "iot",
+      "support": 10,
+      "calibration": 12,
+      "known_test": 27
+    },
+    {
+      "intent": "play_podcasts",
+      "domain": "play",
+      "support": 10,
+      "calibration": 34,
+      "known_test": 63
+    },
+    {
+      "intent": "qa_factoid",
+      "domain": "qa",
+      "support": 10,
+      "calibration": 89,
+      "known_test": 141
+    },
+    {
+      "intent": "recommendation_movies",
+      "domain": "recommendation",
+      "support": 10,
+      "calibration": 12,
+      "known_test": 20
+    },
+    {
+      "intent": "play_game",
+      "domain": "play",
+      "support": 10,
+      "calibration": 22,
+      "known_test": 35
+    },
+    {
+      "intent": "datetime_query",
+      "domain": "datetime",
+      "support": 10,
+      "calibration": 63,
+      "known_test": 88
+    },
+    {
+      "intent": "iot_hue_lightchange",
+      "domain": "iot",
+      "support": 10,
+      "calibration": 22,
+      "known_test": 36
+    },
+    {
+      "intent": "alarm_remove",
+      "domain": "alarm",
+      "support": 10,
+      "calibration": 14,
+      "known_test": 21
+    },
+    {
+      "intent": "iot_wemo_off",
+      "domain": "iot",
+      "support": 10,
+      "calibration": 5,
+      "known_test": 18
+    },
+    {
+      "intent": "music_query",
+      "domain": "music",
+      "support": 10,
+      "calibration": 30,
+      "known_test": 35
+    },
+    {
+      "intent": "social_post",
+      "domain": "social",
+      "support": 10,
+      "calibration": 49,
+      "known_test": 81
+    }
+  ],
+  "text_overlap": {
+    "support10_vs_known_test": 0,
+    "support5_vs_known_test": 0,
+    "support10_vs_calibration": 0,
+    "support10_vs_dev_unknown": 0,
+    "support10_vs_final_unknown": 0,
+    "calibration_vs_known_test": 0,
+    "calibration_vs_dev_unknown": 0,
+    "calibration_vs_final_unknown": 0,
+    "dev_unknown_vs_final_unknown": 0,
+    "dev_unknown_vs_known_test": 0
+  },
+  "fields": [
+    "dataset",
+    "intent",
+    "domain",
+    "split",
+    "role",
+    "sample_id",
+    "text",
+    "open_set_label",
+    "support_rank",
+    "text_sha256",
+    "text_norm_sha256"
+  ],
+  "source": {
+    "id": "AmazonScience/massive",
+    "revision": "ff6bd8e4b27c3543e4f8fe2108f32bb95a6f8740",
+    "dataset_version": "1.1",
+    "license": "CC BY 4.0",
+    "train_rows": 11514,
+    "dev_rows": 2033,
+    "test_rows": 2974
+  },
+  "class_rule": "hash with train>=10 for known; 35/12/13 constrained by dev/test availability"
+}

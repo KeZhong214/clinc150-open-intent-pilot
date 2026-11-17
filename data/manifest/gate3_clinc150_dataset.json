@@ -1,0 +1,236 @@
+{
+  "schema_version": "gate3-dataset-v1",
+  "generated_at_utc": "2026-11-17T17:02:32+00:00",
+  "dataset": "clinc150",
+  "seed": 42,
+  "known_classes": [
+    "uber",
+    "directions",
+    "balance",
+    "routing",
+    "report_lost_card",
+    "credit_score",
+    "reminder",
+    "reminder_update",
+    "meal_suggestion",
+    "restaurant_reviews",
+    "user_name",
+    "change_ai_name",
+    "who_made_you",
+    "are_you_a_bot",
+    "plug_type",
+    "exchange_rate",
+    "measurement_conversion",
+    "spelling",
+    "insurance",
+    "insurance_change"
+  ],
+  "dev_unknown_classes": [],
+  "final_unknown_classes": [],
+  "class_domain": {
+    "uber": "auto_and_commute",
+    "directions": "auto_and_commute",
+    "balance": "banking",
+    "routing": "banking",
+    "report_lost_card": "credit_cards",
+    "credit_score": "credit_cards",
+    "reminder": "home",
+    "reminder_update": "home",
+    "meal_suggestion": "kitchen_and_dining",
+    "restaurant_reviews": "kitchen_and_dining",
+    "user_name": "meta",
+    "change_ai_name": "meta",
+    "who_made_you": "small_talk",
+    "are_you_a_bot": "small_talk",
+    "plug_type": "travel",
+    "exchange_rate": "travel",
+    "measurement_conversion": "utility",
+    "spelling": "utility",
+    "insurance": "work",
+    "insurance_change": "work"
+  },
+  "counts": {
+    "support": 200,
+    "calibration_known": 400,
+    "known_test": 600,
+    "dev_unknown": 100,
+    "final_unknown": 1000
+  },
+  "support_5_rows": 100,
+  "support_10_rows": 200,
+  "class_counts": [
+    {
+      "intent": "uber",
+      "domain": "auto_and_commute",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "directions",
+      "domain": "auto_and_commute",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "balance",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "routing",
+      "domain": "banking",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "report_lost_card",
+      "domain": "credit_cards",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "credit_score",
+      "domain": "credit_cards",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "reminder",
+      "domain": "home",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "reminder_update",
+      "domain": "home",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "meal_suggestion",
+      "domain": "kitchen_and_dining",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "restaurant_reviews",
+      "domain": "kitchen_and_dining",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "user_name",
+      "domain": "meta",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "change_ai_name",
+      "domain": "meta",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "who_made_you",
+      "domain": "small_talk",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "are_you_a_bot",
+      "domain": "small_talk",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "plug_type",
+      "domain": "travel",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "exchange_rate",
+      "domain": "travel",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "measurement_conversion",
+      "domain": "utility",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "spelling",
+      "domain": "utility",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "insurance",
+      "domain": "work",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    },
+    {
+      "intent": "insurance_change",
+      "domain": "work",
+      "support": 10,
+      "calibration": 20,
+      "known_test": 30
+    }
+  ],
+  "text_overlap": {
+    "support10_vs_known_test": 0,
+    "support5_vs_known_test": 0,
+    "support10_vs_calibration": 0,
+    "support10_vs_dev_unknown": 0,
+    "support10_vs_final_unknown": 0,
+    "calibration_vs_known_test": 0,
+    "calibration_vs_dev_unknown": 0,
+    "calibration_vs_final_unknown": 0,
+    "dev_unknown_vs_final_unknown": 0,
+    "dev_unknown_vs_known_test": 0
+  },
+  "fields": [
+    "dataset",
+    "intent",
+    "domain",
+    "split",
+    "role",
+    "sample_id",
+    "text",
+    "open_set_label",
+    "support_rank",
+    "text_sha256",
+    "text_norm_sha256"
+  ],
+  "source": {
+    "id": "clinc/oos-eval",
+    "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+    "license": "CC BY 3.0",
+    "note": "Historical Gate 0/1 split; original oos_val/oos_test used. Test previously seen."
+  },
+  "class_rule": "Gate-0 frozen 20 known intents; original OOS val/test as dev/final unknown.",
+  "historical": true
+}

@@ -1,0 +1,1158 @@
+{
+  "generated_at_utc": "2026-11-17T17:02:32+00:00",
+  "datasets": {
+    "clinc150": {
+      "schema_version": "gate3-dataset-v1",
+      "generated_at_utc": "2026-11-17T17:02:32+00:00",
+      "dataset": "clinc150",
+      "seed": 42,
+      "known_classes": [
+        "uber",
+        "directions",
+        "balance",
+        "routing",
+        "report_lost_card",
+        "credit_score",
+        "reminder",
+        "reminder_update",
+        "meal_suggestion",
+        "restaurant_reviews",
+        "user_name",
+        "change_ai_name",
+        "who_made_you",
+        "are_you_a_bot",
+        "plug_type",
+        "exchange_rate",
+        "measurement_conversion",
+        "spelling",
+        "insurance",
+        "insurance_change"
+      ],
+      "dev_unknown_classes": [],
+      "final_unknown_classes": [],
+      "class_domain": {
+        "uber": "auto_and_commute",
+        "directions": "auto_and_commute",
+        "balance": "banking",
+        "routing": "banking",
+        "report_lost_card": "credit_cards",
+        "credit_score": "credit_cards",
+        "reminder": "home",
+        "reminder_update": "home",
+        "meal_suggestion": "kitchen_and_dining",
+        "restaurant_reviews": "kitchen_and_dining",
+        "user_name": "meta",
+        "change_ai_name": "meta",
+        "who_made_you": "small_talk",
+        "are_you_a_bot": "small_talk",
+        "plug_type": "travel",
+        "exchange_rate": "travel",
+        "measurement_conversion": "utility",
+        "spelling": "utility",
+        "insurance": "work",
+        "insurance_change": "work"
+      },
+      "counts": {
+        "support": 200,
+        "calibration_known": 400,
+        "known_test": 600,
+        "dev_unknown": 100,
+        "final_unknown": 1000
+      },
+      "support_5_rows": 100,
+      "support_10_rows": 200,
+      "class_counts": [
+        {
+          "intent": "uber",
+          "domain": "auto_and_commute",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "directions",
+          "domain": "auto_and_commute",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "balance",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "routing",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "report_lost_card",
+          "domain": "credit_cards",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "credit_score",
+          "domain": "credit_cards",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "reminder",
+          "domain": "home",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "reminder_update",
+          "domain": "home",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "meal_suggestion",
+          "domain": "kitchen_and_dining",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "restaurant_reviews",
+          "domain": "kitchen_and_dining",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "user_name",
+          "domain": "meta",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "change_ai_name",
+          "domain": "meta",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "who_made_you",
+          "domain": "small_talk",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "are_you_a_bot",
+          "domain": "small_talk",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "plug_type",
+          "domain": "travel",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "exchange_rate",
+          "domain": "travel",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "measurement_conversion",
+          "domain": "utility",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "spelling",
+          "domain": "utility",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "insurance",
+          "domain": "work",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        },
+        {
+          "intent": "insurance_change",
+          "domain": "work",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 30
+        }
+      ],
+      "text_overlap": {
+        "support10_vs_known_test": 0,
+        "support5_vs_known_test": 0,
+        "support10_vs_calibration": 0,
+        "support10_vs_dev_unknown": 0,
+        "support10_vs_final_unknown": 0,
+        "calibration_vs_known_test": 0,
+        "calibration_vs_dev_unknown": 0,
+        "calibration_vs_final_unknown": 0,
+        "dev_unknown_vs_final_unknown": 0,
+        "dev_unknown_vs_known_test": 0
+      },
+      "fields": [
+        "dataset",
+        "intent",
+        "domain",
+        "split",
+        "role",
+        "sample_id",
+        "text",
+        "open_set_label",
+        "support_rank",
+        "text_sha256",
+        "text_norm_sha256"
+      ],
+      "source": {
+        "id": "clinc/oos-eval",
+        "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+        "license": "CC BY 3.0",
+        "note": "Historical Gate 0/1 split; original oos_val/oos_test used. Test previously seen."
+      },
+      "class_rule": "Gate-0 frozen 20 known intents; original OOS val/test as dev/final unknown.",
+      "historical": true
+    },
+    "banking77": {
+      "schema_version": "gate3-dataset-v1",
+      "generated_at_utc": "2026-11-17T17:02:32+00:00",
+      "dataset": "banking77",
+      "seed": 42,
+      "known_classes": [
+        "declined_cash_withdrawal",
+        "balance_not_updated_after_bank_transfer",
+        "exchange_via_app",
+        "transfer_not_received_by_recipient",
+        "fiat_currency_support",
+        "pending_top_up",
+        "change_pin",
+        "card_arrival",
+        "transfer_timing",
+        "lost_or_stolen_phone",
+        "card_payment_wrong_exchange_rate",
+        "Refund_not_showing_up",
+        "cancel_transfer",
+        "card_payment_not_recognised",
+        "contactless_not_working",
+        "disposable_card_limits",
+        "card_about_to_expire",
+        "top_up_by_card_charge",
+        "cash_withdrawal_not_recognised",
+        "top_up_reverted",
+        "card_payment_fee_charged",
+        "top_up_by_cash_or_cheque",
+        "card_not_working",
+        "wrong_exchange_rate_for_cash_withdrawal",
+        "verify_source_of_funds",
+        "top_up_failed",
+        "get_physical_card",
+        "transfer_fee_charged",
+        "balance_not_updated_after_cheque_or_cash_deposit",
+        "age_limit",
+        "activate_my_card",
+        "virtual_card_not_working",
+        "card_acceptance",
+        "verify_top_up",
+        "terminate_account",
+        "unable_to_verify_identity",
+        "card_linking",
+        "top_up_by_bank_transfer_charge",
+        "beneficiary_not_allowed",
+        "transfer_into_account"
+      ],
+      "dev_unknown_classes": [
+        "pending_transfer",
+        "getting_virtual_card",
+        "reverted_card_payment?",
+        "transaction_charged_twice",
+        "card_delivery_estimate",
+        "wrong_amount_of_cash_received",
+        "failed_transfer",
+        "pending_cash_withdrawal",
+        "request_refund",
+        "top_up_limits",
+        "declined_card_payment",
+        "edit_personal_details",
+        "direct_debit_payment_not_recognised",
+        "getting_spare_card",
+        "get_disposable_virtual_card",
+        "exchange_rate",
+        "supported_cards_and_currencies",
+        "order_physical_card"
+      ],
+      "final_unknown_classes": [
+        "compromised_card",
+        "why_verify_identity",
+        "automatic_top_up",
+        "verify_my_identity",
+        "cash_withdrawal_charge",
+        "atm_support",
+        "topping_up_by_card",
+        "visa_or_mastercard",
+        "exchange_charge",
+        "apple_pay_or_google_pay",
+        "extra_charge_on_statement",
+        "passcode_forgotten",
+        "receiving_money",
+        "card_swallowed",
+        "lost_or_stolen_card",
+        "declined_transfer",
+        "pin_blocked",
+        "country_support",
+        "pending_card_payment"
+      ],
+      "class_domain": {
+        "declined_cash_withdrawal": "banking",
+        "balance_not_updated_after_bank_transfer": "banking",
+        "exchange_via_app": "banking",
+        "transfer_not_received_by_recipient": "banking",
+        "fiat_currency_support": "banking",
+        "pending_top_up": "banking",
+        "change_pin": "banking",
+        "card_arrival": "banking",
+        "transfer_timing": "banking",
+        "lost_or_stolen_phone": "banking",
+        "card_payment_wrong_exchange_rate": "banking",
+        "Refund_not_showing_up": "banking",
+        "cancel_transfer": "banking",
+        "card_payment_not_recognised": "banking",
+        "contactless_not_working": "banking",
+        "disposable_card_limits": "banking",
+        "card_about_to_expire": "banking",
+        "top_up_by_card_charge": "banking",
+        "cash_withdrawal_not_recognised": "banking",
+        "top_up_reverted": "banking",
+        "card_payment_fee_charged": "banking",
+        "top_up_by_cash_or_cheque": "banking",
+        "card_not_working": "banking",
+        "wrong_exchange_rate_for_cash_withdrawal": "banking",
+        "verify_source_of_funds": "banking",
+        "top_up_failed": "banking",
+        "get_physical_card": "banking",
+        "transfer_fee_charged": "banking",
+        "balance_not_updated_after_cheque_or_cash_deposit": "banking",
+        "age_limit": "banking",
+        "activate_my_card": "banking",
+        "virtual_card_not_working": "banking",
+        "card_acceptance": "banking",
+        "verify_top_up": "banking",
+        "terminate_account": "banking",
+        "unable_to_verify_identity": "banking",
+        "card_linking": "banking",
+        "top_up_by_bank_transfer_charge": "banking",
+        "beneficiary_not_allowed": "banking",
+        "transfer_into_account": "banking",
+        "pending_transfer": "banking",
+        "getting_virtual_card": "banking",
+        "reverted_card_payment?": "banking",
+        "transaction_charged_twice": "banking",
+        "card_delivery_estimate": "banking",
+        "wrong_amount_of_cash_received": "banking",
+        "failed_transfer": "banking",
+        "pending_cash_withdrawal": "banking",
+        "request_refund": "banking",
+        "top_up_limits": "banking",
+        "declined_card_payment": "banking",
+        "edit_personal_details": "banking",
+        "direct_debit_payment_not_recognised": "banking",
+        "getting_spare_card": "banking",
+        "get_disposable_virtual_card": "banking",
+        "exchange_rate": "banking",
+        "supported_cards_and_currencies": "banking",
+        "order_physical_card": "banking",
+        "compromised_card": "banking",
+        "why_verify_identity": "banking",
+        "automatic_top_up": "banking",
+        "verify_my_identity": "banking",
+        "cash_withdrawal_charge": "banking",
+        "atm_support": "banking",
+        "topping_up_by_card": "banking",
+        "visa_or_mastercard": "banking",
+        "exchange_charge": "banking",
+        "apple_pay_or_google_pay": "banking",
+        "extra_charge_on_statement": "banking",
+        "passcode_forgotten": "banking",
+        "receiving_money": "banking",
+        "card_swallowed": "banking",
+        "lost_or_stolen_card": "banking",
+        "declined_transfer": "banking",
+        "pin_blocked": "banking",
+        "country_support": "banking",
+        "pending_card_payment": "banking"
+      },
+      "counts": {
+        "support": 400,
+        "calibration_known": 800,
+        "known_test": 1600,
+        "dev_unknown": 720,
+        "final_unknown": 760
+      },
+      "support_5_rows": 200,
+      "support_10_rows": 400,
+      "class_counts": [
+        {
+          "intent": "declined_cash_withdrawal",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "balance_not_updated_after_bank_transfer",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "exchange_via_app",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "transfer_not_received_by_recipient",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "fiat_currency_support",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "pending_top_up",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "change_pin",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_arrival",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "transfer_timing",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "lost_or_stolen_phone",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_payment_wrong_exchange_rate",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "Refund_not_showing_up",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "cancel_transfer",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_payment_not_recognised",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "contactless_not_working",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "disposable_card_limits",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_about_to_expire",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "top_up_by_card_charge",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "cash_withdrawal_not_recognised",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "top_up_reverted",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_payment_fee_charged",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "top_up_by_cash_or_cheque",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_not_working",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "wrong_exchange_rate_for_cash_withdrawal",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "verify_source_of_funds",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "top_up_failed",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "get_physical_card",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "transfer_fee_charged",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "balance_not_updated_after_cheque_or_cash_deposit",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "age_limit",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "activate_my_card",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "virtual_card_not_working",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_acceptance",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "verify_top_up",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "terminate_account",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "unable_to_verify_identity",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "card_linking",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "top_up_by_bank_transfer_charge",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "beneficiary_not_allowed",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        },
+        {
+          "intent": "transfer_into_account",
+          "domain": "banking",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 40
+        }
+      ],
+      "text_overlap": {
+        "support10_vs_known_test": 0,
+        "support5_vs_known_test": 0,
+        "support10_vs_calibration": 0,
+        "support10_vs_dev_unknown": 0,
+        "support10_vs_final_unknown": 0,
+        "calibration_vs_known_test": 0,
+        "calibration_vs_dev_unknown": 0,
+        "calibration_vs_final_unknown": 0,
+        "dev_unknown_vs_final_unknown": 0,
+        "dev_unknown_vs_known_test": 0
+      },
+      "fields": [
+        "dataset",
+        "intent",
+        "domain",
+        "split",
+        "role",
+        "sample_id",
+        "text",
+        "open_set_label",
+        "support_rank",
+        "text_sha256",
+        "text_norm_sha256"
+      ],
+      "source": {
+        "id": "PolyAI/banking77",
+        "revision": "1846984189f2bc0ac51c6fc3a600fa9e1714e0c6",
+        "license": "CC BY 4.0",
+        "train_rows": 10003,
+        "test_rows": 3080
+      },
+      "class_rule": "hash 40/18/19; all test rows used; train support/calibration"
+    },
+    "massive": {
+      "schema_version": "gate3-dataset-v1",
+      "generated_at_utc": "2026-11-17T17:02:32+00:00",
+      "dataset": "massive",
+      "seed": 42,
+      "known_classes": [
+        "qa_maths",
+        "audio_volume_up",
+        "calendar_query",
+        "email_querycontact",
+        "play_audiobook",
+        "transport_query",
+        "takeaway_order",
+        "calendar_set",
+        "recommendation_events",
+        "weather_query",
+        "takeaway_query",
+        "transport_taxi",
+        "calendar_remove",
+        "qa_definition",
+        "iot_hue_lighton",
+        "social_query",
+        "transport_ticket",
+        "iot_hue_lightoff",
+        "cooking_recipe",
+        "recommendation_locations",
+        "news_query",
+        "qa_currency",
+        "audio_volume_mute",
+        "lists_remove",
+        "iot_hue_lightup",
+        "play_podcasts",
+        "qa_factoid",
+        "recommendation_movies",
+        "play_game",
+        "datetime_query",
+        "iot_hue_lightchange",
+        "alarm_remove",
+        "iot_wemo_off",
+        "music_query",
+        "social_post"
+      ],
+      "dev_unknown_classes": [
+        "cooking_query",
+        "general_greet",
+        "audio_volume_down",
+        "email_query",
+        "alarm_set",
+        "play_music",
+        "alarm_query",
+        "play_radio",
+        "email_sendemail",
+        "music_likeness",
+        "music_dislikeness",
+        "transport_traffic"
+      ],
+      "final_unknown_classes": [
+        "audio_volume_other",
+        "iot_cleaning",
+        "iot_hue_lightdim",
+        "general_quirky",
+        "music_settings",
+        "general_joke",
+        "email_addcontact",
+        "lists_createoradd",
+        "iot_wemo_on",
+        "lists_query",
+        "iot_coffee",
+        "datetime_convert",
+        "qa_stock"
+      ],
+      "class_domain": {
+        "qa_maths": "qa",
+        "audio_volume_up": "audio",
+        "calendar_query": "calendar",
+        "email_querycontact": "email",
+        "play_audiobook": "play",
+        "transport_query": "transport",
+        "takeaway_order": "takeaway",
+        "calendar_set": "calendar",
+        "recommendation_events": "recommendation",
+        "weather_query": "weather",
+        "takeaway_query": "takeaway",
+        "transport_taxi": "transport",
+        "calendar_remove": "calendar",
+        "qa_definition": "qa",
+        "iot_hue_lighton": "iot",
+        "social_query": "social",
+        "transport_ticket": "transport",
+        "iot_hue_lightoff": "iot",
+        "cooking_recipe": "cooking",
+        "recommendation_locations": "recommendation",
+        "news_query": "news",
+        "qa_currency": "qa",
+        "audio_volume_mute": "audio",
+        "lists_remove": "lists",
+        "iot_hue_lightup": "iot",
+        "play_podcasts": "play",
+        "qa_factoid": "qa",
+        "recommendation_movies": "recommendation",
+        "play_game": "play",
+        "datetime_query": "datetime",
+        "iot_hue_lightchange": "iot",
+        "alarm_remove": "alarm",
+        "iot_wemo_off": "iot",
+        "music_query": "music",
+        "social_post": "social",
+        "cooking_query": "cooking",
+        "general_greet": "general",
+        "audio_volume_down": "audio",
+        "email_query": "email",
+        "alarm_set": "alarm",
+        "play_music": "play",
+        "alarm_query": "alarm",
+        "play_radio": "play",
+        "email_sendemail": "email",
+        "music_likeness": "music",
+        "music_dislikeness": "music",
+        "transport_traffic": "transport",
+        "audio_volume_other": "audio",
+        "iot_cleaning": "iot",
+        "iot_hue_lightdim": "iot",
+        "general_quirky": "general",
+        "music_settings": "music",
+        "general_joke": "general",
+        "email_addcontact": "email",
+        "lists_createoradd": "lists",
+        "iot_wemo_on": "iot",
+        "lists_query": "lists",
+        "iot_coffee": "iot",
+        "datetime_convert": "datetime",
+        "qa_stock": "qa"
+      },
+      "counts": {
+        "support": 350,
+        "calibration_known": 1323,
+        "known_test": 1915,
+        "dev_unknown": 407,
+        "final_unknown": 436
+      },
+      "support_5_rows": 175,
+      "support_10_rows": 350,
+      "class_counts": [
+        {
+          "intent": "qa_maths",
+          "domain": "qa",
+          "support": 10,
+          "calibration": 13,
+          "known_test": 25
+        },
+        {
+          "intent": "audio_volume_up",
+          "domain": "audio",
+          "support": 10,
+          "calibration": 12,
+          "known_test": 13
+        },
+        {
+          "intent": "calendar_query",
+          "domain": "calendar",
+          "support": 10,
+          "calibration": 102,
+          "known_test": 126
+        },
+        {
+          "intent": "email_querycontact",
+          "domain": "email",
+          "support": 10,
+          "calibration": 16,
+          "known_test": 26
+        },
+        {
+          "intent": "play_audiobook",
+          "domain": "play",
+          "support": 10,
+          "calibration": 34,
+          "known_test": 41
+        },
+        {
+          "intent": "transport_query",
+          "domain": "transport",
+          "support": 10,
+          "calibration": 36,
+          "known_test": 51
+        },
+        {
+          "intent": "takeaway_order",
+          "domain": "takeaway",
+          "support": 10,
+          "calibration": 20,
+          "known_test": 22
+        },
+        {
+          "intent": "calendar_set",
+          "domain": "calendar",
+          "support": 10,
+          "calibration": 131,
+          "known_test": 209
+        },
+        {
+          "intent": "recommendation_events",
+          "domain": "recommendation",
+          "support": 10,
+          "calibration": 26,
+          "known_test": 43
+        },
+        {
+          "intent": "weather_query",
+          "domain": "weather",
+          "support": 10,
+          "calibration": 126,
+          "known_test": 156
+        },
+        {
+          "intent": "takeaway_query",
+          "domain": "takeaway",
+          "support": 10,
+          "calibration": 24,
+          "known_test": 35
+        },
+        {
+          "intent": "transport_taxi",
+          "domain": "transport",
+          "support": 10,
+          "calibration": 27,
+          "known_test": 23
+        },
+        {
+          "intent": "calendar_remove",
+          "domain": "calendar",
+          "support": 10,
+          "calibration": 47,
+          "known_test": 67
+        },
+        {
+          "intent": "qa_definition",
+          "domain": "qa",
+          "support": 10,
+          "calibration": 55,
+          "known_test": 57
+        },
+        {
+          "intent": "iot_hue_lighton",
+          "domain": "iot",
+          "support": 10,
+          "calibration": 5,
+          "known_test": 3
+        },
+        {
+          "intent": "social_query",
+          "domain": "social",
+          "support": 10,
+          "calibration": 18,
+          "known_test": 25
+        },
+        {
+          "intent": "transport_ticket",
+          "domain": "transport",
+          "support": 10,
+          "calibration": 25,
+          "known_test": 35
+        },
+        {
+          "intent": "iot_hue_lightoff",
+          "domain": "iot",
+          "support": 10,
+          "calibration": 17,
+          "known_test": 43
+        },
+        {
+          "intent": "cooking_recipe",
+          "domain": "cooking",
+          "support": 10,
+          "calibration": 41,
+          "known_test": 72
+        },
+        {
+          "intent": "recommendation_locations",
+          "domain": "recommendation",
+          "support": 10,
+          "calibration": 31,
+          "known_test": 31
+        },
+        {
+          "intent": "news_query",
+          "domain": "news",
+          "support": 10,
+          "calibration": 82,
+          "known_test": 124
+        },
+        {
+          "intent": "qa_currency",
+          "domain": "qa",
+          "support": 10,
+          "calibration": 31,
+          "known_test": 39
+        },
+        {
+          "intent": "audio_volume_mute",
+          "domain": "audio",
+          "support": 10,
+          "calibration": 15,
+          "known_test": 32
+        },
+        {
+          "intent": "lists_remove",
+          "domain": "lists",
+          "support": 10,
+          "calibration": 37,
+          "known_test": 52
+        },
+        {
+          "intent": "iot_hue_lightup",
+          "domain": "iot",
+          "support": 10,
+          "calibration": 12,
+          "known_test": 27
+        },
+        {
+          "intent": "play_podcasts",
+          "domain": "play",
+          "support": 10,
+          "calibration": 34,
+          "known_test": 63
+        },
+        {
+          "intent": "qa_factoid",
+          "domain": "qa",
+          "support": 10,
+          "calibration": 89,
+          "known_test": 141
+        },
+        {
+          "intent": "recommendation_movies",
+          "domain": "recommendation",
+          "support": 10,
+          "calibration": 12,
+          "known_test": 20
+        },
+        {
+          "intent": "play_game",
+          "domain": "play",
+          "support": 10,
+          "calibration": 22,
+          "known_test": 35
+        },
+        {
+          "intent": "datetime_query",
+          "domain": "datetime",
+          "support": 10,
+          "calibration": 63,
+          "known_test": 88
+        },
+        {
+          "intent": "iot_hue_lightchange",
+          "domain": "iot",
+          "support": 10,
+          "calibration": 22,
+          "known_test": 36
+        },
+        {
+          "intent": "alarm_remove",
+          "domain": "alarm",
+          "support": 10,
+          "calibration": 14,
+          "known_test": 21
+        },
+        {
+          "intent": "iot_wemo_off",
+          "domain": "iot",
+          "support": 10,
+          "calibration": 5,
+          "known_test": 18
+        },
+        {
+          "intent": "music_query",
+          "domain": "music",
+          "support": 10,
+          "calibration": 30,
+          "known_test": 35
+        },
+        {
+          "intent": "social_post",
+          "domain": "social",
+          "support": 10,
+          "calibration": 49,
+          "known_test": 81
+        }
+      ],
+      "text_overlap": {
+        "support10_vs_known_test": 0,
+        "support5_vs_known_test": 0,
+        "support10_vs_calibration": 0,
+        "support10_vs_dev_unknown": 0,
+        "support10_vs_final_unknown": 0,
+        "calibration_vs_known_test": 0,
+        "calibration_vs_dev_unknown": 0,
+        "calibration_vs_final_unknown": 0,
+        "dev_unknown_vs_final_unknown": 0,
+        "dev_unknown_vs_known_test": 0
+      },
+      "fields": [
+        "dataset",
+        "intent",
+        "domain",
+        "split",
+        "role",
+        "sample_id",
+        "text",
+        "open_set_label",
+        "support_rank",
+        "text_sha256",
+        "text_norm_sha256"
+      ],
+      "source": {
+        "id": "AmazonScience/massive",
+        "revision": "ff6bd8e4b27c3543e4f8fe2108f32bb95a6f8740",
+        "dataset_version": "1.1",
+        "license": "CC BY 4.0",
+        "train_rows": 11514,
+        "dev_rows": 2033,
+        "test_rows": 2974
+      },
+      "class_rule": "hash with train>=10 for known; 35/12/13 constrained by dev/test availability"
+    }
+  }
+}

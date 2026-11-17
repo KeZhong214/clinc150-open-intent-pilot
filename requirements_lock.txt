@@ -4,7 +4,7 @@
 # D:\Environment; see README.md and reports/gate0_environment.md.
 torch==2.11.0+cu128
 numpy==2.4.4
-pandas==3.0.2
+pandas==2.3.3
 scipy==1.17.1
 scikit-learn==1.9.1
 sentence-transformers==6.3.0
@@ -14,3 +14,8 @@ tokenizers==0.23.3
 safetensors==0.8.0
 PyYAML==6.0.3
 psutil==7.2.2
+pyarrow==26.0.1
+streamlit==1.50.0
+setfit==1.2.0
+datasets==5.2.0
+evaluate==0.4.6

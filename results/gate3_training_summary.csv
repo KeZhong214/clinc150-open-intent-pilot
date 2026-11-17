@@ -1,0 +1,4 @@
+method,known_acceptance,known_correct_routing,oos_recall,open_set_macro_f1,note
+BGE-B0-5shot,0.904375,0.7925,0.5342105263157895,0.750461999980647,Frozen Gate-3 matrix BGE B0 5-shot; same test.
+SetFit-BGE-5shot,0.876875,0.725625,0.3618421052631579,0.6695537992375517,SetFit fine-tuned BGE; same support and validation; BANKING test already used by matrix.
+BGE-Adapter-5shot,0.880625,0.78125,0.5197368421052632,0.7394010689711256,"Residual projection adapter, supervised contrastive + identity, threshold on same validation."

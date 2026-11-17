@@ -79,3 +79,36 @@ Gate 2 test metrics use `hard_oos_recall` and `hard_open_set_macro_f1`; they do
 not include the original `oos_test`. `orig_oos_recall` is blank in the test
 table because the new protocol intentionally keeps the original OOS test
 separate. See `../reports/gate2_method.md` for the final conclusion.
+
+---
+
+# Gate 3 multi-dataset files
+
+Gate 3 contains 3 datasets × 4 encoders × 2 shots × B0/B3-P/B3-H = 72 test
+configurations. CLINC150 is historical; BANKING77 and MASSIVE are new.
+
+| File | Content |
+|---|---|
+| `gate3_matrix.csv` | 72 test configurations, full metrics |
+| `gate3_test_metrics.csv` | Same 72-cell test matrix |
+| `gate3_validation_metrics.csv` | 72 validation-selected configs |
+| `gate3_validation_thresholds.json` | frozen tau per config; input to freeze |
+| `gate3_freeze.json` | freeze record; test evaluated once |
+| `gate3_summary_by_dataset_method.csv` | mean over models/shots |
+| `gate3_summary_by_model.csv` | mean over datasets/shots |
+| `gate3_b3h_vs_b0.csv` | per model/shot B3-H − B0 deltas |
+| `gate3_best_configs.csv` | best config per dataset |
+| `gate3_dataset_profile.csv` | supports, eval rows, classes, domains, imbalance |
+| `gate3_validation_vs_test.csv` | validation→test OOS/F1 shift |
+| `gate3_cost.csv` | encode seconds, texts/s, dim, peak VRAM |
+| `gate3_predictions_{dataset}.csv` | test predictions with Top-3 and scores |
+| `gate3_banking_confusions.csv` | class→class BANKING77 confusions + examples |
+| `gate3_error_cases.csv` | 15 traceable error/correct cases |
+| `gate3_setfit_metrics.csv` / `gate3_setfit_training.json` | SetFit-BGE training comparison |
+| `gate3_adapter_metrics.csv` / `gate3_adapter_training.csv` | projection-adapter training comparison |
+| `gate3_training_summary.csv` | compact training comparison |
+| `gate3_encoding_{bge,qwen,gte,e5}.json` | per-model encoding metadata |
+
+`gate3_test_metrics.csv` marks CLINC150 with `historical_clinc_test=1`.
+SetFit and the adapter reuse the already-opened BANKING77 test; their notes say
+this explicitly. See `../reports/gate3_final_report.md`.

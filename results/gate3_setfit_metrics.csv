@@ -1,0 +1,3 @@
+model,known_acceptance,known_correct_routing,oos_recall,unknown_auroc,open_set_macro_f1,note
+BGE-B0-5shot,0.904375,0.7925,0.5342105263157895,0.8645156249999999,0.750461999980647,Frozen Gate-3 matrix BGE B0 5-shot; same test.
+SetFit-BGE-5shot,0.876875,0.725625,0.3618421052631579,0.7690098684210526,0.6695537992375517,SetFit fine-tuned BGE; same support and validation; BANKING test already used by matrix.

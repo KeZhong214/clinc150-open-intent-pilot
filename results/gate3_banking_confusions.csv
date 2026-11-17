@@ -1,0 +1,16 @@
+true_label,pred_label,count,example_text,top3
+pending_top_up,top_up_failed,7,Is there a reason my top up hasn't gone through,top_up_failed:0.8880 | pending_top_up:0.8532 | top_up_reverted:0.8103
+transfer_not_received_by_recipient,balance_not_updated_after_bank_transfer,6,The transfer I did hasn't arrived,balance_not_updated_after_bank_transfer:0.8443 | transfer_not_received_by_recipient:0.8353 | beneficiary_not_allowed:0.7686
+transfer_timing,balance_not_updated_after_bank_transfer,6,how soon will I see the transfer in my account?,balance_not_updated_after_bank_transfer:0.8280 | transfer_not_received_by_recipient:0.8031 | transfer_timing:0.7958
+transfer_fee_charged,top_up_by_bank_transfer_charge,6,I had to pay in order to do a transfer,top_up_by_bank_transfer_charge:0.8329 | transfer_fee_charged:0.8099 | balance_not_updated_after_bank_transfer:0.7679
+wrong_exchange_rate_for_cash_withdrawal,card_payment_wrong_exchange_rate,6,I did not get the right amount of money when I used a different country's currency.,card_payment_wrong_exchange_rate:0.8228 | wrong_exchange_rate_for_cash_withdrawal:0.8110 | exchange_via_app:0.7264
+top_up_reverted,top_up_failed,4,The app wouldn't accept my top up.,top_up_failed:0.8846 | top_up_reverted:0.7857 | pending_top_up:0.7588
+card_payment_not_recognised,cash_withdrawal_not_recognised,4,There are some payments with my card that I don't know where they are coming from. Just checked today and it's been since a couple days as well! What to I do? Can I revert this retrospectively? My card needs to be frozen immediately as well!,cash_withdrawal_not_recognised:0.8063 | card_payment_not_recognised:0.7648 | card_arrival:0.7399
+fiat_currency_support,exchange_via_app,3,Am I able to exchange currencies?,exchange_via_app:0.8732 | fiat_currency_support:0.8328 | wrong_exchange_rate_for_cash_withdrawal:0.7298
+top_up_by_bank_transfer_charge,top_up_by_card_charge,3,If I make a top-up are there charges applied?,top_up_by_card_charge:0.8808 | top_up_by_bank_transfer_charge:0.8098 | pending_top_up:0.7751
+change_pin,get_physical_card,3,I want to set a new PIN,get_physical_card:0.8000 | change_pin:0.7969 | card_linking:0.6332
+balance_not_updated_after_bank_transfer,transfer_timing,3,How long does it take for an international transfer into my account?,transfer_timing:0.8179 | balance_not_updated_after_bank_transfer:0.7774 | transfer_not_received_by_recipient:0.7570
+balance_not_updated_after_bank_transfer,transfer_not_received_by_recipient,3,I made a transfer and am still waiting.,transfer_not_received_by_recipient:0.8128 | balance_not_updated_after_bank_transfer:0.8087 | transfer_timing:0.7810
+card_payment_wrong_exchange_rate,wrong_exchange_rate_for_cash_withdrawal,2,This rate is too low. Are you sure your using the right exchange rate.,wrong_exchange_rate_for_cash_withdrawal:0.8264 | card_payment_wrong_exchange_rate:0.8227 | fiat_currency_support:0.7129
+exchange_via_app,fiat_currency_support,2,Can I change to another currency?,fiat_currency_support:0.8443 | exchange_via_app:0.8419 | change_pin:0.7106
+card_payment_fee_charged,transfer_fee_charged,2,For the first time I got a fee on my account. How do I know when you charge these fees?,transfer_fee_charged:0.7962 | card_payment_fee_charged:0.7784 | top_up_by_bank_transfer_charge:0.7308

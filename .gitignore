@@ -7,3 +7,6 @@ data/cache_embeddings/
 data/gate0_repeat_*/
 logs/gh_*.log
 logs/*.tmp
+
+checkpoints/
+data/gate3/raw/massive/*.tar.gz

@@ -1,0 +1,4 @@
+dataset,known_classes,dev_unknown_classes,final_unknown_classes,support_5,support_10,calibration_known,known_test,dev_unknown,final_unknown,known_domains,historical
+clinc150,20,0,0,100,200,400,600,100,1000,10,True
+banking77,40,18,19,200,400,800,1600,720,760,1,False
+massive,35,12,13,175,350,1323,1915,407,436,17,False
