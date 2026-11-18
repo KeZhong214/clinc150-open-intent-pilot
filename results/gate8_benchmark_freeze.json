@@ -52,5 +52,8 @@
     }
   },
   "threshold_protocol": "Gate7 dev_threshold for all three routers",
-  "note": "Cases/models/thresholds frozen before the final three-router run; no test-based tuning."
+  "note": "Cases/models/thresholds frozen before the final three-router run; no test-based tuning.",
+  "code_commit": "68d798cf1d7b62ac97101049b7a043378473a8ef",
+  "evaluation_status": "frozen_before_final_three_router_run",
+  "frozen_at_utc": "2026-11-18T18:49:00Z"
 }
