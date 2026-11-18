@@ -253,6 +253,27 @@
 
 ---
 
+## 9.7 Gate 8：可用 Agent 与独立模拟评测
+
+Gate8 把分类/拒识模块接成可操作的多轮银行 Agent：
+
+- 统一 Gate7 `dev_threshold`；三个 router：GTE Frozen、Qwen Frozen、Qwen Plain42；
+- 修复 dispute fallback、pending slot 吞话题、确认阶段改对象、dispute 状态检查；
+- 9 个真实 Demo；SQLite 业务状态、audit、KB 引用、每轮 Top-3；
+- 102 条新冻结模拟案例（不是外部盲测），同案例三模型公平对照。
+
+| Router | TSR | Tool | Safe | P50 |
+|---|---:|---:|---:|---:|
+| GTE-Frozen-RejectOnly | **0.951** | 0.980 | 1.000 | 0.060 s |
+| Qwen-Frozen-RejectOnly | 0.824 | 0.824 | 1.000 | 0.140 s |
+| Qwen-Plain42-RejectOnly | 0.794 | 0.824 | 1.000 | 0.199 s |
+
+- GTE 在本模拟测试上 TSR 最高，不能与分类 F1 直接配对；
+- Qwen 的 dispute 首句被 RejectOnly 拒绝，是真实负结果；
+- 三个 router 安全率均 100%；
+- LLM API 无凭据 `NOT RUN_API_BLOCKED`；
+- 详细：`reports/gate8_agent_final_report.md`。
+
 ## 10. 最终研究结论
 
 ### 可以支持的结论

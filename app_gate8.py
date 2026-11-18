@@ -22,6 +22,7 @@ sys.path.insert(0, str(ROOT))
 from src.gate5.kb import KBRetriever  # noqa: E402
 from src.gate5.llm_client import LLMClient  # noqa: E402
 from src.gate8.agent import Gate8Agent  # noqa: E402
+from src.gate8.llm_assist import LLMAssistant  # noqa: E402
 from src.gate8.routers import ROUTER_NAMES, build  # noqa: E402
 
 DEMOS = {
@@ -70,6 +71,11 @@ def router_cache():
     return {}
 
 
+@st.cache_resource
+def assistant():
+    return LLMAssistant()
+
+
 def get_router(name: str):
     cache = router_cache()
     if cache.get("name") != name:
@@ -95,6 +101,7 @@ def get_agent(name: str) -> Gate8Agent:
             session_id=f"G8-{uuid.uuid4().hex[:10]}",
             db_dir=ROOT / "data" / "gate8" / "ui_sessions",
             kb=kb(),
+            llm_assistant=assistant(),
         )
         st.session_state.setdefault("messages", {})[name] = []
         st.session_state.setdefault("initial", {})[name] = sessions[name].snapshot()

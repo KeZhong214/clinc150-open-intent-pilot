@@ -241,3 +241,19 @@ See `../reports/gate6_final_report.md`.
 
 Agent v1 still uses Gate5/6 thresholds; classification C uses Gate7 dev_threshold.
 See `../reports/gate7_final_report.md` and `../reports/gate7_1_fix_report.md`.
+
+# Gate 8 independent simulated Agent evaluation
+
+| File | Content |
+|---|---|
+| `gate8_benchmark_freeze.json` | 102-case SHA, model thresholds/SHAs, freeze commit |
+| `gate8_agent_*_results.csv` | per-router raw 102-case rows |
+| `gate8_agent_results.csv` | combined 306 rows |
+| `gate8_agent_summary.csv` | TSR/tool/safe/routing/latency/bootstrap CI |
+| `gate8_agent_by_family.csv` | per-family TSR |
+| `gate8_agent_failures.csv` | failure counts |
+| `gate8_agent_paired_bootstrap.csv` | paired delta vs GTE |
+| `gate8_agent_traces.json` | full route/tool/KB traces |
+
+Gate8 uses Gate7 `dev_threshold`; it is a new frozen simulated test, not external blind.
+See `../reports/gate8_agent_final_report.md` and `../reports/gate8_benchmark_protocol.md`.
