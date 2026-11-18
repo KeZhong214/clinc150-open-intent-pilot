@@ -4,7 +4,7 @@
 
 Gate 7 的目标不是再训练一个更大的模型，而是回答：为什么 Qwen LoRA 在 Gate6 的验证集提升、历史 test 却下降？这是 seed 偶然、对比学习实现、表征漂移，还是 unknown 分布迁移？以及核心的 RejectOnly 结论在多种子下是否可靠。
 
-先说结论：**单 seed42 的负结果不是 Qwen LoRA 的普遍失败。3 个 seed 的 Qwen Plain，RejectOnly test 均值 0.8253，比 frozen 0.8127 高 1.25 个百分点，2/3 个 seed 胜出。B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍然稳定优于 B4-Full。P1/P2 没有超过 P0，P3 完成但 B3-H 仍低于 P0，所以没有优化成功。**
+先说结论：**单 seed42 的负结果不是 Qwen LoRA 的普遍失败。3 个 seed 的 Qwen Plain，RejectOnly test 均值 0.8256，比 frozen 0.8130 高 1.26 个百分点，2/3 个 seed 胜出。B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍然稳定优于 B4-Full。P1/P2 没有超过 P0，P3 完成但 B3-H 仍低于 P0，所以没有优化成功。**
 
 ## A：诊断（约 2.5 分钟）
 
@@ -22,7 +22,7 @@ Gate 7 的目标不是再训练一个更大的模型，而是回答：为什么 
 
 P0 原始 Plain，P1 lr=3e-5，P2 lr=1e-5，P3 去掉 triplet。P1/P2 在 dev_select 上都低于 P0；P3 首次在 Windows 内存压力下停在 40/50 step，重跑后完成 50 step，dev B3-H 0.7945，仍低于 P0 0.7984，所以 P3 完成但未选中。
 
-然后训练 P0 的 seed 42/43/44。validation B3-H 均值 0.8028，RejectOnly 0.8130；test B3-H 均值 0.8068，RejectOnly **0.8253**。相对 frozen，B3-H 只高 0.18 pp，RejectOnly 高 1.25 pp。每个 seed 的 adapter SHA 都不同，seed43/44 的 test 明显高于 seed42；seed42 的负结果保留，没有用 test 选 seed。
+然后训练 P0 的 seed 42/43/44。validation B3-H 均值 0.8028，RejectOnly 0.8130；test B3-H 均值 0.8068，RejectOnly **0.8256**。相对 frozen，B3-H 只高 0.18 pp，RejectOnly 高 1.26 pp。每个 seed 的 adapter SHA 都不同，seed43/44 的 test 明显高于 seed42；seed42 的负结果保留，没有用 test 选 seed。
 
 所以“为什么 Gate6 验证提升、test 下降”的答案有两层：一层是这个 seed 在 final-unknown 上确实迁移不好；另一层是不能用一个 seed 推断整个方法失败。
 
@@ -30,7 +30,7 @@ P0 原始 Plain，P1 lr=3e-5，P2 lr=1e-5，P3 去掉 triplet。P1/P2 在 dev_se
 
 所有 adapter、B4 checkpoint、dev 阈值在 `gate7_final_freeze.json` 中冻结，test_evaluated=true 后才评估一次。History test 上：
 
-Frozen B3H 0.8051、RejectOnly 0.8127；Qwen Plain 3-seed B3H 0.8068、RejectOnly 0.8253。RejectOnly 是正结果，B3H 只有很小正结果。
+Frozen B3H 0.8051、RejectOnly 0.8130；Qwen Plain 3-seed B3H 0.8068、RejectOnly 0.8256。RejectOnly 是正结果，B3H 只有很小正结果。
 
 优化配方没有选出来，所以 Optimized = NOT SELECTED；没有把 P1/P2 包装成成功。
 
@@ -38,7 +38,7 @@ Frozen B3H 0.8051、RejectOnly 0.8127；Qwen Plain 3-seed B3H 0.8068、RejectOnl
 
 Agent 修复了 5 条应澄清任务：当 accepted intent 是 transfer-not-arrived 语义族，并且文本有 “not arrived / not received” 时，先问澄清，不直接执行。新回归测试真实通过；旧 120 条任务上，GTE Frozen RejectOnly 73/120，Qwen Frozen RejectOnly 81/120，Qwen Plain42 RejectOnly 81/120。安全率都是 100%，Qwen 的 unknown 族从 0.667 提到 1.0。
 
-分类 F1 与业务 TSR 不单调：Qwen Reject 的 3-seed test F1 0.825，低于 GTE Reject 0.843，但 Agent TSR 0.675 高于 GTE 0.608。这说明业务效果还受拒识、工具执行和澄清影响。
+分类 F1 与业务 TSR 不单调：Qwen Reject 的 3-seed test F1 0.826，低于 GTE Reject 0.843，但 Agent TSR 0.675 高于 GTE 0.608。这说明业务效果还受拒识、工具执行和澄清影响。
 
 稳定性部分：GTE Frozen 的 RejectOnly 3-seed mean 0.8144，Full 0.8105；Qwen Frozen Reject 0.7950，Full 0.7752；GTE-LoRA 42/43/44 的 Reject 都高于 Full。每个 seed 的 checkpoint SHA 不同，说明 seed 参数真的生效。RejectOnly 的结论跨编码器、跨 seed 稳定。
 
@@ -47,7 +47,7 @@ Agent 修复了 5 条应澄清任务：当 accepted intent 是 transfer-not-arri
 四句话：
 
 1. Gate6 的 Qwen LoRA 负结果是 seed42 的真实结果，但不是三种子普遍结论；
-2. 3-seed RejectOnly +1.25 pp，B3H 仅 +0.18 pp；
+2. 3-seed RejectOnly +1.26 pp，B3H 仅 +0.18 pp；
 3. B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 Full；
 4. P1/P2 没有改善，P3 完成但未选中，没有优化成功；LLM API 仍无凭据。
 

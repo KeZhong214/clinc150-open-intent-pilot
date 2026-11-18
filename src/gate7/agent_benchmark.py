@@ -32,7 +32,8 @@ from src.gate6 import qwen_encoder as qe  # noqa: E402
 from src.gate6.router_qwen import QwenEncoderAdapter, QwenRejectOnlyRouter  # noqa: E402
 from src.gate7.router_opt import qwen_reject_router  # noqa: E402
 
-ROUTERS = ["GTE-Frozen-RejectOnly", "Qwen-Frozen-RejectOnly", "Qwen-Opt-RejectOnly"]
+ROUTERS = ["GTE-Frozen-RejectOnly", "Qwen-Frozen-RejectOnly", "Qwen-Plain42-RejectOnly"]
+LEGACY_ROUTER = {"Qwen-Opt-RejectOnly": "Qwen-Plain42-RejectOnly"}
 
 
 def gte_reject():
@@ -59,9 +60,10 @@ def qwen_frozen_reject():
 
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--router", choices=ROUTERS, required=True)
+    p.add_argument("--router", choices=ROUTERS + list(LEGACY_ROUTER), required=True)
     p.add_argument("--opt-tag", default="p1")
     args = p.parse_args(argv)
+    args.router = LEGACY_ROUTER.get(args.router, args.router)
     if args.router == "GTE-Frozen-RejectOnly":
         router = gte_reject()
     elif args.router == "Qwen-Frozen-RejectOnly":

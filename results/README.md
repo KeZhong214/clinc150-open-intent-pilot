@@ -221,15 +221,23 @@ See `../reports/gate6_final_report.md`.
 | `gate7_seed_runs.csv` | seed/lr/adapter SHA for P0/P1/P2/P3 |
 | `gate7_p3_result.json` | P3 completed (50 steps) but not selected |
 | `gate7_dev_plain*.csv` | per-seed dev_select results |
-| `gate7_final_historical_test.csv` | one-shot historical test, 3 seeds + frozen |
-| `gate7_final_summary.csv` | mean/std/paired difference vs frozen |
-| `gate7_stability_b4_results.csv` | B4 Reject/Full stability rows |
-| `gate7_stability_summary.csv` | mean/std across seeds |
-| `gate7_stability_checkpoint_hashes.csv` | seed checkpoints are independent |
+| `gate7_final_historical_test.csv` | original historical test (pre protocol fix), preserved |
+| `gate7_final_historical_test_v2.csv` | corrected protocol_fix_v2 test, all methods use Gate7 dev tau |
+| `gate7_final_freeze.json` | original freeze + P3 amendment history |
+| `gate7_final_freeze_v2.json` | separate protocol-fix-v2 freeze, parent hashes |
+| `gate7_protocol_fix_manifest.json` | pre-fix file hashes |
+| `gate7_protocol_fix_diff.csv` | per-method old/new tau and metric deltas |
+| `gate7_final_summary.csv` | corrected 3-seed mean/std/paired difference |
+| `gate7_stability_b4_results.csv` | 36 unique B4 Reject/Full stability rows |
+| `gate7_stability_b4_results_pre_supplement.csv` | preserved 35-row pre-supplement copy |
+| `gate7_stability_supplement.json` | one missing qwen_plain42/full/seed44 record |
+| `gate7_stability_summary.csv` | mean/std across seeds (36 configs) |
+| `gate7_stability_checkpoint_hashes.csv` | 36 seed checkpoints are independent |
 | `gate7_stability_historical_test.csv` | one exploratory test pass for B4 seed checkpoints |
 | `gate7_stability_test_summary.csv` | Reject/Full test mean±std |
-| `gate7_agent_summary.csv` | GTE/Qwen Agent 120-task comparison |
+| `gate7_agent_summary.csv` | GTE/Qwen Agent 120-task comparison; accurate Plain42 name + legacy |
 | `gate7_agent_results.csv` | 3 routers x 120 = 360 rows |
 | `gate7_agent_traces.json` | real Agent traces |
 
-See `../reports/gate7_final_report.md`.
+Agent v1 still uses Gate5/6 thresholds; classification C uses Gate7 dev_threshold.
+See `../reports/gate7_final_report.md` and `../reports/gate7_1_fix_report.md`.

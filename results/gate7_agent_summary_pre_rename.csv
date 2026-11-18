@@ -1,0 +1,4 @@
+router,n,task_success_rate,tool_accuracy,safe_action_rate,routing_accuracy,clarification_success,p50_latency_seconds,p95_latency_seconds
+GTE-Frozen-RejectOnly,120,0.608333,0.708333,1.0,0.666667,0.0,0.0866,0.173285
+Qwen-Frozen-RejectOnly,120,0.675,0.75,1.0,0.725,1.0,0.1375,0.20728
+Qwen-Opt-RejectOnly,120,0.675,0.75,1.0,0.708333,1.0,0.1887,0.229275

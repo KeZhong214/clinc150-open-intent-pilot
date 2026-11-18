@@ -123,7 +123,75 @@ class Gate7Test(unittest.TestCase):
         self.assertGreater(float(qwen.task_success_rate), float(gte.task_success_rate))
         self.assertEqual(float(qwen.clarification_success), 1.0)
 
-    def test_seed_control_files(self) -> None:
+    def test_protocol_fix_thresholds(self) -> None:
+        freeze = json.loads((RESULTS / "gate7_final_freeze_v2.json").read_text(encoding="utf-8"))
+        self.assertTrue(freeze["protocol_fix_v2"])
+        self.assertTrue(freeze["test_evaluated"])
+        self.assertEqual(len(freeze["thresholds"]), 12)
+        for row in freeze["thresholds"]:
+            dev = pd.read_csv(RESULTS / f"gate7_dev_{row['encoder']}.csv")
+            expected = float(dev[dev.method == row["method"]].tau.iloc[0])
+            self.assertAlmostEqual(float(row["tau_used"]), expected, places=12)
+            self.assertAlmostEqual(float(row["dev_threshold_tau"]), expected, places=12)
+        old = json.loads((RESULTS / "gate7_final_freeze_pre_fix.json").read_text(encoding="utf-8"))
+        self.assertTrue(old["test_evaluated"])
+        self.assertTrue((RESULTS / "gate7_final_historical_test_pre_fix.csv").exists())
+        manifest = json.loads((RESULTS / "gate7_protocol_fix_manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["files"]["results/gate7_final_historical_test_pre_fix.csv"], hashlib.sha256((RESULTS / "gate7_final_historical_test_pre_fix.csv").read_bytes()).hexdigest())
+        old_test = pd.read_csv(RESULTS / "gate7_final_historical_test_pre_fix.csv")
+        new_test = pd.read_csv(RESULTS / "gate7_final_historical_test_v2.csv")
+        for method in ("B0", "B3-H", "B4-RejectOnly"):
+            a = old_test[old_test.method == method].sort_values("encoder").tau.to_numpy()
+            b = new_test[new_test.method == method].sort_values("encoder").tau.to_numpy()
+            if method != "B4-RejectOnly":
+                self.assertTrue((a == b).all())
+            else:
+                self.assertFalse((a == b).all())
+
+    def test_stability_36_unique(self) -> None:
+        d = pd.read_csv(RESULTS / "gate7_stability_b4_results.csv")
+        self.assertEqual(len(d), 36)
+        self.assertEqual(d.duplicated(["encoder", "method", "seed"]).sum(), 0)
+        full = d[(d.encoder == "qwen_plain42") & (d.method == "B4-Full")]
+        self.assertEqual(sorted(full.seed.tolist()), [42, 43, 44])
+        ckpt = RESULTS / "gate7_stability_qwen_plain42_full_seed44.pt"
+        self.assertTrue(ckpt.exists())
+        hashes = pd.read_csv(RESULTS / "gate7_stability_checkpoint_hashes.csv")
+        self.assertEqual(hashes.sha256.nunique(), len(hashes))
+        supp = json.loads((RESULTS / "gate7_stability_supplement.json").read_text(encoding="utf-8"))
+        self.assertEqual(supp["pre_supplement_rows"], 35)
+        self.assertEqual(supp["final_rows"], 36)
+        self.assertEqual(supp["pre_supplement_sha256"], hashlib.sha256((RESULTS / "gate7_stability_b4_results_pre_supplement.csv").read_bytes()).hexdigest())
+
+    def test_agent_accurate_name_and_threshold_source(self) -> None:
+        s = pd.read_csv(RESULTS / "gate7_agent_summary.csv")
+        row = s[s.router == "Qwen-Plain42-RejectOnly"].iloc[0]
+        self.assertEqual(row.router_legacy, "Qwen-Opt-RejectOnly")
+        config = (ROOT / "configs" / "gate7_agent.yaml").read_text(encoding="utf-8")
+        self.assertIn("Qwen-Plain42-RejectOnly", config)
+        self.assertIn("Qwen-Opt-RejectOnly", config)
+        # The Agent run still uses Gate5/6 thresholds; this is explicitly a
+        # separate protocol from the Gate7 classification test.
+        self.assertTrue((RESULTS / "gate5_reject_only_frozen_threshold.json").exists())
+        self.assertTrue((RESULTS / "gate6_qwen_frozen_reject_threshold.json").exists())
+
+    def test_summaries_match_raw(self) -> None:
+        v2 = pd.read_csv(RESULTS / "gate7_final_historical_test_v2.csv")
+        summary = pd.read_csv(RESULTS / "gate7_final_summary.csv")
+        for method in ("B3-H", "B4-RejectOnly"):
+            raw = v2[(v2.method == method) & v2.encoder.str.startswith("plain")].open_set_macro_f1.mean()
+            got = summary[(summary.method == method) & (summary.metric == "open_set_macro_f1")].iloc[0]["mean"]
+            self.assertAlmostEqual(float(raw), float(got), places=10)
+        st = pd.read_csv(RESULTS / "gate7_stability_b4_results.csv")
+        ss = pd.read_csv(RESULTS / "gate7_stability_summary.csv")
+        raw = st[(st.encoder == "qwen_plain42") & (st.method == "B4-RejectOnly")].dev_open_set_macro_f1.mean()
+        got = ss[(ss.encoder == "qwen_plain42") & (ss.method == "B4-RejectOnly")].dev_open_set_macro_f1_mean.iloc[0]
+        self.assertAlmostEqual(float(raw), float(got), places=10)
+
+    def test_all_historical_results_exploratory(self) -> None:
+        for name in ("gate7_final_historical_test.csv", "gate7_final_historical_test_v2.csv", "gate7_stability_historical_test.csv"):
+            d = pd.read_csv(RESULTS / name)
+            self.assertTrue(d.historical_exploratory.all(), name)
         # Filled after B; ensures each trained seed has an independent adapter.
         if (RESULTS / "gate7_seed_runs.csv").exists():
             d = pd.read_csv(RESULTS / "gate7_seed_runs.csv")

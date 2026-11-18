@@ -10,7 +10,8 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "results"
 CASES = ROOT / "data" / "gate5" / "benchmark_cases.jsonl"
-ROUTERS = ["GTE-Frozen-RejectOnly", "Qwen-Frozen-RejectOnly", "Qwen-Opt-RejectOnly"]
+ROUTERS = ["GTE-Frozen-RejectOnly", "Qwen-Frozen-RejectOnly", "Qwen-Plain42-RejectOnly"]
+LEGACY_SLUG = {"Qwen-Plain42-RejectOnly": "qwen_opt_rejectonly"}
 
 
 def main() -> int:
@@ -18,11 +19,14 @@ def main() -> int:
     frames = []
     traces = []
     for r in ROUTERS:
-        slug = r.lower().replace("-", "_")
+        slug = LEGACY_SLUG.get(r, r.lower().replace("-", "_"))
         p = RESULTS / f"gate7_agent_{slug}_results.csv"
         if not p.exists():
             raise FileNotFoundError(p)
-        frames.append(pd.read_csv(p))
+        d = pd.read_csv(p)
+        d["router_legacy"] = d["router"]
+        d["router"] = r
+        frames.append(d)
         traces.extend(json.loads((RESULTS / f"gate7_agent_{slug}_traces.json").read_text(encoding="utf-8")))
     df = pd.concat(frames, ignore_index=True)
     df.to_csv(RESULTS / "gate7_agent_results.csv", index=False)
@@ -40,6 +44,7 @@ def main() -> int:
             "clarification_success": round(float(g[g.case_id.isin(cl)].clarification_ok.mean()), 6),
             "p50_latency_seconds": round(float(g.latency_seconds.quantile(0.5)), 6),
             "p95_latency_seconds": round(float(g.latency_seconds.quantile(0.95)), 6),
+            "router_legacy": "Qwen-Opt-RejectOnly" if router == "Qwen-Plain42-RejectOnly" else router,
         })
     pd.DataFrame(rows).to_csv(RESULTS / "gate7_agent_summary.csv", index=False)
     byfam = df.groupby(["family", "router"]).task_success.mean().reset_index(name="task_success_rate")

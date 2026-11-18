@@ -1,0 +1,13 @@
+{
+  "captured_at_utc": "2026-11-18T18:05:00Z",
+  "reason": "Gate7.1 protocol fix: B4 test used Gate6 threshold files while B0/B3-H used Gate7 dev_threshold",
+  "files": {
+    "results/gate7_final_historical_test_pre_fix.csv": "7b384ffadb5f06a095e7120cd888c6dda52792239dc4bbfc0450c36e6b37535e",
+    "results/gate7_final_freeze_pre_fix.json": "917bac015a6b8b3f708ff180617141ac63bf243491d4155b62d4bec4e7598ccc",
+    "results/gate7_final_summary_pre_fix.csv": "e5a96ed98349c421605123c71eaa00521a46bed3668f97f55561da881f6ff468",
+    "results/gate7_final_historical_test.csv": "7b384ffadb5f06a095e7120cd888c6dda52792239dc4bbfc0450c36e6b37535e",
+    "results/gate7_final_freeze.json": "917bac015a6b8b3f708ff180617141ac63bf243491d4155b62d4bec4e7598ccc",
+    "src/gate7/final_test.py": "f244a600de65e77bf5d6e747926a2bbb7273b290640d5dd078f6271c5446b451"
+  },
+  "original_test_evaluated": true
+}

@@ -1,0 +1,31 @@
+{
+  "added": {
+    "encoder": "qwen_plain42",
+    "method": "B4-Full",
+    "seed": 44,
+    "tau": 0.34233621060848246,
+    "constraint_met": true,
+    "elapsed_seconds": 13.599,
+    "dev_known_acceptance": 0.91,
+    "dev_known_correct_routing": 0.825,
+    "dev_known_macro_f1": 0.8608234223636699,
+    "dev_top1_closed_set_accuracy": 0.89,
+    "dev_oos_recall": 0.6777777777777778,
+    "dev_oos_false_acceptance": 0.32222222222222224,
+    "dev_unknown_auroc": 0.8802083333333335,
+    "dev_open_set_macro_f1": 0.7918138416921289,
+    "dev_open_set_accuracy": 0.7552631578947369,
+    "dev_n_known": 400,
+    "dev_n_unknown": 360,
+    "dev_known_rejected": 36,
+    "dev_unknown_rejected": 244,
+    "dev_unknown_accepted": 116
+  },
+  "existing_rows": 35,
+  "final_rows": 36,
+  "checkpoint": "results/gate7_stability_qwen_plain42_full_seed44.pt",
+  "history": "results/gate7_stability_qwen_plain42_full_seed44_history.csv",
+  "pre_supplement_file": "results/gate7_stability_b4_results_pre_supplement.csv",
+  "pre_supplement_sha256": "3c7a922f17a8eb9cd5576a5505441020b52a334bd1725a0fadc022c0e2354827",
+  "pre_supplement_rows": 35
+}

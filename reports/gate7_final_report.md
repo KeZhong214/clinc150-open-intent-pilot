@@ -12,7 +12,7 @@
 
 ## 0. 一句话结论
 
-**Gate6 的“验证提升、test 下降”主要是 seed 42 的偶然/迁移问题，而不是 Qwen LoRA 的普遍失败：3 个 seed 的 Qwen Plain 在 dev_select 上 B3-H 均值 0.8028、RejectOnly 0.8130；历史 test 均值 B3-H 0.8068、RejectOnly 0.8253，RejectOnly 相对 frozen 0.8127 提升 +1.25 pp，3 个 seed 中 2 个胜出。B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍稳定优于 B4-Full。**
+**Gate6 的“验证提升、test 下降”主要是 seed 42 的偶然/迁移问题，而不是 Qwen LoRA 的普遍失败：3 个 seed 的 Qwen Plain 在 dev_select 上 B3-H 均值 0.8028、RejectOnly 0.8130；history test（protocol_fix_v2）均值 B3-H 0.8068、RejectOnly 0.8256，RejectOnly 相对 frozen 0.8130 提升 +1.26 pp，3 个 seed 中 2 个胜出。B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍稳定优于 B4-Full。**
 
 同时保留负结果：P1/P2 没有超过 P0；P3 首次停顿后重跑完成，但 dev B3-H 仍低于 P0，未选中；B4 Full 没有超过 RejectOnly；LLM API 仍无凭据。
 
@@ -93,17 +93,17 @@ P3 首次运行在 Windows 内存压力下停顿；重跑完成 2 epochs / 50 st
 
 | Seed | Val B3-H | Val Reject | Test B3-H | Test Reject | Adapter SHA |
 |---|---:|---:|---:|---:|---|
-| 42 | 0.79837 | 0.79947 | 0.79694 | 0.80798 | `4efaee5c...` |
-| 43 | **0.80508** | **0.82216** | **0.81589** | **0.83611** | `8ca9d985...` |
-| 44 | 0.80504 | 0.81746 | 0.80768 | 0.83175 | `1711bcc9...` |
-| **mean ± std** | **0.8028 ± 0.0032** | **0.8130 ± 0.0100** | **0.8068 ± 0.0095** | **0.8253 ± 0.0151** | — |
+| 42 | 0.79837 | 0.79947 | 0.79694 | 0.80906 | `4efaee5c...` |
+| 43 | **0.80508** | **0.82216** | **0.81589** | **0.83557** | `8ca9d985...` |
+| 44 | 0.80504 | 0.81746 | 0.80768 | 0.83207 | `1711bcc9...` |
+| **mean ± std** | **0.8028 ± 0.0032** | **0.8130 ± 0.0100** | **0.8068 ± 0.0095** | **0.8256 ± 0.0144** | — |
 
 相对 frozen：
 
 | Method | Frozen test F1 | 3-seed mean | Δ mean | Wins |
 |---|---:|---:|---:|---:|
 | B3-H | 0.80509 | 0.80684 | +0.18 pp | 2/3 |
-| B4-RejectOnly | 0.81274 | **0.82528** | **+1.25 pp** | **2/3** |
+| B4-RejectOnly | 0.81300 | **0.82557** | **+1.26 pp** | **2/3** |
 
 OOS recall：
 - B3-H mean 0.6009 vs frozen 0.5724（+2.85 pp）；
@@ -111,7 +111,7 @@ OOS recall：
 
 Known correct routing：
 - B3-H mean 0.8323 vs frozen 0.8425（−1.02 pp）；
-- RejectOnly mean 0.8458 vs frozen 0.8438（+0.21 pp）。
+- RejectOnly mean 0.8467 vs frozen 0.8444（+0.23 pp）。
 
 **结论：seed42 的 test 负结果是真实的，但不是三种子的普遍结论；3-seed 均值是
 小幅正结果，且 RejectOnly 比 B3-H 更稳。**
@@ -130,23 +130,46 @@ P0 0.7984。按任务书保留 P0/Frozen-RejectOnly 为主结果，没有为了�
 ## 3. C：冻结与历史探索性 test
 
 所有 seed、adapter、B4 checkpoint、dev 阈值在
-`results/gate7_final_freeze.json` 中冻结，`test_evaluated=true` 后只评估一次。
+`results/gate7_final_freeze.json` 中冻结；该原始记录与原始 test 保留。
+B4 阈值协议修复后，按 `protocol_fix_v2` 单独运行一次，
+写入 `gate7_final_freeze_v2.json` / `gate7_final_historical_test_v2.csv`；
+原始 `test_evaluated=true` 没有被重置，第一版结果保留在 `*_pre_fix.csv`。
 
 | Encoder | Method | Test F1 | OOS | Routing | AUROC |
 |---|---|---:|---:|---:|---:|
 | Qwen Frozen | B3-H | 0.8051 | 0.5724 | 0.8425 | 0.8872 |
-| Qwen Frozen | B4-RejectOnly | 0.8127 | 0.6000 | 0.8438 | 0.8815 |
+| Qwen Frozen | B4-RejectOnly | 0.8130 | 0.5974 | 0.8444 | 0.8815 |
 | Qwen Plain 42 | B3-H | 0.7969 | 0.5579 | 0.8288 | 0.8677 |
-| Qwen Plain 42 | B4-RejectOnly | 0.8080 | 0.5750 | 0.8413 | 0.8661 |
+| Qwen Plain 42 | B4-RejectOnly | 0.8091 | 0.5816 | 0.8413 | 0.8661 |
 | Qwen Plain 43 | B3-H | 0.8159 | 0.6197 | 0.8388 | 0.8834 |
-| Qwen Plain 43 | B4-RejectOnly | **0.8361** | **0.6789** | 0.8494 | 0.8864 |
+| Qwen Plain 43 | B4-RejectOnly | **0.8356** | 0.6513 | 0.8575 | 0.8864 |
 | Qwen Plain 44 | B3-H | 0.8077 | 0.6250 | 0.8294 | 0.8976 |
-| Qwen Plain 44 | B4-RejectOnly | 0.8318 | 0.6789 | 0.8469 | 0.8910 |
+| Qwen Plain 44 | B4-RejectOnly | 0.8321 | **0.6947** | 0.8413 | 0.8910 |
 
-- **没有用 test 选 seed/配方；42/43/44 全部报告。**
+- **没有用 test 选 seed/配方；42/43/44 全部报告；**
 - seed42 的 B3-H 负结果保留；
 - 3-seed 均值不是“最优 seed”挑选；
-- 历史 test 仍不是新盲测。
+- 历史 test 仍不是新盲测；
+- protocol_fix_v2 只用 Gate7 dev_threshold 阈值，不重新选模型/seed。
+
+### 3.1 阈值协议修复前后对照
+
+修复前 B0/B3-H 使用 Gate7 `dev_threshold`，但 B4-RejectOnly 误用了 Gate6 旧
+threshold 文件；修复后所有方法统一使用 Gate7 `dev_threshold`。
+
+| Encoder | Old B4 tau | New B4 tau | Δ tau | Old F1 | New F1 | Δ F1 |
+|---|---:|---:|---:|---:|---:|---:|
+| frozen | 0.445477 | 0.442460 | −0.003018 | 0.812741 | 0.812998 | +0.000257 |
+| plain42 | 0.413429 | 0.416832 | +0.003403 | 0.807982 | 0.809062 | +0.001080 |
+| plain43 | 0.442301 | 0.418433 | −0.023869 | 0.836114 | 0.835568 | −0.000546 |
+| plain44 | 0.433705 | 0.451184 | +0.017478 | 0.831755 | 0.832067 | +0.000313 |
+
+- B0/B3-H 完全不变；
+- RejectOnly 3-seed mean 从 **0.82528** 变为 **0.82557**（+0.03 pp）；
+- frozen 从 0.81274 变为 0.81300；
+- **原结论不变**：Qwen RejectOnly 略高于 frozen，2/3 seed 胜出；
+- 旧结果、旧 freeze、旧 summary 均保留为 `*_pre_fix.*`；
+- 逐行差异见 `results/gate7_protocol_fix_diff.csv`。
 
 ---
 
@@ -168,10 +191,17 @@ Gate7 加入一个**通用语义歧义守卫**：当 accepted intent 属于 tran
 |---|---:|---:|---:|---:|---:|---:|
 | GTE-Frozen-RejectOnly | 0.6083 | 73 | 0.708 | 1.000 | 0.667 | 0.087 s |
 | Qwen-Frozen-RejectOnly | **0.6750** | **81** | 0.750 | 1.000 | **0.725** | 0.138 s |
-| Qwen-Opt-RejectOnly | **0.6750** | **81** | 0.750 | 1.000 | 0.708 | 0.189 s |
+| Qwen-Plain42-RejectOnly | **0.6750** | **81** | 0.750 | 1.000 | 0.708 | 0.189 s |
 
-`Qwen-Opt-RejectOnly` 实际是 **Qwen Plain42 + RejectOnly**；因为优化配方未
-被选中，没有另一个 optimized adapter。
+`Qwen-Plain42-RejectOnly` 的旧结果标签是 `Qwen-Opt-RejectOnly`；它实际加载的是
+**Gate6 Qwen Plain LoRA seed42 + RejectOnly**，不是新优化配方。为兼容旧文件，
+结果表保留 `router_legacy` 列，旧值映射到新名称。
+
+**Agent 阈值来源说明**：分类评测 C 的 B0/B3-H/B4-RejectOnly 统一使用 Gate7
+`dev_threshold`；Agent 120 任务仍使用原 Gate5/Gate6 阈值（GTE RejectOnly
+0.4417、Qwen Frozen RejectOnly 0.4455、Qwen Plain42 RejectOnly 0.4168）。
+两者是**不同协议**，没有把 Agent 结果与 C 的分类指标混为同一校准；
+Agent 旧结果保留，未因本轮协议修复重跑。
 
 分族：
 
@@ -190,7 +220,7 @@ Gate7 加入一个**通用语义歧义守卫**：当 accepted intent 属于 tran
 - dispute 仍是所有路由器最弱族；
 - 安全率全部 100%。
 
-对比 Gate6 的 F1 结论：Qwen RejectOnly 的 test F1 0.825（3-seed mean）低于
+对比 Gate6 的 F1 结论：Qwen RejectOnly 的 test F1 0.826（3-seed mean）低于
 GTE RejectOnly 0.843，但 Agent TSR 0.675 > GTE RejectOnly 0.608。**分类 F1
 和业务 TSR 不是同一排序**，与 Gate6 的结论一致。
 
@@ -205,7 +235,7 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
 | GTE LoRA seed43 | **0.8277 ± 0.0005** | 0.8152 ± 0.0023 |
 | GTE LoRA seed44 | **0.8266 ± 0.0009** | 0.8026 ± 0.0014 |
 | Qwen Frozen | **0.7950 ± 0.0008** | 0.7752 ± 0.0047 |
-| Qwen Plain42 | **0.7997 ± 0.0002** | 0.7879 ± 0.0088（仅 2 seed 完成） |
+| Qwen Plain42 | **0.7997 ± 0.0002** | 0.7892 ± 0.0066 |
 
 历史探索性 test 的 3-seed 均值（不是选 seed 的依据；只做一次复核）：
 
@@ -216,13 +246,13 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
 | GTE LoRA43 | **0.8249 ± .0002** | 0.8130 ± .0005 | 3/3 |
 | GTE LoRA44 | **0.8181 ± .0005** | 0.7998 ± .0017 | 3/3 |
 | Qwen Frozen | **0.8125 ± .0005** | 0.8002 ± .0052 | 3/3 |
-| Qwen Plain42 | **0.8088 ± .0009** | 0.7948 ± .0058 | 2/2（Full 仅 2 seed） |
+| Qwen Plain42 | **0.8088 ± .0009** | 0.7956 ± .0043 | 3/3 |
 
 - 每个 seed 的 B4 checkpoint SHA 独立（`gate7_stability_checkpoint_hashes.csv`）；
 - RejectOnly 在 GTE Frozen、GTE-LoRA 42/43/44、Qwen Frozen 上都优于 Full；
 - 训练/初始化/episode 的 seed 确实改变了输出，不是“复制同一模型”；
 - GTE-LoRA 的 seed43/44 高于 seed42，说明 adapter 本身也有明显 seed 波动；
-- Qwen Plain 的 3-seed test RejectOnly mean 0.8253，已在上节报告。
+- Qwen Plain 的 3-seed test RejectOnly mean 0.8256，已在上节报告。
 
 ### 4.4 LLM API
 
@@ -249,7 +279,7 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
    GTE 分类 F1 更高、编码快约 4 倍；Qwen 0.6B 在 Agent TSR 上更好
    （Reject 81 vs GTE 73），但延迟高。**没有单一赢家。**
 6. **F1 变化是否对应业务成功率？**
-   不完全。Qwen 3-seed test Reject F1 0.825 < GTE 0.843，但 TSR 0.675 >
+   不完全。Qwen 3-seed test Reject F1 0.826 < GTE 0.843，但 TSR 0.675 >
    GTE 0.608；agent 修复、拒识分布和工具执行共同决定业务结果。
 
 ---
@@ -263,7 +293,7 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
 - P3：首次 40/50 step 停顿；重跑完成 50 step，adapter SHA 84926b52...，未选中；
 - 曾出现 Windows page file / CUDA unknown error（并发稳定性 + Agent 时）；
   通过分进程、释放模型和串行运行修复；日志保留；
-- 65 个测试全部通过。
+- 69 个测试全部通过。
 
 ---
 
@@ -273,7 +303,9 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
 - 120 条 Agent 任务是旧任务；Agent 修复后重跑也只能算探索性回归；
 - Qwen 只有 3 个 seed，不能声称显著性；
 - P3 已完成但未选中，优化结论只能保留 P0；
-- Qwen Plain 的 B4-Full 稳定性只完成 2 个 seed（Qwen Frozen 完成 3 个）；
+- Qwen Plain43/44 只完成 LoRA 编码器与最终 test，未完成完整 B4 三种子矩阵；
+  完整 B4 交叉稳定性覆盖 GTE Frozen、GTE-LoRA 42/43/44、Qwen Frozen、
+  Qwen Plain42；
 - 没有 bootstrap 置信区间；
 - 没有新的独立 unknown-class 协议；
 - LLM API 无凭据。
@@ -305,7 +337,7 @@ $env:TRANSFORMERS_OFFLINE = "1"
 # D
 .\.venv\Scripts\python.exe -m src.gate7.agent_benchmark --router GTE-Frozen-RejectOnly
 .\.venv\Scripts\python.exe -m src.gate7.agent_benchmark --router Qwen-Frozen-RejectOnly
-.\.venv\Scripts\python.exe -m src.gate7.agent_benchmark --router Qwen-Opt-RejectOnly --opt-tag plain42
+.\.venv\Scripts\python.exe -m src.gate7.agent_benchmark --router Qwen-Plain42-RejectOnly --opt-tag plain42
 .\.venv\Scripts\python.exe -m src.gate7.combine_agent
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```

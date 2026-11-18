@@ -13,8 +13,10 @@ encoders:
   gte_lora44: Gate7 GTE LoRA seed44
   qwen_frozen: Gate6 Qwen frozen
   qwen_plain42: Gate6 Qwen Plain seed42
-  qwen_plain43: Gate7 Qwen Plain seed43
-  qwen_plain44: Gate7 Qwen Plain seed44
+not_completed:
+  qwen_plain43: B4 stability matrix not run; only Qwen Plain adapter/final test
+  qwen_plain44: B4 stability matrix not run; only Qwen Plain adapter/final test
+matrix_size: 36 unique (encoder, method, seed)
 methods:
   B4-RejectOnly: fixed gate 0.5, reject head only
   B4-Full: learned gate + reject head

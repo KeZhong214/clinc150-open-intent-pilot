@@ -3,8 +3,8 @@
 ## Slide 1 — 结论先行
 
 - Qwen LoRA 的单 seed42 test 负结果不是普遍规律；
-- 3-seed Qwen Plain：B3-H test 0.8068、RejectOnly **0.8253**；
-- RejectOnly 相对 frozen +1.25 pp，2/3 seed 胜出；
+- 3-seed Qwen Plain：B3-H test 0.8068、RejectOnly **0.8256**；
+- RejectOnly 相对 frozen +1.26 pp，2/3 seed 胜出；
 - B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍稳定优于 Full；
 - P1/P2 没超过 P0，P3 完成但 B3-H 仍低于 P0：**没有优化成功**。
 
@@ -70,19 +70,19 @@
 
 | Seed | Val B3H | Test B3H | Test Reject |
 |---|---:|---:|---:|
-| 42 | 0.7984 | 0.7969 | 0.8080 |
-| 43 | 0.8051 | 0.8159 | **0.8361** |
-| 44 | 0.8050 | 0.8077 | 0.8318 |
-| mean±std | 0.8028±.0032 | 0.8068±.0095 | **0.8253±.0151** |
+| 42 | 0.7984 | 0.7969 | 0.8091 |
+| 43 | 0.8051 | 0.8159 | **0.8356** |
+| 44 | 0.8050 | 0.8077 | 0.8321 |
+| mean±std | 0.8028±.0032 | 0.8068±.0095 | **0.8256±.0144** |
 
-- RejectOnly +1.25 pp vs frozen，2/3 wins；
+- RejectOnly +1.26 pp vs frozen，2/3 wins；
 - 没有用 test 挑 seed。
 
 ## Slide 9 — C：冻结后一次 test
 
 - `gate7_final_freeze.json`，test_evaluated=true；
-- Frozen B3-H 0.8051、Reject 0.8127；
-- Plain 3-seed B3-H 0.8068、Reject 0.8253；
+- Frozen B3-H 0.8051、Reject 0.8130；
+- Plain 3-seed B3-H 0.8068、Reject 0.8256；
 - Optimized = NOT SELECTED（P1/P2/P3 未改善）；
 - 历史 test，不是盲测。
 
@@ -95,6 +95,7 @@
 | GTE LoRA43 | **0.8277** | 0.8152 |
 | GTE LoRA44 | **0.8266** | 0.8026 |
 | Qwen Frozen | **0.7950** | 0.7752 |
+| Qwen Plain42 | **0.7997** | 0.7892 |
 
 - Reject 在全部对照中 > Full；
 - 每个 seed 的 checkpoint SHA 不同；
@@ -124,7 +125,7 @@
 - test 已看过；
 - P3 完成但未选中；
 - 3 seeds 不是显著性；
-- Qwen Plain B4-Full 稳定性仅 2 seed；
+- Qwen Plain 的 B4 三种子矩阵已补齐；
 - 无新独立 unknown 协议；
 - LLM API NOT RUN_API_BLOCKED。
 

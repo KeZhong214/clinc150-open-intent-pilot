@@ -2,7 +2,9 @@ schema_version: gate7-agent-v1
 routers:
   - GTE-Frozen-RejectOnly
   - Qwen-Frozen-RejectOnly
-  - Qwen-Opt-RejectOnly
+  - Qwen-Plain42-RejectOnly
+legacy_router_alias:
+  Qwen-Opt-RejectOnly: Qwen-Plain42-RejectOnly
 opt_router_actual: Qwen-Plain42-RejectOnly (no optimization selected; P0 retained)
 cases: data/gate5/benchmark_cases.jsonl
 n_cases: 120

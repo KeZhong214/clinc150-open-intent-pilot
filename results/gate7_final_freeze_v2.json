@@ -1,0 +1,105 @@
+{
+  "selection": "P0 fixed plain recipe (P1/P2 did not beat P0 on dev_select; P3 completed but not selected)",
+  "adapter_sha256": {
+    "plain42": "4efaee5c891e26058764b4a7ec999dec718436f57b724841650831ddc01c3818",
+    "plain43": "8ca9d98507ec2e254f181052cbcb02804798003d9a5cbc10d3b326f5e20f245d",
+    "plain44": "1711bcc9fef4368b05822f01b52a4d1e05a9ff1e17cad92d52d5c090eda9979a"
+  },
+  "b4_sha256": {
+    "frozen": "d7512e525c3af6c6dc8909f961d200578e8d970650afe6336c21121de9dd7c37",
+    "plain42": "d222f9686acb931646adc4634036540e270fe4b48c48cd639c6be07a4c94da5c",
+    "plain43": "f6cf0d7ef1f77dd555600b5c4cad1ab983b2f546b76d6c464aec95b29d54bd30",
+    "plain44": "ad987550774dcdcd5d7e7a5752d859fb039f7c9b2d362e506706af9384bcac3f"
+  },
+  "dev_sha256": {
+    "frozen": "5807376beead503ff47e0a017a7483f46677f792c2c422a2c7d7830133c3117d",
+    "plain42": "9db8d55a13767ceadeccfd5afbe580795b31ca4f3419a7e5b6c868a504f55e5e",
+    "plain43": "7309a851bd10da1c0f57b3692db5a18cfa32be94bb8df3ecf4e205b012e78c9d",
+    "plain44": "555ac2e59bf3fad45a8a93073a4147651b0bf0130ea6c32d98a1d9cb265a60d3"
+  },
+  "test_evaluated": true,
+  "label": "historical_exploratory",
+  "protocol": "B0/B3-H/B4-RejectOnly all use Gate7 dev_threshold tau",
+  "cases_sha256": "2d3f157bf6ebc1f711430523b8b99510f7558c96db799a093d92262ac5c57f43",
+  "dev_select_sha256": "07ba9a1fccdef7e3c437fdbfc0a88193667f3368bf05aa7253aac58e6e189c29",
+  "test_sha256": "f204634dd9c1dba4b66b097078c8881c70d6451e2d1686f44661083ccd8603ab",
+  "thresholds": [
+    {
+      "encoder": "frozen",
+      "method": "B0",
+      "tau_used": 0.8070925354957581,
+      "dev_threshold_tau": 0.8070925354957581
+    },
+    {
+      "encoder": "frozen",
+      "method": "B3-H",
+      "tau_used": 0.8161428213119507,
+      "dev_threshold_tau": 0.8161428213119507
+    },
+    {
+      "encoder": "frozen",
+      "method": "B4-RejectOnly",
+      "tau_used": 0.442459625005722,
+      "dev_threshold_tau": 0.442459625005722
+    },
+    {
+      "encoder": "plain42",
+      "method": "B0",
+      "tau_used": 0.7853701293468476,
+      "dev_threshold_tau": 0.7853701293468476
+    },
+    {
+      "encoder": "plain42",
+      "method": "B3-H",
+      "tau_used": 0.7952173292636872,
+      "dev_threshold_tau": 0.7952173292636872
+    },
+    {
+      "encoder": "plain42",
+      "method": "B4-RejectOnly",
+      "tau_used": 0.4168315291404724,
+      "dev_threshold_tau": 0.4168315291404724
+    },
+    {
+      "encoder": "plain43",
+      "method": "B0",
+      "tau_used": 0.7609515905380249,
+      "dev_threshold_tau": 0.7609515905380249
+    },
+    {
+      "encoder": "plain43",
+      "method": "B3-H",
+      "tau_used": 0.7699443817138671,
+      "dev_threshold_tau": 0.7699443817138671
+    },
+    {
+      "encoder": "plain43",
+      "method": "B4-RejectOnly",
+      "tau_used": 0.4184325933456421,
+      "dev_threshold_tau": 0.4184325933456421
+    },
+    {
+      "encoder": "plain44",
+      "method": "B0",
+      "tau_used": 0.7876578629016876,
+      "dev_threshold_tau": 0.7876578629016876
+    },
+    {
+      "encoder": "plain44",
+      "method": "B3-H",
+      "tau_used": 0.7882236713171005,
+      "dev_threshold_tau": 0.7882236713171005
+    },
+    {
+      "encoder": "plain44",
+      "method": "B4-RejectOnly",
+      "tau_used": 0.4511835128068924,
+      "dev_threshold_tau": 0.4511835128068924
+    }
+  ],
+  "protocol_fix_v2": true,
+  "parent_freeze_sha256": "917bac015a6b8b3f708ff180617141ac63bf243491d4155b62d4bec4e7598ccc",
+  "parent_test_sha256": "7b384ffadb5f06a095e7120cd888c6dda52792239dc4bbfc0450c36e6b37535e",
+  "parent_test_evaluated": true,
+  "reason": "Prior B4 test used Gate6 threshold files; corrected run uses Gate7 dev_threshold for all methods."
+}

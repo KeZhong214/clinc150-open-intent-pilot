@@ -1,5 +1,5 @@
 {
-  "selection": "P0 fixed plain recipe (P1/P2 did not beat P0 on dev_select; P3 incomplete)",
+  "selection": "P0 fixed plain recipe (P1/P2 did not beat P0; P3 completed but not selected)",
   "adapter_sha256": {
     "plain42": "4efaee5c891e26058764b4a7ec999dec718436f57b724841650831ddc01c3818",
     "plain43": "8ca9d98507ec2e254f181052cbcb02804798003d9a5cbc10d3b326f5e20f245d",
@@ -21,5 +21,18 @@
   "label": "historical_exploratory",
   "cases_sha256": "2d3f157bf6ebc1f711430523b8b99510f7558c96db799a093d92262ac5c57f43",
   "dev_select_sha256": "07ba9a1fccdef7e3c437fdbfc0a88193667f3368bf05aa7253aac58e6e189c29",
-  "test_sha256": "7b384ffadb5f06a095e7120cd888c6dda52792239dc4bbfc0450c36e6b37535e"
+  "test_sha256": "7b384ffadb5f06a095e7120cd888c6dda52792239dc4bbfc0450c36e6b37535e",
+  "p3_status": "COMPLETED_NOT_SELECTED",
+  "p3_adapter_sha256": "84926b52865c832243f9fc2cde45861a630c1d5b8173d4dba3dacc025f9496e0",
+  "p3_optimizer_steps": 50,
+  "p3_dev_b3h_f1": 0.79452,
+  "amendments": [
+    {
+      "at_utc": "2026-11-18T18:08:00Z",
+      "change": "P3 status corrected from incomplete to completed/not selected; test hashes and selection unchanged",
+      "before_sha256": "917bac015a6b8b3f708ff180617141ac63bf243491d4155b62d4bec4e7598ccc",
+      "preserved_as": "results/gate7_final_freeze_pre_p3_update.json"
+    }
+  ],
+  "protocol_fix_v2_freeze": "results/gate7_final_freeze_v2.json"
 }

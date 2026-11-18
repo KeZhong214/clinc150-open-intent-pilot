@@ -1,0 +1,39 @@
+{
+  "comparison": "gate7_final_historical_test_pre_fix.csv vs gate7_final_historical_test_v2.csv",
+  "label": "historical_exploratory; protocol_fix_v2",
+  "n_rows": 12,
+  "b4_threshold_rows": [
+    {
+      "encoder": "frozen",
+      "old_tau": 0.4454773753881454,
+      "new_tau": 0.442459625005722,
+      "delta_tau": -0.003017750382423412,
+      "old_open_set_macro_f1": 0.8127409923882719,
+      "new_open_set_macro_f1": 0.8129976748317347
+    },
+    {
+      "encoder": "plain42",
+      "old_tau": 0.4134286105632782,
+      "new_tau": 0.4168315291404724,
+      "delta_tau": 0.003402918577194214,
+      "old_open_set_macro_f1": 0.8079821759308765,
+      "new_open_set_macro_f1": 0.8090621922971374
+    },
+    {
+      "encoder": "plain43",
+      "old_tau": 0.4423011511564255,
+      "new_tau": 0.4184325933456421,
+      "delta_tau": -0.023868557810783397,
+      "old_open_set_macro_f1": 0.8361136390242536,
+      "new_open_set_macro_f1": 0.8355678763754396
+    },
+    {
+      "encoder": "plain44",
+      "old_tau": 0.4337053388357162,
+      "new_tau": 0.4511835128068924,
+      "delta_tau": 0.01747817397117618,
+      "old_open_set_macro_f1": 0.8317546450402072,
+      "new_open_set_macro_f1": 0.8320672837688348
+    }
+  ]
+}

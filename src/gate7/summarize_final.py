@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -11,8 +12,12 @@ ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "results"
 
 
-def main() -> int:
-    test = pd.read_csv(RESULTS / "gate7_final_historical_test.csv")
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input", default="results/gate7_final_historical_test.csv")
+    parser.add_argument("--out", default="results/gate7_final_summary.csv")
+    args = parser.parse_args(argv)
+    test = pd.read_csv(ROOT / args.input)
     test = test[test.method.isin(["B3-H", "B4-RejectOnly"])]
     rows = []
     for method in ("B3-H", "B4-RejectOnly"):
@@ -35,7 +40,7 @@ def main() -> int:
                 }
             )
     df = pd.DataFrame(rows)
-    df.to_csv(RESULTS / "gate7_final_summary.csv", index=False)
+    df.to_csv(ROOT / args.out, index=False)
     print(df.round(5).to_string(index=False))
     print("GATE7_FINAL_SUMMARY_OK")
     return 0

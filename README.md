@@ -63,19 +63,30 @@ Gate 7 的核心结果（双层 dev + 3-seed；历史探索性 test）：
 
 | Qwen Plain seed | Val B3-H | Test B3-H | Test RejectOnly |
 |---|---:|---:|---:|
-| 42 | 0.7984 | 0.7969 | 0.8080 |
-| 43 | 0.8051 | 0.8159 | 0.8361 |
-| 44 | 0.8050 | 0.8077 | 0.8318 |
-| mean ± std | 0.8028 ± .0032 | 0.8068 ± .0095 | **0.8253 ± .0151** |
+| 42 | 0.7984 | 0.7969 | 0.8091 |
+| 43 | 0.8051 | 0.8159 | 0.8356 |
+| 44 | 0.8050 | 0.8077 | 0.8321 |
+| mean ± std | 0.8028 ± .0032 | 0.8068 ± .0095 | **0.8256 ± .0144** |
 
 - Gate6 的 seed42 test 负结果是真实结果，但不是 3-seed 普遍结论；
-- B4-RejectOnly 相对 frozen test +1.25 pp，2/3 seed 胜出；
+- B4-RejectOnly 相对 frozen test +1.26 pp，2/3 seed 胜出；
 - dev_threshold 只选 tau，dev_select 只选配方；
 - 6×6 microbatch 和 203/400 负 margin hard negative 已诊断；
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 B4-Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 65 个测试通过。
+- 69 个测试通过。
+
+Gate 7.1 修复：
+
+- B0/B3-H/B4-RejectOnly 的 test 阈值统一使用 Gate7 `dev_threshold`；
+  原 test/freeze/summary 保留为 `*_pre_fix.*`，v2 单独记录；
+- B4 stability 补齐 `qwen_plain42/B4-Full/seed44`，共 **36 组无重复键**；
+- P3 记录更新为 completed/not selected；
+- `Qwen-Opt-RejectOnly` 更正为 `Qwen-Plain42-RejectOnly`，保留 legacy alias；
+- Agent 仍使用 Gate5/6 旧阈值，与分类 C 的 Gate7 dev_threshold 明确分开；
+- 详细：[`reports/gate7_1_fix_report.md`](reports/gate7_1_fix_report.md)
+  与 [`reports/project_final_research_summary.md`](reports/project_final_research_summary.md)。
 
 B3-H 的场景差异：
 
@@ -103,7 +114,9 @@ Gate 1/2 历史结果保持冻结：
 [Gate 4 B4+Agent](reports/gate4_final_report.md) ·
 [Gate 5 LoRA+Benchmark](reports/gate5_final_report.md) ·
 [Gate 6 Qwen+Agent](reports/gate6_final_report.md) ·
-[Gate 7 多种子诊断](reports/gate7_final_report.md)  
+[Gate 7 多种子诊断](reports/gate7_final_report.md) ·
+[Gate 7.1 协议修复](reports/gate7_1_fix_report.md) ·
+[项目最终研究总结](reports/project_final_research_summary.md)  
 结果索引：[results/gate6_qwen_method_matrix_historical_test.csv](results/gate6_qwen_method_matrix_historical_test.csv) ·
 [results/gate6_qwen_benchmark_summary.csv](results/gate6_qwen_benchmark_summary.csv) ·
 [results/gate7_final_historical_test.csv](results/gate7_final_historical_test.csv) ·
@@ -176,13 +189,13 @@ Demo：[app_gate5.py](app_gate5.py) ·
 - Gate 6 完成 Qwen3-Embedding 0.6B 冻结对齐（mean cosine 0.999998）、
   Plain/Anchor LoRA（2.29M 参数、2 epoch、adapter 9.20 MB）。
 - 完成 Qwen Frozen/Plain × B0/B3-H/RejectOnly/Full 的 9 行 validation 和
-  一次性历史 test；Qwen Frozen-RejectOnly 0.8127，Qwen Plain-B3H 0.7972。
+  一次性历史 test；Qwen Frozen-RejectOnly 0.8130，Qwen Plain-B3H 0.7972。
 - 完成 Qwen Agent 接入、6 条真实回放和 120 任务 × 4 路由回归；
   Qwen Plain-RejectOnly TSR 65.0%，安全率 100%。
 - Gate 7 冻结双层 dev_threshold/dev_select，诊断 6×6 micro-batch 与
   203/400 负 margin 的 hard negative。
-- 完成 Qwen Plain seed42/43/44 真实复验；RejectOnly test 均值 0.8253，
-  相对 frozen +1.25 pp，2/3 seed 胜出。
+- 完成 Qwen Plain seed42/43/44 真实复验；RejectOnly test 均值 0.8256，
+  相对 frozen +1.26 pp，2/3 seed 胜出。
 - P1/P2 未超过 P0；P3 完成但未选中（dev B3-H 0.7945 < P0 0.7984）。
 - 完成 GTE Frozen、Qwen Frozen、GTE-LoRA 42/43/44 的 B4 多种子稳定性；
   RejectOnly 在全部对照中稳定优于 B4-Full。
@@ -429,7 +442,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 65 tests in ...s
+Ran 69 tests in ...s
 OK
 ```
 
@@ -457,7 +470,7 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 65 个测试。请反馈
+预期最后一行是 `OK`，共 69 个测试。请反馈
 `logs/gate7_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
@@ -811,13 +824,13 @@ Gate 6 的主要判断：
 Gate 7 的主要判断：
 
 - 双层 dev 隔离后，Qwen Plain 3-seed 的 B3-H test 均值 0.8068、
-  RejectOnly 0.8253；RejectOnly 相对 frozen +1.25 pp，2/3 seed 胜出；
+  RejectOnly 0.8256；RejectOnly 相对 frozen +1.26 pp，2/3 seed 胜出；
 - Gate6 的 seed42 负结果真实，但不是三种子普遍结论；
 - 6×6 microbatch / 203/400 负 margin hard negative 是机制风险；
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE Frozen、GTE-LoRA、Qwen Frozen 上稳定优于 Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 65 个测试通过。
+- 69 个测试通过。
 
 尚未做：
 
