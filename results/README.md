@@ -226,6 +226,8 @@ See `../reports/gate6_final_report.md`.
 | `gate7_stability_b4_results.csv` | B4 Reject/Full stability rows |
 | `gate7_stability_summary.csv` | mean/std across seeds |
 | `gate7_stability_checkpoint_hashes.csv` | seed checkpoints are independent |
+| `gate7_stability_historical_test.csv` | one exploratory test pass for B4 seed checkpoints |
+| `gate7_stability_test_summary.csv` | Reject/Full test mean±std |
 | `gate7_agent_summary.csv` | GTE/Qwen Agent 120-task comparison |
 | `gate7_agent_results.csv` | 3 routers x 120 = 360 rows |
 | `gate7_agent_traces.json` | real Agent traces |

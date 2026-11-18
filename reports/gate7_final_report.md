@@ -206,6 +206,17 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
 | Qwen Frozen | **0.7950 ± 0.0008** | 0.7752 ± 0.0047 |
 | Qwen Plain42 | **0.7997 ± 0.0002** | 0.7879 ± 0.0088（仅 2 seed 完成） |
 
+历史探索性 test 的 3-seed 均值（不是选 seed 的依据；只做一次复核）：
+
+| Encoder | RejectOnly test F1 | Full test F1 | Reject wins |
+|---|---:|---:|---:|
+| GTE Frozen | **0.8415 ± .0007** | 0.8404 ± .0006 | 3/3 |
+| GTE LoRA42 | **0.8122 ± .0008** | 0.8014 ± .0012 | 3/3 |
+| GTE LoRA43 | **0.8249 ± .0002** | 0.8130 ± .0005 | 3/3 |
+| GTE LoRA44 | **0.8181 ± .0005** | 0.7998 ± .0017 | 3/3 |
+| Qwen Frozen | **0.8125 ± .0005** | 0.8002 ± .0052 | 3/3 |
+| Qwen Plain42 | **0.8088 ± .0009** | 0.7948 ± .0058 | 2/2（Full 仅 2 seed） |
+
 - 每个 seed 的 B4 checkpoint SHA 独立（`gate7_stability_checkpoint_hashes.csv`）；
 - RejectOnly 在 GTE Frozen、GTE-LoRA 42/43/44、Qwen Frozen 上都优于 Full；
 - 训练/初始化/episode 的 seed 确实改变了输出，不是“复制同一模型”；
