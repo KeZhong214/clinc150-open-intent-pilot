@@ -1,0 +1,2 @@
+encoder,method,tau,constraint_met,val_known_acceptance,val_known_correct_routing,val_known_macro_f1,val_top1_closed_set_accuracy,val_oos_recall,val_oos_false_acceptance,val_unknown_auroc,val_open_set_macro_f1,val_open_set_accuracy,val_n_known,val_n_unknown,val_known_rejected,val_unknown_rejected,val_unknown_accepted
+lora,B4-RejectOnly,0.3096582978963852,True,0.9,0.83375,0.8756748883306968,0.8875,0.6083333333333333,0.39166666666666666,0.8772621527777777,0.7666109655470622,0.7269736842105263,800,720,80,438,282

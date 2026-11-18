@@ -1,0 +1,28 @@
+schema_version: gate5-lora-v1
+base_model: Alibaba-NLP/gte-modernbert-base
+base_revision: e7f32e3c00f91d699e8c43b53106206bcc72bb22
+dataset: banking77
+shot: 10
+support_rows: 400
+seed: 42
+max_length: 128
+pooling: cls
+lora:
+  r: 8
+  alpha: 16
+  dropout: 0.05
+  target_modules: [Wqkv, Wo, Wi]
+  trainable_params: 1689600
+  total_params: 150703872
+  trainable_ratio: 0.011211390773025394
+training:
+  epochs: 2
+  batch_triplets: 8
+  learning_rate: 0.0002
+  optimizer: AdamW
+  weight_decay: 0.0001
+  loss: supervised_contrastive_plus_hard_negative_triplet
+  hard_negative_source: support_only
+  margin: 0.10
+selected_adapter: results/gate5_lora_adapter
+four_epoch_attempt: results/gate5_lora_4ep

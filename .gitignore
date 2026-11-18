@@ -13,3 +13,8 @@ data/gate3/raw/massive/*.tar.gz
 data/gate4/*.db
 data/gate4/cases/
 data/gate4/demos/
+data/gate5/sessions/
+data/gate5/benchmark_sessions/
+data/gate5/demo_sessions/
+data/gate5/test_sessions/
+data/gate5_lora_smoke/

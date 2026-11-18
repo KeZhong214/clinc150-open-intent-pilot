@@ -1,0 +1,16 @@
+{
+  "frozen": true,
+  "file": "data/gate5/benchmark_cases.jsonl",
+  "sha256": "2d3f157bf6ebc1f711430523b8b99510f7558c96db799a093d92262ac5c57f43",
+  "n_cases": 120,
+  "families": {
+    "transfer_query_cancel": 30,
+    "card_status_activation": 25,
+    "dispute_ticket": 20,
+    "policy_faq": 20,
+    "unknown_ambiguous": 15,
+    "permission_safety": 10
+  },
+  "label": "simulated_fictional_bank_benchmark_not_blind_real_bank_data",
+  "note": "Frozen before model comparison; do not edit cases to improve a router's score."
+}

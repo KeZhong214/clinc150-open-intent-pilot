@@ -1,0 +1,4 @@
+router,n_cases,task_success_rate,tool_accuracy,safe_action_rate,routing_accuracy,oos_escalation_rate,clarification_success,p50_latency_seconds,p95_latency_seconds,mean_turns
+Frozen-B3H,120,0.625,0.725,1.0,0.641667,1.0,1.0,0.05035,0.094145,1.308333
+Frozen-B4Full,120,0.583333,0.7,1.0,0.641667,1.0,0.0,0.05585,0.118425,1.308333
+LoRA-B4Full,120,0.583333,0.725,1.0,0.641667,1.0,0.0,0.09735,0.213325,1.308333

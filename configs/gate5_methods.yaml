@@ -1,0 +1,23 @@
+schema_version: gate5-methods-v1
+dataset: banking77
+shot: 10
+seed: 42
+encoders:
+  frozen: Gate3 GTE cache (CLS, L2, 768d)
+  lora: Gate5 LoRA-GTE cache (CLS, L2, 768d)
+methods:
+  B0: single prototype
+  B3-H: 0.5 prototype + 0.5 top-2 neighbor
+  B4-Fusion: learned gate only
+  B4-RejectOnly: fixed gate 0.5 + trained reject head
+  B4-Full: learned gate + trained reject head
+validation:
+  calibration_known: 800
+  dev_unknown: 720
+  target_known_acceptance: 0.90
+  objective: max open-set macro-F1 subject to known acceptance >= 0.90
+test:
+  known: 1600
+  unknown: 760
+  label: historical_exploratory
+  note: BANKING77 test was already seen in Gate3/4; one Gate5 evaluation only.

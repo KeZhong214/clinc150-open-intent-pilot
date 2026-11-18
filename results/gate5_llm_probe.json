@@ -1,0 +1,10 @@
+{
+  "available": false,
+  "base_url_set": false,
+  "api_key_set": false,
+  "model_set": false,
+  "model": null,
+  "mode": "offline_or_blocked",
+  "note": "No OPENAI_BASE_URL / OPENAI_API_KEY / OPENAI_MODEL in this environment. The offline template Agent remains fully runnable; the 12-call API report is blocked.",
+  "api_mode_result": "NOT RUN_API_BLOCKED"
+}

@@ -1,10 +1,11 @@
 # 少样本开放意图识别：从跨场景矩阵到可训练路由器与客服 Agent
 
-课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测、B4 可训练融合与真实工具 Agent**
+课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测、LoRA/B4 归因与真实工具 Agent**
 
-当前状态：**Gate 0–4 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
+当前状态：**Gate 0–5 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
 5/10-shot、B0/B3-P/B3-H 的 72 格矩阵；Gate 4 完成 BANKING77 GTE 10-shot
-的 B4-AR 训练、B3-H/B4 对照、SQLite 多轮客服 Agent 与 Streamlit Demo。
+的 B4-AR 与 SQLite Agent；Gate 5 完成真实 LoRA-GTE、RejectOnly 归因、
+30 条虚构银行政策 RAG、120 条业务 benchmark。
 
 Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 
@@ -23,10 +24,23 @@ Gate 4 的核心结果（BANKING77 GTE 10-shot；test 已看过，探索性）�
 | B4-Fusion | 0.740 | 0.820 | 0.555 |
 | **B4-Full** | **0.781** | **0.837** | **0.658** |
 
-- B4-Full 比 B3-H：validation F1 +1.39 pp；test F1 +0.62 pp、OOS +2.11 pp；
-- **B4-Fusion 单独退化**：收益主要来自拒识头，不是可训练门控；
-- 门控随输入难度变化：最难 margin 组 Top-1 gate 0.560，最易组 0.919；
-- Agent：16/16 确定性工具/状态测试、6/6 真实路由演示；SQLite 真实状态变化。
+Gate 5 的核心结果（BANKING77 GTE 10-shot；历史探索性 test）：
+
+| Method | Validation F1 | Test F1 | Test OOS recall |
+|---|---:|---:|---:|
+| Frozen B3-H | 0.767 | 0.831 | 0.637 |
+| **Frozen RejectOnly** | **0.790** | **0.843** | 0.643 |
+| Frozen B4-Full | 0.781 | 0.837 | 0.658 |
+| LoRA B3-H | 0.760 | 0.803 | 0.584 |
+| LoRA RejectOnly | 0.767 | 0.814 | 0.574 |
+| LoRA B4-Full | 0.753 | 0.802 | 0.500 |
+
+- **RejectOnly 是唯一稳定正贡献的新模块**；LoRA 没有改善 B3-H/业务路由；
+- LoRA 真实训练：1.69M 可训练参数（1.12%），2 epoch，22.19 s，adapter 6.78 MB；
+- Agent：30 条虚构政策、RAG 引用、自然语言澄清、独立 session SQLite；
+- 120 条真实路由 benchmark：Frozen-B3H **62.5% TSR**，Frozen-B4Full 58.3%，
+  LoRA-B4Full 58.3%；三者安全操作率均 100%；
+- 12 条 LLM API 模式因无凭据 **NOT RUN_API_BLOCKED**，未伪造调用。
 
 B3-H 的场景差异：
 
@@ -51,14 +65,15 @@ Gate 1/2 历史结果保持冻结：
 [Gate 1 Baseline](reports/gate1_baseline.md) ·
 [Gate 2 Hard-OOS](reports/gate2_method.md) ·
 [Gate 3 多数据集](reports/gate3_final_report.md) ·
-[Gate 4 B4+Agent](reports/gate4_final_report.md)  
-结果索引：[results/gate3_matrix.csv](results/gate3_matrix.csv) ·
-[results/gate4_b4_test_metrics.csv](results/gate4_b4_test_metrics.csv)  
-图表：[figures/gate4_b4_comparison.png](figures/gate4_b4_comparison.png) ·
-[figures/gate4_b4_gate_scatter.png](figures/gate4_b4_gate_scatter.png)  
-Demo：[app_gate4.py](app_gate4.py) ·
-[真实 B3-H 查卡截图](figures/gate4_agent_card.png) ·
-[真实 B4 取消转账截图](figures/gate4_agent_b4_cancel.png)
+[Gate 4 B4+Agent](reports/gate4_final_report.md) ·
+[Gate 5 LoRA+Benchmark](reports/gate5_final_report.md)  
+结果索引：[results/gate5_method_matrix_historical_test.csv](results/gate5_method_matrix_historical_test.csv) ·
+[results/gate5_benchmark_summary.csv](results/gate5_benchmark_summary.csv)  
+图表：[figures/gate5_method_matrix.png](figures/gate5_method_matrix.png) ·
+[figures/gate5_benchmark_overall.png](figures/gate5_benchmark_overall.png)  
+Demo：[app_gate5.py](app_gate5.py) ·
+[真实 B4 查卡截图](figures/gate5_agent_card_b4.png) ·
+[真实 RAG 截图](figures/gate5_agent_rag.png)
 
 ---
 
@@ -104,18 +119,29 @@ Demo：[app_gate4.py](app_gate4.py) ·
 - 建立 SQLite 虚构银行库 + 7 个工具 + 多轮状态机；敏感动作二次确认、所有权
   校验、幂等、审计；16/16 确定性工具测试、6/6 真实路由演示。
 - 完成 B4 训练/门控/对照图、Agent 指标图、真实 Streamlit 截图。
-- 39 个协议、配置、可复现性、Gate 1/2/3/4 逻辑测试通过。
+- Gate 5 真实训练 GTE-ModernBERT LoRA（Wqkv/Wo/Wi，1.69M 可训练参数，
+  2 epoch，22.19 s，adapter 6.78 MB），support-only 重编码 4,280 条。
+- 完成 Frozen/LoRA × B3-H/RejectOnly/B4-Full 的 9 行 validation 与一次性
+  历史探索性 test；Frozen-RejectOnly 最佳（validation F1 0.790，test 0.843）。
+- 30 条虚构银行政策 + TF-IDF RAG 引用 + 自然语言澄清 + 每会话独立 SQLite；
+  10 条真实模型演示；LLM API 接口已实现但因无凭据标记
+  `NOT RUN_API_BLOCKED`。
+- 建立 120 条冻结 Agent benchmark，用 3 个真实路由完成 360 次评测；
+  Frozen-B3H TSR 62.5%，B4/LoRA 均为 58.3%，安全操作率 100%。
+- 48 个协议、配置、可复现性、Gate 1/2/3/4/5 逻辑测试通过。
 
 详细报告：[Gate 0 环境与数据](reports/gate0_environment.md)  
 Gate 1 报告：[B0/B2 Baseline 与动态拒识](reports/gate1_baseline.md)  
 Gate 2 报告：[Hard-OOS 与 B2-v2 类别边界校准](reports/gate2_method.md)  
 Gate 3 报告：[多数据集、跨模型与 B3 实验](reports/gate3_final_report.md)  
 Gate 4 报告：[B4 可训练路由器与客服 Agent](reports/gate4_final_report.md)  
+Gate 5 报告：[LoRA、RejectOnly、RAG Agent 与 120 任务 Benchmark](reports/gate5_final_report.md)  
 修改记录：[Gate 0](reports/gate0_vibe_coding.md)、
 [Gate 1](reports/gate1_vibe_coding.md)、
 [Gate 2](reports/gate2_vibe_coding.md)、
 [Gate 3](reports/gate3_vibe_coding.md)、
-[Gate 4](reports/gate4_vibe_coding.md)
+[Gate 4](reports/gate4_vibe_coding.md)、
+[Gate 5](reports/gate5_vibe_coding.md)
 
 ---
 
@@ -130,11 +156,16 @@ D:\code\intent-open-set\
 ├── pip_freeze.txt
 ├── app.py                           # Gate 3 classifier demo
 ├── app_gate4.py                     # Gate 4 agent demo
+├── app_gate5.py                     # Gate 5 RAG agent demo
 ├── configs\
 │   ├── pilot.yaml
 │   ├── gate2.yaml
 │   ├── gate3.yaml
-│   └── gate4.yaml
+│   ├── gate4.yaml
+│   ├── gate5_lora.yaml
+│   ├── gate5_methods.yaml
+│   ├── gate5_agent.yaml
+│   └── gate5_benchmark.yaml
 ├── data\
 │   ├── raw\
 │   │   ├── data_full.json
@@ -146,34 +177,40 @@ D:\code\intent-open-set\
 │   ├── gate3\
 │   │   └── raw\                     # BANKING77 parquet + MASSIVE en-US JSONL
 │   ├── gate4\                       # SQLite demo DB (git-ignored)
+│   ├── gate5\
+│   │   ├── benchmark_cases.jsonl    # frozen 120 tasks
+│   │   └── sessions\                # per-session SQLite (git-ignored)
 │   ├── manifest\
 │   │   ├── selected_intents.json
 │   │   ├── gate2_*                  # hard-OOS split/manifests
 │   │   ├── gate3_*                  # 3 datasets, classes, support/cal/test
 │   │   └── ...
 │   ├── model_cache\                 # BGE/Qwen/GTE/E5 weights (git-ignored)
-│   └── cache_embeddings\            # Gate 1/2/3 vectors (git-ignored)
+│   └── cache_embeddings\            # Gate 1/2/3/5 vectors (git-ignored)
+├── knowledge_base\
+│   └── fictional_bank\
+│       └── policies.jsonl           # 30 citable fictional policy docs
 ├── src\
 │   ├── download_data.py
 │   ├── prepare_data.py
 │   ├── encode_embeddings.py
 │   ├── run_baseline.py
 │   ├── gate3\
-│   │   ├── prepare.py
-│   │   ├── encode.py
-│   │   ├── methods.py
-│   │   ├── run_matrix.py
-│   │   ├── freeze.py
 │   │   └── ...
 │   ├── gate4\
-│   │   ├── b4_core.py
-│   │   ├── train_b4.py
-│   │   ├── freeze_b4.py
-│   │   ├── run_b4_test.py
-│   │   ├── router.py
-│   │   ├── db.py
-│   │   ├── agent.py
-│   │   ├── run_agent_cases.py
+│   │   └── ...
+│   ├── gate5\
+│   │   ├── train_lora_gte.py
+│   │   ├── encode_lora.py
+│   │   ├── evaluate_lora.py
+│   │   ├── train_reject_only.py
+│   │   ├── train_b4_lora.py
+│   │   ├── run_method_matrix.py
+│   │   ├── kb.py
+│   │   ├── llm_client.py
+│   │   ├── agent_v2.py
+│   │   ├── router_lora.py
+│   │   ├── benchmark.py
 │   │   └── make_figures.py
 │   └── ...                          # Gate 1/2 scripts retained
 ├── tests\
@@ -181,22 +218,21 @@ D:\code\intent-open-set\
 │   ├── test_gate2_protocol.py
 │   ├── test_gate3_protocol.py
 │   ├── test_gate4.py
+│   ├── test_gate5.py
 │   └── ...
 ├── logs\
 ├── reports\
 │   ├── gate0_*.md
 │   ├── gate1_*.md
 │   ├── gate2_*.md
-│   ├── gate3_final_report.md
-│   ├── gate3_ppt_outline.md
-│   ├── gate3_speech.md
-│   ├── gate3_vibe_coding.md
-│   ├── gate4_final_report.md
-│   ├── gate4_ppt_outline.md
-│   ├── gate4_speech.md
-│   └── gate4_vibe_coding.md
-├── results\                         # Gate 1/2/3/4 metrics, predictions, thresholds
-└── figures\                         # Gate 1/2/3/4 PNGs, real screenshots
+│   ├── gate3_*.md
+│   ├── gate4_*.md
+│   ├── gate5_final_report.md
+│   ├── gate5_ppt_outline.md
+│   ├── gate5_speech.md
+│   └── gate5_vibe_coding.md
+├── results\                         # Gate 1/2/3/4/5 metrics, predictions, checkpoints
+└── figures\                         # Gate 1/2/3/4/5 PNGs, real screenshots
 ```
 
 ---
@@ -286,7 +322,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 39 tests in ...s
+Ran 48 tests in ...s
 OK
 ```
 
@@ -314,8 +350,8 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 39 个测试。请反馈
-`logs/gate4_all_tests.log`；如需环境信息，再反馈
+预期最后一行是 `OK`，共 48 个测试。请反馈
+`logs/gate5_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
 ### 4.6 Gate 1 复现命令（实际已运行）
@@ -432,6 +468,44 @@ Gate 4 的 test 在 `results/gate4_b4_freeze.json` 后只跑一次；BANKING77 t
 在 Gate 3 已看过，因此报告中明确标注“探索性、非新盲测”。Agent 的 16 条
 确定性测试使用 StubRouter；6 条演示使用真实 GTE/B3-H/B4，两组指标分开报告。
 
+### 4.10 Gate 5 复现命令（实际已运行）
+
+```powershell
+$env:HF_HOME = "D:\code\intent-open-set\data\model_cache"
+
+# A. LoRA-GTE
+.\.venv\Scripts\python.exe -m src.gate5.train_lora_gte --epochs 2
+.\.venv\Scripts\python.exe -m src.gate5.encode_lora
+.\.venv\Scripts\python.exe -m src.gate5.evaluate_lora
+
+# B. RejectOnly + LoRA B4 + 9-row matrix
+.\.venv\Scripts\python.exe -m src.gate5.train_reject_only --encoder frozen
+.\.venv\Scripts\python.exe -m src.gate5.train_reject_only --encoder lora
+.\.venv\Scripts\python.exe -m src.gate5.train_b4_lora
+.\.venv\Scripts\python.exe -m src.gate5.run_method_matrix --phase validation
+.\.venv\Scripts\python.exe -m src.gate5.run_method_matrix --phase test
+
+# C. 30 KB docs / demos / app
+.\.venv\Scripts\python.exe -m src.gate5.make_kb
+.\.venv\Scripts\python.exe -m src.gate5.run_demos_gate5
+.\.venv\Scripts\python.exe -m streamlit run app_gate5.py
+
+# D. 120 benchmark / API status
+.\.venv\Scripts\python.exe -m src.gate5.make_benchmark
+.\.venv\Scripts\python.exe -c "from src.gate5.benchmark import load_cases, freeze; freeze(load_cases())"
+.\.venv\Scripts\python.exe -m src.gate5.benchmark
+.\.venv\Scripts\python.exe -m src.gate5.run_llm_api_cases
+
+# Figures / tests
+.\.venv\Scripts\python.exe -m src.gate5.make_figures
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+Gate 5 的 BANKING77 test 是 `historical_exploratory`，只跑一次；120 条
+benchmark 在比较前冻结 SHA。LoRA 4-epoch 第一次尝试保留在
+`results/gate5_lora_4ep/`，最终 adapter 是 2 epoch。LLM API 因无凭据标记
+`NOT RUN_API_BLOCKED`。
+
 ---
 
 ## 5. 数据协议（冻结）
@@ -490,6 +564,20 @@ Gate 2 不覆盖 Gate 1，也不混用原始 `oos_test`：
 - Agent 使用 `data/gate4/agent.db` 虚构 SQLite，不连接真实银行；
 - 16 条 StubRouter 测试只验证工具/状态；6 条真实路由演示单独报告。
 
+### Gate 5 的 LoRA / B4 / Agent / Benchmark 协议
+
+- LoRA 与 B4 只使用 400 条 10-shot support；
+- 4-epoch 第一次尝试仅作为 validation 失败记录，最终 2-epoch adapter 由
+  validation 选择；test 不参与 epoch 选择；
+- B4-RejectOnly 的 gate 参数 `requires_grad=False`，固定 `g=0.5`；
+- 9 行矩阵在 `results/gate5_method_freeze.json` 后只做一次历史探索性 test；
+- 30 条政策文档明确标记为虚构演示，不访问外部网页；
+- 120 条 benchmark 在评测前写入
+  `results/gate5_benchmark_freeze.json`，文件 SHA 不被修改；
+- 三个真实路由（Frozen-B3H/Frozen-B4Full/LoRA-B4Full）使用相同输入和初始
+  DB；StubRouter 不计入；
+- LLM API 无凭据时为 `NOT RUN_API_BLOCKED`，离线模板模式不冒充 API。
+
 ### 已知的官方数据重复
 
 官方数据内部没有分区内重复，但规范化文本有 **5 处跨分区碰撞**：
@@ -518,9 +606,9 @@ ID 和规范化文本交集均为 0；但 `user_name` 的一个 test 文本在 t
 
 ## 7. 当前边界与后续扩展
 
-已完成：Gate 0–4；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
-test 矩阵；SetFit/Adapter；B4-AR 训练与探索性 test；SQLite 多轮 Agent；
-16 条工具/状态测试与 6 条真实路由演示；真实 Streamlit 截图。
+已完成：Gate 0–5；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
+test 矩阵；B4-AR；LoRA-GTE；RejectOnly/Full 归因；RAG Agent；
+120 条真实路由 benchmark；真实截图。
 
 Gate 3 的主要判断：
 
@@ -539,13 +627,25 @@ Gate 4 的主要判断：
   6/6 真实路由演示；
 - Gate 4 test 是探索性对照，不是新盲测。
 
+Gate 5 的主要判断：
+
+- LoRA 真实训练成功（1.69M 参数、22.19 s、adapter 6.78 MB），但 LoRA-B3-H
+  validation 从 0.767 降到 0.760，test 0.803，低于 frozen 0.831；
+- **Frozen-B4-RejectOnly 是唯一稳定正贡献**：validation 0.790、test 0.843；
+- B4-Full 的门控没有超过 RejectOnly；LoRA 与拒识头不互补；
+- 120 条 benchmark：Frozen-B3H TSR 62.5%，B4/LoRA 58.3%；安全率 100%；
+  主要失败是 routing，不是工具越权；
+- 30 条政策 RAG + 10 条真实模型 demo 可用；API 12 条因无凭据
+  `NOT RUN_API_BLOCKED`。
+
 尚未做：
 
 - 新的独立 unknown-class test / 多 seed 方差；
-- B4 显著性检验与拒识头校准曲线；
+- LoRA 多 seed 与显著性检验；
 - 更多 BANKING77 intent 的 Agent 槽位；
 - 实际 PPTX 排版、演讲录像；
+- 12 条真实 LLM API 调用（无凭据）；
 - 近域/远域未知的可靠统一定义（NOT RUN）。
 
-不会在当前 BANKING77 test 上继续调 B4 参数；若继续，需要新的独立
+不会在当前 BANKING77 test 上继续调 LoRA/B4 参数；若继续，需要新的独立
 unknown classes 或明确的新协议。

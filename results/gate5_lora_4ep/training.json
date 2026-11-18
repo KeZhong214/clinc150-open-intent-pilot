@@ -1,0 +1,52 @@
+{
+  "base_model": "Alibaba-NLP/gte-modernbert-base",
+  "base_revision": "e7f32e3c00f91d699e8c43b53106206bcc72bb22",
+  "dataset": "banking77",
+  "shot": 10,
+  "support_rows": 400,
+  "classes": 40,
+  "seed": 42,
+  "target_modules": [
+    "Wqkv",
+    "Wo",
+    "Wi"
+  ],
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.05,
+  "epochs": 4,
+  "batch_triplets": 8,
+  "lr": 0.0002,
+  "margin": 0.1,
+  "steps": 200,
+  "train_seconds": 39.651,
+  "cuda_peak_mib": 1368.1,
+  "params": {
+    "total": 150703872,
+    "trainable": 1689600,
+    "trainable_ratio": 0.011211390773025394,
+    "adapter_bytes": null
+  },
+  "adapter_path": "results\\gate5_lora_adapter",
+  "adapter_sha256": "8895231d5040988d7177865dc47abc739a3b175b48a5b08b5737fb2f9b0f40e3",
+  "adapter_bytes": 6778776,
+  "frozen_alignment": {
+    "max_abs": 0.0002091526985168457,
+    "mean_abs": 4.238168457959546e-06,
+    "min_cosine": 0.9999998807907104,
+    "mean_cosine": 1.0,
+    "note": "Direct AutoModel CLS pooling compared with Gate-3 SentenceTransformer cache."
+  },
+  "vector_check": {
+    "n_probe": 8,
+    "dim": 768,
+    "lora_norm_max_abs_error": 1.1920928955078125e-07,
+    "frozen_vs_lora_max_abs": 0.6873396039009094,
+    "frozen_vs_lora_mean_abs": 0.02838917076587677,
+    "frozen_vs_lora_mean_cosine": 0.3198031187057495,
+    "reload_max_abs": 0.0
+  },
+  "hard_negatives": "results/gate5_lora_hard_negatives.csv",
+  "history": "results/gate5_lora_training_history.csv",
+  "test_evaluated": false
+}

@@ -1,0 +1,27 @@
+schema_version: gate5-agent-v1
+customer_id: CUST-1001
+fictional_data: true
+session_db_dir: data/gate5/sessions
+knowledge_base: knowledge_base/fictional_bank/policies.jsonl
+kb_documents: 30
+retrieval: tfidf_word_12gram_cosine
+citations: true
+tools:
+  - get_card_delivery_status
+  - get_transfer_status
+  - cancel_transfer
+  - activate_card
+  - create_dispute
+  - create_ticket
+  - handoff_to_human
+sensitive_actions:
+  - cancel_transfer
+  - activate_card
+confirmation: explicit_yes_required
+ownership_check: tool_layer
+session_isolation: one_sqlite_per_session
+llm:
+  provider: openai_compatible
+  env: [OPENAI_BASE_URL, OPENAI_API_KEY, OPENAI_MODEL]
+  status: offline_or_blocked
+  note: No credentials present; API mode is explicitly blocked.

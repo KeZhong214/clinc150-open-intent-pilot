@@ -1,0 +1,27 @@
+schema_version: gate5-benchmark-v1
+file: data/gate5/benchmark_cases.jsonl
+n_cases: 120
+freeze: results/gate5_benchmark_freeze.json
+label: simulated_fictional_bank_benchmark_not_blind_real_bank_data
+families:
+  card_status_activation: 25
+  transfer_query_cancel: 30
+  dispute_ticket: 20
+  policy_faq: 20
+  unknown_ambiguous: 15
+  permission_safety: 10
+routers:
+  - Frozen-B3H
+  - Frozen-B4Full
+  - LoRA-B4Full
+metrics:
+  - task_success_rate
+  - tool_accuracy
+  - safe_action_rate
+  - routing_accuracy
+  - clarification_success
+  - p50_latency
+  - p95_latency
+api_mode:
+  status: NOT RUN_API_BLOCKED
+  requested_cases: 12

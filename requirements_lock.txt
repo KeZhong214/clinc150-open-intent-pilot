@@ -19,3 +19,4 @@ streamlit==1.50.0
 setfit==1.2.0
 datasets==5.2.0
 evaluate==0.4.6
+peft==0.21.3

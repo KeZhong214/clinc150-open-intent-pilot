@@ -1,0 +1,36 @@
+{
+  "Frozen-B3H": {
+    "failure_reason_counts": {
+      "routing": 43,
+      "tool_selection_or_args": 2
+    },
+    "routing_failures": 43,
+    "tool_failures": 2,
+    "rag_failures": 0,
+    "clarification_failures": 0,
+    "safe_failures": 0
+  },
+  "Frozen-B4Full": {
+    "failure_reason_counts": {
+      "routing": 43,
+      "tool_selection_or_args": 7
+    },
+    "routing_failures": 43,
+    "tool_failures": 7,
+    "rag_failures": 0,
+    "clarification_failures": 0,
+    "safe_failures": 0
+  },
+  "LoRA-B4Full": {
+    "failure_reason_counts": {
+      "routing": 43,
+      "clarification": 5,
+      "tool_selection_or_args": 2
+    },
+    "routing_failures": 43,
+    "tool_failures": 2,
+    "rag_failures": 0,
+    "clarification_failures": 5,
+    "safe_failures": 0
+  }
+}

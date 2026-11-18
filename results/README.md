@@ -140,3 +140,38 @@ B4 test is exploratory, not a new blind test.
 
 `data/gate4/agent.db` is generated at runtime and is git-ignored. See
 `../reports/gate4_final_report.md`.
+
+---
+
+# Gate 5 LoRA / RejectOnly / Agent benchmark files
+
+Gate 5 starts from `gate4-train-agent@81e81a9`. BANKING77 test is historical
+exploratory, not a new blind test.
+
+| File | Content |
+|---|---|
+| `gate5_lora_training.json` | 2-epoch selected LoRA, params, adapter hash, vector checks |
+| `gate5_lora_training_history.csv` | real epoch losses |
+| `gate5_lora_hard_negatives.csv` | support-only hard-negative log |
+| `gate5_lora_adapter/` | 6.78 MB adapter_config + adapter_model |
+| `gate5_lora_encoding.json` | 4,280-row re-encode metadata and vector shift |
+| `gate5_lora_validation.csv` | LoRA B0/B3-H validation |
+| `gate5_lora_4ep/` | 4-epoch failed attempt, metrics only, not selected |
+| `gate5_reject_only_{frozen,lora}.pt` | fixed-gate reject-head checkpoints |
+| `gate5_reject_only_{frozen,lora}_validation.csv` | RejectOnly validation |
+| `gate5_b4_full_lora.pt` | LoRA B4-Full checkpoint |
+| `gate5_method_matrix_val.csv` | 9-row validation attribution matrix |
+| `gate5_method_matrix_historical_test.csv` | one-shot historical exploratory test |
+| `gate5_method_freeze.json` | pre-test hashes; `test_evaluated=true` |
+| `gate5_agent_cases.csv` | Gate4 16 deterministic state/tool cases |
+| `gate5_agent_demos.json` | 10 real-router demo traces |
+| `data/gate5/benchmark_cases.jsonl` | 120 frozen natural-language tasks |
+| `gate5_benchmark_freeze.json` | case SHA + family counts |
+| `gate5_benchmark_results.csv` | 360 real-router runs |
+| `gate5_benchmark_summary.csv` | TSR/tool/safe/routing/latency |
+| `gate5_benchmark_by_family.csv` | family-level TSR |
+| `gate5_benchmark_failure_summary.json` | routing/tool/rag/clarification failure counts |
+| `gate5_llm_probe.json` / `gate5_llm_api_results.json` | API blocked status |
+
+The 120-case benchmark is simulated fictional-bank data; it is not a real bank
+test set. See `../reports/gate5_final_report.md`.

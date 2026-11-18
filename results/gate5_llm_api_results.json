@@ -1,0 +1,31 @@
+{
+  "status": "NOT RUN_API_BLOCKED",
+  "available": false,
+  "n_requested": 12,
+  "n_completed": 0,
+  "cases": [
+    "B001",
+    "B003",
+    "B036",
+    "B045",
+    "B076",
+    "B078",
+    "B083",
+    "B111",
+    "B119",
+    "B106",
+    "B026",
+    "B056"
+  ],
+  "reason": "Missing one or more of OPENAI_BASE_URL / OPENAI_API_KEY / OPENAI_MODEL.",
+  "note": "Offline template Agent and the 120-case real-router benchmark remain valid; no API output is fabricated.",
+  "client": {
+    "available": false,
+    "base_url_set": false,
+    "api_key_set": false,
+    "model_set": false,
+    "model": null,
+    "mode": "offline_or_blocked",
+    "note": "Keys are read from environment variables only and never logged."
+  }
+}

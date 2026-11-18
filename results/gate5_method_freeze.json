@@ -1,0 +1,77 @@
+{
+  "frozen": true,
+  "test_evaluated": true,
+  "label": "historical_exploratory",
+  "note": "BANKING77 test was already seen in Gate3/4. Gate5 test is a one-shot historical exploratory comparison.",
+  "files": {
+    "results\\gate5_lora_training.json": {
+      "sha256": "60a705ab863138d8d4337fcb702e006eabb015b982aa9f3fdb701c28f23165bc",
+      "bytes": 1525
+    },
+    "results\\gate5_lora_adapter\\adapter_model.safetensors": {
+      "sha256": "f15f68beaeb9cf3db431ba07e801c2f17442353930e733e9e2917c93c44ed113",
+      "bytes": 6778776
+    },
+    "results\\gate5_lora_validation.csv": {
+      "sha256": "770eaba2661005fcad738b3dc3ad958162243dcf0aad3c25159db56d8e24a72f",
+      "bytes": 697
+    },
+    "results\\gate5_reject_only_frozen.pt": {
+      "sha256": "0e920d0fed6b13d30dd3e84c53cb9e49747760823b9f20c61df2cbdd7d89cf0f",
+      "bytes": 6459
+    },
+    "results\\gate5_reject_only_lora.pt": {
+      "sha256": "f78cba43cac46426dd2714a806d0d55a9da6a45f2a9e1664f85b4f1542f8ad4d",
+      "bytes": 6431
+    },
+    "results\\gate5_reject_only_frozen_validation.csv": {
+      "sha256": "0b088c9822a88a6a7de324fd881776170e2a59ef5ef098db9b8b4a6981a1aaaf",
+      "bytes": 518
+    },
+    "results\\gate5_reject_only_lora_validation.csv": {
+      "sha256": "040755e7c78be5e61ddfce3893e9f9b45dd65e2798046e4f00680977aa8abe51",
+      "bytes": 516
+    },
+    "results\\gate5_reject_only_frozen_threshold.json": {
+      "sha256": "f9b88a9f62d18225e91c423790f4b3a9adc2b08bceab55c0185870ae83cd492b",
+      "bytes": 393
+    },
+    "results\\gate5_reject_only_lora_threshold.json": {
+      "sha256": "9f2a2b387fb99b3bfa3d4b2947411a5219e213e1ca9175d1d4a5a4e6ed742f73",
+      "bytes": 393
+    },
+    "results\\gate5_b4_full_lora.pt": {
+      "sha256": "5d427ee138b7d1cf1e6da5cdf9760140d7c375f624a7c43c20ee1534df0cf132",
+      "bytes": 6375
+    },
+    "results\\gate5_b4_lora_validation.csv": {
+      "sha256": "5f83ebc0937bc9686d0cf9792327b0569a7faaf90e664f9a6aaaeef63b88cce3",
+      "bytes": 497
+    },
+    "results\\gate5_b4_lora_threshold.json": {
+      "sha256": "958d759f8c2718eed6d609b6b00d30fb0f2a68708447de51264b96d0f9ba6599",
+      "bytes": 470
+    },
+    "results\\gate5_lora_adapter\\adapter_config.json": {
+      "sha256": "b87ef0ee54c0f7d0a7318a386ad20cc39c48fa53d6bd22747230ffa13ea1eb57",
+      "bytes": 1168
+    },
+    "results\\gate4_b4_full.pt": {
+      "sha256": "4ef40c88d7998b3b15ea1bcd57cf0d57feeb5e2a042710e0207ec93ee656fbff",
+      "bytes": 6305
+    },
+    "results\\gate4_b4_thresholds.json": {
+      "sha256": "6224e41a847d977848bb59069317bcadacde33f01d0790cb890717ca0c627bef",
+      "bytes": 1181
+    },
+    "results\\gate3_validation_metrics.csv": {
+      "sha256": "34754d2bc2d8b139c5b5da42fa2a0c5cc814d62b3d33d4345e30eb84ac407a24",
+      "bytes": 14098
+    },
+    "results\\gate3_test_metrics.csv": {
+      "sha256": "6c0e38473fe68ca1638f180effa35c2660664f7b9cbc427afd284647cc546168",
+      "bytes": 14875
+    }
+  },
+  "test_file": "results/gate5_method_matrix_historical_test.csv"
+}
