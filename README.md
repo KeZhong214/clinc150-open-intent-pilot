@@ -2,11 +2,11 @@
 
 课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测、LoRA/B4 归因与真实工具 Agent**
 
-当前状态：**Gate 0–6 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
+当前状态：**Gate 0–7 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
 5/10-shot、B0/B3-P/B3-H 的 72 格矩阵；Gate 4 完成 BANKING77 GTE 10-shot
 的 B4-AR 与 SQLite Agent；Gate 5 完成真实 LoRA-GTE、RejectOnly 归因、
 30 条虚构银行政策 RAG、120 条业务 benchmark；Gate 6 完成 Qwen3-Embedding
-0.6B 的冻结对齐、Plain/Anchor LoRA、Qwen 联合矩阵与 Qwen Agent 回归。
+0.6B LoRA；Gate 7 完成双层开发集诊断、3-seed 复验和核心 B4 稳定性实验。
 
 Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 
@@ -59,6 +59,24 @@ Gate 6 的核心结果（Qwen3-Embedding 0.6B；历史探索性 test）：
 - Qwen Plain-RejectOnly Agent TSR **65.0%**，四版本最高，安全率 100%；
 - 分类 F1 仍是 GTE Frozen-RejectOnly **0.8435** 最高。
 
+Gate 7 的核心结果（双层 dev + 3-seed；历史探索性 test）：
+
+| Qwen Plain seed | Val B3-H | Test B3-H | Test RejectOnly |
+|---|---:|---:|---:|
+| 42 | 0.7984 | 0.7969 | 0.8080 |
+| 43 | 0.8051 | 0.8159 | 0.8361 |
+| 44 | 0.8050 | 0.8077 | 0.8318 |
+| mean ± std | 0.8028 ± .0032 | 0.8068 ± .0095 | **0.8253 ± .0151** |
+
+- Gate6 的 seed42 test 负结果是真实结果，但不是 3-seed 普遍结论；
+- B4-RejectOnly 相对 frozen test +1.25 pp，2/3 seed 胜出；
+- dev_threshold 只选 tau，dev_select 只选配方；
+- 6×6 microbatch 和 203/400 负 margin hard negative 已诊断；
+- P1/P2 没有超过 P0；P3 停在 40/50 step（INCOMPLETE）；
+- B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 B4-Full；
+- Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
+- 64 个测试通过。
+
 B3-H 的场景差异：
 
 - BANKING77：相对 B0 平均 OOS recall +5.21 pp，open-set F1 +0.99 pp；
@@ -84,20 +102,22 @@ Gate 1/2 历史结果保持冻结：
 [Gate 3 多数据集](reports/gate3_final_report.md) ·
 [Gate 4 B4+Agent](reports/gate4_final_report.md) ·
 [Gate 5 LoRA+Benchmark](reports/gate5_final_report.md) ·
-[Gate 6 Qwen+Agent](reports/gate6_final_report.md)  
-结果索引：[results/gate5_method_matrix_historical_test.csv](results/gate5_method_matrix_historical_test.csv) ·
-[results/gate5_benchmark_summary.csv](results/gate5_benchmark_summary.csv) ·
-[results/gate6_qwen_method_matrix_historical_test.csv](results/gate6_qwen_method_matrix_historical_test.csv) ·
-[results/gate6_qwen_benchmark_summary.csv](results/gate6_qwen_benchmark_summary.csv)  
-图表：[figures/gate5_method_matrix.png](figures/gate5_method_matrix.png) ·
-[figures/gate5_benchmark_overall.png](figures/gate5_benchmark_overall.png) ·
-[figures/gate6_qwen_matrix.png](figures/gate6_qwen_matrix.png) ·
-[figures/gate6_qwen_benchmark.png](figures/gate6_qwen_benchmark.png)  
+[Gate 6 Qwen+Agent](reports/gate6_final_report.md) ·
+[Gate 7 多种子诊断](reports/gate7_final_report.md)  
+结果索引：[results/gate6_qwen_method_matrix_historical_test.csv](results/gate6_qwen_method_matrix_historical_test.csv) ·
+[results/gate6_qwen_benchmark_summary.csv](results/gate6_qwen_benchmark_summary.csv) ·
+[results/gate7_final_historical_test.csv](results/gate7_final_historical_test.csv) ·
+[results/gate7_final_summary.csv](results/gate7_final_summary.csv)  
+图表：[figures/gate6_qwen_matrix.png](figures/gate6_qwen_matrix.png) ·
+[figures/gate6_qwen_benchmark.png](figures/gate6_qwen_benchmark.png) ·
+[figures/gate7_final_test.png](figures/gate7_final_test.png) ·
+[figures/gate7_stability.png](figures/gate7_stability.png)  
 Demo：[app_gate5.py](app_gate5.py) ·
 [app_gate6.py](app_gate6.py) ·
 [Gate5 B4 查卡截图](figures/gate5_agent_card_b4.png) ·
 [Gate5 RAG 截图](figures/gate5_agent_rag.png) ·
 [Qwen RejectOnly 取消转账截图](figures/gate6_qwen_agent_cancel.png) ·
+[Gate7 澄清截图](figures/gate7_agent_clarification.png) ·
 [Qwen RAG 截图](figures/gate6_qwen_agent_rag.png)
 
 ---
@@ -159,7 +179,16 @@ Demo：[app_gate5.py](app_gate5.py) ·
   一次性历史 test；Qwen Frozen-RejectOnly 0.8127，Qwen Plain-B3H 0.7972。
 - 完成 Qwen Agent 接入、6 条真实回放和 120 任务 × 4 路由回归；
   Qwen Plain-RejectOnly TSR 65.0%，安全率 100%。
-- 55 个协议、配置、可复现性、Gate 1/2/3/4/5/6 逻辑测试通过。
+- Gate 7 冻结双层 dev_threshold/dev_select，诊断 6×6 micro-batch 与
+  203/400 负 margin 的 hard negative。
+- 完成 Qwen Plain seed42/43/44 真实复验；RejectOnly test 均值 0.8253，
+  相对 frozen +1.25 pp，2/3 seed 胜出。
+- P1/P2 未超过 P0；P3 停在 40/50 step（INCOMPLETE），未伪造结果。
+- 完成 GTE Frozen、Qwen Frozen、GTE-LoRA 42/43/44 的 B4 多种子稳定性；
+  RejectOnly 在全部对照中稳定优于 B4-Full。
+- 修复 5 条 transfer-not-arrived 澄清 bug；Qwen RejectOnly 81/120，
+  GTE RejectOnly 73/120，安全率 100%。
+- 64 个协议、配置、可复现性、Gate 1/2/3/4/5/6/7 逻辑测试通过。
 
 详细报告：[Gate 0 环境与数据](reports/gate0_environment.md)  
 Gate 1 报告：[B0/B2 Baseline 与动态拒识](reports/gate1_baseline.md)  
@@ -168,13 +197,15 @@ Gate 3 报告：[多数据集、跨模型与 B3 实验](reports/gate3_final_repo
 Gate 4 报告：[B4 可训练路由器与客服 Agent](reports/gate4_final_report.md)  
 Gate 5 报告：[LoRA、RejectOnly、RAG Agent 与 120 任务 Benchmark](reports/gate5_final_report.md)  
 Gate 6 报告：[Qwen3-Embedding LoRA、表征漂移与联合路由](reports/gate6_final_report.md)  
+Gate 7 报告：[Qwen LoRA 多种子诊断、优化与稳定性](reports/gate7_final_report.md)  
 修改记录：[Gate 0](reports/gate0_vibe_coding.md)、
 [Gate 1](reports/gate1_vibe_coding.md)、
 [Gate 2](reports/gate2_vibe_coding.md)、
 [Gate 3](reports/gate3_vibe_coding.md)、
 [Gate 4](reports/gate4_vibe_coding.md)、
 [Gate 5](reports/gate5_vibe_coding.md)、
-[Gate 6](reports/gate6_vibe_coding.md)
+[Gate 6](reports/gate6_vibe_coding.md)、
+[Gate 7](reports/gate7_vibe_coding.md)
 
 ---
 
@@ -203,7 +234,11 @@ D:\code\intent-open-set\
 │   ├── gate6_qwen_lora.yaml
 │   ├── gate6_qwen_b4.yaml
 │   ├── gate6_qwen_agent.yaml
-│   └── gate6_qwen_benchmark.yaml
+│   ├── gate6_qwen_benchmark.yaml
+│   ├── gate7_dev.yaml
+│   ├── gate7_training.yaml
+│   ├── gate7_stability.yaml
+│   └── gate7_agent.yaml
 ├── data\
 │   ├── raw\
 │   │   ├── data_full.json
@@ -221,6 +256,7 @@ D:\code\intent-open-set\
 │   ├── gate6\
 │   │   ├── sessions\                # Qwen per-session SQLite (git-ignored)
 │   │   └── demo_sessions\           # replay DBs (git-ignored)
+│   ├── gate7_agent_sessions\        # Gate7 Agent DBs (git-ignored)
 │   ├── manifest\
 │   │   ├── selected_intents.json
 │   │   ├── gate2_*                  # hard-OOS split/manifests
@@ -264,6 +300,15 @@ D:\code\intent-open-set\
 │   │   ├── benchmark_qwen.py
 │   │   ├── combine_qwen_benchmark.py
 │   │   └── make_figures.py
+│   ├── gate7\
+│   │   ├── make_dev_split.py
+│   │   ├── diagnose.py
+│   │   ├── dev_eval.py
+│   │   ├── final_test.py
+│   │   ├── stability_b4.py
+│   │   ├── agent_benchmark.py
+│   │   ├── combine_agent.py
+│   │   └── make_figures.py
 │   └── ...                          # Gate 1/2 scripts retained
 ├── tests\
 │   ├── test_gate1_logic.py
@@ -272,6 +317,7 @@ D:\code\intent-open-set\
 │   ├── test_gate4.py
 │   ├── test_gate5.py
 │   ├── test_gate6.py
+│   ├── test_gate7.py
 │   └── ...
 ├── logs\
 ├── reports\
@@ -287,9 +333,13 @@ D:\code\intent-open-set\
 │   ├── gate6_final_report.md
 │   ├── gate6_ppt_outline.md
 │   ├── gate6_speech.md
-│   └── gate6_vibe_coding.md
-├── results\                         # Gate 1/2/3/4/5 metrics, predictions, checkpoints
-└── figures\                         # Gate 1/2/3/4/5 PNGs, real screenshots
+│   ├── gate6_vibe_coding.md
+│   ├── gate7_final_report.md
+│   ├── gate7_ppt_outline.md
+│   ├── gate7_speech.md
+│   └── gate7_vibe_coding.md
+├── results\                         # Gate 1/2/3/4/5/6/7 metrics, predictions, checkpoints
+└── figures\                         # Gate 1/2/3/4/5/6/7 PNGs, real screenshots
 ```
 
 ---
@@ -379,7 +429,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 55 tests in ...s
+Ran 64 tests in ...s
 OK
 ```
 
@@ -407,8 +457,8 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 55 个测试。请反馈
-`logs/gate6_all_tests.log`；如需环境信息，再反馈
+预期最后一行是 `OK`，共 64 个测试。请反馈
+`logs/gate7_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
 ### 4.6 Gate 1 复现命令（实际已运行）
@@ -714,9 +764,9 @@ ID 和规范化文本交集均为 0；但 `user_name` 的一个 test 文本在 t
 
 ## 7. 当前边界与后续扩展
 
-已完成：Gate 0–6；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
+已完成：Gate 0–7；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
 test 矩阵；B4-AR；LoRA-GTE；RejectOnly/Full 归因；Qwen3-Embedding LoRA；
-RAG Agent；120 条真实路由 benchmark；真实截图。
+双层开发集与 3-seed 复验；RAG Agent；真实路由 benchmark；真实截图。
 
 Gate 3 的主要判断：
 
@@ -758,10 +808,22 @@ Gate 6 的主要判断：
   GTE Frozen-RejectOnly 0.8435 最高；
 - 5 条应澄清任务 Qwen 全部直接接受，clarification=0，是真实缺陷。
 
+Gate 7 的主要判断：
+
+- 双层 dev 隔离后，Qwen Plain 3-seed 的 B3-H test 均值 0.8068、
+  RejectOnly 0.8253；RejectOnly 相对 frozen +1.25 pp，2/3 seed 胜出；
+- Gate6 的 seed42 负结果真实，但不是三种子普遍结论；
+- 6×6 microbatch / 203/400 负 margin hard negative 是机制风险；
+- P1/P2 没有超过 P0；P3 停在 40/50 step，未完成；
+- B4-RejectOnly 在 GTE Frozen、GTE-LoRA、Qwen Frozen 上稳定优于 Full；
+- Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
+- 64 个测试通过。
+
 尚未做：
 
-- 新的独立 unknown-class test / 多 seed 方差；
-- Qwen LoRA 多 seed、Anchor λ 扫描与显著性检验；
+- 新的独立 unknown-class test / 大样本 bootstrap；
+- Qwen LoRA 更多 seed、Anchor λ 扫描与显著性检验；
+- P3 的完整训练（当前 INCOMPLETE）；
 - 更多 BANKING77 intent 的 Agent 槽位；
 - 实际 PPTX 排版、演讲录像；
 - 12 条真实 LLM API 调用（无凭据）；

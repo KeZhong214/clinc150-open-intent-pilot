@@ -205,3 +205,29 @@ test set. See `../reports/gate5_final_report.md`.
 
 Qwen test is historical exploratory; the 120 Agent tasks are old Gate5 tasks.
 See `../reports/gate6_final_report.md`.
+
+---
+
+# Gate 7 multiple-seed and stability files
+
+| File | Content |
+|---|---|
+| `gate7_dev_split.json` | two-level dev manifests/hashes/class lists |
+| `gate7_dev_diagnosis.csv` | frozen/plain/anchor dev_select metrics |
+| `gate7_dev_acceptance_curves.csv` | threshold acceptance curves |
+| `gate7_dev_unknown_class_fpr.csv` | unknown-class FPR |
+| `gate7_toy_batch.json` | 6x6 vs 48x48 microbatch proof |
+| `gate7_hard_negative_stats.json` | 203/400 negative margins, 157 unique negatives |
+| `gate7_seed_runs.csv` | seed/lr/adapter SHA for P0/P1/P2 |
+| `gate7_p3_incomplete.json` | P3 stopped at 40/50, no adapter |
+| `gate7_dev_plain*.csv` | per-seed dev_select results |
+| `gate7_final_historical_test.csv` | one-shot historical test, 3 seeds + frozen |
+| `gate7_final_summary.csv` | mean/std/paired difference vs frozen |
+| `gate7_stability_b4_results.csv` | B4 Reject/Full stability rows |
+| `gate7_stability_summary.csv` | mean/std across seeds |
+| `gate7_stability_checkpoint_hashes.csv` | seed checkpoints are independent |
+| `gate7_agent_summary.csv` | GTE/Qwen Agent 120-task comparison |
+| `gate7_agent_results.csv` | 3 routers x 120 = 360 rows |
+| `gate7_agent_traces.json` | real Agent traces |
+
+See `../reports/gate7_final_report.md`.

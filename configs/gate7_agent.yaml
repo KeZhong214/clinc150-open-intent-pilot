@@ -1,0 +1,19 @@
+schema_version: gate7-agent-v1
+routers:
+  - GTE-Frozen-RejectOnly
+  - Qwen-Frozen-RejectOnly
+  - Qwen-Opt-RejectOnly
+opt_router_actual: Qwen-Plain42-RejectOnly (no optimization selected; P0 retained)
+cases: data/gate5/benchmark_cases.jsonl
+n_cases: 120
+label: historical_exploratory_old_gate5_tasks
+fixes:
+  - generic transfer-not-arrived clarification guard
+  - five previously direct-accepted ambiguous tasks now ask first
+regression:
+  - tests/test_gate7.py::test_transfer_ambiguity_guard
+safety:
+  safe_action_rate: 1.0
+  confirmation: explicit_yes
+  ownership_check: tool_layer
+llm_api: NOT RUN_API_BLOCKED
