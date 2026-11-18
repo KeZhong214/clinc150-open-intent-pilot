@@ -1,0 +1,135 @@
+{
+  "environment": {
+    "python": "3.14.4",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+    "vram_total_mib": 8150.6,
+    "vram_free_mib": 7012.0,
+    "transformers": "5.23.0",
+    "peft": "0.21.3",
+    "sentence_transformers": "6.3.0",
+    "tokenizers": "0.23.3",
+    "qwen_id": "Qwen/Qwen3-Embedding-0.6B",
+    "qwen_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "prompt_sha256": "4bbdf1c169061f64ba742f64bca5e422d05e94ccc7261d29495c233ed9a90005",
+    "prompt": "Instruct: Given a customer service message, identify the supported intent it expresses.\nQuery: ",
+    "pooling": "last_token",
+    "max_length": 128,
+    "dtype": "float16"
+  },
+  "load_seconds": 3.002,
+  "probe_n": 32,
+  "vector_alignment": {
+    "mean_cosine": 0.9999980926513672,
+    "min_cosine": 0.999995231628418,
+    "max_abs_diff": 0.0004296824336051941,
+    "mean_abs_diff": 3.938126246794127e-05,
+    "top1_intent_consistency": 1.0,
+    "direct_dim": 1024,
+    "norm_max_abs_error": 5.960464477539063e-08,
+    "prompt": "Instruct: Given a customer service message, identify the supported intent it expresses.\nQuery: ",
+    "pooling": "last_non_pad_token",
+    "padding_side": "right",
+    "max_length": 128
+  },
+  "direct_support_cache_mean_cosine": 0.9999983310699463,
+  "direct_support_cache_max_abs": 0.0005564317107200623,
+  "validation_replay": [
+    {
+      "method": "B0",
+      "tau": 0.810658723115921,
+      "constraint_met": true,
+      "known_acceptance": 0.9,
+      "known_correct_routing": 0.80375,
+      "known_macro_f1": 0.8433782513731725,
+      "top1_closed_set_accuracy": 0.87,
+      "oos_recall": 0.4722222222222222,
+      "oos_false_acceptance": 0.5277777777777778,
+      "unknown_auroc": 0.8395034722222221,
+      "open_set_macro_f1": 0.7096992079357561,
+      "open_set_accuracy": 0.6467105263157895,
+      "n_known": 800,
+      "n_unknown": 720,
+      "known_rejected": 80,
+      "unknown_rejected": 340,
+      "unknown_accepted": 380
+    },
+    {
+      "method": "B3-H",
+      "tau": 0.8170075058937073,
+      "constraint_met": true,
+      "known_acceptance": 0.9,
+      "known_correct_routing": 0.8225,
+      "known_macro_f1": 0.8633082387751836,
+      "top1_closed_set_accuracy": 0.89125,
+      "oos_recall": 0.5208333333333334,
+      "oos_false_acceptance": 0.47916666666666663,
+      "unknown_auroc": 0.853154513888889,
+      "open_set_macro_f1": 0.7413994195442308,
+      "open_set_accuracy": 0.6796052631578947,
+      "n_known": 800,
+      "n_unknown": 720,
+      "known_rejected": 80,
+      "unknown_rejected": 375,
+      "unknown_accepted": 345
+    }
+  ],
+  "gate3_validation": [
+    {
+      "method": "B0",
+      "known_acceptance": 0.9,
+      "known_correct_routing": 0.80375,
+      "oos_recall": 0.4708333333333333,
+      "auroc": 0.8394444444444443,
+      "open_set_macro_f1": 0.7095275367439756
+    },
+    {
+      "method": "B3-H",
+      "known_acceptance": 0.9,
+      "known_correct_routing": 0.82125,
+      "oos_recall": 0.5208333333333334,
+      "auroc": 0.8531822916666666,
+      "open_set_macro_f1": 0.7403519073463075
+    }
+  ],
+  "target_modules": {
+    "n": 112,
+    "examples": [
+      {
+        "name": "layers.0.self_attn.q_proj",
+        "class": "Linear"
+      },
+      {
+        "name": "layers.0.self_attn.k_proj",
+        "class": "Linear"
+      },
+      {
+        "name": "layers.0.self_attn.v_proj",
+        "class": "Linear"
+      },
+      {
+        "name": "layers.0.self_attn.o_proj",
+        "class": "Linear"
+      },
+      {
+        "name": "layers.1.self_attn.q_proj",
+        "class": "Linear"
+      },
+      {
+        "name": "layers.1.self_attn.k_proj",
+        "class": "Linear"
+      },
+      {
+        "name": "layers.1.self_attn.v_proj",
+        "class": "Linear"
+      },
+      {
+        "name": "layers.1.self_attn.o_proj",
+        "class": "Linear"
+      }
+    ]
+  },
+  "cuda_peak_mib": 1169.2,
+  "alignment_ok": true
+}

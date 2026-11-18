@@ -1,0 +1,19 @@
+{
+  "python": "3.14.4",
+  "torch": "2.11.0+cu128",
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "vram_total_mib": 8150.6,
+  "vram_free_mib": 7012.0,
+  "transformers": "5.23.0",
+  "peft": "0.21.3",
+  "sentence_transformers": "6.3.0",
+  "tokenizers": "0.23.3",
+  "qwen_id": "Qwen/Qwen3-Embedding-0.6B",
+  "qwen_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "prompt_sha256": "4bbdf1c169061f64ba742f64bca5e422d05e94ccc7261d29495c233ed9a90005",
+  "prompt": "Instruct: Given a customer service message, identify the supported intent it expresses.\nQuery: ",
+  "pooling": "last_token",
+  "max_length": 128,
+  "dtype": "float16"
+}
