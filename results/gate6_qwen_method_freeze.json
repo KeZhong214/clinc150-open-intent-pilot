@@ -1,0 +1,18 @@
+{
+  "stage": "gate6_qwen_methods",
+  "test_evaluated": true,
+  "label": "historical_exploratory",
+  "files": {
+    "results\\gate6_qwen_plain_adapter\\adapter_model.safetensors": "4efaee5c891e26058764b4a7ec999dec718436f57b724841650831ddc01c3818",
+    "results\\gate6_qwen_anchor_adapter\\adapter_model.safetensors": "5c9c9a17b7bfb2604238391a476bcb6367b404fe6ad6bf0a3b92d84c463dd499",
+    "results\\gate6_qwen_frozen_reject.pt": "d7512e525c3af6c6dc8909f961d200578e8d970650afe6336c21121de9dd7c37",
+    "results\\gate6_qwen_frozen_full.pt": "1f512ca96bf17d3322c1558b094f6d82df89a99ad613e7a69079f631724e8838",
+    "results\\gate6_qwen_plain_reject.pt": "d222f9686acb931646adc4634036540e270fe4b48c48cd639c6be07a4c94da5c",
+    "results\\gate6_qwen_plain_full.pt": "e2e2c252ed6982bb9c25f8d5981397ef93c9107a91b4edae07acfb7dfaf717a8"
+  },
+  "adapter_plain": "4efaee5c891e26058764b4a7ec999dec718436f57b724841650831ddc01c3818",
+  "adapter_anchor": "5c9c9a17b7bfb2604238391a476bcb6367b404fe6ad6bf0a3b92d84c463dd499",
+  "cases_sha256": "2d3f157bf6ebc1f711430523b8b99510f7558c96db799a093d92262ac5c57f43",
+  "val_sha256": "de1a63ed649188fa9d8f2530018c6ff52a8f5409ad841d38b4e4d60333281373",
+  "test_sha256": "a11d9911f112802d830e6a35cc311a08c85dae339552aa4196ca7572268bec12"
+}

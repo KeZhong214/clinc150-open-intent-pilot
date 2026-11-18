@@ -1,0 +1,2 @@
+encoder,method,tau,constraint_met,val_known_acceptance,val_known_correct_routing,val_known_macro_f1,val_top1_closed_set_accuracy,val_oos_recall,val_oos_false_acceptance,val_unknown_auroc,val_open_set_macro_f1,val_open_set_accuracy,val_n_known,val_n_unknown,val_known_rejected,val_unknown_rejected,val_unknown_accepted,gate_mean,gate_top1_mean
+qwen_frozen,B4-Full,0.44584909379482274,True,0.9,0.81875,0.859441332556886,0.88375,0.5430555555555555,0.45694444444444443,0.860095486111111,0.7430801885427464,0.6881578947368421,800,720,80,391,329,0.10080036520957947,0.5736018419265747
