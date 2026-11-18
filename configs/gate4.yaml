@@ -1,0 +1,40 @@
+schema_version: gate4-config-v1
+seed: 42
+dataset: banking77
+encoder: gte-modernbert-base
+encoder_revision: e7f32e3c00f91d699e8c43b53106206bcc72bb22
+shot: 10
+support_rows: 400
+b4:
+  name: B4-AR
+  gate_hidden: 32
+  reject_hidden: 16
+  episodes: 24
+  folds: 2
+  masks_per_fold: 12
+  mask_size: 6
+  epochs_fusion: 60
+  epochs_full: 60
+  lr: 0.001
+  weight_decay: 0.0001
+  alpha_oos: 0.5
+  checkpoints:
+    fusion: results/gate4_b4_fusion.pt
+    full: results/gate4_b4_full.pt
+  protocol:
+    train: support-only leave-fold + leave-class-out pseudo-OOS
+    validation: 800 calibration known + 720 dev unknown
+    test: 1600 known + 760 final unknown; test already seen in Gate3, exploratory only
+agent:
+  db: data/gate4/agent.db
+  customers: [CUST-1001, CUST-1002, CUST-1003]
+  sensitive_actions: [cancel_transfer, activate_card]
+  tools:
+    - get_card_delivery_status
+    - get_transfer_status
+    - cancel_transfer
+    - activate_card
+    - create_dispute
+    - create_ticket
+    - handoff_to_human
+  demo_cases: 6

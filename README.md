@@ -1,10 +1,10 @@
-# 少样本开放意图识别：多数据集、跨模型与原型—近邻实验
+# 少样本开放意图识别：从跨场景矩阵到可训练路由器与客服 Agent
 
-课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测与原型—近邻协同优化**
+课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测、B4 可训练融合与真实工具 Agent**
 
-当前状态：**Gate 0–3 均已完成真实运行。** 3 个数据集、4 个冻结编码器、
-5/10-shot、B0/B3-P/B3-H 的 72 格矩阵已完成；另完成 BANKING77 SetFit-BGE
-训练实验和 Streamlit Demo。
+当前状态：**Gate 0–4 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
+5/10-shot、B0/B3-P/B3-H 的 72 格矩阵；Gate 4 完成 BANKING77 GTE 10-shot
+的 B4-AR 训练、B3-H/B4 对照、SQLite 多轮客服 Agent 与 Streamlit Demo。
 
 Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 
@@ -13,6 +13,20 @@ Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 | CLINC150（历史） | Qwen 10-shot B0 | 0.9817 | 0.9010 | 0.9226 |
 | BANKING77 | GTE 10-shot B3-H | 0.8625 | 0.6368 | **0.8306** |
 | MASSIVE en-US | Qwen 10-shot B0 | 0.8272 | 0.5298 | 0.7982 |
+
+Gate 4 的核心结果（BANKING77 GTE 10-shot；test 已看过，探索性）：
+
+| Method | Validation F1 | Test F1 | Test OOS recall |
+|---|---:|---:|---:|
+| B0 | 0.734 | 0.808 | 0.505 |
+| B3-H | 0.767 | 0.831 | 0.637 |
+| B4-Fusion | 0.740 | 0.820 | 0.555 |
+| **B4-Full** | **0.781** | **0.837** | **0.658** |
+
+- B4-Full 比 B3-H：validation F1 +1.39 pp；test F1 +0.62 pp、OOS +2.11 pp；
+- **B4-Fusion 单独退化**：收益主要来自拒识头，不是可训练门控；
+- 门控随输入难度变化：最难 margin 组 Top-1 gate 0.560，最易组 0.919；
+- Agent：16/16 确定性工具/状态测试、6/6 真实路由演示；SQLite 真实状态变化。
 
 B3-H 的场景差异：
 
@@ -36,12 +50,15 @@ Gate 1/2 历史结果保持冻结：
 详细报告：[Gate 0 环境与数据](reports/gate0_environment.md) ·
 [Gate 1 Baseline](reports/gate1_baseline.md) ·
 [Gate 2 Hard-OOS](reports/gate2_method.md) ·
-[Gate 3 多数据集](reports/gate3_final_report.md)  
+[Gate 3 多数据集](reports/gate3_final_report.md) ·
+[Gate 4 B4+Agent](reports/gate4_final_report.md)  
 结果索引：[results/gate3_matrix.csv](results/gate3_matrix.csv) ·
-[results/gate3_summary_by_dataset_method.csv](results/gate3_summary_by_dataset_method.csv)  
-图表：[figures/gate3_heatmap_macro_f1.png](figures/gate3_heatmap_macro_f1.png) ·
-[figures/gate3_ablation.png](figures/gate3_ablation.png)  
-Demo：[app.py](app.py) · [真实运行截图](figures/gate3_streamlit_demo.png)
+[results/gate4_b4_test_metrics.csv](results/gate4_b4_test_metrics.csv)  
+图表：[figures/gate4_b4_comparison.png](figures/gate4_b4_comparison.png) ·
+[figures/gate4_b4_gate_scatter.png](figures/gate4_b4_gate_scatter.png)  
+Demo：[app_gate4.py](app_gate4.py) ·
+[真实 B3-H 查卡截图](figures/gate4_agent_card.png) ·
+[真实 B4 取消转账截图](figures/gate4_agent_b4_cancel.png)
 
 ---
 
@@ -80,16 +97,25 @@ Demo：[app.py](app.py) · [真实运行截图](figures/gate3_streamlit_demo.png
 - 完成数据集画像、模型×数据集热图、shot 曲线、B3 消融、阈值权衡、
   BANKING77 混淆、成本散点和 4 类可追踪错误案例。
 - 完成 Streamlit Demo 并在真实浏览器中运行截图。
-- 29 个协议、配置、可复现性和 Gate 1/2/3 逻辑测试通过。
+- Gate 4 用 GTE BANKING77 10-shot 的 400 条 support 训练 B4-AR：
+  4→32→1 共享门控 + 7→16→1 拒识头；24 个 episodic，60+60 epoch，12.55 s。
+- B4-Fusion/B4-Full checkpoint、validation、freeze 和一次性探索性 test 落盘；
+  B4-Full test F1 0.8369，比 B3-H 0.8306 高 0.62 pp；B4-Fusion 单独退化。
+- 建立 SQLite 虚构银行库 + 7 个工具 + 多轮状态机；敏感动作二次确认、所有权
+  校验、幂等、审计；16/16 确定性工具测试、6/6 真实路由演示。
+- 完成 B4 训练/门控/对照图、Agent 指标图、真实 Streamlit 截图。
+- 39 个协议、配置、可复现性、Gate 1/2/3/4 逻辑测试通过。
 
 详细报告：[Gate 0 环境与数据](reports/gate0_environment.md)  
 Gate 1 报告：[B0/B2 Baseline 与动态拒识](reports/gate1_baseline.md)  
 Gate 2 报告：[Hard-OOS 与 B2-v2 类别边界校准](reports/gate2_method.md)  
 Gate 3 报告：[多数据集、跨模型与 B3 实验](reports/gate3_final_report.md)  
+Gate 4 报告：[B4 可训练路由器与客服 Agent](reports/gate4_final_report.md)  
 修改记录：[Gate 0](reports/gate0_vibe_coding.md)、
 [Gate 1](reports/gate1_vibe_coding.md)、
 [Gate 2](reports/gate2_vibe_coding.md)、
-[Gate 3](reports/gate3_vibe_coding.md)
+[Gate 3](reports/gate3_vibe_coding.md)、
+[Gate 4](reports/gate4_vibe_coding.md)
 
 ---
 
@@ -102,11 +128,13 @@ D:\code\intent-open-set\
 ├── requirements.txt
 ├── requirements_lock.txt
 ├── pip_freeze.txt
-├── app.py                           # Streamlit demo
+├── app.py                           # Gate 3 classifier demo
+├── app_gate4.py                     # Gate 4 agent demo
 ├── configs\
 │   ├── pilot.yaml
 │   ├── gate2.yaml
-│   └── gate3.yaml
+│   ├── gate3.yaml
+│   └── gate4.yaml
 ├── data\
 │   ├── raw\
 │   │   ├── data_full.json
@@ -117,6 +145,7 @@ D:\code\intent-open-set\
 │   │   └── model_cards\
 │   ├── gate3\
 │   │   └── raw\                     # BANKING77 parquet + MASSIVE en-US JSONL
+│   ├── gate4\                       # SQLite demo DB (git-ignored)
 │   ├── manifest\
 │   │   ├── selected_intents.json
 │   │   ├── gate2_*                  # hard-OOS split/manifests
@@ -135,15 +164,23 @@ D:\code\intent-open-set\
 │   │   ├── methods.py
 │   │   ├── run_matrix.py
 │   │   ├── freeze.py
-│   │   ├── train_adapter.py
-│   │   ├── train_setfit.py
-│   │   ├── aggregate.py
+│   │   └── ...
+│   ├── gate4\
+│   │   ├── b4_core.py
+│   │   ├── train_b4.py
+│   │   ├── freeze_b4.py
+│   │   ├── run_b4_test.py
+│   │   ├── router.py
+│   │   ├── db.py
+│   │   ├── agent.py
+│   │   ├── run_agent_cases.py
 │   │   └── make_figures.py
 │   └── ...                          # Gate 1/2 scripts retained
 ├── tests\
 │   ├── test_gate1_logic.py
 │   ├── test_gate2_protocol.py
 │   ├── test_gate3_protocol.py
+│   ├── test_gate4.py
 │   └── ...
 ├── logs\
 ├── reports\
@@ -153,9 +190,13 @@ D:\code\intent-open-set\
 │   ├── gate3_final_report.md
 │   ├── gate3_ppt_outline.md
 │   ├── gate3_speech.md
-│   └── gate3_vibe_coding.md
-├── results\                         # Gate 1/2/3 metrics, predictions, thresholds
-└── figures\                         # Gate 1/2/3 PNGs, Streamlit screenshot
+│   ├── gate3_vibe_coding.md
+│   ├── gate4_final_report.md
+│   ├── gate4_ppt_outline.md
+│   ├── gate4_speech.md
+│   └── gate4_vibe_coding.md
+├── results\                         # Gate 1/2/3/4 metrics, predictions, thresholds
+└── figures\                         # Gate 1/2/3/4 PNGs, real screenshots
 ```
 
 ---
@@ -245,7 +286,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 29 tests in ...s
+Ran 39 tests in ...s
 OK
 ```
 
@@ -273,8 +314,8 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 29 个测试。请反馈
-`logs/gate3_all_tests.log`；如需环境信息，再反馈
+预期最后一行是 `OK`，共 39 个测试。请反馈
+`logs/gate4_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
 ### 4.6 Gate 1 复现命令（实际已运行）
@@ -365,6 +406,32 @@ Gate 3 的 test 已在 `results/gate3_freeze.json` 后评测一次；再次运�
 `--phase test` 会被拒绝。SetFit/Adapter 的 BANKING77 test 与矩阵 test 相同，
 因此报告中明确标注“非盲测复用”。
 
+### 4.9 Gate 4 复现命令（实际已运行）
+
+```powershell
+$env:HF_HOME = "D:\code\intent-open-set\data\model_cache"
+
+# 1. B4-Fusion + B4-Full 训练与 validation
+.\.venv\Scripts\python.exe -m src.gate4.train_b4
+
+# 2. 冻结 checkpoint + 阈值；之后 test 只跑一次
+.\.venv\Scripts\python.exe -m src.gate4.freeze_b4
+.\.venv\Scripts\python.exe -m src.gate4.run_b4_test
+
+# 3. 16 条工具/状态测试 + 6 条真实路由演示
+.\.venv\Scripts\python.exe -m src.gate4.run_agent_cases
+
+# 4. 图表
+.\.venv\Scripts\python.exe -m src.gate4.make_figures
+
+# 5. 有状态 Agent Demo
+.\.venv\Scripts\python.exe -m streamlit run app_gate4.py
+```
+
+Gate 4 的 test 在 `results/gate4_b4_freeze.json` 后只跑一次；BANKING77 test
+在 Gate 3 已看过，因此报告中明确标注“探索性、非新盲测”。Agent 的 16 条
+确定性测试使用 StubRouter；6 条演示使用真实 GTE/B3-H/B4，两组指标分开报告。
+
 ---
 
 ## 5. 数据协议（冻结）
@@ -412,6 +479,17 @@ Gate 2 不覆盖 Gate 1，也不混用原始 `oos_test`：
 - 支持集/校准/测试的规范化文本交集为 0；
 - CLINC150 原始 test 已查看，标为 historical，仅作追加分析。
 
+### Gate 4 的 B4 与 Agent 协议
+
+- B4 只用 BANKING77 400 条 10-shot support 训练；
+- 每类 5 条原型、5 条 query，两折互换；每 episode 屏蔽 6/40 类，
+  其 query 作为 pseudo-OOS；不使用 calibration/dev 标签做梯度；
+- calibration known 800 + dev unknown 720 只用于 validation、阈值和诊断；
+- checkpoint/阈值写入 `results/gate4_b4_freeze.json` 后，探索性 test 只跑一次；
+- BANKING77 test 在 Gate 3 已看过，Gate 4 不声称新盲测；
+- Agent 使用 `data/gate4/agent.db` 虚构 SQLite，不连接真实银行；
+- 16 条 StubRouter 测试只验证工具/状态；6 条真实路由演示单独报告。
+
 ### 已知的官方数据重复
 
 官方数据内部没有分区内重复，但规范化文本有 **5 处跨分区碰撞**：
@@ -440,26 +518,34 @@ ID 和规范化文本交集均为 0；但 `user_name` 的一个 test 文本在 t
 
 ## 7. 当前边界与后续扩展
 
-已完成：Gate 0–3；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
-test 矩阵；BANKING77 SetFit/Adapter 训练对照；数据集画像、热图、shot 曲线、
-消融、阈值权衡、混淆、成本与错误案例；Streamlit Demo 真实截图。
+已完成：Gate 0–4；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
+test 矩阵；SetFit/Adapter；B4-AR 训练与探索性 test；SQLite 多轮 Agent；
+16 条工具/状态测试与 6 条真实路由演示；真实 Streamlit 截图。
 
 Gate 3 的主要判断：
 
 - B3-H 在 BANKING77 有正收益：OOS recall +5.21 pp，open-set F1 +0.99 pp；
 - B3-H 在 MASSIVE 和 CLINC150 没有稳定收益；
 - Qwen 平均最强，GTE 在 BANKING77 最强且编码成本低；
-- SetFit 和投影适配器都没有超过冻结 BGE-B0；
 - MASSIVE 的 F1-first 阈值选择在 BGE/GTE 上把 known acceptance 推到
-  0.99+，几乎不拒 OOS，说明阈值目标本身是主要限制；本轮没有用 test
-  重新调阈值。
+  0.99+，几乎不拒 OOS，说明阈值目标本身是主要限制。
+
+Gate 4 的主要判断：
+
+- B4-Full 在 validation F1 +1.39 pp、test F1 +0.62 pp、test OOS +2.11 pp；
+- B4-Fusion 单独退化：收益主要来自拒识头，不是可学习门控；
+- 门控随输入难度变化：Top-1 gate 0.56（最难）→ 0.92（最易）；
+- Agent 工具、状态、确认、所有权、审计链真实闭环；16/16 确定性测试、
+  6/6 真实路由演示；
+- Gate 4 test 是探索性对照，不是新盲测。
 
 尚未做：
 
-- 3 个数据集之外的新独立 test / 多 seed 方差；
-- B1/B3-P 的更多原型数、融合权重的系统消融；
-- 近域/远域未知的可靠统一定义；
-- 最终课程报告的精排、PPT 实际排版与演讲录像。
+- 新的独立 unknown-class test / 多 seed 方差；
+- B4 显著性检验与拒识头校准曲线；
+- 更多 BANKING77 intent 的 Agent 槽位；
+- 实际 PPTX 排版、演讲录像；
+- 近域/远域未知的可靠统一定义（NOT RUN）。
 
-不会在当前 Gate 3 test 上继续调 B3 参数；若继续，需要新的独立 unknown
-classes 或明确的新协议。
+不会在当前 BANKING77 test 上继续调 B4 参数；若继续，需要新的独立
+unknown classes 或明确的新协议。

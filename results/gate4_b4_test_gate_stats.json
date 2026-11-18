@@ -1,0 +1,12 @@
+{
+  "test_seconds": 0.14406619998044334,
+  "n_known": 1600,
+  "n_unknown": 760,
+  "fusion_gate_mean": 0.10877078026533127,
+  "fusion_gate_std": 0.24296818673610687,
+  "full_gate_mean": 0.023234480991959572,
+  "full_gate_std": 0.1206280067563057,
+  "full_gate_top1_mean": 0.7715762257575989,
+  "full_gate_top1_std": 0.28091055154800415,
+  "test_is_exploratory_not_blind": true
+}

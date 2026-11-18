@@ -1,0 +1,9 @@
+{
+  "n_demos": 6,
+  "task_completion_rate": 1.0,
+  "tool_call_correctness": 1.0,
+  "clarification_rate": 0.16666666666666666,
+  "confirmation_rate": 0.16666666666666666,
+  "escalation_rate": 0.3333333333333333,
+  "note": "6 fixed real-router demos; D1/D2/D3 success, D4 reject/handoff, D5 ownership/handoff, D6 ambiguity/clarification."
+}

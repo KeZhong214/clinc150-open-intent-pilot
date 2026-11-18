@@ -1,0 +1,8 @@
+{
+  "test_seconds": 0.14406619998044334,
+  "counts": {
+    "known": 1600,
+    "unknown": 760
+  },
+  "note": "BANKING77 test was already seen in Gate3; this is exploratory, not a new blind test."
+}

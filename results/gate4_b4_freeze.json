@@ -1,0 +1,27 @@
+{
+  "frozen": true,
+  "test_evaluated": true,
+  "dataset": "banking77",
+  "model": "gte-modernbert-base",
+  "shot": 10,
+  "note": "BANKING77 test was already seen in Gate3. This is an exploratory Gate4 test, not a new blind test.",
+  "files": {
+    "gate4_b4_thresholds.json": {
+      "sha256": "6224e41a847d977848bb59069317bcadacde33f01d0790cb890717ca0c627bef",
+      "bytes": 1181
+    },
+    "gate4_b4_fusion.pt": {
+      "sha256": "0923a18bd5ccc3674c47f932034684c71670c4624b8953fbf3e320209dcb876c",
+      "bytes": 6269
+    },
+    "gate4_b4_full.pt": {
+      "sha256": "4ef40c88d7998b3b15ea1bcd57cf0d57feeb5e2a042710e0207ec93ee656fbff",
+      "bytes": 6305
+    },
+    "gate4_b4_training_config.json": {
+      "sha256": "f3aa545fb24e9ba6575d3d3c61f5f0c9ae2a10775929d99fab05fe0678e09852",
+      "bytes": 558
+    }
+  },
+  "test_metrics": "results/gate4_b4_test_metrics.csv"
+}

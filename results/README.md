@@ -112,3 +112,31 @@ configurations. CLINC150 is historical; BANKING77 and MASSIVE are new.
 `gate3_test_metrics.csv` marks CLINC150 with `historical_clinc_test=1`.
 SetFit and the adapter reuse the already-opened BANKING77 test; their notes say
 this explicitly. See `../reports/gate3_final_report.md`.
+
+---
+
+# Gate 4 B4 and Agent files
+
+Gate 4 uses BANKING77 GTE-ModernBERT 10-shot and the already-seen test. The
+B4 test is exploratory, not a new blind test.
+
+| File | Content |
+|---|---|
+| `gate4_b4_validation_metrics.csv` | B0/B3-H/B4-Fusion/B4-Full validation |
+| `gate4_b4_thresholds.json` | frozen B4 thresholds |
+| `gate4_b4_training_history.csv` | 60+60 epoch losses, gate stats |
+| `gate4_b4_training_config.json` | episodes, hyperparameters, checkpoint paths |
+| `gate4_b4_gate_stats.json` | gate mean/std, gradient, parameter deltas |
+| `gate4_b4_gate_by_class.csv` / `gate4_b4_gate_by_difficulty.csv` | gate behavior |
+| `gate4_b4_fusion.pt` / `gate4_b4_full.pt` | small checkpoints (~6 KB) |
+| `gate4_b4_freeze.json` | pre-test freeze hashes; `test_evaluated=true` |
+| `gate4_b4_test_metrics.csv` | one-shot exploratory test, 4 methods |
+| `gate4_b4_test_predictions.csv` | B4-Full test predictions + gate values |
+| `gate4_b4_test_cases.csv` | five traceable B4-Full cases |
+| `gate4_agent_cases.csv` | 16 deterministic tool/state cases |
+| `gate4_agent_metrics.json` | 16-case completion/tool/clarification/escalation |
+| `gate4_agent_demos.json` | 6 real-router multi-turn demos + DB snapshots |
+| `gate4_agent_demo_metrics.json` | 6-demo metrics |
+
+`data/gate4/agent.db` is generated at runtime and is git-ignored. See
+`../reports/gate4_final_report.md`.

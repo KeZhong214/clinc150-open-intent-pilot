@@ -10,3 +10,6 @@ logs/*.tmp
 
 checkpoints/
 data/gate3/raw/massive/*.tar.gz
+data/gate4/*.db
+data/gate4/cases/
+data/gate4/demos/

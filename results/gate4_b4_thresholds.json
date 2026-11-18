@@ -1,0 +1,39 @@
+{
+  "model": "gte-modernbert-base",
+  "dataset": "banking77",
+  "shot": 10,
+  "B4-Fusion": {
+    "tau": 0.7893897354602813,
+    "selection": {
+      "tau": 0.7893897354602813,
+      "known_acceptance_val": 0.9,
+      "oos_recall_val": 0.4708333333333333,
+      "open_set_macro_f1_val": 0.7404405828144548,
+      "constraint_met": true,
+      "n_candidates": 101,
+      "target_acceptance": 0.9,
+      "objective": "max validation open-set macro-F1 subject to known acceptance >= 0.90"
+    }
+  },
+  "B4-Full": {
+    "tau": 0.367605084180832,
+    "selection": {
+      "tau": 0.367605084180832,
+      "known_acceptance_val": 0.9,
+      "oos_recall_val": 0.6041666666666666,
+      "open_set_macro_f1_val": 0.7808755549345678,
+      "constraint_met": true,
+      "n_candidates": 101,
+      "target_acceptance": 0.9,
+      "objective": "max validation open-set macro-F1 subject to known acceptance >= 0.90"
+    }
+  },
+  "B0": {
+    "tau": 0.780942394733429
+  },
+  "B3-H": {
+    "tau": 0.7831942200660705
+  },
+  "test_evaluated": false,
+  "test_policy": "BANKING77 test was already seen in Gate3; Gate4 test is exploratory, not a new blind test."
+}

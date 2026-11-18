@@ -1,0 +1,963 @@
+[
+  {
+    "id": "D1",
+    "method": "B3-H",
+    "turns": [
+      {
+        "user": "Where is my card? I still have not received CARD-1001.",
+        "response": "Card **CARD-1001**: delivery status is **delivered**, card status is **active**.",
+        "route": {
+          "method": "B3-H",
+          "intent": "card_arrival",
+          "accepted": true,
+          "score": 0.835989,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "card_arrival",
+              0.8359894752502441
+            ],
+            [
+              "card_linking",
+              0.7442004680633545
+            ],
+            [
+              "card_not_working",
+              0.7425686120986938
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": [
+          {
+            "tool": "get_card_delivery_status",
+            "args": {
+              "card_id": "CARD-1001"
+            },
+            "result": {
+              "card_id": "CARD-1001",
+              "delivery_status": "delivered",
+              "status": "active",
+              "last4": "4242"
+            }
+          }
+        ]
+      }
+    ],
+    "snapshot": {
+      "cards": [
+        {
+          "card_id": "CARD-1001",
+          "customer_id": "CUST-1001",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "4242",
+          "activated_at": "2026-10-01T10:00:00+00:00"
+        },
+        {
+          "card_id": "CARD-1002",
+          "customer_id": "CUST-1001",
+          "status": "inactive",
+          "delivery_status": "in_transit",
+          "last4": "1881",
+          "activated_at": null
+        },
+        {
+          "card_id": "CARD-2001",
+          "customer_id": "CUST-1002",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "7777",
+          "activated_at": "2026-09-15T09:00:00+00:00"
+        }
+      ],
+      "transfers": [
+        {
+          "transfer_id": "TXN-2001",
+          "customer_id": "CUST-1001",
+          "amount": 250.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "ACME Supplies",
+          "created_at": "2026-11-15T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2002",
+          "customer_id": "CUST-1001",
+          "amount": 90.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Landlord Demo",
+          "created_at": "2026-11-16T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2003",
+          "customer_id": "CUST-1001",
+          "amount": 120.0,
+          "currency": "USD",
+          "status": "completed",
+          "recipient": "Utility Co",
+          "created_at": "2026-11-10T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2004",
+          "customer_id": "CUST-1002",
+          "amount": 500.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Other Demo",
+          "created_at": "2026-11-14T08:00:00+00:00"
+        }
+      ],
+      "disputes": [],
+      "tickets": [
+        {
+          "ticket_id": "TCK-1000",
+          "customer_id": "CUST-1001",
+          "intent": "general",
+          "issue": "Welcome to the fictional demo queue",
+          "status": "open",
+          "priority": "low",
+          "created_at": "2026-11-18T01:10:56.099827+00:00"
+        }
+      ],
+      "audit_events": [
+        {
+          "event_id": 1,
+          "session_id": "DEMO-D1",
+          "customer_id": "CUST-1001",
+          "tool": "get_card_delivery_status",
+          "args_json": "{\"card_id\": \"CARD-1001\"}",
+          "result_json": "{\"card_id\": \"CARD-1001\", \"delivery_status\": \"delivered\", \"status\": \"active\", \"last4\": \"4242\"}",
+          "created_at": "2026-11-18T01:10:56.217175+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "D2",
+    "method": "B4-Full",
+    "turns": [
+      {
+        "user": "My transfer TXN-2001 has not arrived yet.",
+        "response": "Transfer **TXN-2001** is **pending**; amount 250.00 USD to ACME Supplies.",
+        "route": {
+          "method": "B4-Full",
+          "intent": "transfer_not_received_by_recipient",
+          "accepted": true,
+          "score": 0.659113,
+          "threshold": 0.367605,
+          "top3": [
+            [
+              "transfer_not_received_by_recipient",
+              0.7931410670280457
+            ],
+            [
+              "balance_not_updated_after_bank_transfer",
+              0.772197425365448
+            ],
+            [
+              "transfer_timing",
+              0.7271702885627747
+            ]
+          ],
+          "gate_top1": 0.5276807546615601
+        },
+        "tools": [
+          {
+            "tool": "get_transfer_status",
+            "args": {
+              "transfer_id": "TXN-2001"
+            },
+            "result": {
+              "transfer_id": "TXN-2001",
+              "status": "pending",
+              "amount": 250.0,
+              "currency": "USD",
+              "recipient": "ACME Supplies"
+            }
+          }
+        ]
+      }
+    ],
+    "snapshot": {
+      "cards": [
+        {
+          "card_id": "CARD-1001",
+          "customer_id": "CUST-1001",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "4242",
+          "activated_at": "2026-10-01T10:00:00+00:00"
+        },
+        {
+          "card_id": "CARD-1002",
+          "customer_id": "CUST-1001",
+          "status": "inactive",
+          "delivery_status": "in_transit",
+          "last4": "1881",
+          "activated_at": null
+        },
+        {
+          "card_id": "CARD-2001",
+          "customer_id": "CUST-1002",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "7777",
+          "activated_at": "2026-09-15T09:00:00+00:00"
+        }
+      ],
+      "transfers": [
+        {
+          "transfer_id": "TXN-2001",
+          "customer_id": "CUST-1001",
+          "amount": 250.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "ACME Supplies",
+          "created_at": "2026-11-15T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2002",
+          "customer_id": "CUST-1001",
+          "amount": 90.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Landlord Demo",
+          "created_at": "2026-11-16T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2003",
+          "customer_id": "CUST-1001",
+          "amount": 120.0,
+          "currency": "USD",
+          "status": "completed",
+          "recipient": "Utility Co",
+          "created_at": "2026-11-10T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2004",
+          "customer_id": "CUST-1002",
+          "amount": 500.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Other Demo",
+          "created_at": "2026-11-14T08:00:00+00:00"
+        }
+      ],
+      "disputes": [],
+      "tickets": [
+        {
+          "ticket_id": "TCK-1000",
+          "customer_id": "CUST-1001",
+          "intent": "general",
+          "issue": "Welcome to the fictional demo queue",
+          "status": "open",
+          "priority": "low",
+          "created_at": "2026-11-18T01:10:56.293937+00:00"
+        }
+      ],
+      "audit_events": [
+        {
+          "event_id": 1,
+          "session_id": "DEMO-D2",
+          "customer_id": "CUST-1001",
+          "tool": "get_transfer_status",
+          "args_json": "{\"transfer_id\": \"TXN-2001\"}",
+          "result_json": "{\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}",
+          "created_at": "2026-11-18T01:10:56.356043+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "D3",
+    "method": "B3-H",
+    "turns": [
+      {
+        "user": "Please cancel transfer TXN-2002.",
+        "response": "Transfer **TXN-2002** is still pending (90.00 USD to Landlord Demo). Cancelling it is a sensitive action. Do you explicitly confirm cancellation?",
+        "route": {
+          "method": "B3-H",
+          "intent": "cancel_transfer",
+          "accepted": true,
+          "score": 0.807056,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "cancel_transfer",
+              0.8070557117462158
+            ],
+            [
+              "beneficiary_not_allowed",
+              0.7062318325042725
+            ],
+            [
+              "top_up_reverted",
+              0.6555160880088806
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": [
+          {
+            "tool": "cancel_transfer",
+            "args": {
+              "transfer_id": "TXN-2002",
+              "confirmed": false
+            },
+            "result": {
+              "status": "confirmation_required",
+              "transfer_id": "TXN-2002",
+              "amount": 90.0,
+              "recipient": "Landlord Demo"
+            }
+          }
+        ]
+      },
+      {
+        "user": "yes",
+        "response": "Confirmed. Transfer **TXN-2002** is now **cancelled** in the mock database.",
+        "route": {
+          "method": "B3-H",
+          "intent": "cancel_transfer",
+          "accepted": true,
+          "score": 0.807056,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "cancel_transfer",
+              0.8070557117462158
+            ],
+            [
+              "beneficiary_not_allowed",
+              0.7062318325042725
+            ],
+            [
+              "top_up_reverted",
+              0.6555160880088806
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": [
+          {
+            "tool": "cancel_transfer",
+            "args": {
+              "transfer_id": "TXN-2002",
+              "confirmed": true
+            },
+            "result": {
+              "status": "cancelled",
+              "transfer_id": "TXN-2002",
+              "amount": 90.0
+            }
+          }
+        ]
+      }
+    ],
+    "snapshot": {
+      "cards": [
+        {
+          "card_id": "CARD-1001",
+          "customer_id": "CUST-1001",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "4242",
+          "activated_at": "2026-10-01T10:00:00+00:00"
+        },
+        {
+          "card_id": "CARD-1002",
+          "customer_id": "CUST-1001",
+          "status": "inactive",
+          "delivery_status": "in_transit",
+          "last4": "1881",
+          "activated_at": null
+        },
+        {
+          "card_id": "CARD-2001",
+          "customer_id": "CUST-1002",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "7777",
+          "activated_at": "2026-09-15T09:00:00+00:00"
+        }
+      ],
+      "transfers": [
+        {
+          "transfer_id": "TXN-2001",
+          "customer_id": "CUST-1001",
+          "amount": 250.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "ACME Supplies",
+          "created_at": "2026-11-15T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2002",
+          "customer_id": "CUST-1001",
+          "amount": 90.0,
+          "currency": "USD",
+          "status": "cancelled",
+          "recipient": "Landlord Demo",
+          "created_at": "2026-11-16T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2003",
+          "customer_id": "CUST-1001",
+          "amount": 120.0,
+          "currency": "USD",
+          "status": "completed",
+          "recipient": "Utility Co",
+          "created_at": "2026-11-10T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2004",
+          "customer_id": "CUST-1002",
+          "amount": 500.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Other Demo",
+          "created_at": "2026-11-14T08:00:00+00:00"
+        }
+      ],
+      "disputes": [],
+      "tickets": [
+        {
+          "ticket_id": "TCK-1000",
+          "customer_id": "CUST-1001",
+          "intent": "general",
+          "issue": "Welcome to the fictional demo queue",
+          "status": "open",
+          "priority": "low",
+          "created_at": "2026-11-18T01:10:56.421161+00:00"
+        }
+      ],
+      "audit_events": [
+        {
+          "event_id": 2,
+          "session_id": "DEMO-D3",
+          "customer_id": "CUST-1001",
+          "tool": "cancel_transfer",
+          "args_json": "{\"transfer_id\": \"TXN-2002\", \"confirmed\": true}",
+          "result_json": "{\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}",
+          "created_at": "2026-11-18T01:10:56.486772+00:00"
+        },
+        {
+          "event_id": 1,
+          "session_id": "DEMO-D3",
+          "customer_id": "CUST-1001",
+          "tool": "cancel_transfer",
+          "args_json": "{\"transfer_id\": \"TXN-2002\", \"confirmed\": false}",
+          "result_json": "{\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}",
+          "created_at": "2026-11-18T01:10:56.470645+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "D4",
+    "method": "B3-H",
+    "turns": [
+      {
+        "user": "How do I buy Bitcoin?",
+        "response": "I’m not confident this is a supported banking request. I’m handing you to a human specialist and creating a ticket.",
+        "route": {
+          "method": "B3-H",
+          "intent": "OOS",
+          "accepted": false,
+          "score": 0.652867,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "verify_source_of_funds",
+              0.6528668403625488
+            ],
+            [
+              "exchange_via_app",
+              0.6505719423294067
+            ],
+            [
+              "fiat_currency_support",
+              0.6403298377990723
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": [
+          {
+            "tool": "handoff_to_human",
+            "args": {
+              "intent": "OOS",
+              "reason": "Router rejected the request as unsupported/unknown"
+            },
+            "result": {
+              "status": "handoff_created",
+              "ticket_id": "TCK-1002",
+              "intent": "OOS"
+            }
+          }
+        ]
+      }
+    ],
+    "snapshot": {
+      "cards": [
+        {
+          "card_id": "CARD-1001",
+          "customer_id": "CUST-1001",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "4242",
+          "activated_at": "2026-10-01T10:00:00+00:00"
+        },
+        {
+          "card_id": "CARD-1002",
+          "customer_id": "CUST-1001",
+          "status": "inactive",
+          "delivery_status": "in_transit",
+          "last4": "1881",
+          "activated_at": null
+        },
+        {
+          "card_id": "CARD-2001",
+          "customer_id": "CUST-1002",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "7777",
+          "activated_at": "2026-09-15T09:00:00+00:00"
+        }
+      ],
+      "transfers": [
+        {
+          "transfer_id": "TXN-2001",
+          "customer_id": "CUST-1001",
+          "amount": 250.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "ACME Supplies",
+          "created_at": "2026-11-15T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2002",
+          "customer_id": "CUST-1001",
+          "amount": 90.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Landlord Demo",
+          "created_at": "2026-11-16T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2003",
+          "customer_id": "CUST-1001",
+          "amount": 120.0,
+          "currency": "USD",
+          "status": "completed",
+          "recipient": "Utility Co",
+          "created_at": "2026-11-10T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2004",
+          "customer_id": "CUST-1002",
+          "amount": 500.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Other Demo",
+          "created_at": "2026-11-14T08:00:00+00:00"
+        }
+      ],
+      "disputes": [],
+      "tickets": [
+        {
+          "ticket_id": "TCK-1000",
+          "customer_id": "CUST-1001",
+          "intent": "general",
+          "issue": "Welcome to the fictional demo queue",
+          "status": "open",
+          "priority": "low",
+          "created_at": "2026-11-18T01:10:56.551230+00:00"
+        },
+        {
+          "ticket_id": "TCK-1002",
+          "customer_id": "CUST-1001",
+          "intent": "OOS",
+          "issue": "HUMAN HANDOFF: Router rejected the request as unsupported/unknown",
+          "status": "open",
+          "priority": "high",
+          "created_at": "2026-11-18T01:10:56.593696+00:00"
+        }
+      ],
+      "audit_events": [
+        {
+          "event_id": 2,
+          "session_id": "DEMO-D4",
+          "customer_id": "CUST-1001",
+          "tool": "handoff_to_human",
+          "args_json": "{\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}",
+          "result_json": "{\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}",
+          "created_at": "2026-11-18T01:10:56.611048+00:00"
+        },
+        {
+          "event_id": 1,
+          "session_id": "DEMO-D4",
+          "customer_id": "CUST-1001",
+          "tool": "create_ticket",
+          "args_json": "{\"intent\": \"OOS\", \"issue\": \"HUMAN HANDOFF: Router rejected the request as unsupported/unknown\", \"priority\": \"high\"}",
+          "result_json": "{\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}",
+          "created_at": "2026-11-18T01:10:56.602617+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "D5",
+    "method": "B3-H",
+    "turns": [
+      {
+        "user": "I still have not received my card CARD-2001.",
+        "response": "I couldn’t perform that card action. I’m creating a human handoff ticket and did not make any financial change.",
+        "route": {
+          "method": "B3-H",
+          "intent": "card_arrival",
+          "accepted": true,
+          "score": 0.816037,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "card_arrival",
+              0.816036581993103
+            ],
+            [
+              "card_not_working",
+              0.755056619644165
+            ],
+            [
+              "card_about_to_expire",
+              0.7283322811126709
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": [
+          {
+            "tool": "handoff_to_human",
+            "args": {
+              "intent": "card_arrival",
+              "reason": "ownership_denied: That card belongs to another fictional customer"
+            },
+            "result": {
+              "status": "handoff_created",
+              "ticket_id": "TCK-1002",
+              "intent": "card_arrival"
+            }
+          }
+        ]
+      }
+    ],
+    "snapshot": {
+      "cards": [
+        {
+          "card_id": "CARD-1001",
+          "customer_id": "CUST-1001",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "4242",
+          "activated_at": "2026-10-01T10:00:00+00:00"
+        },
+        {
+          "card_id": "CARD-1002",
+          "customer_id": "CUST-1001",
+          "status": "inactive",
+          "delivery_status": "in_transit",
+          "last4": "1881",
+          "activated_at": null
+        },
+        {
+          "card_id": "CARD-2001",
+          "customer_id": "CUST-1002",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "7777",
+          "activated_at": "2026-09-15T09:00:00+00:00"
+        }
+      ],
+      "transfers": [
+        {
+          "transfer_id": "TXN-2001",
+          "customer_id": "CUST-1001",
+          "amount": 250.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "ACME Supplies",
+          "created_at": "2026-11-15T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2002",
+          "customer_id": "CUST-1001",
+          "amount": 90.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Landlord Demo",
+          "created_at": "2026-11-16T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2003",
+          "customer_id": "CUST-1001",
+          "amount": 120.0,
+          "currency": "USD",
+          "status": "completed",
+          "recipient": "Utility Co",
+          "created_at": "2026-11-10T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2004",
+          "customer_id": "CUST-1002",
+          "amount": 500.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Other Demo",
+          "created_at": "2026-11-14T08:00:00+00:00"
+        }
+      ],
+      "disputes": [],
+      "tickets": [
+        {
+          "ticket_id": "TCK-1000",
+          "customer_id": "CUST-1001",
+          "intent": "general",
+          "issue": "Welcome to the fictional demo queue",
+          "status": "open",
+          "priority": "low",
+          "created_at": "2026-11-18T01:10:56.671357+00:00"
+        },
+        {
+          "ticket_id": "TCK-1002",
+          "customer_id": "CUST-1001",
+          "intent": "card_arrival",
+          "issue": "HUMAN HANDOFF: ownership_denied: That card belongs to another fictional customer",
+          "status": "open",
+          "priority": "high",
+          "created_at": "2026-11-18T01:10:56.741516+00:00"
+        }
+      ],
+      "audit_events": [
+        {
+          "event_id": 3,
+          "session_id": "DEMO-D5",
+          "customer_id": "CUST-1001",
+          "tool": "handoff_to_human",
+          "args_json": "{\"intent\": \"card_arrival\", \"reason\": \"ownership_denied: That card belongs to another fictional customer\"}",
+          "result_json": "{\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"card_arrival\"}",
+          "created_at": "2026-11-18T01:10:56.751057+00:00"
+        },
+        {
+          "event_id": 2,
+          "session_id": "DEMO-D5",
+          "customer_id": "CUST-1001",
+          "tool": "create_ticket",
+          "args_json": "{\"intent\": \"card_arrival\", \"issue\": \"HUMAN HANDOFF: ownership_denied: That card belongs to another fictional customer\", \"priority\": \"high\"}",
+          "result_json": "{\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"card_arrival\"}",
+          "created_at": "2026-11-18T01:10:56.745555+00:00"
+        },
+        {
+          "event_id": 1,
+          "session_id": "DEMO-D5",
+          "customer_id": "CUST-1001",
+          "tool": "get_card_delivery_status",
+          "args_json": "{\"card_id\": \"CARD-2001\"}",
+          "result_json": "{\"error\": \"ownership_denied\", \"message\": \"That card belongs to another fictional customer\"}",
+          "created_at": "2026-11-18T01:10:56.733694+00:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "D6",
+    "method": "B3-H",
+    "turns": [
+      {
+        "user": "My transfer TXN-2001 has not arrived yet.",
+        "response": "I’m not fully sure whether you mean **transfer_not_received_by_recipient** or **balance_not_updated_after_bank_transfer**. Could you clarify in a few words?",
+        "route": {
+          "method": "B3-H",
+          "intent": "transfer_not_received_by_recipient",
+          "accepted": true,
+          "score": 0.79146,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "transfer_not_received_by_recipient",
+              0.7914604544639587
+            ],
+            [
+              "balance_not_updated_after_bank_transfer",
+              0.7828240990638733
+            ],
+            [
+              "transfer_timing",
+              0.750058650970459
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": []
+      },
+      {
+        "user": "transfer_not_received_by_recipient",
+        "response": "I can help with **transfer_not_received_by_recipient**. Please provide your fictional transfer ID (for example TXN-2001).",
+        "route": {
+          "method": "B3-H",
+          "intent": "transfer_not_received_by_recipient",
+          "accepted": true,
+          "score": 0.79146,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "transfer_not_received_by_recipient",
+              0.7914604544639587
+            ],
+            [
+              "balance_not_updated_after_bank_transfer",
+              0.7828240990638733
+            ],
+            [
+              "transfer_timing",
+              0.750058650970459
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": []
+      },
+      {
+        "user": "TXN-2001",
+        "response": "Transfer **TXN-2001** is **pending**; amount 250.00 USD to ACME Supplies.",
+        "route": {
+          "method": "B3-H",
+          "intent": "transfer_not_received_by_recipient",
+          "accepted": true,
+          "score": 0.79146,
+          "threshold": 0.783194,
+          "top3": [
+            [
+              "transfer_not_received_by_recipient",
+              0.7914604544639587
+            ],
+            [
+              "balance_not_updated_after_bank_transfer",
+              0.7828240990638733
+            ],
+            [
+              "transfer_timing",
+              0.750058650970459
+            ]
+          ],
+          "gate_top1": null
+        },
+        "tools": [
+          {
+            "tool": "get_transfer_status",
+            "args": {
+              "transfer_id": "TXN-2001"
+            },
+            "result": {
+              "transfer_id": "TXN-2001",
+              "status": "pending",
+              "amount": 250.0,
+              "currency": "USD",
+              "recipient": "ACME Supplies"
+            }
+          }
+        ]
+      }
+    ],
+    "snapshot": {
+      "cards": [
+        {
+          "card_id": "CARD-1001",
+          "customer_id": "CUST-1001",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "4242",
+          "activated_at": "2026-10-01T10:00:00+00:00"
+        },
+        {
+          "card_id": "CARD-1002",
+          "customer_id": "CUST-1001",
+          "status": "inactive",
+          "delivery_status": "in_transit",
+          "last4": "1881",
+          "activated_at": null
+        },
+        {
+          "card_id": "CARD-2001",
+          "customer_id": "CUST-1002",
+          "status": "active",
+          "delivery_status": "delivered",
+          "last4": "7777",
+          "activated_at": "2026-09-15T09:00:00+00:00"
+        }
+      ],
+      "transfers": [
+        {
+          "transfer_id": "TXN-2001",
+          "customer_id": "CUST-1001",
+          "amount": 250.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "ACME Supplies",
+          "created_at": "2026-11-15T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2002",
+          "customer_id": "CUST-1001",
+          "amount": 90.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Landlord Demo",
+          "created_at": "2026-11-16T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2003",
+          "customer_id": "CUST-1001",
+          "amount": 120.0,
+          "currency": "USD",
+          "status": "completed",
+          "recipient": "Utility Co",
+          "created_at": "2026-11-10T08:00:00+00:00"
+        },
+        {
+          "transfer_id": "TXN-2004",
+          "customer_id": "CUST-1002",
+          "amount": 500.0,
+          "currency": "USD",
+          "status": "pending",
+          "recipient": "Other Demo",
+          "created_at": "2026-11-14T08:00:00+00:00"
+        }
+      ],
+      "disputes": [],
+      "tickets": [
+        {
+          "ticket_id": "TCK-1000",
+          "customer_id": "CUST-1001",
+          "intent": "general",
+          "issue": "Welcome to the fictional demo queue",
+          "status": "open",
+          "priority": "low",
+          "created_at": "2026-11-18T01:10:56.810121+00:00"
+        }
+      ],
+      "audit_events": [
+        {
+          "event_id": 1,
+          "session_id": "DEMO-D6",
+          "customer_id": "CUST-1001",
+          "tool": "get_transfer_status",
+          "args_json": "{\"transfer_id\": \"TXN-2001\"}",
+          "result_json": "{\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}",
+          "created_at": "2026-11-18T01:10:56.868541+00:00"
+        }
+      ]
+    }
+  }
+]

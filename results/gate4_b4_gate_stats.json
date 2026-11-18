@@ -1,0 +1,18 @@
+{
+  "train_seconds": 12.548859400005313,
+  "epochs_fusion": 60,
+  "epochs_full": 60,
+  "n_episodes": 24,
+  "known_queries_per_episode": 170,
+  "pseudo_oos_per_episode": 30,
+  "fusion_gate_mean": 0.11026803404092789,
+  "fusion_gate_std": 0.2446858435869217,
+  "full_gate_mean": 0.021626543253660202,
+  "full_gate_std": 0.11274584382772446,
+  "fusion_gate_max_abs_delta": 1.2961134910583496,
+  "full_gate_max_abs_delta": 0.6407008767127991,
+  "first_fusion_gate_grad_norm": 0.001789755112972651,
+  "last_fusion_gate_grad_norm": 0.001168694116762784,
+  "first_full_gate_grad_norm": 0.0014042566579477052,
+  "last_full_gate_grad_norm": 0.10772901569659869
+}

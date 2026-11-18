@@ -1,0 +1,9 @@
+{
+  "n_cases": 16,
+  "task_completion_rate": 1.0,
+  "tool_call_correctness": 1.0,
+  "clarification_rate": 0.0625,
+  "confirmation_rate": 0.25,
+  "escalation_rate": 0.125,
+  "note": "16 scripted deterministic tool/state cases with StubRouter; real-router demos are separate."
+}

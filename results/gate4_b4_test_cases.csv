@@ -1,0 +1,6 @@
+category,sample_id,text,true_label,pred_label,accepted,reject_score,tau,top3,gate_top1
+known_correct,banking77:test:00001,"I still have not received my new card, I ordered over a week ago.",card_arrival,card_arrival,1,0.9295672178268432,0.367605084180832,card_arrival:0.8627 | card_about_to_expire:0.7696 | card_not_working,0.8775745630264282
+known_rejected,banking77:test:00037,Is there tracking info available?,card_arrival,OOS,0,0.1786898374557495,0.367605084180832,card_arrival:0.7236 | verify_source_of_funds:0.6205 | card_payment_not_recognised,0.0016768624773249
+known_misclassified,banking77:test:00000,How do I locate my card?,card_arrival,card_linking,1,0.889337956905365,0.367605084180832,card_linking:0.8581 | card_arrival:0.8341 | get_physical_card,0.8544314503669739
+oos_correct,banking77:test:00162,I'm not okay with this fee on my statement.,OOS,OOS,0,0.203261911869049,0.367605084180832,card_payment_fee_charged:0.7533 | card_payment_not_recognised:0.7297 | wrong_exchange_rate_for_cash_withdrawal,0.1165782585740089
+oos_false_accept,banking77:test:00160,My statement has a dollar I have been charged showing up on it.,OOS,card_payment_not_recognised,1,0.5380239486694336,0.367605084180832,card_payment_not_recognised:0.7882 | card_payment_fee_charged:0.7396 | Refund_not_showing_up,0.398720771074295
