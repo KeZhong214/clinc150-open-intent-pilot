@@ -104,6 +104,17 @@ key，触发 `st.session_state.router_choice cannot be modified after widget`。
 可用但不可调用；`gate5_llm_api_results.json` 明确记录
 `NOT RUN_API_BLOCKED`，n_completed=0，没有伪造 12 条 API 会话。
 
+### 3.10 Benchmark 后的通用 FAQ fallback
+
+首次正式 benchmark 中，policy FAQ 只有 50% 左右通过，原因是路由把
+“what is the policy...”判成 OOS，Agent 直接 handoff。做了一次通用修复：
+当路由拒识、没有卡/转账 ID、且文本包含 fee/policy/process/methods 等政策
+词时，允许走本地知识库，禁止任何工具或金融动作。
+
+该修复是在错误分析后加入的，随后重跑了同一份 120 条冻结任务；任务内容
+没有修改。最终 TSR 从约 50% 提升到 62.5%（B3H），但这不是“从未看过
+benchmark 的盲测”，报告中已注明。
+
 ## 4. 真实运行证据
 
 - `logs/gate5_lora_train.log`：2 epoch，22.19 s，峰值 1368 MiB；

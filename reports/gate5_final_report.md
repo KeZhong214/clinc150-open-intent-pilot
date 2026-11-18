@@ -258,6 +258,9 @@ success rate is 0.0, not an average over all 120 cases.
 - 120 条任务为模拟数据，不是真实银行线上分布；
 - 测试用 Stub 的 16 条 Gate4 状态测试不计入 Gate5 120 条真实路由 benchmark；
 - API 模式因凭据缺失未运行；
+- 在首次 benchmark 错误分析后，只加入了一次**通用 FAQ fallback**（路由拒识时允许
+  本地知识库回答政策问题），任务内容未修改，随后重跑 benchmark；因此最终 Agent
+  结果不是完全盲测的“第一次运行”，但任务集哈希保持不变；
 - 没有做显著性检验；提升幅度小。
 
 ### 下一步
@@ -266,7 +269,7 @@ success rate is 0.0, not an average over all 120 cases.
 - 多 seed 训练 LoRA，先解决 routing 退化，再谈组合；
 - 用真实用户表达扩充 transfer/dispute/permission 任务族；
 - 配好 API 凭据后跑 12 条真实 API 会话，并单独报告 token/cost；
-- 不基于当前 benchmark 继续调 Agent 规则。
+- 不基于当前 benchmark 继续调 Agent 规则；若继续，需要新的独立任务集。
 
 ---
 
