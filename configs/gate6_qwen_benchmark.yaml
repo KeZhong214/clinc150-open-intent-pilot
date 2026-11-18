@@ -1,0 +1,19 @@
+schema_version: gate6-qwen-benchmark-v1
+cases: data/gate5/benchmark_cases.jsonl
+n_cases: 120
+label: historical_exploratory_old_gate5_tasks_not_blind
+routers:
+  - Qwen-Frozen-B3H
+  - Qwen-Plain-B3H
+  - Qwen-Plain-RejectOnly
+  - Qwen-Plain-B4Full
+runs: 480
+metrics:
+  - task_success_rate
+  - tool_accuracy
+  - safe_action_rate
+  - routing_accuracy
+  - clarification_success
+  - p50_latency_seconds
+  - p95_latency_seconds
+result: results/gate6_qwen_benchmark_summary.csv

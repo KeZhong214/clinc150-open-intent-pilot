@@ -21,12 +21,12 @@
 共同设置：400 support，seed 42，2 epochs，microbatch 2，grad accumulation 8，
 eff. 16 triplets/step，50 optimizer steps，lr 1e-4。
 
-| Run | Train s | Peak MiB | Adapter MB | Frozen cos |
+| Run | Train s | Peak MiB | Adapter MB | Support cosine |
 |---|---:|---:|---:|---:|
-| Plain | 295.2 | 1,259.9 | 8.78 | 0.8806 |
-| Anchor (λ=0.5) | 290.2 | 1,259.9 | 8.78 | 0.9454 |
+| Plain | 295.2 | 1,259.9 | 8.78 | 0.892 |
+| Anchor (λ=0.5) | 290.2 | 1,259.9 | 8.78 | 0.936 |
 
-Anchor 明显减小 support 表征漂移。
+Anchor 明显减小 support 表征漂移（4-probe 检查为 0.881→0.945）。
 
 Validation：
 

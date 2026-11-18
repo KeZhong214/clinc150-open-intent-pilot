@@ -1,0 +1,12 @@
+router,failure_reason,count
+Qwen-Frozen-B3H,routing,34
+Qwen-Frozen-B3H,tool_selection_or_args,11
+Qwen-Plain-B3H,clarification,5
+Qwen-Plain-B3H,routing,42
+Qwen-Plain-B3H,tool_selection_or_args,2
+Qwen-Plain-B4Full,clarification,5
+Qwen-Plain-B4Full,routing,37
+Qwen-Plain-B4Full,tool_selection_or_args,3
+Qwen-Plain-RejectOnly,clarification,5
+Qwen-Plain-RejectOnly,routing,35
+Qwen-Plain-RejectOnly,tool_selection_or_args,2

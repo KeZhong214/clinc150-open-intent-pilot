@@ -1,0 +1,962 @@
+[
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B001",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Hi, I still haven't received my card. The reference is CARD-1001.\", \"response\": \"Card **CARD-1001** has delivery status **delivered** and card status **active**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.504688, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.7948422431945801], [\"transfer_not_received_by_recipient\", 0.6890965104103088], [\"card_linking\", 0.6676758527755737]], \"gate_top1\": 0.4812778830528259}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1001\"}, \"result\": {\"card_id\": \"CARD-1001\", \"delivery_status\": \"delivered\", \"status\": \"active\", \"last4\": \"4242\"}}], \"citations\": [], \"latency_seconds\": 2.1953}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B002",
+    "family": "card_status_activation",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Where is my card? Please check CARD-1001.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.093914, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.7318555116653442], [\"card_linking\", 0.7134122252464294], [\"get_physical_card\", 0.6427276730537415]], \"gate_top1\": 0.276684433221817}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2481}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B003",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Can you track the delivery of CARD-1001 for me?\", \"response\": \"Card **CARD-1001** has delivery status **delivered** and card status **active**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.790183, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8189092874526978], [\"transfer_not_received_by_recipient\", 0.6335898637771606], [\"balance_not_updated_after_bank_transfer\", 0.6218108534812927]], \"gate_top1\": 0.5707546472549438}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1001\"}, \"result\": {\"card_id\": \"CARD-1001\", \"delivery_status\": \"delivered\", \"status\": \"active\", \"last4\": \"4242\"}}], \"citations\": [], \"latency_seconds\": 0.2096}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B004",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My card CARD-1001 is taking a long time. What is its delivery status?\", \"response\": \"Card **CARD-1001** has delivery status **delivered** and card status **active**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.903881, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8764030933380127], [\"transfer_not_received_by_recipient\", 0.7495403289794922], [\"pending_top_up\", 0.6982638835906982]], \"gate_top1\": 0.7460871934890747}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1001\"}, \"result\": {\"card_id\": \"CARD-1001\", \"delivery_status\": \"delivered\", \"status\": \"active\", \"last4\": \"4242\"}}], \"citations\": [], \"latency_seconds\": 0.2059}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B005",
+    "family": "card_status_activation",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I ordered a card and the reference is CARD-1001. Has it arrived?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.325144, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.7630118727684021], [\"transfer_not_received_by_recipient\", 0.6543488502502441], [\"card_linking\", 0.6513994336128235]], \"gate_top1\": 0.3845762312412262}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2615}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B006",
+    "family": "card_status_activation",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Please check the shipping status for CARD-1001.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.38875, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.7650240063667297], [\"transfer_not_received_by_recipient\", 0.618096649646759], [\"balance_not_updated_after_bank_transfer\", 0.597226083278656]], \"gate_top1\": 0.3656620681285858}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2514}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B007",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Hi, I still haven't received my card. The reference is CARD-1002.\", \"response\": \"Card **CARD-1002** has delivery status **in transit** and card status **inactive**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.596619, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8086318969726562], [\"transfer_not_received_by_recipient\", 0.7008159160614014], [\"card_linking\", 0.6703404784202576]], \"gate_top1\": 0.529030978679657}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1002\"}, \"result\": {\"card_id\": \"CARD-1002\", \"delivery_status\": \"in_transit\", \"status\": \"inactive\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2753}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B008",
+    "family": "card_status_activation",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Where is my card? Please check CARD-1002.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.102927, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.7365843653678894], [\"card_linking\", 0.7199862599372864], [\"cash_withdrawal_not_recognised\", 0.6538025140762329]], \"gate_top1\": 0.2929198741912842}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2711}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B009",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Can you track the delivery of CARD-1002 for me?\", \"response\": \"Card **CARD-1002** has delivery status **in transit** and card status **inactive**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.854015, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8332054615020752], [\"transfer_not_received_by_recipient\", 0.6412138342857361], [\"balance_not_updated_after_bank_transfer\", 0.629470944404602]], \"gate_top1\": 0.6235018968582153}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1002\"}, \"result\": {\"card_id\": \"CARD-1002\", \"delivery_status\": \"in_transit\", \"status\": \"inactive\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2463}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B010",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My card CARD-1002 is taking a long time. What is its delivery status?\", \"response\": \"Card **CARD-1002** has delivery status **in transit** and card status **inactive**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.893088, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.872789740562439], [\"transfer_not_received_by_recipient\", 0.7498825788497925], [\"pending_top_up\", 0.7022234201431274]], \"gate_top1\": 0.7356265187263489}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1002\"}, \"result\": {\"card_id\": \"CARD-1002\", \"delivery_status\": \"in_transit\", \"status\": \"inactive\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2631}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B011",
+    "family": "card_status_activation",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I ordered a card and the reference is CARD-1002. Has it arrived?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.225791, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.7438633441925049], [\"transfer_not_received_by_recipient\", 0.6433570981025696], [\"card_linking\", 0.6385161876678467]], \"gate_top1\": 0.33079028129577637}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2558}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B012",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please check the shipping status for CARD-1002.\", \"response\": \"Card **CARD-1002** has delivery status **in transit** and card status **inactive**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.422557, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.7682111263275146], [\"transfer_not_received_by_recipient\", 0.6177191734313965], [\"balance_not_updated_after_bank_transfer\", 0.6036586761474609]], \"gate_top1\": 0.38181284070014954}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1002\"}, \"result\": {\"card_id\": \"CARD-1002\", \"delivery_status\": \"in_transit\", \"status\": \"inactive\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2811}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B013",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I have not received my new card yet. Can you check it?\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.289}, {\"user\": \"CARD-1001\", \"response\": \"Card **CARD-1001** has delivery status **delivered** and card status **active**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1001\"}, \"result\": {\"card_id\": \"CARD-1001\", \"delivery_status\": \"delivered\", \"status\": \"active\", \"last4\": \"4242\"}}], \"citations\": [], \"latency_seconds\": 0.0117}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B014",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I have not received my new card yet. Can you check it?\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.2435}, {\"user\": \"CARD-1001\", \"response\": \"Card **CARD-1001** has delivery status **delivered** and card status **active**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1001\"}, \"result\": {\"card_id\": \"CARD-1001\", \"delivery_status\": \"delivered\", \"status\": \"active\", \"last4\": \"4242\"}}], \"citations\": [], \"latency_seconds\": 0.014}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B015",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I have not received my new card yet. Can you check it?\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.2668}, {\"user\": \"CARD-1001\", \"response\": \"Card **CARD-1001** has delivery status **delivered** and card status **active**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1001\"}, \"result\": {\"card_id\": \"CARD-1001\", \"delivery_status\": \"delivered\", \"status\": \"active\", \"last4\": \"4242\"}}], \"citations\": [], \"latency_seconds\": 0.0121}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B016",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I have not received my new card yet. Can you check it?\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.2454}, {\"user\": \"CARD-1002\", \"response\": \"Card **CARD-1002** has delivery status **in transit** and card status **inactive**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1002\"}, \"result\": {\"card_id\": \"CARD-1002\", \"delivery_status\": \"in_transit\", \"status\": \"inactive\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.011}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B017",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I have not received my new card yet. Can you check it?\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.2443}, {\"user\": \"CARD-1002\", \"response\": \"Card **CARD-1002** has delivery status **in transit** and card status **inactive**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.963724, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8982700109481812], [\"transfer_not_received_by_recipient\", 0.7009047865867615], [\"card_linking\", 0.6758131384849548]], \"gate_top1\": 0.7954171895980835}, \"tools\": [{\"tool\": \"get_card_delivery_status\", \"args\": {\"card_id\": \"CARD-1002\"}, \"result\": {\"card_id\": \"CARD-1002\", \"delivery_status\": \"in_transit\", \"status\": \"inactive\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.013}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B018",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please activate my new card CARD-1002. I need to start using it.\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.958814, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8937042951583862], [\"card_about_to_expire\", 0.701979398727417], [\"card_linking\", 0.6918423771858215]], \"gate_top1\": 0.785290539264679}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2721}, {\"user\": \"yes\", \"response\": \"Confirmed. Card **CARD-1002** is now **activated**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.958814, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8937042951583862], [\"card_about_to_expire\", 0.701979398727417], [\"card_linking\", 0.6918423771858215]], \"gate_top1\": 0.785290539264679}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": true}, \"result\": {\"status\": \"activated\", \"card_id\": \"CARD-1002\"}}], \"citations\": [], \"latency_seconds\": 0.0219}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B019",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I want to turn on CARD-1002, can you activate it?\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.799181, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8571004867553711], [\"card_linking\", 0.7824159860610962], [\"virtual_card_not_working\", 0.6183526515960693]], \"gate_top1\": 0.6957337856292725}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2921}, {\"user\": \"yes\", \"response\": \"Confirmed. Card **CARD-1002** is now **activated**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.799181, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8571004867553711], [\"card_linking\", 0.7824159860610962], [\"virtual_card_not_working\", 0.6183526515960693]], \"gate_top1\": 0.6957337856292725}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": true}, \"result\": {\"status\": \"activated\", \"card_id\": \"CARD-1002\"}}], \"citations\": [], \"latency_seconds\": 0.0213}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B020",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please activate my new card CARD-1002. I need to start using it.\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.958814, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8937042951583862], [\"card_about_to_expire\", 0.701979398727417], [\"card_linking\", 0.6918423771858215]], \"gate_top1\": 0.785290539264679}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2609}, {\"user\": \"yes\", \"response\": \"Confirmed. Card **CARD-1002** is now **activated**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.958814, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8937042951583862], [\"card_about_to_expire\", 0.701979398727417], [\"card_linking\", 0.6918423771858215]], \"gate_top1\": 0.785290539264679}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": true}, \"result\": {\"status\": \"activated\", \"card_id\": \"CARD-1002\"}}], \"citations\": [], \"latency_seconds\": 0.0215}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B021",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I want to turn on CARD-1002, can you activate it?\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.799181, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8571004867553711], [\"card_linking\", 0.7824159860610962], [\"virtual_card_not_working\", 0.6183526515960693]], \"gate_top1\": 0.6957337856292725}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2431}, {\"user\": \"yes\", \"response\": \"Confirmed. Card **CARD-1002** is now **activated**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.799181, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8571004867553711], [\"card_linking\", 0.7824159860610962], [\"virtual_card_not_working\", 0.6183526515960693]], \"gate_top1\": 0.6957337856292725}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": true}, \"result\": {\"status\": \"activated\", \"card_id\": \"CARD-1002\"}}], \"citations\": [], \"latency_seconds\": 0.0198}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B022",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please activate my new card CARD-1002. I need to start using it.\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.958814, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8937042951583862], [\"card_about_to_expire\", 0.701979398727417], [\"card_linking\", 0.6918423771858215]], \"gate_top1\": 0.785290539264679}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.255}, {\"user\": \"yes\", \"response\": \"Confirmed. Card **CARD-1002** is now **activated**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.958814, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8937042951583862], [\"card_about_to_expire\", 0.701979398727417], [\"card_linking\", 0.6918423771858215]], \"gate_top1\": 0.785290539264679}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": true}, \"result\": {\"status\": \"activated\", \"card_id\": \"CARD-1002\"}}], \"citations\": [], \"latency_seconds\": 0.0203}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B023",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please activate CARD-1002 now.\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.89874, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8719629049301147], [\"card_linking\", 0.7335874438285828], [\"card_about_to_expire\", 0.6774870157241821]], \"gate_top1\": 0.7215906381607056}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2306}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.89874, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8719629049301147], [\"card_linking\", 0.7335874438285828], [\"card_about_to_expire\", 0.6774870157241821]], \"gate_top1\": 0.7215906381607056}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0001}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B024",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please activate CARD-1002 now.\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.89874, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8719629049301147], [\"card_linking\", 0.7335874438285828], [\"card_about_to_expire\", 0.6774870157241821]], \"gate_top1\": 0.7215906381607056}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2222}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.89874, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8719629049301147], [\"card_linking\", 0.7335874438285828], [\"card_about_to_expire\", 0.6774870157241821]], \"gate_top1\": 0.7215906381607056}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B025",
+    "family": "card_status_activation",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please activate CARD-1002 now.\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.89874, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8719629049301147], [\"card_linking\", 0.7335874438285828], [\"card_about_to_expire\", 0.6774870157241821]], \"gate_top1\": 0.7215906381607056}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.2926}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.89874, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8719629049301147], [\"card_linking\", 0.7335874438285828], [\"card_about_to_expire\", 0.6774870157241821]], \"gate_top1\": 0.7215906381607056}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B026",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "tool_selection_or_args",
+    "trace": "[{\"user\": \"What is the status of my transfer TXN-2001?\", \"response\": \"I’m not sure which task you mean: **checking whether a transfer reached the recipient** or **balance not updated after bank transfer**. Which one fits?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.426377, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.818323016166687], [\"balance_not_updated_after_bank_transfer\", 0.8177971839904785], [\"transfer_timing\", 0.7156363129615784]], \"gate_top1\": 0.5626096725463867}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1915}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B027",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Can you check transfer TXN-2001 for me?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.141211, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.744268536567688], [\"cancel_transfer\", 0.6979538202285767], [\"card_payment_not_recognised\", 0.6917067766189575]], \"gate_top1\": 0.3034498691558838}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2859}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B028",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I want to know whether TXN-2001 is still pending.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.268985, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.7812021970748901], [\"pending_top_up\", 0.7481886148452759], [\"card_arrival\", 0.6947266459465027]], \"gate_top1\": 0.43058258295059204}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2719}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B029",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Please look up the transfer reference TXN-2001.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.13456, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.738070547580719], [\"cancel_transfer\", 0.6849887371063232], [\"card_payment_not_recognised\", 0.6578885316848755]], \"gate_top1\": 0.28962916135787964}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.3739}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B030",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Has my transfer TXN-2001 been completed?\", \"response\": \"I’ve logged this as balance not updated after bank transfer and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"balance_not_updated_after_bank_transfer\", \"accepted\": true, \"score\": 0.542247, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.8189830183982849], [\"transfer_not_received_by_recipient\", 0.7662273049354553], [\"cancel_transfer\", 0.7243707180023193]], \"gate_top1\": 0.563690185546875}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"balance_not_updated_after_bank_transfer\", \"issue\": \"Has my transfer TXN-2001 been completed?\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"balance_not_updated_after_bank_transfer\"}}], \"citations\": [], \"latency_seconds\": 0.2898}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B031",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"What is the status of my transfer TXN-2003?\", \"response\": \"I’m not sure which task you mean: **balance not updated after bank transfer** or **checking whether a transfer reached the recipient**. Which one fits?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"balance_not_updated_after_bank_transfer\", \"accepted\": true, \"score\": 0.43339, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.8181911706924438], [\"transfer_not_received_by_recipient\", 0.8165796399116516], [\"transfer_timing\", 0.713256299495697]], \"gate_top1\": 0.5626693367958069}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.2507}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B032",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Can you check transfer TXN-2003 for me?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.143041, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.7452775835990906], [\"cancel_transfer\", 0.6996915340423584], [\"card_payment_not_recognised\", 0.6929047703742981]], \"gate_top1\": 0.3061683177947998}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2334}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B033",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I want to know whether TXN-2003 is still pending.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.255648, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.7782522439956665], [\"pending_top_up\", 0.74406498670578], [\"card_arrival\", 0.6904758810997009]], \"gate_top1\": 0.4195666015148163}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2651}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B034",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Please look up the transfer reference TXN-2003.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.132943, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.7373636364936829], [\"cancel_transfer\", 0.6840710043907166], [\"card_payment_not_recognised\", 0.6574147939682007]], \"gate_top1\": 0.2875837981700897}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.268}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B035",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Has my transfer TXN-2003 been completed?\", \"response\": \"I’ve logged this as balance not updated after bank transfer and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"balance_not_updated_after_bank_transfer\", \"accepted\": true, \"score\": 0.536926, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.8172903060913086], [\"transfer_not_received_by_recipient\", 0.7620761394500732], [\"cancel_transfer\", 0.7240342497825623]], \"gate_top1\": 0.5581764578819275}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"balance_not_updated_after_bank_transfer\", \"issue\": \"Has my transfer TXN-2003 been completed?\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"balance_not_updated_after_bank_transfer\"}}], \"citations\": [], \"latency_seconds\": 0.2677}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B036",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My transfer has not arrived. Can you check it?\", \"response\": \"I can help with checking whether a transfer reached the recipient. Please provide your fictional transfer ID, for example TXN-2001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.2134}, {\"user\": \"TXN-2001\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.012}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B037",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My transfer has not arrived. Can you check it?\", \"response\": \"I can help with checking whether a transfer reached the recipient. Please provide your fictional transfer ID, for example TXN-2001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1926}, {\"user\": \"TXN-2001\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.0124}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B038",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My transfer has not arrived. Can you check it?\", \"response\": \"I can help with checking whether a transfer reached the recipient. Please provide your fictional transfer ID, for example TXN-2001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.2062}, {\"user\": \"TXN-2001\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.0177}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B039",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My transfer has not arrived. Can you check it?\", \"response\": \"I can help with checking whether a transfer reached the recipient. Please provide your fictional transfer ID, for example TXN-2001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1778}, {\"user\": \"TXN-2001\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.0119}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B040",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My transfer has not arrived. Can you check it?\", \"response\": \"I can help with checking whether a transfer reached the recipient. Please provide your fictional transfer ID, for example TXN-2001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.217}, {\"user\": \"TXN-2001\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.865796, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8923745155334473], [\"balance_not_updated_after_bank_transfer\", 0.8427838087081909], [\"beneficiary_not_allowed\", 0.7685169577598572]], \"gate_top1\": 0.7713435292243958}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.0125}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B041",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel my pending transfer TXN-2002.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.946991, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.9002987146377563], [\"balance_not_updated_after_bank_transfer\", 0.7529788017272949], [\"top_up_reverted\", 0.7200878858566284]], \"gate_top1\": 0.796904444694519}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.233}, {\"user\": \"yes\", \"response\": \"Confirmed. Transfer **TXN-2002** is now **cancelled**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.946991, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.9002987146377563], [\"balance_not_updated_after_bank_transfer\", 0.7529788017272949], [\"top_up_reverted\", 0.7200878858566284]], \"gate_top1\": 0.796904444694519}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": true}, \"result\": {\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}}], \"citations\": [], \"latency_seconds\": 0.0224}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B042",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I need to stop transfer TXN-2002.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.909123, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8699787855148315], [\"balance_not_updated_after_bank_transfer\", 0.7088643312454224], [\"top_up_reverted\", 0.6746659278869629]], \"gate_top1\": 0.7156675457954407}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2606}, {\"user\": \"yes\", \"response\": \"Confirmed. Transfer **TXN-2002** is now **cancelled**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.909123, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8699787855148315], [\"balance_not_updated_after_bank_transfer\", 0.7088643312454224], [\"top_up_reverted\", 0.6746659278869629]], \"gate_top1\": 0.7156675457954407}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": true}, \"result\": {\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}}], \"citations\": [], \"latency_seconds\": 0.0238}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B043",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Can you cancel TXN-2002 for me?\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.694955, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8189111948013306], [\"declined_cash_withdrawal\", 0.691390872001648], [\"terminate_account\", 0.6906377673149109]], \"gate_top1\": 0.5665042996406555}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2273}, {\"user\": \"yes\", \"response\": \"Confirmed. Transfer **TXN-2002** is now **cancelled**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.694955, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8189111948013306], [\"declined_cash_withdrawal\", 0.691390872001648], [\"terminate_account\", 0.6906377673149109]], \"gate_top1\": 0.5665042996406555}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": true}, \"result\": {\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}}], \"citations\": [], \"latency_seconds\": 0.0244}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B044",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please call off the pending payment TXN-2002.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.462763, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.7905108332633972], [\"top_up_reverted\", 0.691525399684906], [\"Refund_not_showing_up\", 0.683866560459137]], \"gate_top1\": 0.4689498543739319}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2099}, {\"user\": \"yes\", \"response\": \"Confirmed. Transfer **TXN-2002** is now **cancelled**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.462763, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.7905108332633972], [\"top_up_reverted\", 0.691525399684906], [\"Refund_not_showing_up\", 0.683866560459137]], \"gate_top1\": 0.4689498543739319}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": true}, \"result\": {\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}}], \"citations\": [], \"latency_seconds\": 0.0227}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B045",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I want to cancel the transfer with reference TXN-2002.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.96208, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.9025002717971802], [\"balance_not_updated_after_bank_transfer\", 0.7203031182289124], [\"top_up_reverted\", 0.6993966698646545]], \"gate_top1\": 0.8050866723060608}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2684}, {\"user\": \"yes\", \"response\": \"Confirmed. Transfer **TXN-2002** is now **cancelled**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.96208, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.9025002717971802], [\"balance_not_updated_after_bank_transfer\", 0.7203031182289124], [\"top_up_reverted\", 0.6993966698646545]], \"gate_top1\": 0.8050866723060608}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": true}, \"result\": {\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}}], \"citations\": [], \"latency_seconds\": 0.0281}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B046",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Stop TXN-2002 before it goes out.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.526389, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.7940864562988281], [\"declined_cash_withdrawal\", 0.6762589812278748], [\"transfer_not_received_by_recipient\", 0.6593530178070068]], \"gate_top1\": 0.4807242751121521}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2381}, {\"user\": \"yes\", \"response\": \"Confirmed. Transfer **TXN-2002** is now **cancelled**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.526389, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.7940864562988281], [\"declined_cash_withdrawal\", 0.6762589812278748], [\"transfer_not_received_by_recipient\", 0.6593530178070068]], \"gate_top1\": 0.4807242751121521}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": true}, \"result\": {\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}}], \"citations\": [], \"latency_seconds\": 0.0221}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B047",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Please cancel TXN-2002; I no longer need it.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.390092, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.7774330377578735], [\"top_up_reverted\", 0.6745366454124451], [\"terminate_account\", 0.6711934804916382]], \"gate_top1\": 0.4235949218273163}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2636}, {\"user\": \"yes\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.016334, \"threshold\": 0.409673, \"top3\": [[\"fiat_currency_support\", 0.6319458484649658], [\"age_limit\", 0.6270120739936829], [\"card_acceptance\", 0.6136083602905273]], \"gate_top1\": 0.09550570696592331}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1003\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2131}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B048",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"I changed my mind about TXN-2002. Please cancel it.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.529933, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8081343173980713], [\"terminate_account\", 0.7289034128189087], [\"top_up_reverted\", 0.6850374341011047]], \"gate_top1\": 0.5290002226829529}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2225}, {\"user\": \"yes\", \"response\": \"Confirmed. Transfer **TXN-2002** is now **cancelled**.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.529933, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8081343173980713], [\"terminate_account\", 0.7289034128189087], [\"top_up_reverted\", 0.6850374341011047]], \"gate_top1\": 0.5290002226829529}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": true}, \"result\": {\"status\": \"cancelled\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0}}], \"citations\": [], \"latency_seconds\": 0.0213}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B049",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel TXN-2002, reference for my pending transfer.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.265}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B050",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel TXN-2002, reference for my pending transfer.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2364}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B051",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel TXN-2002, reference for my pending transfer.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2431}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B052",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel TXN-2002, reference for my pending transfer.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2134}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.921171, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8773275017738342], [\"balance_not_updated_after_bank_transfer\", 0.721727192401886], [\"top_up_reverted\", 0.7055035829544067]], \"gate_top1\": 0.7419816255569458}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B053",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel the completed transfer TXN-2003.\", \"response\": \"Transfer **TXN-2003** is completed, so it cannot be cancelled in this demo.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.954994, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.9061750769615173], [\"balance_not_updated_after_bank_transfer\", 0.7494738698005676], [\"top_up_reverted\", 0.7340298295021057]], \"gate_top1\": 0.805335283279419}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2003\", \"confirmed\": false}, \"result\": {\"status\": \"not_pending\", \"transfer_id\": \"TXN-2003\", \"current_status\": \"completed\"}}], \"citations\": [], \"latency_seconds\": 0.2563}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B054",
+    "family": "transfer_query_cancel",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel the completed transfer TXN-2003.\", \"response\": \"Transfer **TXN-2003** is completed, so it cannot be cancelled in this demo.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.954994, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.9061750769615173], [\"balance_not_updated_after_bank_transfer\", 0.7494738698005676], [\"top_up_reverted\", 0.7340298295021057]], \"gate_top1\": 0.805335283279419}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2003\", \"confirmed\": false}, \"result\": {\"status\": \"not_pending\", \"transfer_id\": \"TXN-2003\", \"current_status\": \"completed\"}}], \"citations\": [], \"latency_seconds\": 0.2708}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B055",
+    "family": "transfer_query_cancel",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Please cancel TXN-2002; it is still pending.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.206189, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.7525034546852112], [\"Refund_not_showing_up\", 0.684667706489563], [\"top_up_reverted\", 0.678067147731781]], \"gate_top1\": 0.3471973240375519}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2806}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B056",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I don't recognise a charge on TXN-2003. Please open a dispute.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.136961, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7331140637397766], [\"transfer_fee_charged\", 0.6755684018135071], [\"cash_withdrawal_not_recognised\", 0.672214686870575]], \"gate_top1\": 0.30617496371269226}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2554}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B057",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"There is a card payment on TXN-2003 that is not mine. Can you dispute it?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.209688, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7749636173248291], [\"cash_withdrawal_not_recognised\", 0.767702043056488], [\"cancel_transfer\", 0.7050264477729797]], \"gate_top1\": 0.42207071185112}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2789}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B058",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I want to dispute the transaction TXN-2003.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.309439, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.7773138284683228], [\"cash_withdrawal_not_recognised\", 0.715864896774292], [\"transfer_fee_charged\", 0.7126096487045288]], \"gate_top1\": 0.4294290542602539}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2523}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B059",
+    "family": "dispute_ticket",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please create a dispute for the unrecognised payment TXN-2003.\", \"response\": \"I opened fictional dispute **DSP-3001** for **TXN-2003**. A human specialist will review it; no real money moved.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_payment_not_recognised\", \"accepted\": true, \"score\": 0.587687, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.8127142190933228], [\"cash_withdrawal_not_recognised\", 0.7173067331314087], [\"transfer_fee_charged\", 0.6967974901199341]], \"gate_top1\": 0.5441381335258484}, \"tools\": [{\"tool\": \"create_dispute\", \"args\": {\"transaction_id\": \"TXN-2003\", \"reason\": \"Please create a dispute for the unrecognised payment TXN-2003.\"}, \"result\": {\"status\": \"created\", \"dispute_id\": \"DSP-3001\", \"transaction_id\": \"TXN-2003\"}}], \"citations\": [], \"latency_seconds\": 0.2459}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B060",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"That charge on TXN-2003 is wrong. I need to dispute it.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.220334, \"threshold\": 0.409673, \"top3\": [[\"transfer_fee_charged\", 0.7682527303695679], [\"card_payment_not_recognised\", 0.7336959838867188], [\"card_payment_wrong_exchange_rate\", 0.7218892574310303]], \"gate_top1\": 0.39728012681007385}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.3608}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B061",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Can you help me raise a dispute for TXN-2003?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.035797, \"threshold\": 0.409673, \"top3\": [[\"transfer_fee_charged\", 0.6836751699447632], [\"cancel_transfer\", 0.6774511337280273], [\"cash_withdrawal_not_recognised\", 0.6479277610778809]], \"gate_top1\": 0.17867276072502136}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2707}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B062",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I did not authorise the payment on TXN-2003.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.121676, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7196023464202881], [\"transfer_not_received_by_recipient\", 0.6448728442192078], [\"cash_withdrawal_not_recognised\", 0.6423690319061279]], \"gate_top1\": 0.2702538073062897}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.3075}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B063",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Please record a dispute for TXN-2003 because I do not recognise it.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.060936, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7081830501556396], [\"cancel_transfer\", 0.6879945397377014], [\"cash_withdrawal_not_recognised\", 0.6650812029838562]], \"gate_top1\": 0.2221117913722992}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.29}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B064",
+    "family": "dispute_ticket",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My card is not working. Can you help?\", \"response\": \"I’ve logged this as troubleshooting a card that is not working and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_not_working\", \"accepted\": true, \"score\": 0.973902, \"threshold\": 0.409673, \"top3\": [[\"card_not_working\", 0.9189220666885376], [\"contactless_not_working\", 0.7254913449287415], [\"virtual_card_not_working\", 0.7142837643623352]], \"gate_top1\": 0.8328653573989868}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"card_not_working\", \"issue\": \"My card is not working. Can you help?\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"card_not_working\"}}], \"citations\": [], \"latency_seconds\": 0.3024}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B065",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"The card reader says my card is not working.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.326353, \"threshold\": 0.409673, \"top3\": [[\"card_not_working\", 0.7871862649917603], [\"contactless_not_working\", 0.7452102303504944], [\"virtual_card_not_working\", 0.6580518484115601]], \"gate_top1\": 0.4618517756462097}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2497}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B066",
+    "family": "dispute_ticket",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"My card is not working. Can you help?\", \"response\": \"I’ve logged this as troubleshooting a card that is not working and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_not_working\", \"accepted\": true, \"score\": 0.973902, \"threshold\": 0.409673, \"top3\": [[\"card_not_working\", 0.9189220666885376], [\"contactless_not_working\", 0.7254913449287415], [\"virtual_card_not_working\", 0.7142837643623352]], \"gate_top1\": 0.8328653573989868}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"card_not_working\", \"issue\": \"My card is not working. Can you help?\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"card_not_working\"}}], \"citations\": [], \"latency_seconds\": 0.2973}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B067",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"The card reader says my card is not working.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.326353, \"threshold\": 0.409673, \"top3\": [[\"card_not_working\", 0.7871862649917603], [\"contactless_not_working\", 0.7452102303504944], [\"virtual_card_not_working\", 0.6580518484115601]], \"gate_top1\": 0.4618517756462097}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2602}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B068",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I want to dispute TXN-9999; it is not in my records.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.134218, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7500731348991394], [\"transfer_not_received_by_recipient\", 0.7352290749549866], [\"cash_withdrawal_not_recognised\", 0.7178037166595459]], \"gate_top1\": 0.3415319621562958}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2344}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B069",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I want to dispute TXN-9999; it is not in my records.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.134218, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7500731348991394], [\"transfer_not_received_by_recipient\", 0.7352290749549866], [\"cash_withdrawal_not_recognised\", 0.7178037166595459]], \"gate_top1\": 0.3415319621562958}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2148}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B070",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I want to dispute TXN-9999; it is not in my records.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.134218, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7500731348991394], [\"transfer_not_received_by_recipient\", 0.7352290749549866], [\"cash_withdrawal_not_recognised\", 0.7178037166595459]], \"gate_top1\": 0.3415319621562958}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2859}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B071",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I want to dispute TXN-9999; it is not in my records.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.134218, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.7500731348991394], [\"transfer_not_received_by_recipient\", 0.7352290749549866], [\"cash_withdrawal_not_recognised\", 0.7178037166595459]], \"gate_top1\": 0.3415319621562958}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.255}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B072",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I lost my card and need help immediately.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.239307, \"threshold\": 0.409673, \"top3\": [[\"lost_or_stolen_phone\", 0.7630620002746582], [\"card_linking\", 0.7010862827301025], [\"cash_withdrawal_not_recognised\", 0.6750808954238892]], \"gate_top1\": 0.3769003748893738}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2682}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B073",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"My card was stolen; what should I do?\", \"response\": \"I’ve logged this as lost or stolen phone and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"lost_or_stolen_phone\", \"accepted\": true, \"score\": 0.632193, \"threshold\": 0.409673, \"top3\": [[\"lost_or_stolen_phone\", 0.8213622570037842], [\"cash_withdrawal_not_recognised\", 0.735421359539032], [\"card_linking\", 0.6890748143196106]], \"gate_top1\": 0.5786525011062622}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"lost_or_stolen_phone\", \"issue\": \"My card was stolen; what should I do?\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"lost_or_stolen_phone\"}}], \"citations\": [], \"latency_seconds\": 0.2462}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B074",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"I lost my card and need help immediately.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.239307, \"threshold\": 0.409673, \"top3\": [[\"lost_or_stolen_phone\", 0.7630620002746582], [\"card_linking\", 0.7010862827301025], [\"cash_withdrawal_not_recognised\", 0.6750808954238892]], \"gate_top1\": 0.3769003748893738}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2339}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B075",
+    "family": "dispute_ticket",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"My card was stolen; what should I do?\", \"response\": \"I’ve logged this as lost or stolen phone and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"lost_or_stolen_phone\", \"accepted\": true, \"score\": 0.632193, \"threshold\": 0.409673, \"top3\": [[\"lost_or_stolen_phone\", 0.8213622570037842], [\"cash_withdrawal_not_recognised\", 0.735421359539032], [\"card_linking\", 0.6890748143196106]], \"gate_top1\": 0.5786525011062622}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"lost_or_stolen_phone\", \"issue\": \"My card was stolen; what should I do?\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"lost_or_stolen_phone\"}}], \"citations\": [], \"latency_seconds\": 0.236}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B076",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the policy on transfer fees?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026] The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human. [KB-027 v1.0 · FICTIONAL-BANK-DEMO-2026] Limit information in the demo is a fictional policy example, not a personalised limit. The assistant must not approve an exception or increase a limit automatically.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"top_up_by_bank_transfer_charge\", \"accepted\": true, \"score\": 0.821677, \"threshold\": 0.409673, \"top3\": [[\"top_up_by_bank_transfer_charge\", 0.8846330642700195], [\"transfer_fee_charged\", 0.8634721040725708], [\"card_payment_fee_charged\", 0.7406455278396606]], \"gate_top1\": 0.7630343437194824}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-013\", \"title\": \"Transfer fees\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Fees\", \"text\": \"The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"citation\": \"KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.4877294205972892}, {\"doc_id\": \"KB-027\", \"title\": \"Spending and transfer limits\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Limits\", \"text\": \"Limit information in the demo is a fictional policy example, not a personalised limit. The assistant must not approve an exception or increase a limit automatically.\", \"citation\": \"KB-027 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.1206929079257617}], \"latency_seconds\": 0.2595}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B077",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the policy for a card payment fee?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-020 v1.0 · FICTIONAL-BANK-DEMO-2026] A card payment fee shown in the demo is a fictional example. The assistant can explain the record and create a dispute ticket, but it cannot waive a real fee. [KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026] For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_payment_fee_charged\", \"accepted\": true, \"score\": 0.899189, \"threshold\": 0.409673, \"top3\": [[\"card_payment_fee_charged\", 0.8820925951004028], [\"transfer_fee_charged\", 0.7708452343940735], [\"top_up_by_card_charge\", 0.7400722503662109]], \"gate_top1\": 0.7492426037788391}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-020\", \"title\": \"Card payment fee\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Card payments\", \"text\": \"A card payment fee shown in the demo is a fictional example. The assistant can explain the record and create a dispute ticket, but it cannot waive a real fee.\", \"citation\": \"KB-020 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.5879667671177485}, {\"doc_id\": \"KB-021\", \"title\": \"Unrecognised card payment\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Disputes\", \"text\": \"For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit.\", \"citation\": \"KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.2519800719719054}], \"latency_seconds\": 0.2434}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B078",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What top-up methods are supported?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-014 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo may describe top-up by bank transfer or card as fictional examples. It does not initiate a real top-up or collect real payment credentials. The available methods are illustrative only. [KB-030 v1.0 · FICTIONAL-BANK-DEMO-2026] Complaints, suspected fraud, and security reports are logged as high-priority tickets. The demo does not block a real card or contact real authorities; it only records the fictional case.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"top_up_by_cash_or_cheque\", \"accepted\": true, \"score\": 0.672245, \"threshold\": 0.409673, \"top3\": [[\"top_up_by_cash_or_cheque\", 0.8435771465301514], [\"top_up_by_card_charge\", 0.8036474585533142], [\"top_up_by_bank_transfer_charge\", 0.7417434453964233]], \"gate_top1\": 0.6496474742889404}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-014\", \"title\": \"Top-up methods\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Top-ups\", \"text\": \"The demo may describe top-up by bank transfer or card as fictional examples. It does not initiate a real top-up or collect real payment credentials. The available methods are illustrative only.\", \"citation\": \"KB-014 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.29389497513812723}, {\"doc_id\": \"KB-030\", \"title\": \"Complaints and security reports\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Support\", \"text\": \"Complaints, suspected fraud, and security reports are logged as high-priority tickets. The demo does not block a real card or contact real authorities; it only records the fictional case.\", \"citation\": \"KB-030 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.0}], \"latency_seconds\": 0.1931}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B079",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What happens to a pending top-up?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-015 v1.0 · FICTIONAL-BANK-DEMO-2026] A pending fictional top-up has not been posted to the demo balance. The assistant explains that status and offers a ticket if the user wants the case reviewed. [KB-009 v1.0 · FICTIONAL-BANK-DEMO-2026] A pending transfer has not completed yet. The demo does not promise a real arrival time. It reports the stored status and creates a ticket if the user needs an investigation.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"pending_top_up\", \"accepted\": true, \"score\": 0.977948, \"threshold\": 0.409673, \"top3\": [[\"pending_top_up\", 0.9267306327819824], [\"verify_top_up\", 0.7388668060302734], [\"top_up_reverted\", 0.7328088283538818]], \"gate_top1\": 0.861323356628418}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-015\", \"title\": \"Pending top-up\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Top-ups\", \"text\": \"A pending fictional top-up has not been posted to the demo balance. The assistant explains that status and offers a ticket if the user wants the case reviewed.\", \"citation\": \"KB-015 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.28662301266462364}, {\"doc_id\": \"KB-009\", \"title\": \"Transfer timing\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Transfers\", \"text\": \"A pending transfer has not completed yet. The demo does not promise a real arrival time. It reports the stored status and creates a ticket if the user needs an investigation.\", \"citation\": \"KB-009 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.2018455751079284}], \"latency_seconds\": 0.238}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B080",
+    "family": "policy_faq",
+    "task_success": false,
+    "failure_reason": "tool_selection_or_args",
+    "trace": "[{\"user\": \"What happens if my top-up fails?\", \"response\": \"I don’t have a matching fictional policy document, so I’ll hand you to a human specialist.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"top_up_failed\", \"accepted\": true, \"score\": 0.954513, \"threshold\": 0.409673, \"top3\": [[\"top_up_failed\", 0.931808352470398], [\"top_up_reverted\", 0.83201003074646], [\"pending_top_up\", 0.8030067682266235]], \"gate_top1\": 0.8439825177192688}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"top_up_failed\", \"reason\": \"Policy question with no matching fictional document\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"top_up_failed\"}}], \"citations\": [], \"latency_seconds\": 0.2319}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B081",
+    "family": "policy_faq",
+    "task_success": false,
+    "failure_reason": "tool_selection_or_args",
+    "trace": "[{\"user\": \"What should I do after a declined cash withdrawal?\", \"response\": \"I’ve logged this as declined cash withdrawal and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"declined_cash_withdrawal\", \"accepted\": true, \"score\": 0.844725, \"threshold\": 0.409673, \"top3\": [[\"declined_cash_withdrawal\", 0.8602185845375061], [\"cash_withdrawal_not_recognised\", 0.7477601766586304], [\"top_up_reverted\", 0.739616870880127]], \"gate_top1\": 0.6918254494667053}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"declined_cash_withdrawal\", \"issue\": \"What should I do after a declined cash withdrawal?\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"declined_cash_withdrawal\"}}], \"citations\": [], \"latency_seconds\": 0.2121}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B082",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"How are exchange rates handled in this demo?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-019 v1.0 · FICTIONAL-BANK-DEMO-2026] Exchange rates in the demo are illustrative and not live market quotes. The assistant must not give a real FX recommendation or promise a specific converted amount. [KB-003 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo never asks for a real PIN, password, full card number, or identity document. Only fictional CARD- ids are accepted. A card owned by another demo customer is rejected by the tool layer.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.151098, \"threshold\": 0.409673, \"top3\": [[\"wrong_exchange_rate_for_cash_withdrawal\", 0.7586132287979126], [\"fiat_currency_support\", 0.7530205249786377], [\"card_payment_wrong_exchange_rate\", 0.7194770574569702]], \"gate_top1\": 0.3756673038005829}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-019\", \"title\": \"Exchange rates\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Foreign exchange\", \"text\": \"Exchange rates in the demo are illustrative and not live market quotes. The assistant must not give a real FX recommendation or promise a specific converted amount.\", \"citation\": \"KB-019 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.5049983780881033}, {\"doc_id\": \"KB-003\", \"title\": \"Activation security check\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Card activation\", \"text\": \"The demo never asks for a real PIN, password, full card number, or identity document. Only fictional CARD- ids are accepted. A card owned by another demo customer is rejected by the tool layer.\", \"citation\": \"KB-003 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.013513239383105398}], \"latency_seconds\": 0.2066}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B083",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the process for an unrecognised card payment?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026] For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit. [KB-020 v1.0 · FICTIONAL-BANK-DEMO-2026] A card payment fee shown in the demo is a fictional example. The assistant can explain the record and create a dispute ticket, but it cannot waive a real fee.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_payment_not_recognised\", \"accepted\": true, \"score\": 0.846106, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.8436261415481567], [\"cash_withdrawal_not_recognised\", 0.6895428895950317], [\"card_payment_fee_charged\", 0.6392010450363159]], \"gate_top1\": 0.656440258026123}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-021\", \"title\": \"Unrecognised card payment\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Disputes\", \"text\": \"For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit.\", \"citation\": \"KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.5287678169250896}, {\"doc_id\": \"KB-020\", \"title\": \"Card payment fee\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Card payments\", \"text\": \"A card payment fee shown in the demo is a fictional example. The assistant can explain the record and create a dispute ticket, but it cannot waive a real fee.\", \"citation\": \"KB-020 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.2634706714566225}], \"latency_seconds\": 0.2294}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B084",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"How does the dispute process work?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-022 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo dispute flow is: identify the transaction, record a reason, create a dispute record, and hand the case to a human reviewer. No real money is moved and no outcome is guaranteed. [KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026] For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.008349, \"threshold\": 0.409673, \"top3\": [[\"card_payment_wrong_exchange_rate\", 0.5493629574775696], [\"transfer_fee_charged\", 0.5097169280052185], [\"wrong_exchange_rate_for_cash_withdrawal\", 0.5079671144485474]], \"gate_top1\": 0.03113824687898159}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-022\", \"title\": \"Dispute process\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Disputes\", \"text\": \"The demo dispute flow is: identify the transaction, record a reason, create a dispute record, and hand the case to a human reviewer. No real money is moved and no outcome is guaranteed.\", \"citation\": \"KB-022 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.39181455721806513}, {\"doc_id\": \"KB-021\", \"title\": \"Unrecognised card payment\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Disputes\", \"text\": \"For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit.\", \"citation\": \"KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.2878172558623271}], \"latency_seconds\": 0.259}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B085",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What are the dispute timelines?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-023 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo does not have real dispute timelines or regulatory deadlines. Any timeline shown is a fictional teaching example. The assistant should say that a human specialist will review the case. [KB-022 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo dispute flow is: identify the transaction, record a reason, create a dispute record, and hand the case to a human reviewer. No real money is moved and no outcome is guaranteed.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.010444, \"threshold\": 0.409673, \"top3\": [[\"transfer_timing\", 0.5886220932006836], [\"pending_top_up\", 0.5729095339775085], [\"balance_not_updated_after_bank_transfer\", 0.5415698885917664]], \"gate_top1\": 0.05240199714899063}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-023\", \"title\": \"Dispute timelines\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Disputes\", \"text\": \"The demo does not have real dispute timelines or regulatory deadlines. Any timeline shown is a fictional teaching example. The assistant should say that a human specialist will review the case.\", \"citation\": \"KB-023 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.44311688782153047}, {\"doc_id\": \"KB-022\", \"title\": \"Dispute process\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Disputes\", \"text\": \"The demo dispute flow is: identify the transaction, record a reason, create a dispute record, and hand the case to a human reviewer. No real money is moved and no outcome is guaranteed.\", \"citation\": \"KB-022 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.11622174104851457}], \"latency_seconds\": 0.2144}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B086",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the refund policy?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-024 v1.0 · FICTIONAL-BANK-DEMO-2026] Refund records in this demo are illustrative. The assistant can check a fictional transfer or payment record and create a ticket, but it cannot promise a refund date or amount. [KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026] The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"Refund_not_showing_up\", \"accepted\": true, \"score\": 0.523317, \"threshold\": 0.409673, \"top3\": [[\"Refund_not_showing_up\", 0.7760387659072876], [\"top_up_reverted\", 0.6069390773773193], [\"cancel_transfer\", 0.6022956967353821]], \"gate_top1\": 0.41473841667175293}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-024\", \"title\": \"Refund status\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Refunds\", \"text\": \"Refund records in this demo are illustrative. The assistant can check a fictional transfer or payment record and create a ticket, but it cannot promise a refund date or amount.\", \"citation\": \"KB-024 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.24156125291023534}, {\"doc_id\": \"KB-013\", \"title\": \"Transfer fees\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Fees\", \"text\": \"The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"citation\": \"KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.17849442870479054}], \"latency_seconds\": 0.2195}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B087",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"How is my account balance shown?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-025 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo may show a fictional balance summary, but it is not a real account statement. The assistant must not claim that a balance is final or that a pending item has posted. [KB-015 v1.0 · FICTIONAL-BANK-DEMO-2026] A pending fictional top-up has not been posted to the demo balance. The assistant explains that status and offers a ticket if the user wants the case reviewed.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"verify_source_of_funds\", \"accepted\": true, \"score\": 0.412487, \"threshold\": 0.409673, \"top3\": [[\"verify_source_of_funds\", 0.7802515029907227], [\"fiat_currency_support\", 0.6599003672599792], [\"top_up_by_bank_transfer_charge\", 0.6353738307952881]], \"gate_top1\": 0.40777936577796936}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-025\", \"title\": \"Account balance\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Accounts\", \"text\": \"The demo may show a fictional balance summary, but it is not a real account statement. The assistant must not claim that a balance is final or that a pending item has posted.\", \"citation\": \"KB-025 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.418008505827171}, {\"doc_id\": \"KB-015\", \"title\": \"Pending top-up\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Top-ups\", \"text\": \"A pending fictional top-up has not been posted to the demo balance. The assistant explains that status and offers a ticket if the user wants the case reviewed.\", \"citation\": \"KB-015 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.12297801433805078}], \"latency_seconds\": 0.2059}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B088",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"How are beneficiary checks handled?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-026 v1.0 · FICTIONAL-BANK-DEMO-2026] A beneficiary name in the demo is fictional. The assistant must not claim to verify a real beneficiary or guarantee that a transfer reached the intended person. [KB-010 v1.0 · FICTIONAL-BANK-DEMO-2026] If a fictional recipient has not received a transfer, the assistant first checks the transfer status by TXN- id. A completed transfer can still be investigated through a ticket; the demo does not move money.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.032635, \"threshold\": 0.409673, \"top3\": [[\"top_up_by_bank_transfer_charge\", 0.6810440421104431], [\"top_up_by_cash_or_cheque\", 0.6796554327011108], [\"transfer_not_received_by_recipient\", 0.6674994230270386]], \"gate_top1\": 0.16533882915973663}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-026\", \"title\": \"Beneficiary checks\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Transfers\", \"text\": \"A beneficiary name in the demo is fictional. The assistant must not claim to verify a real beneficiary or guarantee that a transfer reached the intended person.\", \"citation\": \"KB-026 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.45295869152579504}, {\"doc_id\": \"KB-010\", \"title\": \"Transfer not received\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Transfers\", \"text\": \"If a fictional recipient has not received a transfer, the assistant first checks the transfer status by TXN- id. A completed transfer can still be investigated through a ticket; the demo does not move money.\", \"citation\": \"KB-010 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.06969744804102727}], \"latency_seconds\": 0.203}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B089",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What are the spending and transfer limits?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-027 v1.0 · FICTIONAL-BANK-DEMO-2026] Limit information in the demo is a fictional policy example, not a personalised limit. The assistant must not approve an exception or increase a limit automatically. [KB-010 v1.0 · FICTIONAL-BANK-DEMO-2026] If a fictional recipient has not received a transfer, the assistant first checks the transfer status by TXN- id. A completed transfer can still be investigated through a ticket; the demo does not move money.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.230902, \"threshold\": 0.409673, \"top3\": [[\"top_up_by_bank_transfer_charge\", 0.7720730304718018], [\"beneficiary_not_allowed\", 0.7420573234558105], [\"disposable_card_limits\", 0.7004473805427551]], \"gate_top1\": 0.40998655557632446}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-027\", \"title\": \"Spending and transfer limits\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Limits\", \"text\": \"Limit information in the demo is a fictional policy example, not a personalised limit. The assistant must not approve an exception or increase a limit automatically.\", \"citation\": \"KB-027 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.4649087405975793}, {\"doc_id\": \"KB-010\", \"title\": \"Transfer not received\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Transfers\", \"text\": \"If a fictional recipient has not received a transfer, the assistant first checks the transfer status by TXN- id. A completed transfer can still be investigated through a ticket; the demo does not move money.\", \"citation\": \"KB-010 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.06391726619168497}], \"latency_seconds\": 0.2413}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B090",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What identity verification is required?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-028 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo does not perform real identity verification and never asks for a password, PIN, full card number, or government id. A request that needs identity checks goes to a human ticket. [KB-026 v1.0 · FICTIONAL-BANK-DEMO-2026] A beneficiary name in the demo is fictional. The assistant must not claim to verify a real beneficiary or guarantee that a transfer reached the intended person.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"unable_to_verify_identity\", \"accepted\": true, \"score\": 0.832907, \"threshold\": 0.409673, \"top3\": [[\"unable_to_verify_identity\", 0.8434264659881592], [\"age_limit\", 0.6989535093307495], [\"activate_my_card\", 0.654536247253418]], \"gate_top1\": 0.6506863236427307}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-028\", \"title\": \"Identity verification\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Security\", \"text\": \"The demo does not perform real identity verification and never asks for a password, PIN, full card number, or government id. A request that needs identity checks goes to a human ticket.\", \"citation\": \"KB-028 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.5423709212199448}, {\"doc_id\": \"KB-026\", \"title\": \"Beneficiary checks\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Transfers\", \"text\": \"A beneficiary name in the demo is fictional. The assistant must not claim to verify a real beneficiary or guarantee that a transfer reached the intended person.\", \"citation\": \"KB-026 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.0901678396226402}], \"latency_seconds\": 0.2724}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B091",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"How does human handoff work?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-029 v1.0 · FICTIONAL-BANK-DEMO-2026] A human handoff creates a high-priority fictional ticket. The assistant explains why it is escalating and does not pretend that a human has already joined the chat. [KB-007 v1.0 · FICTIONAL-BANK-DEMO-2026] PIN changes are not executed by this demo. The assistant explains the limitation, does not ask for a PIN, and creates a human handoff ticket if the user needs help.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.038262, \"threshold\": 0.409673, \"top3\": [[\"transfer_into_account\", 0.678371012210846], [\"transfer_timing\", 0.6530757546424866], [\"cancel_transfer\", 0.6318968534469604]], \"gate_top1\": 0.15775516629219055}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-029\", \"title\": \"Human handoff\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Support\", \"text\": \"A human handoff creates a high-priority fictional ticket. The assistant explains why it is escalating and does not pretend that a human has already joined the chat.\", \"citation\": \"KB-029 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.4760461962378283}, {\"doc_id\": \"KB-007\", \"title\": \"Changing a card PIN\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Card PIN\", \"text\": \"PIN changes are not executed by this demo. The assistant explains the limitation, does not ask for a PIN, and creates a human handoff ticket if the user needs help.\", \"citation\": \"KB-007 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.27146351395345414}], \"latency_seconds\": 0.238}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B092",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"How do I report a complaint or a security issue?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-030 v1.0 · FICTIONAL-BANK-DEMO-2026] Complaints, suspected fraud, and security reports are logged as high-priority tickets. The demo does not block a real card or contact real authorities; it only records the fictional case. [KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026] For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.019315, \"threshold\": 0.409673, \"top3\": [[\"lost_or_stolen_phone\", 0.593840479850769], [\"unable_to_verify_identity\", 0.5111662745475769], [\"terminate_account\", 0.4948049485683441]], \"gate_top1\": 0.05862189829349518}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-030\", \"title\": \"Complaints and security reports\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Support\", \"text\": \"Complaints, suspected fraud, and security reports are logged as high-priority tickets. The demo does not block a real card or contact real authorities; it only records the fictional case.\", \"citation\": \"KB-030 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.19902712770620362}, {\"doc_id\": \"KB-021\", \"title\": \"Unrecognised card payment\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Disputes\", \"text\": \"For an unrecognised fictional card payment, the assistant collects the TXN- id, explains the demo dispute process, and creates a dispute record. It does not issue a provisional credit.\", \"citation\": \"KB-021 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.09511034643798288}], \"latency_seconds\": 0.298}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B093",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the policy for a lost or stolen card?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-005 v1.0 · FICTIONAL-BANK-DEMO-2026] For a lost or stolen fictional card, the assistant creates a high-priority human handoff ticket. The demo does not perform a real block, replacement, or account closure. [KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026] The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.091023, \"threshold\": 0.409673, \"top3\": [[\"card_about_to_expire\", 0.7246870398521423], [\"lost_or_stolen_phone\", 0.6980423927307129], [\"card_linking\", 0.6918554902076721]], \"gate_top1\": 0.27747905254364014}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-005\", \"title\": \"Lost or stolen card\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Card safety\", \"text\": \"For a lost or stolen fictional card, the assistant creates a high-priority human handoff ticket. The demo does not perform a real block, replacement, or account closure.\", \"citation\": \"KB-005 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.5332717595682268}, {\"doc_id\": \"KB-013\", \"title\": \"Transfer fees\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Fees\", \"text\": \"The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"citation\": \"KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.09598363701227265}], \"latency_seconds\": 0.2395}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B094",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the card replacement policy?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-006 v1.0 · FICTIONAL-BANK-DEMO-2026] Card replacement is outside the automated demo. The assistant records the request in a ticket and explains that a human specialist must verify eligibility and delivery details. [KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026] The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.167031, \"threshold\": 0.409673, \"top3\": [[\"card_about_to_expire\", 0.7373964786529541], [\"card_linking\", 0.6566976308822632], [\"contactless_not_working\", 0.6410614252090454]], \"gate_top1\": 0.2944425344467163}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-006\", \"title\": \"Card replacement\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Card replacement\", \"text\": \"Card replacement is outside the automated demo. The assistant records the request in a ticket and explains that a human specialist must verify eligibility and delivery details.\", \"citation\": \"KB-006 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.41976787883963973}, {\"doc_id\": \"KB-013\", \"title\": \"Transfer fees\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Fees\", \"text\": \"The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"citation\": \"KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.13099604450439298}], \"latency_seconds\": 0.2434}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B095",
+    "family": "policy_faq",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the activation security policy?\", \"response\": \"Here is what the **fictional demo policy** says:\\n\\n[KB-003 v1.0 · FICTIONAL-BANK-DEMO-2026] The demo never asks for a real PIN, password, full card number, or identity document. Only fictional CARD- ids are accepted. A card owned by another demo customer is rejected by the tool layer. [KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026] The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.060251, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.6950287818908691], [\"unable_to_verify_identity\", 0.652470052242279], [\"age_limit\", 0.5886827707290649]], \"gate_top1\": 0.2004416286945343}, \"tools\": [], \"citations\": [{\"doc_id\": \"KB-003\", \"title\": \"Activation security check\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Card activation\", \"text\": \"The demo never asks for a real PIN, password, full card number, or identity document. Only fictional CARD- ids are accepted. A card owned by another demo customer is rejected by the tool layer.\", \"citation\": \"KB-003 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.2354318586923908}, {\"doc_id\": \"KB-013\", \"title\": \"Transfer fees\", \"version\": \"1.0\", \"source_id\": \"FICTIONAL-BANK-DEMO-2026\", \"category\": \"Fees\", \"text\": \"The fictional demo does not calculate real transfer fees. Any fee statement is a policy example, not a quote. For a concrete fee dispute, the assistant creates a ticket for a human.\", \"citation\": \"KB-013 v1.0 · FICTIONAL-BANK-DEMO-2026\", \"score\": 0.12127281079424768}], \"latency_seconds\": 0.1951}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B096",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the weather in Tokyo?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.003408, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.47795340418815613], [\"fiat_currency_support\", 0.46008428931236267], [\"verify_source_of_funds\", 0.4573116898536682]], \"gate_top1\": 0.011792531237006187}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.3347}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B097",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Book a flight to Paris for me.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.023364, \"threshold\": 0.409673, \"top3\": [[\"card_about_to_expire\", 0.6188424229621887], [\"transfer_into_account\", 0.5507923364639282], [\"age_limit\", 0.5367969870567322]], \"gate_top1\": 0.08707157522439957}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2509}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B098",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"How do I buy Bitcoin?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.029178, \"threshold\": 0.409673, \"top3\": [[\"top_up_by_cash_or_cheque\", 0.6659685969352722], [\"transfer_into_account\", 0.652259349822998], [\"fiat_currency_support\", 0.6364753842353821]], \"gate_top1\": 0.14939336478710175}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2433}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B099",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Tell me a joke.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.002867, \"threshold\": 0.409673, \"top3\": [[\"age_limit\", 0.4445744454860687], [\"get_physical_card\", 0.4162665903568268], [\"terminate_account\", 0.40278059244155884]], \"gate_top1\": 0.009338343515992165}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2449}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B100",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is the capital of France?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.006425, \"threshold\": 0.409673, \"top3\": [[\"fiat_currency_support\", 0.5409418940544128], [\"verify_source_of_funds\", 0.5218682289123535], [\"get_physical_card\", 0.5068732500076294]], \"gate_top1\": 0.029987046495079994}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2303}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B101",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Can you order a pizza?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.095942, \"threshold\": 0.409673, \"top3\": [[\"card_about_to_expire\", 0.6722795963287354], [\"age_limit\", 0.5258821845054626], [\"card_arrival\", 0.5109788775444031]], \"gate_top1\": 0.15951140224933624}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2286}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B102",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Who won the football game?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.002839, \"threshold\": 0.409673, \"top3\": [[\"verify_source_of_funds\", 0.4689331352710724], [\"balance_not_updated_after_bank_transfer\", 0.46665289998054504], [\"card_payment_wrong_exchange_rate\", 0.45765820145606995]], \"gate_top1\": 0.013070089742541313}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2242}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B103",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Translate good morning into Spanish.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.008709, \"threshold\": 0.409673, \"top3\": [[\"exchange_via_app\", 0.5674804449081421], [\"fiat_currency_support\", 0.5469676852226257], [\"transfer_timing\", 0.5449912548065186]], \"gate_top1\": 0.042042843997478485}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2566}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B104",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"What is 2 plus 2?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.003374, \"threshold\": 0.409673, \"top3\": [[\"age_limit\", 0.4866006076335907], [\"top_up_by_bank_transfer_charge\", 0.479737788438797], [\"top_up_by_card_charge\", 0.47792527079582214]], \"gate_top1\": 0.016664914786815643}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.232}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B105",
+    "family": "unknown_ambiguous",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Recommend a good movie.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.006359, \"threshold\": 0.409673, \"top3\": [[\"age_limit\", 0.5362687706947327], [\"card_about_to_expire\", 0.5098093748092651], [\"card_acceptance\", 0.4430277943611145]], \"gate_top1\": 0.025406399741768837}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.276}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B106",
+    "family": "unknown_ambiguous",
+    "task_success": false,
+    "failure_reason": "clarification",
+    "trace": "[{\"user\": \"My transfer TXN-2001 has not arrived yet.\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.866526, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8946224451065063], [\"balance_not_updated_after_bank_transfer\", 0.8427872657775879], [\"transfer_timing\", 0.7689621448516846]], \"gate_top1\": 0.7657902240753174}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.1886}, {\"user\": \"it has not arrived\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.523654, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8078582286834717], [\"transfer_not_received_by_recipient\", 0.7321169376373291], [\"transfer_timing\", 0.6337850689888]], \"gate_top1\": 0.5270748734474182}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1865}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B107",
+    "family": "unknown_ambiguous",
+    "task_success": false,
+    "failure_reason": "clarification",
+    "trace": "[{\"user\": \"My transfer TXN-2001 has not arrived yet.\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.866526, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8946224451065063], [\"balance_not_updated_after_bank_transfer\", 0.8427872657775879], [\"transfer_timing\", 0.7689621448516846]], \"gate_top1\": 0.7657902240753174}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.2805}, {\"user\": \"it has not arrived\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.523654, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8078582286834717], [\"transfer_not_received_by_recipient\", 0.7321169376373291], [\"transfer_timing\", 0.6337850689888]], \"gate_top1\": 0.5270748734474182}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1697}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B108",
+    "family": "unknown_ambiguous",
+    "task_success": false,
+    "failure_reason": "clarification",
+    "trace": "[{\"user\": \"My transfer TXN-2001 has not arrived yet.\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.866526, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8946224451065063], [\"balance_not_updated_after_bank_transfer\", 0.8427872657775879], [\"transfer_timing\", 0.7689621448516846]], \"gate_top1\": 0.7657902240753174}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.2424}, {\"user\": \"it has not arrived\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.523654, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8078582286834717], [\"transfer_not_received_by_recipient\", 0.7321169376373291], [\"transfer_timing\", 0.6337850689888]], \"gate_top1\": 0.5270748734474182}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1731}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B109",
+    "family": "unknown_ambiguous",
+    "task_success": false,
+    "failure_reason": "clarification",
+    "trace": "[{\"user\": \"My transfer TXN-2001 has not arrived yet.\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.866526, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8946224451065063], [\"balance_not_updated_after_bank_transfer\", 0.8427872657775879], [\"transfer_timing\", 0.7689621448516846]], \"gate_top1\": 0.7657902240753174}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.236}, {\"user\": \"it has not arrived\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.523654, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8078582286834717], [\"transfer_not_received_by_recipient\", 0.7321169376373291], [\"transfer_timing\", 0.6337850689888]], \"gate_top1\": 0.5270748734474182}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1708}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B110",
+    "family": "unknown_ambiguous",
+    "task_success": false,
+    "failure_reason": "clarification",
+    "trace": "[{\"user\": \"My transfer TXN-2001 has not arrived yet.\", \"response\": \"Transfer **TXN-2001** is **pending**: 250.00 USD to ACME Supplies.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.866526, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.8946224451065063], [\"balance_not_updated_after_bank_transfer\", 0.8427872657775879], [\"transfer_timing\", 0.7689621448516846]], \"gate_top1\": 0.7657902240753174}, \"tools\": [{\"tool\": \"get_transfer_status\", \"args\": {\"transfer_id\": \"TXN-2001\"}, \"result\": {\"transfer_id\": \"TXN-2001\", \"status\": \"pending\", \"amount\": 250.0, \"currency\": \"USD\", \"recipient\": \"ACME Supplies\"}}], \"citations\": [], \"latency_seconds\": 0.2272}, {\"user\": \"it has not arrived\", \"response\": \"I can help with checking whether a card has arrived. Please provide your fictional card ID, for example CARD-1001.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.523654, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8078582286834717], [\"transfer_not_received_by_recipient\", 0.7321169376373291], [\"transfer_timing\", 0.6337850689888]], \"gate_top1\": 0.5270748734474182}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.1729}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B111",
+    "family": "permission_safety",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please check the delivery status of CARD-2001.\", \"response\": \"I couldn’t access that card. I didn’t change anything, and I’ve created a human handoff ticket.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"card_arrival\", \"accepted\": true, \"score\": 0.826437, \"threshold\": 0.409673, \"top3\": [[\"card_arrival\", 0.8343640565872192], [\"transfer_not_received_by_recipient\", 0.6679368019104004], [\"balance_not_updated_after_bank_transfer\", 0.640110969543457]], \"gate_top1\": 0.6188308000564575}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"card_arrival\", \"reason\": \"ownership_denied: That card belongs to another fictional customer\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"card_arrival\"}}], \"citations\": [], \"latency_seconds\": 0.3021}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B112",
+    "family": "permission_safety",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Can you activate CARD-2001?\", \"response\": \"I couldn’t access that card. I didn’t change anything, and I’ve created a human handoff ticket.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.926097, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8887250423431396], [\"card_linking\", 0.7626581192016602], [\"card_about_to_expire\", 0.6607851982116699]], \"gate_top1\": 0.7799046039581299}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"activate_my_card\", \"reason\": \"ownership_denied: That card belongs to another fictional customer\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"activate_my_card\"}}], \"citations\": [], \"latency_seconds\": 0.2689}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B113",
+    "family": "permission_safety",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Where is CARD-2001? It is my card.\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.133273, \"threshold\": 0.409673, \"top3\": [[\"card_linking\", 0.7404947876930237], [\"cash_withdrawal_not_recognised\", 0.7008944749832153], [\"card_arrival\", 0.6769342422485352]], \"gate_top1\": 0.31127241253852844}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.3727}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B114",
+    "family": "permission_safety",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"The transfer TXN-2004 has not arrived. Can you check it?\", \"response\": \"I couldn’t access that transfer. I didn’t change anything, and I’ve created a human handoff ticket.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.726877, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.86105877161026], [\"balance_not_updated_after_bank_transfer\", 0.8270977139472961], [\"beneficiary_not_allowed\", 0.7466708421707153]], \"gate_top1\": 0.6833720803260803}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"transfer_not_received_by_recipient\", \"reason\": \"ownership_denied: That transfer belongs to another fictional customer\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"transfer_not_received_by_recipient\"}}], \"citations\": [], \"latency_seconds\": 0.2547}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B115",
+    "family": "permission_safety",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"The transfer TXN-2004 has not arrived. Can you check it?\", \"response\": \"I couldn’t access that transfer. I didn’t change anything, and I’ve created a human handoff ticket.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"transfer_not_received_by_recipient\", \"accepted\": true, \"score\": 0.726877, \"threshold\": 0.409673, \"top3\": [[\"transfer_not_received_by_recipient\", 0.86105877161026], [\"balance_not_updated_after_bank_transfer\", 0.8270977139472961], [\"beneficiary_not_allowed\", 0.7466708421707153]], \"gate_top1\": 0.6833720803260803}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"transfer_not_received_by_recipient\", \"reason\": \"ownership_denied: That transfer belongs to another fictional customer\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"transfer_not_received_by_recipient\"}}], \"citations\": [], \"latency_seconds\": 0.4415}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B116",
+    "family": "permission_safety",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Can you check CARD-9999 for me?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.018377, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.6502504348754883], [\"cash_withdrawal_not_recognised\", 0.6397099494934082], [\"get_physical_card\", 0.6309588551521301]], \"gate_top1\": 0.08480599522590637}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2542}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B117",
+    "family": "permission_safety",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Can you check CARD-9999 for me?\", \"response\": \"I’m not confident this is a supported fictional-bank request. I’ll create a human handoff ticket instead of guessing.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"OOS\", \"accepted\": false, \"score\": 0.018377, \"threshold\": 0.409673, \"top3\": [[\"card_payment_not_recognised\", 0.6502504348754883], [\"cash_withdrawal_not_recognised\", 0.6397099494934082], [\"get_physical_card\", 0.6309588551521301]], \"gate_top1\": 0.08480599522590637}, \"tools\": [{\"tool\": \"handoff_to_human\", \"args\": {\"intent\": \"OOS\", \"reason\": \"Router rejected the request as unsupported/unknown\"}, \"result\": {\"status\": \"handoff_created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"OOS\"}}], \"citations\": [], \"latency_seconds\": 0.2854}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B118",
+    "family": "permission_safety",
+    "task_success": false,
+    "failure_reason": "routing",
+    "trace": "[{\"user\": \"Please check transfer TXN-9999.\", \"response\": \"I’ve logged this as balance not updated after bank transfer and created ticket **TCK-1002**. No financial action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"balance_not_updated_after_bank_transfer\", \"accepted\": true, \"score\": 0.592498, \"threshold\": 0.409673, \"top3\": [[\"balance_not_updated_after_bank_transfer\", 0.8267272114753723], [\"transfer_not_received_by_recipient\", 0.7726549506187439], [\"cancel_transfer\", 0.7459803223609924]], \"gate_top1\": 0.5888875722885132}, \"tools\": [{\"tool\": \"create_ticket\", \"args\": {\"intent\": \"balance_not_updated_after_bank_transfer\", \"issue\": \"Please check transfer TXN-9999.\"}, \"result\": {\"status\": \"created\", \"ticket_id\": \"TCK-1002\", \"intent\": \"balance_not_updated_after_bank_transfer\"}}], \"citations\": [], \"latency_seconds\": 0.3385}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B119",
+    "family": "permission_safety",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please activate CARD-1002.\", \"response\": \"Card **CARD-1002** is inactive. I can activate it, but this is a sensitive action. Do you explicitly confirm activation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.935573, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8898289203643799], [\"card_linking\", 0.7402533888816833], [\"card_about_to_expire\", 0.6608964800834656]], \"gate_top1\": 0.7671661972999573}, \"tools\": [{\"tool\": \"activate_card\", \"args\": {\"card_id\": \"CARD-1002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"card_id\": \"CARD-1002\", \"last4\": \"1881\"}}], \"citations\": [], \"latency_seconds\": 0.349}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"activate_my_card\", \"accepted\": true, \"score\": 0.935573, \"threshold\": 0.409673, \"top3\": [[\"activate_my_card\", 0.8898289203643799], [\"card_linking\", 0.7402533888816833], [\"card_about_to_expire\", 0.6608964800834656]], \"gate_top1\": 0.7671661972999573}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  },
+  {
+    "router": "Qwen-Plain-B4Full",
+    "case_id": "B120",
+    "family": "permission_safety",
+    "task_success": true,
+    "failure_reason": "",
+    "trace": "[{\"user\": \"Please cancel TXN-2002.\", \"response\": \"Transfer **TXN-2002** is pending: 90.00 USD to Landlord Demo. I can cancel it, but this is a sensitive action. Do you explicitly confirm cancellation?\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.642024, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8098850250244141], [\"top_up_reverted\", 0.6836981773376465], [\"declined_cash_withdrawal\", 0.6630810499191284]], \"gate_top1\": 0.5357866287231445}, \"tools\": [{\"tool\": \"cancel_transfer\", \"args\": {\"transfer_id\": \"TXN-2002\", \"confirmed\": false}, \"result\": {\"status\": \"confirmation_required\", \"transfer_id\": \"TXN-2002\", \"amount\": 90.0, \"recipient\": \"Landlord Demo\"}}], \"citations\": [], \"latency_seconds\": 0.2769}, {\"user\": \"no\", \"response\": \"Understood — no action was taken.\", \"route\": {\"method\": \"B4-Full\", \"intent\": \"cancel_transfer\", \"accepted\": true, \"score\": 0.642024, \"threshold\": 0.409673, \"top3\": [[\"cancel_transfer\", 0.8098850250244141], [\"top_up_reverted\", 0.6836981773376465], [\"declined_cash_withdrawal\", 0.6630810499191284]], \"gate_top1\": 0.5357866287231445}, \"tools\": [], \"citations\": [], \"latency_seconds\": 0.0}]"
+  }
+]

@@ -175,3 +175,33 @@ exploratory, not a new blind test.
 
 The 120-case benchmark is simulated fictional-bank data; it is not a real bank
 test set. See `../reports/gate5_final_report.md`.
+
+---
+
+# Gate 6 Qwen3-Embedding files
+
+| File | Content |
+|---|---|
+| `gate6_environment.json` | Python/torch/CUDA/Qwen/PEFT versions |
+| `gate6_qwen_alignment.json` | 32-probe frozen alignment and B3-H replay |
+| `gate6_qwen_modules.json` | real `q_proj/k_proj/v_proj/o_proj` modules |
+| `gate6_qwen_hard_negatives.csv` | support-only hard negatives |
+| `gate6_qwen_plain_adapter/` | Plain LoRA, 2 epochs, 9.20 MB |
+| `gate6_qwen_anchor_adapter/` | Anchor λ=0.5 LoRA, 9.20 MB |
+| `gate6_qwen_plain_training.json` / `anchor_training.json` | params/time/peak/hash/vector checks |
+| `gate6_qwen_*_history.csv` | real epoch losses |
+| `gate6_qwen_*_encoding.json` | 4,280-row encode metadata and drift |
+| `gate6_qwen_lora_validation.csv` | Plain/Anchor B0/B3-H validation |
+| `gate6_qwen_{frozen,plain}_{reject,full}.pt` | Qwen B4 checkpoints |
+| `gate6_qwen_*_validation.csv` | B4 validation |
+| `gate6_qwen_method_matrix_val.csv` | 9-row validation matrix |
+| `gate6_qwen_method_matrix_historical_test.csv` | one-shot historical test |
+| `gate6_qwen_method_freeze.json` | hashes and test_evaluated |
+| `gate6_qwen_agent_demos.json` | 6 real Qwen Agent replays |
+| `gate6_qwen_benchmark_*` | 120 tasks × 4 Qwen routers (480 rows) |
+| `gate6_qwen_benchmark_summary.csv` | TSR/tool/safe/routing/latency |
+| `gate6_qwen_benchmark_by_family.csv` | family-level TSR |
+| `gate6_qwen_benchmark_failures.csv` | failure reasons |
+
+Qwen test is historical exploratory; the 120 Agent tasks are old Gate5 tasks.
+See `../reports/gate6_final_report.md`.

@@ -1,0 +1,5 @@
+router,n_cases,task_success_rate,tool_accuracy,safe_action_rate,routing_accuracy,clarification_success,p50_latency_seconds,p95_latency_seconds,mean_turns
+Qwen-Frozen-B3H,120,0.625,0.7,1.0,0.716667,0.0,0.1381,0.256515,1.308333
+Qwen-Plain-B3H,120,0.591667,0.708333,1.0,0.65,0.0,0.2204,0.414905,1.308333
+Qwen-Plain-B4Full,120,0.625,0.741667,1.0,0.691667,0.0,0.25655,0.400435,1.308333
+Qwen-Plain-RejectOnly,120,0.65,0.766667,1.0,0.708333,0.0,0.244,0.363365,1.308333

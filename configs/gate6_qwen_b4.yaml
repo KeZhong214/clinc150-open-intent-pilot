@@ -1,0 +1,23 @@
+schema_version: gate6-qwen-b4-v1
+encoder: Qwen/Qwen3-Embedding-0.6B
+revision: 97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3
+support: 400
+validation: 800 calibration-known + 720 dev-unknown
+classes: 40
+methods:
+  B0: single prototype
+  B3-H: 0.5 prototype + 0.5 top-2 neighbor
+  B4-RejectOnly: fixed gate 0.5, reject head 7-16-1 only
+  B4-Full: learned gate 4-32-1 + reject head 7-16-1
+training:
+  epochs: 60
+  episodes: 24
+  seed: 42
+  optimizer: AdamW
+  lr: 0.001
+checkpoints:
+  frozen_reject: results/gate6_qwen_frozen_reject.pt
+  frozen_full: results/gate6_qwen_frozen_full.pt
+  plain_reject: results/gate6_qwen_plain_reject.pt
+  plain_full: results/gate6_qwen_plain_full.pt
+test_label: historical_exploratory

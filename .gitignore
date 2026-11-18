@@ -18,3 +18,6 @@ data/gate5/benchmark_sessions/
 data/gate5/demo_sessions/
 data/gate5/test_sessions/
 data/gate5_lora_smoke/
+data/gate6/sessions/
+data/gate6/demo_sessions/
+data/gate6_qwen_benchmark_sessions/

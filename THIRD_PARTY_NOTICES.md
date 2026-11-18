@@ -75,6 +75,7 @@ This repository contains course-project code and derived manifests. It does
 
 - SetFit: <https://github.com/huggingface/setfit>, **Apache-2.0**
 - Streamlit: <https://streamlit.io/>, **Apache-2.0**
+- Qwen3-Embedding-0.6B: <https://huggingface.co/Qwen/Qwen3-Embedding-0.6B>, **Apache-2.0**
 - PEFT: <https://github.com/huggingface/peft>, **Apache-2.0**
 - Playwright (screenshot tooling only): **Apache-2.0**
 

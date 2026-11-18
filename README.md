@@ -2,10 +2,11 @@
 
 课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测、LoRA/B4 归因与真实工具 Agent**
 
-当前状态：**Gate 0–5 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
+当前状态：**Gate 0–6 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
 5/10-shot、B0/B3-P/B3-H 的 72 格矩阵；Gate 4 完成 BANKING77 GTE 10-shot
 的 B4-AR 与 SQLite Agent；Gate 5 完成真实 LoRA-GTE、RejectOnly 归因、
-30 条虚构银行政策 RAG、120 条业务 benchmark。
+30 条虚构银行政策 RAG、120 条业务 benchmark；Gate 6 完成 Qwen3-Embedding
+0.6B 的冻结对齐、Plain/Anchor LoRA、Qwen 联合矩阵与 Qwen Agent 回归。
 
 Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 
@@ -42,6 +43,22 @@ Gate 5 的核心结果（BANKING77 GTE 10-shot；历史探索性 test）：
   LoRA-B4Full 58.3%；三者安全操作率均 100%；
 - 12 条 LLM API 模式因无凭据 **NOT RUN_API_BLOCKED**，未伪造调用。
 
+Gate 6 的核心结果（Qwen3-Embedding 0.6B；历史探索性 test）：
+
+| Qwen encoder | B3-H Val | B3-H Test | RejectOnly Test | Agent TSR |
+|---|---:|---:|---:|---:|
+| Frozen | 0.740 | 0.806 | 0.813 | 0.625 |
+| Plain LoRA | **0.758** | 0.797 | 0.808 | 0.592（B3-H）/ **0.650（Reject）** |
+| Anchor LoRA | 0.757 | 0.797 | — | NOT RUN |
+
+- 冻结对齐：32 probe mean cosine **0.999998**，top1 1.0；
+- LoRA：2.29M 可训练参数（0.38%），2 epoch，adapter 9.20 MB；
+- **validation 提升，但 historical test 没有复现**；
+- Anchor 把 support 余弦从 0.892 提高到 0.936（漂移更小），但没有 test 收益；
+- Qwen 上 **RejectOnly > Full**，支持 Gate5 模块归因；
+- Qwen Plain-RejectOnly Agent TSR **65.0%**，四版本最高，安全率 100%；
+- 分类 F1 仍是 GTE Frozen-RejectOnly **0.8435** 最高。
+
 B3-H 的场景差异：
 
 - BANKING77：相对 B0 平均 OOS recall +5.21 pp，open-set F1 +0.99 pp；
@@ -66,14 +83,22 @@ Gate 1/2 历史结果保持冻结：
 [Gate 2 Hard-OOS](reports/gate2_method.md) ·
 [Gate 3 多数据集](reports/gate3_final_report.md) ·
 [Gate 4 B4+Agent](reports/gate4_final_report.md) ·
-[Gate 5 LoRA+Benchmark](reports/gate5_final_report.md)  
+[Gate 5 LoRA+Benchmark](reports/gate5_final_report.md) ·
+[Gate 6 Qwen+Agent](reports/gate6_final_report.md)  
 结果索引：[results/gate5_method_matrix_historical_test.csv](results/gate5_method_matrix_historical_test.csv) ·
-[results/gate5_benchmark_summary.csv](results/gate5_benchmark_summary.csv)  
+[results/gate5_benchmark_summary.csv](results/gate5_benchmark_summary.csv) ·
+[results/gate6_qwen_method_matrix_historical_test.csv](results/gate6_qwen_method_matrix_historical_test.csv) ·
+[results/gate6_qwen_benchmark_summary.csv](results/gate6_qwen_benchmark_summary.csv)  
 图表：[figures/gate5_method_matrix.png](figures/gate5_method_matrix.png) ·
-[figures/gate5_benchmark_overall.png](figures/gate5_benchmark_overall.png)  
+[figures/gate5_benchmark_overall.png](figures/gate5_benchmark_overall.png) ·
+[figures/gate6_qwen_matrix.png](figures/gate6_qwen_matrix.png) ·
+[figures/gate6_qwen_benchmark.png](figures/gate6_qwen_benchmark.png)  
 Demo：[app_gate5.py](app_gate5.py) ·
-[真实 B4 查卡截图](figures/gate5_agent_card_b4.png) ·
-[真实 RAG 截图](figures/gate5_agent_rag.png)
+[app_gate6.py](app_gate6.py) ·
+[Gate5 B4 查卡截图](figures/gate5_agent_card_b4.png) ·
+[Gate5 RAG 截图](figures/gate5_agent_rag.png) ·
+[Qwen RejectOnly 取消转账截图](figures/gate6_qwen_agent_cancel.png) ·
+[Qwen RAG 截图](figures/gate6_qwen_agent_rag.png)
 
 ---
 
@@ -128,7 +153,13 @@ Demo：[app_gate5.py](app_gate5.py) ·
   `NOT RUN_API_BLOCKED`。
 - 建立 120 条冻结 Agent benchmark，用 3 个真实路由完成 360 次评测；
   Frozen-B3H TSR 62.5%，B4/LoRA 均为 58.3%，安全操作率 100%。
-- 48 个协议、配置、可复现性、Gate 1/2/3/4/5 逻辑测试通过。
+- Gate 6 完成 Qwen3-Embedding 0.6B 冻结对齐（mean cosine 0.999998）、
+  Plain/Anchor LoRA（2.29M 参数、2 epoch、adapter 9.20 MB）。
+- 完成 Qwen Frozen/Plain × B0/B3-H/RejectOnly/Full 的 9 行 validation 和
+  一次性历史 test；Qwen Frozen-RejectOnly 0.8127，Qwen Plain-B3H 0.7972。
+- 完成 Qwen Agent 接入、6 条真实回放和 120 任务 × 4 路由回归；
+  Qwen Plain-RejectOnly TSR 65.0%，安全率 100%。
+- 55 个协议、配置、可复现性、Gate 1/2/3/4/5/6 逻辑测试通过。
 
 详细报告：[Gate 0 环境与数据](reports/gate0_environment.md)  
 Gate 1 报告：[B0/B2 Baseline 与动态拒识](reports/gate1_baseline.md)  
@@ -136,12 +167,14 @@ Gate 2 报告：[Hard-OOS 与 B2-v2 类别边界校准](reports/gate2_method.md)
 Gate 3 报告：[多数据集、跨模型与 B3 实验](reports/gate3_final_report.md)  
 Gate 4 报告：[B4 可训练路由器与客服 Agent](reports/gate4_final_report.md)  
 Gate 5 报告：[LoRA、RejectOnly、RAG Agent 与 120 任务 Benchmark](reports/gate5_final_report.md)  
+Gate 6 报告：[Qwen3-Embedding LoRA、表征漂移与联合路由](reports/gate6_final_report.md)  
 修改记录：[Gate 0](reports/gate0_vibe_coding.md)、
 [Gate 1](reports/gate1_vibe_coding.md)、
 [Gate 2](reports/gate2_vibe_coding.md)、
 [Gate 3](reports/gate3_vibe_coding.md)、
 [Gate 4](reports/gate4_vibe_coding.md)、
-[Gate 5](reports/gate5_vibe_coding.md)
+[Gate 5](reports/gate5_vibe_coding.md)、
+[Gate 6](reports/gate6_vibe_coding.md)
 
 ---
 
@@ -157,6 +190,7 @@ D:\code\intent-open-set\
 ├── app.py                           # Gate 3 classifier demo
 ├── app_gate4.py                     # Gate 4 agent demo
 ├── app_gate5.py                     # Gate 5 RAG agent demo
+├── app_gate6.py                     # Gate 6 Qwen LoRA RAG agent demo
 ├── configs\
 │   ├── pilot.yaml
 │   ├── gate2.yaml
@@ -165,7 +199,11 @@ D:\code\intent-open-set\
 │   ├── gate5_lora.yaml
 │   ├── gate5_methods.yaml
 │   ├── gate5_agent.yaml
-│   └── gate5_benchmark.yaml
+│   ├── gate5_benchmark.yaml
+│   ├── gate6_qwen_lora.yaml
+│   ├── gate6_qwen_b4.yaml
+│   ├── gate6_qwen_agent.yaml
+│   └── gate6_qwen_benchmark.yaml
 ├── data\
 │   ├── raw\
 │   │   ├── data_full.json
@@ -180,6 +218,9 @@ D:\code\intent-open-set\
 │   ├── gate5\
 │   │   ├── benchmark_cases.jsonl    # frozen 120 tasks
 │   │   └── sessions\                # per-session SQLite (git-ignored)
+│   ├── gate6\
+│   │   ├── sessions\                # Qwen per-session SQLite (git-ignored)
+│   │   └── demo_sessions\           # replay DBs (git-ignored)
 │   ├── manifest\
 │   │   ├── selected_intents.json
 │   │   ├── gate2_*                  # hard-OOS split/manifests
@@ -212,6 +253,17 @@ D:\code\intent-open-set\
 │   │   ├── router_lora.py
 │   │   ├── benchmark.py
 │   │   └── make_figures.py
+│   ├── gate6\
+│   │   ├── qwen_encoder.py
+│   │   ├── inspect_qwen.py
+│   │   ├── train_qwen_lora.py
+│   │   ├── encode_qwen_lora.py
+│   │   ├── train_qwen_b4.py
+│   │   ├── run_qwen_matrix.py
+│   │   ├── router_qwen.py
+│   │   ├── benchmark_qwen.py
+│   │   ├── combine_qwen_benchmark.py
+│   │   └── make_figures.py
 │   └── ...                          # Gate 1/2 scripts retained
 ├── tests\
 │   ├── test_gate1_logic.py
@@ -219,6 +271,7 @@ D:\code\intent-open-set\
 │   ├── test_gate3_protocol.py
 │   ├── test_gate4.py
 │   ├── test_gate5.py
+│   ├── test_gate6.py
 │   └── ...
 ├── logs\
 ├── reports\
@@ -230,7 +283,11 @@ D:\code\intent-open-set\
 │   ├── gate5_final_report.md
 │   ├── gate5_ppt_outline.md
 │   ├── gate5_speech.md
-│   └── gate5_vibe_coding.md
+│   ├── gate5_vibe_coding.md
+│   ├── gate6_final_report.md
+│   ├── gate6_ppt_outline.md
+│   ├── gate6_speech.md
+│   └── gate6_vibe_coding.md
 ├── results\                         # Gate 1/2/3/4/5 metrics, predictions, checkpoints
 └── figures\                         # Gate 1/2/3/4/5 PNGs, real screenshots
 ```
@@ -322,7 +379,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 48 tests in ...s
+Ran 55 tests in ...s
 OK
 ```
 
@@ -350,8 +407,8 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 48 个测试。请反馈
-`logs/gate5_all_tests.log`；如需环境信息，再反馈
+预期最后一行是 `OK`，共 55 个测试。请反馈
+`logs/gate6_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
 ### 4.6 Gate 1 复现命令（实际已运行）
@@ -506,6 +563,44 @@ benchmark 在比较前冻结 SHA。LoRA 4-epoch 第一次尝试保留在
 `results/gate5_lora_4ep/`，最终 adapter 是 2 epoch。LLM API 因无凭据标记
 `NOT RUN_API_BLOCKED`。
 
+### 4.11 Gate 6 复现命令（实际已运行）
+
+```powershell
+$env:HF_HOME = "D:\code\intent-open-set\data\model_cache"
+$env:HF_HUB_OFFLINE = "1"
+$env:TRANSFORMERS_OFFLINE = "1"
+
+# A. Qwen 冻结对齐 + smoke
+.\.venv\Scripts\python.exe -m src.gate6.inspect_qwen
+
+# B. Plain / Anchor LoRA + 重编码 + validation
+.\.venv\Scripts\python.exe -m src.gate6.train_qwen_lora --run plain --epochs 2 --microbatch 2 --grad-accum 8
+.\.venv\Scripts\python.exe -m src.gate6.train_qwen_lora --run anchor --epochs 2 --microbatch 2 --grad-accum 8 --lambda-anchor 0.5
+.\.venv\Scripts\python.exe -m src.gate6.encode_qwen_lora --run plain
+.\.venv\Scripts\python.exe -m src.gate6.encode_qwen_lora --run anchor
+.\.venv\Scripts\python.exe -m src.gate6.evaluate_qwen_lora
+
+# C. Qwen B4 与矩阵
+.\.venv\Scripts\python.exe -m src.gate6.train_qwen_b4 --encoder frozen --method reject
+.\.venv\Scripts\python.exe -m src.gate6.train_qwen_b4 --encoder frozen --method full
+.\.venv\Scripts\python.exe -m src.gate6.train_qwen_b4 --encoder plain --method reject
+.\.venv\Scripts\python.exe -m src.gate6.train_qwen_b4 --encoder plain --method full
+.\.venv\Scripts\python.exe -m src.gate6.run_qwen_matrix
+
+# D. Qwen Agent / benchmark (one process per router on Windows 8GB)
+.\.venv\Scripts\python.exe -m src.gate6.run_qwen_demos
+.\.venv\Scripts\python.exe -m streamlit run app_gate6.py
+foreach ($n in @('Qwen-Frozen-B3H','Qwen-Plain-B3H','Qwen-Plain-RejectOnly','Qwen-Plain-B4Full')) {
+  .\.venv\Scripts\python.exe -m src.gate6.benchmark_qwen --router $n
+}
+.\.venv\Scripts\python.exe -m src.gate6.combine_qwen_benchmark
+.\.venv\Scripts\python.exe -m src.gate6.make_figures
+```
+
+Qwen 与 Gate3 对齐的关键是 **right padding + 最后一个非 pad token**；左 padding
+会破坏 Qwen causal/RoPE 的位置路径，不能用于训练。Qwen test 是
+`historical_exploratory`；120 条 Agent 任务是 Gate5 旧任务的探索性回归。
+
 ---
 
 ## 5. 数据协议（冻结）
@@ -578,6 +673,19 @@ Gate 2 不覆盖 Gate 1，也不混用原始 `oos_test`：
   DB；StubRouter 不计入；
 - LLM API 无凭据时为 `NOT RUN_API_BLOCKED`，离线模板模式不冒充 API。
 
+### Gate 6 的 Qwen LoRA / B4 / Agent 协议
+
+- Qwen revision、prompt、maxlen、right padding、last non-pad token 与 Gate3
+  cache 对齐（mean cosine 0.999998）；
+- LoRA 与 B4 只使用 400 条 10-shot support；Plain/Anchor 同 seed/epoch；
+- Anchor teacher 是冻结 Qwen 的 detached 向量，不参与梯度；
+- Qwen B4-RejectOnly 固定 gate 0.5，只训练拒识头；Full 训练 gate+拒识；
+- 9 行矩阵在 `results/gate6_qwen_method_freeze.json` 后只做一次历史 test；
+- Qwen test 已看过；120 条 Agent 任务是 Gate5 旧任务的探索性回归；
+- Qwen benchmark 在 Windows 8GB 上按 router 分进程执行，最后合并；每个
+  router 一个 partial CSV，不把 smoke/partial 冒充完整结果；
+- 没有新的 LLM API 调用；API 仍为 `NOT RUN_API_BLOCKED`。
+
 ### 已知的官方数据重复
 
 官方数据内部没有分区内重复，但规范化文本有 **5 处跨分区碰撞**：
@@ -606,9 +714,9 @@ ID 和规范化文本交集均为 0；但 `user_name` 的一个 test 文本在 t
 
 ## 7. 当前边界与后续扩展
 
-已完成：Gate 0–5；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
-test 矩阵；B4-AR；LoRA-GTE；RejectOnly/Full 归因；RAG Agent；
-120 条真实路由 benchmark；真实截图。
+已完成：Gate 0–6；3 数据集 × 4 编码器 × 2 shot × B0/B3-P/B3-H 的 72 格
+test 矩阵；B4-AR；LoRA-GTE；RejectOnly/Full 归因；Qwen3-Embedding LoRA；
+RAG Agent；120 条真实路由 benchmark；真实截图。
 
 Gate 3 的主要判断：
 
@@ -638,14 +746,26 @@ Gate 5 的主要判断：
 - 30 条政策 RAG + 10 条真实模型 demo 可用；API 12 条因无凭据
   `NOT RUN_API_BLOCKED`。
 
+Gate 6 的主要判断：
+
+- Qwen 冻结对齐通过（mean cosine 0.999998，top1 1.0），train 前先固定
+  right padding + last non-pad token；
+- Qwen Plain/Anchor validation 高于 frozen（B3-H 0.758/0.757 vs 0.740），
+  但 historical test 没有复现（0.797/0.797 vs 0.806）；
+- Anchor 把 support 余弦从 0.892 提到 0.936，但没有 test 收益；
+- Qwen 上 RejectOnly > Full（Frozen 0.813/0.805；Plain 0.808/0.797）；
+- Qwen Plain-RejectOnly Agent TSR 65.0%，四版本最高；分类 F1 仍是
+  GTE Frozen-RejectOnly 0.8435 最高；
+- 5 条应澄清任务 Qwen 全部直接接受，clarification=0，是真实缺陷。
+
 尚未做：
 
 - 新的独立 unknown-class test / 多 seed 方差；
-- LoRA 多 seed 与显著性检验；
+- Qwen LoRA 多 seed、Anchor λ 扫描与显著性检验；
 - 更多 BANKING77 intent 的 Agent 槽位；
 - 实际 PPTX 排版、演讲录像；
 - 12 条真实 LLM API 调用（无凭据）；
 - 近域/远域未知的可靠统一定义（NOT RUN）。
 
-不会在当前 BANKING77 test 上继续调 LoRA/B4 参数；若继续，需要新的独立
-unknown classes 或明确的新协议。
+不会在当前 BANKING77 test 上继续调 Qwen LoRA/B4 参数；若继续，需要新的
+独立 unknown classes 或明确的新协议。

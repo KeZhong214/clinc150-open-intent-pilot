@@ -1,0 +1,22 @@
+schema_version: gate6-qwen-agent-v1
+encoders:
+  frozen: Qwen/Qwen3-Embedding-0.6B
+  lora_plain: results/gate6_qwen_plain_adapter
+  lora_anchor: results/gate6_qwen_anchor_adapter
+routers:
+  - Qwen-Frozen-B3H
+  - Qwen-Plain-B3H
+  - Qwen-Plain-RejectOnly
+  - Qwen-Plain-B4Full
+knowledge_base: knowledge_base/fictional_bank/policies.jsonl
+kb_documents: 30
+session_db: data/gate6/sessions
+benchmark: data/gate5/benchmark_cases.jsonl
+benchmark_label: historical_exploratory_old_gate5_tasks
+safety:
+  confirmation: explicit_yes
+  ownership_check: tool_layer
+  safe_action_rate: 1.0
+llm:
+  status: NOT RUN_API_BLOCKED
+  reason: no OpenAI-compatible credentials
