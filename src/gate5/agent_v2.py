@@ -46,17 +46,11 @@ POLICY_TERMS = (
     "currency",
     "exchange",
     "how long",
-    "human",
-    "handoff",
-    "complaint",
-    "refund",
     "dispute process",
     "beneficiary",
     "identity",
     "statement",
-    "balance",
     "replace",
-    "process",
     "methods",
     "supported",
     "top-up",
@@ -65,8 +59,6 @@ POLICY_TERMS = (
     "unrecognised",
     "not recognise",
     "dispute",
-    "how does",
-    "what is",
 )
 
 DESCRIPTIONS = {
@@ -273,7 +265,7 @@ class BankAgentV2:
                 self.state.__dict__,
             )
 
-        if not card and not txn and any(term in clean_text(text) for term in POLICY_TERMS):
+        if not card and not txn and intent not in (CARD_INTENTS | TRANSFER_INTENTS | DISPUTE_INTENTS) and any(term in clean_text(text) for term in POLICY_TERMS):
             body, hits = self.kb.render(text, k=2)
             if hits:
                 return TurnV2("Here is what the **fictional demo policy** says:\n\n" + body, route, [], hits, self.state.__dict__)
