@@ -6,7 +6,7 @@
 - 3-seed Qwen Plain：B3-H test 0.8068、RejectOnly **0.8253**；
 - RejectOnly 相对 frozen +1.25 pp，2/3 seed 胜出；
 - B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍稳定优于 Full；
-- P1/P2 没超过 P0，P3 未完成：**没有优化成功**。
+- P1/P2 没超过 P0，P3 完成但 B3-H 仍低于 P0：**没有优化成功**。
 
 ## Slide 2 — 研究问题
 
@@ -61,9 +61,9 @@
 | P0 | 0.7984 | **0.7995** | 保留 |
 | P1 lr3e-5 | 0.7780 | 0.7978 | 更差 |
 | P2 lr1e-5 | 0.7889 | 0.7981 | 更差 |
-| P3 no triplet | INCOMPLETE | — | 40/50 step |
+| P3 no triplet | 0.7945 | 0.7995 | 完成但未选中 |
 
-- 不把 P3 当完成；
+- P3 首次停顿后重跑完成，但未选中；
 - 不强行宣布优化成功。
 
 ## Slide 8 — 3-seed Plain
@@ -122,7 +122,7 @@
 ## Slide 13 — 限制
 
 - test 已看过；
-- P3 incomplete；
+- P3 完成但未选中；
 - 3 seeds 不是显著性；
 - Qwen Plain B4-Full 稳定性仅 2 seed；
 - 无新独立 unknown 协议；

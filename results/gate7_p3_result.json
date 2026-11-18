@@ -1,0 +1,16 @@
+{
+  "status": "COMPLETED_NEGATIVE",
+  "run": "p3",
+  "seed": 42,
+  "lr": 0.0001,
+  "triplet_weight": 0.0,
+  "epochs": 2,
+  "optimizer_steps": 50,
+  "adapter_sha256": "84926b52865c832243f9fc2cde45861a630c1d5b8173d4dba3dacc025f9496e0",
+  "adapter_dir": "results\\gate7_qwen_p3_adapter",
+  "dev_b3h_f1": 0.79452,
+  "dev_reject_f1": 0.79947,
+  "selected": false,
+  "reason": "P3 B3-H dev_select 0.7945 < P0 0.7984; P3 Reject ties P0 0.7995; P0 retained on B3-H primary rule",
+  "log": "logs/gate7_qwen_p3_train_retry.log"
+}

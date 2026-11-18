@@ -93,6 +93,14 @@ class Gate7Test(unittest.TestCase):
         self.assertGreater(float(reject["delta_mean_vs_frozen"]), 0.0)
         self.assertGreaterEqual(int(reject["wins_vs_frozen"]), 2)
 
+    def test_p3_completed_but_not_selected(self) -> None:
+        p = json.loads((RESULTS / "gate7_p3_result.json").read_text(encoding="utf-8"))
+        self.assertEqual(p["status"], "COMPLETED_NEGATIVE")
+        self.assertFalse(p["selected"])
+        self.assertEqual(p["optimizer_steps"], 50)
+        self.assertTrue((RESULTS / "gate7_qwen_p3_adapter" / "adapter_model.safetensors").exists())
+        self.assertLess(float(p["dev_b3h_f1"]), 0.7984)
+
     def test_stability_b4_reject_beats_full(self) -> None:
         d = pd.read_csv(RESULTS / "gate7_stability_summary.csv")
         for enc in ("gte_frozen", "qwen_frozen", "gte_lora42", "gte_lora43", "gte_lora44"):

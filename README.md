@@ -72,10 +72,10 @@ Gate 7 的核心结果（双层 dev + 3-seed；历史探索性 test）：
 - B4-RejectOnly 相对 frozen test +1.25 pp，2/3 seed 胜出；
 - dev_threshold 只选 tau，dev_select 只选配方；
 - 6×6 microbatch 和 203/400 负 margin hard negative 已诊断；
-- P1/P2 没有超过 P0；P3 停在 40/50 step（INCOMPLETE）；
+- P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 B4-Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 64 个测试通过。
+- 65 个测试通过。
 
 B3-H 的场景差异：
 
@@ -183,7 +183,7 @@ Demo：[app_gate5.py](app_gate5.py) ·
   203/400 负 margin 的 hard negative。
 - 完成 Qwen Plain seed42/43/44 真实复验；RejectOnly test 均值 0.8253，
   相对 frozen +1.25 pp，2/3 seed 胜出。
-- P1/P2 未超过 P0；P3 停在 40/50 step（INCOMPLETE），未伪造结果。
+- P1/P2 未超过 P0；P3 完成但未选中（dev B3-H 0.7945 < P0 0.7984）。
 - 完成 GTE Frozen、Qwen Frozen、GTE-LoRA 42/43/44 的 B4 多种子稳定性；
   RejectOnly 在全部对照中稳定优于 B4-Full。
 - 修复 5 条 transfer-not-arrived 澄清 bug；Qwen RejectOnly 81/120，
@@ -429,7 +429,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 64 tests in ...s
+Ran 65 tests in ...s
 OK
 ```
 
@@ -457,7 +457,7 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 64 个测试。请反馈
+预期最后一行是 `OK`，共 65 个测试。请反馈
 `logs/gate7_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
@@ -814,16 +814,16 @@ Gate 7 的主要判断：
   RejectOnly 0.8253；RejectOnly 相对 frozen +1.25 pp，2/3 seed 胜出；
 - Gate6 的 seed42 负结果真实，但不是三种子普遍结论；
 - 6×6 microbatch / 203/400 负 margin hard negative 是机制风险；
-- P1/P2 没有超过 P0；P3 停在 40/50 step，未完成；
+- P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE Frozen、GTE-LoRA、Qwen Frozen 上稳定优于 Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 64 个测试通过。
+- 65 个测试通过。
 
 尚未做：
 
 - 新的独立 unknown-class test / 大样本 bootstrap；
 - Qwen LoRA 更多 seed、Anchor λ 扫描与显著性检验；
-- P3 的完整训练（当前 INCOMPLETE）；
+- P3 已完成但未进入最终 test（dev 低于 P0）；
 - 更多 BANKING77 intent 的 Agent 槽位；
 - 实际 PPTX 排版、演讲录像；
 - 12 条真实 LLM API 调用（无凭据）；

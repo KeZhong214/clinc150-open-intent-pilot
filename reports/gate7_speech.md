@@ -4,7 +4,7 @@
 
 Gate 7 的目标不是再训练一个更大的模型，而是回答：为什么 Qwen LoRA 在 Gate6 的验证集提升、历史 test 却下降？这是 seed 偶然、对比学习实现、表征漂移，还是 unknown 分布迁移？以及核心的 RejectOnly 结论在多种子下是否可靠。
 
-先说结论：**单 seed42 的负结果不是 Qwen LoRA 的普遍失败。3 个 seed 的 Qwen Plain，RejectOnly test 均值 0.8253，比 frozen 0.8127 高 1.25 个百分点，2/3 个 seed 胜出。B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍然稳定优于 B4-Full。P1/P2 没有超过 P0，P3 未完成，所以没有优化成功。**
+先说结论：**单 seed42 的负结果不是 Qwen LoRA 的普遍失败。3 个 seed 的 Qwen Plain，RejectOnly test 均值 0.8253，比 frozen 0.8127 高 1.25 个百分点，2/3 个 seed 胜出。B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍然稳定优于 B4-Full。P1/P2 没有超过 P0，P3 完成但 B3-H 仍低于 P0，所以没有优化成功。**
 
 ## A：诊断（约 2.5 分钟）
 
@@ -20,7 +20,7 @@ Gate 7 的目标不是再训练一个更大的模型，而是回答：为什么 
 
 ## B：多种子（约 3 分钟）
 
-P0 原始 Plain，P1 lr=3e-5，P2 lr=1e-5，P3 去掉 triplet。P1/P2 在 dev_select 上都低于 P0；P3 在 Windows 内存压力下停在 40/50 step，没有 adapter，记录为 INCOMPLETE，不冒充完成。
+P0 原始 Plain，P1 lr=3e-5，P2 lr=1e-5，P3 去掉 triplet。P1/P2 在 dev_select 上都低于 P0；P3 首次在 Windows 内存压力下停在 40/50 step，重跑后完成 50 step，dev B3-H 0.7945，仍低于 P0 0.7984，所以 P3 完成但未选中。
 
 然后训练 P0 的 seed 42/43/44。validation B3-H 均值 0.8028，RejectOnly 0.8130；test B3-H 均值 0.8068，RejectOnly **0.8253**。相对 frozen，B3-H 只高 0.18 pp，RejectOnly 高 1.25 pp。每个 seed 的 adapter SHA 都不同，seed43/44 的 test 明显高于 seed42；seed42 的负结果保留，没有用 test 选 seed。
 
@@ -49,9 +49,9 @@ Agent 修复了 5 条应澄清任务：当 accepted intent 是 transfer-not-arri
 1. Gate6 的 Qwen LoRA 负结果是 seed42 的真实结果，但不是三种子普遍结论；
 2. 3-seed RejectOnly +1.25 pp，B3H 仅 +0.18 pp；
 3. B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 Full；
-4. P1/P2 没有改善，P3 未完成，没有优化成功；LLM API 仍无凭据。
+4. P1/P2 没有改善，P3 完成但未选中，没有优化成功；LLM API 仍无凭据。
 
-限制：test 已看过；120 任务是旧任务；3 seeds 不是显著性；P3 incomplete；没有新独立 unknown 协议。
+限制：test 已看过；120 任务是旧任务；3 seeds 不是显著性；P3 未进入 test；没有新独立 unknown 协议。
 
 下一步：新的独立 unknown-class 协议、真 batch/负例质量修复、更多 seed 和 bootstrap、dispute 路由与澄清覆盖，而不是继续在当前 test 上调参。
 

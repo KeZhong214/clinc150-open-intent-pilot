@@ -12,7 +12,7 @@ candidates:
   P0: {lr: 0.0001, loss: supcon_plus_0.5_triplet}
   P1: {lr: 0.00003, loss: supcon_plus_0.5_triplet}
   P2: {lr: 0.00001, loss: supcon_plus_0.5_triplet}
-  P3: {lr: 0.0001, loss: supcon_only, status: INCOMPLETE_WINDOWS_STALL}
+  P3: {lr: 0.0001, loss: supcon_only, status: COMPLETED_NOT_SELECTED}
 training:
   epochs: 2
   microbatch: 2

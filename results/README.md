@@ -218,8 +218,8 @@ See `../reports/gate6_final_report.md`.
 | `gate7_dev_unknown_class_fpr.csv` | unknown-class FPR |
 | `gate7_toy_batch.json` | 6x6 vs 48x48 microbatch proof |
 | `gate7_hard_negative_stats.json` | 203/400 negative margins, 157 unique negatives |
-| `gate7_seed_runs.csv` | seed/lr/adapter SHA for P0/P1/P2 |
-| `gate7_p3_incomplete.json` | P3 stopped at 40/50, no adapter |
+| `gate7_seed_runs.csv` | seed/lr/adapter SHA for P0/P1/P2/P3 |
+| `gate7_p3_result.json` | P3 completed (50 steps) but not selected |
 | `gate7_dev_plain*.csv` | per-seed dev_select results |
 | `gate7_final_historical_test.csv` | one-shot historical test, 3 seeds + frozen |
 | `gate7_final_summary.csv` | mean/std/paired difference vs frozen |

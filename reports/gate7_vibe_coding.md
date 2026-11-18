@@ -19,15 +19,17 @@ Gate6 的 `0.999998` 对齐和 B3H replay 作为 A 的门槛。
 原实现 `supcon_loss(z[6], y[6])`；`grad_accum=8` 只累积梯度，不合并 logits。
 toy 文件 `results/gate7_toy_batch.json` 证明 6×6，48×48 只是假设。
 
-### 2.3 P3 在 Windows 内存压力下停顿
+### 2.3 P3 先停顿，重跑后完成
 
-P3（去掉 triplet，lr 1e-4）在 epoch2 到 step 40/50 时长时间停顿；GPU 1.5GB，
-CPU 持续占用，最终停止并记录：
+P3（去掉 triplet，lr 1e-4）第一次在 epoch2 的 step 40/50 长时间停顿，停止并
+保留 `logs/gate7_qwen_p3_train.log`，当时没有 adapter。
 
-- `results/gate7_p3_incomplete.json`
-- `logs/gate7_qwen_p3_train.log`
+在 GPU 空闲、无并发稳定性/Agent 进程后，用相同配置重跑，**完成 2 epochs /
+50 steps**，adapter SHA `84926b52...`；dev B3-H 0.7945、Reject 0.7995，仍低于
+P0 的 0.7984，所以 P3 完成但未选中。记录：
+`results/gate7_p3_result.json`，日志：`logs/gate7_qwen_p3_train_retry.log`。
 
-**没有 P3 adapter，不把它算成完成，也没有用 P3 的结果选任何东西。**
+没有用 P3 的 test 结果做选择；P3 未进入 final test。
 
 ### 2.4 稳定性/Agent 并发导致 CUDA unknown error
 
@@ -100,7 +102,7 @@ Gate6 中 B106–B110 均直接接受。Gate7 加通用语义守卫：
 
 ## 5. 未完成 / 边界
 
-- P3 未完成（INCOMPLETE）；
+- P3 完成但未选中（dev B3-H 0.7945 < P0 0.7984）；
 - Qwen Plain42 B4-Full 稳定性只有 2 seed；
 - 没有 bootstrap 置信区间；
 - 没有新的独立 unknown-class 盲测；

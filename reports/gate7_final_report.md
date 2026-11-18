@@ -14,7 +14,7 @@
 
 **Gate6 的“验证提升、test 下降”主要是 seed 42 的偶然/迁移问题，而不是 Qwen LoRA 的普遍失败：3 个 seed 的 Qwen Plain 在 dev_select 上 B3-H 均值 0.8028、RejectOnly 0.8130；历史 test 均值 B3-H 0.8068、RejectOnly 0.8253，RejectOnly 相对 frozen 0.8127 提升 +1.25 pp，3 个 seed 中 2 个胜出。B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上仍稳定优于 B4-Full。**
 
-同时保留负结果：P1/P2 没有超过 P0；P3 因 Windows 内存压力停在 40/50 step，未保存 adapter；B4 Full 没有超过 RejectOnly；LLM API 仍无凭据。
+同时保留负结果：P1/P2 没有超过 P0；P3 首次停顿后重跑完成，但 dev B3-H 仍低于 P0，未选中；B4 Full 没有超过 RejectOnly；LLM API 仍无凭据。
 
 ---
 
@@ -83,10 +83,11 @@ Plain 在 dev_select 上确实优于 frozen；这与 Gate6 historical test 的 s
 | P0 | 原 Plain，lr 1e-4，SupCon+0.5 triplet | **0.7984** | **0.7995** | 保留 |
 | P1 | lr 3e-5 | 0.7780 | 0.7978 | 更差 |
 | P2 | lr 1e-5 | 0.7889 | 0.7981 | 更差 |
-| P3 | 移除 triplet | **INCOMPLETE** | — | 40/50 step 后 Windows 压力停顿，无 adapter |
+| P3 | 移除 triplet | 0.7945 | 0.7995 | 完成但未选中；B3-H 低于 P0 |
 
-P3 日志：`logs/gate7_qwen_p3_train.log`；记录：
-`results/gate7_p3_incomplete.json`。**没有把 P3 当成完成。**
+P3 首次运行在 Windows 内存压力下停顿；重跑完成 2 epochs / 50 steps，adapter SHA
+`84926b52...`。因为 dev B3-H 0.7945 < P0 0.7984，P3 未进入最终 test。
+日志：`logs/gate7_qwen_p3_train_retry.log`；记录：`results/gate7_p3_result.json`。
 
 ### 2.2 3-seed Plain（P0）
 
@@ -117,9 +118,9 @@ Known correct routing：
 
 ### 2.3 优化是否成功？
 
-**没有。** P1/P2 在 dev_select 均低于 P0；P3 未完成。按任务书保留 P0/
-Frozen-RejectOnly 为主结果，没有强行把 P1/P2 包装成“优化成功”，也没有
-为了得到一个正的 optimized 结果去扫 test。
+**没有。** P1/P2 在 dev_select 均低于 P0；P3 完成但 B3-H 0.7945 也低于
+P0 0.7984。按任务书保留 P0/Frozen-RejectOnly 为主结果，没有为了得到正结果
+而用 test 选择配方。
 
 因此 C 表中的 **Optimized = NOT SELECTED**；Plain 3-seed 是最终 Qwen LoRA
 代表。
@@ -259,10 +260,10 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
 - adapter 9.20 MB/seed；
 - Qwen 4,280 条重编码：78–84 s，峰值 1,186 MiB；
 - GTE LoRA seed43/44：约 30 s 训练，24 s 重编码，618 MiB；
-- P3：40/50 step 后停顿，**未保存 adapter**；
+- P3：首次 40/50 step 停顿；重跑完成 50 step，adapter SHA 84926b52...，未选中；
 - 曾出现 Windows page file / CUDA unknown error（并发稳定性 + Agent 时）；
   通过分进程、释放模型和串行运行修复；日志保留；
-- 64 个测试全部通过。
+- 65 个测试全部通过。
 
 ---
 
@@ -271,7 +272,7 @@ B4-RejectOnly / Full 的 3-seed dev_select 均值±std：
 - BANKING77 test 已看过；历史探索性；
 - 120 条 Agent 任务是旧任务；Agent 修复后重跑也只能算探索性回归；
 - Qwen 只有 3 个 seed，不能声称显著性；
-- P3 未完成，优化结论只能保留 P0；
+- P3 已完成但未选中，优化结论只能保留 P0；
 - Qwen Plain 的 B4-Full 稳定性只完成 2 个 seed（Qwen Frozen 完成 3 个）；
 - 没有 bootstrap 置信区间；
 - 没有新的独立 unknown-class 协议；
@@ -291,7 +292,7 @@ $env:TRANSFORMERS_OFFLINE = "1"
 .\.venv\Scripts\python.exe -m src.gate7.diagnose
 .\.venv\Scripts\python.exe -m src.gate7.make_figures
 
-# B (P1/P2; P3 was stopped and is recorded incomplete)
+# B (P1/P2/P3; P3 completed but not selected)
 .\.venv\Scripts\python.exe -m src.gate6.train_qwen_lora --run p1 --out-prefix gate7_qwen --lr 3e-5 --epochs 2 --microbatch 2 --grad-accum 8
 .\.venv\Scripts\python.exe -m src.gate6.train_qwen_lora --run p2 --out-prefix gate7_qwen --lr 1e-5 --epochs 2 --microbatch 2 --grad-accum 8
 .\.venv\Scripts\python.exe -m src.gate6.train_qwen_lora --run plain43 --out-prefix gate7_qwen --seed 43 --epochs 2 --microbatch 2 --grad-accum 8
