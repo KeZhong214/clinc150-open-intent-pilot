@@ -1,4 +1,4 @@
-"""G5-A: train a real LoRA adapter on GTE-ModernBERT for BANKING77 10-shot.
+﻿"""G5-A: train a real LoRA adapter on GTE-ModernBERT for BANKING77 10-shot.
 
 Supervised contrastive loss + support-mined hard-negative triplet loss.  Only
 the 400 support rows are used for gradients.
@@ -21,7 +21,6 @@ import torch.nn.functional as F
 
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "results"
-ADAPTER_DIR = RESULTS / "gate5_lora_adapter"
 
 import sys
 
@@ -40,7 +39,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--margin", type=float, default=0.10)
     parser.add_argument("--max-steps", type=int, default=0)
+    parser.add_argument("--tag", default="")
     args = parser.parse_args(argv)
+    tag = args.tag
+    adapter_dir = RESULTS / (f"gate7_{tag}_adapter" if tag else "gate5_lora_adapter")
+    stem = f"gate7_{tag}" if tag else "gate5_lora"
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -78,7 +81,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(json.dumps({"frozen_alignment": alignment}, ensure_ascii=False))
 
     hard = lc.mine_hard_negatives(support_frozen, labels, ids, seed=args.seed)
-    with (RESULTS / "gate5_lora_hard_negatives.csv").open("w", encoding="utf-8", newline="") as handle:
+    with (RESULTS / f"{stem}_hard_negatives.csv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(hard[0].keys()))
         writer.writeheader()
         writer.writerows(hard)
@@ -165,11 +168,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             break
 
     train_seconds = time.perf_counter() - t0
-    if ADAPTER_DIR.exists():
-        shutil.rmtree(ADAPTER_DIR)
-    ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
-    model.save_pretrained(str(ADAPTER_DIR))
-    adapter_file = ADAPTER_DIR / "adapter_model.safetensors"
+    if adapter_dir.exists():
+        shutil.rmtree(adapter_dir)
+    adapter_dir.mkdir(parents=True, exist_ok=True)
+    model.save_pretrained(str(adapter_dir))
+    adapter_file = adapter_dir / "adapter_model.safetensors"
     adapter_hash = lc.sha256_file(adapter_file)
     adapter_bytes = adapter_file.stat().st_size
 
@@ -179,7 +182,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     with torch.no_grad():
         lora_probe = lc.encode_texts(model, tokenizer, probe_texts, device=device, batch_size=8)
         frozen_probe = lc.encode_texts(lc.get_base(dtype=torch.float16, device=device).eval(), tokenizer, probe_texts, device=device, batch_size=8)
-    reload_model = lc.load_lora_model(ADAPTER_DIR, device=device)
+    reload_model = lc.load_lora_model(adapter_dir, device=device)
     with torch.no_grad():
         reload_probe = lc.encode_texts(reload_model, tokenizer, probe_texts, device=device, batch_size=8)
     vector_check = {
@@ -192,7 +195,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "reload_max_abs": float(np.max(np.abs(reload_probe - lora_probe))),
     }
 
-    with (RESULTS / "gate5_lora_training_history.csv").open("w", encoding="utf-8", newline="") as handle:
+    with (RESULTS / f"{stem}_training_history.csv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(history[0].keys()))
         writer.writeheader()
         writer.writerows(history)
@@ -216,16 +219,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         "train_seconds": round(train_seconds, 3),
         "cuda_peak_mib": round(torch.cuda.max_memory_allocated() / 1024**2, 1),
         "params": params,
-        "adapter_path": str(ADAPTER_DIR.relative_to(ROOT)),
+        "adapter_path": str(adapter_dir.relative_to(ROOT)),
         "adapter_sha256": adapter_hash,
         "adapter_bytes": adapter_bytes,
         "frozen_alignment": alignment,
         "vector_check": vector_check,
-        "hard_negatives": "results/gate5_lora_hard_negatives.csv",
-        "history": "results/gate5_lora_training_history.csv",
+        "hard_negatives": f"results/{stem}_hard_negatives.csv",
+        "history": f"results/{stem}_training_history.csv",
         "test_evaluated": False,
     }
-    (RESULTS / "gate5_lora_training.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (RESULTS / f"{stem}_training.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"train_seconds": train_seconds, "adapter_sha256": adapter_hash, "vector_check": vector_check, "alignment": alignment}, ensure_ascii=False, indent=2))
     print("GATE5_LORA_TRAIN_OK")
     return 0
@@ -233,3 +236,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

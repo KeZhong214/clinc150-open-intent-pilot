@@ -1,0 +1,24 @@
+{
+  "dim": 1024,
+  "norm_max_abs_error": 1.1920928955078125e-07,
+  "run": "p2",
+  "adapter_dir": "results\\gate7_qwen_p2_adapter",
+  "adapter_sha256": "a4030222ca91e059fe6b71a4e7e66a58412d83fb66de0423e7aaa6216fe9f401",
+  "dataset": "banking77",
+  "n_texts": 4280,
+  "embedding_dim": 1024,
+  "prompt": "Instruct: Given a customer service message, identify the supported intent it expresses.\nQuery: ",
+  "prompt_sha256": "4bbdf1c169061f64ba742f64bca5e422d05e94ccc7261d29495c233ed9a90005",
+  "pooling": "last_token",
+  "padding_side": "right",
+  "max_length": 128,
+  "encode_seconds": 78.328,
+  "texts_per_second": 54.642,
+  "cuda_peak_mib": 1185.6,
+  "cache_path": "data\\cache_embeddings\\gate6\\qwen_lora\\banking77\\97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3_a4030222ca91e059fe6b71a4e7e66a58412d83fb66de0423e7aaa6216fe9f401\\L128\\embeddings.npz",
+  "vector_shift": {
+    "support_mean_cosine": 0.9925838708877563,
+    "support_max_abs": 0.022473923861980438,
+    "support_mean_abs": 0.002976576332002878
+  }
+}

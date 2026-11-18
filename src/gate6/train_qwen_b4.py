@@ -41,14 +41,29 @@ def val_scores(model: B4AR, cache: dict, query: np.ndarray, classes, *, reject_o
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--encoder", choices=("frozen", "plain", "anchor"), required=True)
+    parser.add_argument("--encoder", choices=("frozen", "plain", "anchor"), default="plain")
     parser.add_argument("--method", choices=("reject", "full"), required=True)
     parser.add_argument("--epochs", type=int, default=60)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--training-json", default="")
+    parser.add_argument("--tag", default="")
     args = parser.parse_args(argv)
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
-    cache = qd.load(args.encoder)
+    if args.training_json:
+        train = json.loads((ROOT / args.training_json).read_text(encoding="utf-8"))
+        d = np.load(qe.lora_cache(train["adapter_sha256"]), allow_pickle=False)
+        cache = {
+            "vectors": d["vectors"].astype(np.float32),
+            "sample_ids": d["sample_ids"].astype(str),
+            "roles": d["roles"].astype(str),
+            "labels": d["labels"].astype(str),
+            "intents": d["intents"].astype(str),
+            "encoder": f"qwen_{args.tag or args.encoder}_lora",
+            "run": args.tag or args.encoder,
+        }
+    else:
+        cache = qd.load(args.encoder)
     classes = qe.classes()
     X, y = qd.support(cache)
     cal_X, cal_y = qd.role(cache, "calibration_known", classes)
@@ -110,7 +125,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     reject, class_idx, s, g = val_scores(model, cache, val_X, classes, reject_only=reject_only)
     tau, _, info = b4_core.select_threshold_custom(reject, class_idx, val_y, classes)
     metrics, pred, accept = b4_core.evaluate_custom(reject, class_idx, val_y, tau, classes)
-    stem = f"gate6_qwen_{args.encoder}_{args.method}"
+    stem = f"gate7_qwen_{args.tag}_{args.method}" if args.tag else f"gate6_qwen_{args.encoder}_{args.method}"
     ckpt = RESULTS / f"{stem}.pt"
     b4_core.save_checkpoint(
         ckpt,
@@ -129,7 +144,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     pd.DataFrame(
         [
             {
-                "encoder": f"qwen_{args.encoder}_lora" if args.encoder != "frozen" else "qwen_frozen",
+                "encoder": f"qwen_{args.tag or args.encoder}_lora" if args.encoder != "frozen" else "qwen_frozen",
                 "method": "B4-RejectOnly" if reject_only else "B4-Full",
                 "tau": tau,
                 "constraint_met": info["constraint_met"],

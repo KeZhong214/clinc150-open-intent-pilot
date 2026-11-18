@@ -7,12 +7,17 @@ import json
 import unittest
 from pathlib import Path
 
+import tempfile
+
 import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data" / "manifest"
 RESULTS = ROOT / "results"
+
+from src.gate4.agent import StubRouter  # noqa: E402
+from src.gate5.agent_v2 import BankAgentV2  # noqa: E402
 
 
 class Gate7Test(unittest.TestCase):
@@ -59,6 +64,56 @@ class Gate7Test(unittest.TestCase):
         self.assertGreater(h["margin_negative_count"], 200)
         self.assertGreater(h["duplicate_hard_negative_count"], 200)
         self.assertLess(h["margin_mean"], 0.0)
+
+    def test_transfer_ambiguity_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            agent = BankAgentV2(StubRouter("transfer_not_received_by_recipient", margin=0.5), session_id="g7-amb", db_dir=Path(tmp))
+            try:
+                turn = agent.handle("My transfer TXN-2001 has not arrived yet.")
+                self.assertIn("not sure", turn.response.lower())
+                self.assertEqual(turn.tools, [])
+                self.assertTrue(any("transfer" in c for c in agent.state.clarification_candidates))
+                turn2 = agent.handle("it has not arrived")
+                self.assertTrue(turn2.tools)
+                self.assertEqual(turn2.tools[0]["tool"], "get_transfer_status")
+                self.assertIn("pending", turn2.response.lower())
+                self.assertIn("TXN-2001", turn2.tools[0]["args"].get("transfer_id", ""))
+            finally:
+                agent.close()
+
+    def test_final_test_frozen(self) -> None:
+        freeze = json.loads((RESULTS / "gate7_final_freeze.json").read_text(encoding="utf-8"))
+        self.assertTrue(freeze["test_evaluated"])
+        test = pd.read_csv(RESULTS / "gate7_final_historical_test.csv")
+        self.assertEqual(len(test), 12)
+        self.assertTrue(test.historical_exploratory.all())
+        summary = pd.read_csv(RESULTS / "gate7_final_summary.csv")
+        self.assertEqual(len(summary), 8)
+        reject = summary[(summary.method == "B4-RejectOnly") & (summary.metric == "open_set_macro_f1")].iloc[0]
+        self.assertGreater(float(reject["delta_mean_vs_frozen"]), 0.0)
+        self.assertGreaterEqual(int(reject["wins_vs_frozen"]), 2)
+
+    def test_stability_b4_reject_beats_full(self) -> None:
+        d = pd.read_csv(RESULTS / "gate7_stability_summary.csv")
+        for enc in ("gte_frozen", "qwen_frozen", "gte_lora42", "gte_lora43", "gte_lora44"):
+            r = d[(d.encoder == enc) & (d.method == "B4-RejectOnly")]
+            f = d[(d.encoder == enc) & (d.method == "B4-Full")]
+            if len(r) and len(f):
+                self.assertGreater(float(r.dev_open_set_macro_f1_mean.iloc[0]), float(f.dev_open_set_macro_f1_mean.iloc[0]))
+        hashes = pd.read_csv(RESULTS / "gate7_stability_checkpoint_hashes.csv")
+        self.assertGreaterEqual(len(hashes), 30)
+        self.assertEqual(hashes.sha256.nunique(), len(hashes))
+
+    def test_agent_three_router_regression(self) -> None:
+        s = pd.read_csv(RESULTS / "gate7_agent_summary.csv")
+        self.assertEqual(len(s), 3)
+        d = pd.read_csv(RESULTS / "gate7_agent_results.csv")
+        self.assertEqual(len(d), 360)
+        self.assertTrue((d.safe == 1).all())
+        qwen = s[s.router == "Qwen-Frozen-RejectOnly"].iloc[0]
+        gte = s[s.router == "GTE-Frozen-RejectOnly"].iloc[0]
+        self.assertGreater(float(qwen.task_success_rate), float(gte.task_success_rate))
+        self.assertEqual(float(qwen.clarification_success), 1.0)
 
     def test_seed_control_files(self) -> None:
         # Filled after B; ensures each trained seed has an independent adapter.

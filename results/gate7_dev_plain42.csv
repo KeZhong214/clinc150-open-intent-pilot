@@ -1,0 +1,4 @@
+tag,encoder,method,tau,constraint_met,select_known_acceptance,select_known_correct_routing,select_known_macro_f1,select_top1_closed_set_accuracy,select_oos_recall,select_oos_false_acceptance,select_unknown_auroc,select_open_set_macro_f1,select_open_set_accuracy,select_n_known,select_n_unknown,select_known_rejected,select_unknown_rejected,select_unknown_accepted
+plain42,qwen_plain42_lora,B0,0.7853701293468476,True,0.9075,0.8225,0.8597591702816161,0.89,0.6444444444444445,0.3555555555555555,0.871375,0.7841398805634139,0.7381578947368421,400,360,37,232,128
+plain42,qwen_plain42_lora,B3-H,0.7952173292636872,True,0.9075,0.83,0.8653707916180826,0.8975,0.6916666666666667,0.30833333333333335,0.8896180555555555,0.7983730741946677,0.7644736842105263,400,360,37,249,111
+plain42,qwen_plain42_lora,B4-RejectOnly,0.41683152914047245,True,0.8975,0.825,0.8653753065819629,0.8975,0.7,0.3,0.8809930555555555,0.7994671366733714,0.7657894736842106,400,360,41,252,108

@@ -1,0 +1,13 @@
+{
+  "tau": 0.43370533883571627,
+  "selection": {
+    "tau": 0.43370533883571627,
+    "known_acceptance_val": 0.9,
+    "oos_recall_val": 0.6416666666666667,
+    "open_set_macro_f1_val": 0.7884470979097553,
+    "constraint_met": true,
+    "n_candidates": 101,
+    "target_acceptance": 0.9,
+    "objective": "max validation open-set macro-F1 subject to known acceptance >= 0.90"
+  }
+}

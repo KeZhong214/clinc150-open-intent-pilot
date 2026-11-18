@@ -26,15 +26,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--tag", default="")
+    parser.add_argument("--training", default="results/gate5_lora_training.json")
     args = parser.parse_args(argv)
-    training = json.loads((RESULTS / "gate5_lora_training.json").read_text(encoding="utf-8"))
+    training = json.loads((ROOT / args.training).read_text(encoding="utf-8"))
+    adapter_dir = ROOT / training["adapter_path"]
     adapter_hash = training["adapter_sha256"]
     rows = lc.manifest_rows()
     if args.limit:
         rows = rows[: args.limit]
     texts = [r["text"] for r in rows]
     tokenizer = lc.get_tokenizer()
-    model = lc.load_lora_model(ADAPTER_DIR, device="cuda")
+    model = lc.load_lora_model(adapter_dir, device="cuda")
     torch.cuda.empty_cache()
     torch.cuda.reset_peak_memory_stats()
     torch.cuda.synchronize()
@@ -53,7 +56,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     probe = texts[:8]
     with torch.no_grad():
         p1 = lc.encode_texts(model, tokenizer, probe, device="cuda", batch_size=8)
-        reloaded = lc.load_lora_model(ADAPTER_DIR, device="cuda")
+        reloaded = lc.load_lora_model(adapter_dir, device="cuda")
         p2 = lc.encode_texts(reloaded, tokenizer, probe, device="cuda", batch_size=8)
 
     out_path = lc.lora_cache_path(adapter_hash)
@@ -70,7 +73,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "dataset": "banking77",
         "base_model": lc.BASE_ID,
         "base_revision": lc.BASE_REV,
-        "adapter_path": str(ADAPTER_DIR.relative_to(ROOT)),
+        "adapter_path": str(adapter_dir.relative_to(ROOT)),
         "adapter_sha256": adapter_hash,
         "prompt": "",
         "max_length": lc.MAX_LEN,
@@ -101,7 +104,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "support_mean_cosine": float(np.mean((frozen_support * lora_support).sum(axis=1))),
         "probe_reload_max_abs": float(np.max(np.abs(p1 - p2))),
     }
-    (RESULTS / "gate5_lora_encoding.json").write_text(
+    (RESULTS / f"{("gate7_" + args.tag) if args.tag else "gate5_lora"}_encoding.json").write_text(
         json.dumps({"metadata": meta, "vector_shift": shift}, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
@@ -112,3 +115,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

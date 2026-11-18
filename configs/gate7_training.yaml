@@ -1,0 +1,28 @@
+schema_version: gate7-training-v1
+base_model: Qwen/Qwen3-Embedding-0.6B
+base_revision: 97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3
+support: 400
+shot: 10
+seed_set: [42, 43, 44]
+seeds:
+  plain42: {recipe: P0, seed: 42, lr: 0.0001, triplet_weight: 0.5, epochs: 2}
+  plain43: {recipe: P0, seed: 43, lr: 0.0001, triplet_weight: 0.5, epochs: 2}
+  plain44: {recipe: P0, seed: 44, lr: 0.0001, triplet_weight: 0.5, epochs: 2}
+candidates:
+  P0: {lr: 0.0001, loss: supcon_plus_0.5_triplet}
+  P1: {lr: 0.00003, loss: supcon_plus_0.5_triplet}
+  P2: {lr: 0.00001, loss: supcon_plus_0.5_triplet}
+  P3: {lr: 0.0001, loss: supcon_only, status: INCOMPLETE_WINDOWS_STALL}
+training:
+  epochs: 2
+  microbatch: 2
+  grad_accum: 8
+  effective_triplets_per_step: 16
+  optimizer_steps: 50
+  optimizer: AdamW
+  weight_decay: 0.0001
+selection:
+  dev_threshold: threshold only
+  dev_select: recipe selection only
+  rule: P0 retained because P1/P2 did not beat P0 on dev_select; P3 incomplete
+  final_test_used_for_selection: false

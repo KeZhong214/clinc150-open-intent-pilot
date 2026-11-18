@@ -1,0 +1,13 @@
+{
+  "status": "INCOMPLETE_WINDOWS_STALL",
+  "run": "p3",
+  "seed": 42,
+  "lr": 0.0001,
+  "triplet_weight": 0,
+  "epochs_requested": 2,
+  "steps_completed": 40,
+  "steps_requested": 50,
+  "adapter_saved": false,
+  "reason": "process stalled in epoch 2 under Windows memory pressure; stopped and preserved log",
+  "log": "logs/gate7_qwen_p3_train.log"
+}

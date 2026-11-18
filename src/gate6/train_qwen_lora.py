@@ -65,7 +65,9 @@ def mine_hard_negatives(vectors: np.ndarray, labels: np.ndarray, ids: Sequence[s
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run", choices=("smoke", "plain", "anchor"), required=True)
+    parser.add_argument("--run", required=True)
+    parser.add_argument("--out-prefix", default="gate6_qwen")
+    parser.add_argument("--triplet-weight", type=float, default=0.5)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--microbatch", type=int, default=2)
@@ -94,8 +96,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     hard_by = {r["anchor_id"]: r for r in hard}
     text_by = {r["sample_id"]: r["text"] for r in rows}
     label_by = {r["sample_id"]: r["intent"] for r in rows}
-    (RESULTS / "gate6_qwen_hard_negatives.csv").write_text("")  # placeholder overwritten below
-    with (RESULTS / "gate6_qwen_hard_negatives.csv").open("w", encoding="utf-8", newline="") as handle:
+    (RESULTS / f"{args.out_prefix}_{args.run}_hard_negatives.csv").write_text("")  # placeholder overwritten below
+    with (RESULTS / f"{args.out_prefix}_{args.run}_hard_negatives.csv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(hard[0].keys()))
         writer.writeheader()
         writer.writerows(hard)
@@ -160,7 +162,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.run == "anchor":
                 teacher = torch.from_numpy(np.stack(anchor_teacher)).to("cuda").float()
                 anchor = (1.0 - (z[:b] * teacher).sum(dim=1)).mean()
-            loss = sup + 0.5 * triplet
+            loss = sup + args.triplet_weight * triplet
             if args.run == "anchor":
                 loss = loss + args.lambda_anchor * anchor
             scaler.scale(loss / args.grad_accum).backward()
@@ -203,7 +205,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             break
 
     elapsed = time.perf_counter() - t0
-    adapter_dir = RESULTS / f"gate6_qwen_{args.run}_adapter"
+    adapter_dir = RESULTS / f"{args.out_prefix}_{args.run}_adapter"
     if adapter_dir.exists():
         shutil.rmtree(adapter_dir)
     model.save_pretrained(str(adapter_dir))
@@ -235,7 +237,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "reload_max_abs": float(np.max(np.abs(reload_probe - lora_probe))),
         "norm_max_abs_error": float(np.max(np.abs(np.linalg.norm(lora_probe, axis=1) - 1.0))),
     }
-    pd_history = Path(RESULTS / f"gate6_qwen_{args.run}_history.csv")
+    pd_history = Path(RESULTS / f"{args.out_prefix}_{args.run}_history.csv")
     import pandas as pd
 
     pd.DataFrame(history).to_csv(pd_history, index=False)
@@ -258,9 +260,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         "adapter_bytes": adapter_bytes,
         "vector_check": vector_check,
         "history_csv": str(pd_history.relative_to(ROOT)),
-        "hard_negatives": "results/gate6_qwen_hard_negatives.csv",
+        "triplet_weight": args.triplet_weight,
+        "hard_negatives": f"results/{args.out_prefix}_{args.run}_hard_negatives.csv",
     }
-    (RESULTS / f"gate6_qwen_{args.run}_training.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (RESULTS / f"{args.out_prefix}_{args.run}_training.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     print("GATE6_QWEN_TRAIN_OK")
     return 0

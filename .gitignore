@@ -21,3 +21,5 @@ data/gate5_lora_smoke/
 data/gate6/sessions/
 data/gate6/demo_sessions/
 data/gate6_qwen_benchmark_sessions/
+data/gate7/sessions/
+data/gate7_agent_sessions/

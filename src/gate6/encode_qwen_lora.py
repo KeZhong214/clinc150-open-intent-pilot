@@ -21,10 +21,11 @@ from src.gate6 import qwen_encoder as qe  # noqa: E402
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run", choices=("plain", "anchor"), required=True)
+    parser.add_argument("--run", required=True)
+    parser.add_argument("--prefix", default="gate6_qwen")
     parser.add_argument("--batch-size", type=int, default=8)
     args = parser.parse_args(argv)
-    train = json.loads((RESULTS / f"gate6_qwen_{args.run}_training.json").read_text(encoding="utf-8"))
+    train = json.loads((RESULTS / f"{args.prefix}_{args.run}_training.json").read_text(encoding="utf-8"))
     adapter_dir = ROOT / train["adapter_dir"]
     adapter_hash = train["adapter_sha256"]
     rows = qe.manifest_rows()
@@ -84,7 +85,7 @@ def main(argv=None) -> int:
         }
     )
     (out.parent / "metadata.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (RESULTS / f"gate6_qwen_{args.run}_encoding.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (RESULTS / f"{args.prefix}_{args.run}_encoding.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(meta, ensure_ascii=False, indent=2))
     print("GATE6_QWEN_ENCODE_OK")
     return 0

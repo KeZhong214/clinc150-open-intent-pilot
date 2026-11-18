@@ -214,7 +214,7 @@ class BankAgentV2:
                 [],
                 self.state.__dict__,
             )
-        if route.margin < self.ambiguity_margin:
+        if route.margin < self.ambiguity_margin or self._needs_transfer_clarification(route, text):
             candidates = []
             for name, _ in route.top3[:2]:
                 if name not in candidates:
@@ -231,6 +231,23 @@ class BankAgentV2:
                 self.state.__dict__,
             )
         return self._dispatch(route, text)
+
+    @staticmethod
+    def _needs_transfer_clarification(route: RouteResult, text: str) -> bool:
+        """A generic ambiguity guard for 'transfer has not arrived' requests.
+
+        This is not a threshold sweep: it asks when the transfer-not-arrived
+        wording can mean either recipient-not-received or a pending transfer.
+        """
+        ambiguous = {
+            "transfer_not_received_by_recipient",
+            "transfer_not_received",
+            "pending_transfer",
+            "failed_transfer",
+        }
+        phrase = clean_text(text)
+        markers = ("not arrived", "hasn't arrived", "has not arrived", "not received", "hasn't shown", "has not shown")
+        return route.intent in ambiguous and any(m in phrase for m in markers)
 
     def _dispatch(self, route: RouteResult, text: str) -> TurnV2:
         intent = route.intent

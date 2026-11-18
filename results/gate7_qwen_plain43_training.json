@@ -1,0 +1,33 @@
+{
+  "run": "plain43",
+  "seed": 43,
+  "epochs": 2,
+  "optimizer_steps": 50,
+  "microbatch": 2,
+  "grad_accum": 8,
+  "effective_triplets_per_step": 16,
+  "lr": 0.0001,
+  "lambda_anchor": 0.0,
+  "margin": 0.1,
+  "params": {
+    "total": 598070272,
+    "trainable": 2293760,
+    "ratio": 0.0038352683746166872
+  },
+  "elapsed_seconds": 320.835,
+  "cuda_peak_mib": 1259.9,
+  "adapter_dir": "results\\gate7_qwen_plain43_adapter",
+  "adapter_sha256": "8ca9d98507ec2e254f181052cbcb02804798003d9a5cbc10d3b326f5e20f245d",
+  "adapter_bytes": 9203168,
+  "vector_check": {
+    "probe_n": 4,
+    "dim": 1024,
+    "frozen_vs_lora_mean_cosine": 0.8442033529281616,
+    "frozen_vs_lora_max_abs": 0.08723460137844086,
+    "reload_max_abs": 0.0,
+    "norm_max_abs_error": 5.960464477539063e-08
+  },
+  "history_csv": "results\\gate7_qwen_plain43_history.csv",
+  "triplet_weight": 0.5,
+  "hard_negatives": "results/gate7_qwen_plain43_hard_negatives.csv"
+}

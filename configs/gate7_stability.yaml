@@ -1,0 +1,21 @@
+schema_version: gate7-stability-v1
+label: historical_core_method_stability
+support_seed: 42
+training_seeds: [42, 43, 44]
+evaluation:
+  threshold: dev_threshold
+  selection: dev_select
+  metrics: [open_set_macro_f1, oos_recall, known_correct_routing, unknown_auroc]
+encoders:
+  gte_frozen: results with Gate3 GTE frozen cache
+  gte_lora42: Gate5 LoRA seed42
+  gte_lora43: Gate7 GTE LoRA seed43
+  gte_lora44: Gate7 GTE LoRA seed44
+  qwen_frozen: Gate6 Qwen frozen
+  qwen_plain42: Gate6 Qwen Plain seed42
+  qwen_plain43: Gate7 Qwen Plain seed43
+  qwen_plain44: Gate7 Qwen Plain seed44
+methods:
+  B4-RejectOnly: fixed gate 0.5, reject head only
+  B4-Full: learned gate + reject head
+note: each seed changes initialization, episode masks, sample order and pseudo-OOS sampling; checkpoints are independent; final test is not used for selection.
