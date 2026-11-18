@@ -1,0 +1,51 @@
+{
+  "seed": 42,
+  "label": "internal_two_level_development_not_blind",
+  "dev_threshold": {
+    "n": 760,
+    "n_known": 400,
+    "n_unknown": 360,
+    "known_per_class": 10,
+    "unknown_classes": [
+      "pending_transfer",
+      "getting_virtual_card",
+      "declined_card_payment",
+      "wrong_amount_of_cash_received",
+      "direct_debit_payment_not_recognised",
+      "supported_cards_and_currencies",
+      "exchange_rate",
+      "transaction_charged_twice",
+      "get_disposable_virtual_card"
+    ],
+    "path": "data\\manifest\\gate7_dev_threshold.csv",
+    "sha256": "a6821544df31e95ba93a6f8b79ca4289ffd91f7a5e69d3a7a4315d71592f564a",
+    "sample_ids_sha256": "d5321679d7097b9cd3d9f336da98de4f5702a276199ea309aeee24f70239af23"
+  },
+  "dev_select": {
+    "n": 760,
+    "n_known": 400,
+    "n_unknown": 360,
+    "known_per_class": 10,
+    "unknown_classes": [
+      "failed_transfer",
+      "getting_spare_card",
+      "order_physical_card",
+      "top_up_limits",
+      "request_refund",
+      "edit_personal_details",
+      "reverted_card_payment?",
+      "pending_cash_withdrawal",
+      "card_delivery_estimate"
+    ],
+    "path": "data\\manifest\\gate7_dev_select.csv",
+    "sha256": "07ba9a1fccdef7e3c437fdbfc0a88193667f3368bf05aa7253aac58e6e189c29",
+    "sample_ids_sha256": "72b3c4ab08118f32ccc6ccd13372fc2d242e6a2c85283d9bdbe9871dd1aa19ff"
+  },
+  "checks": {
+    "sample_id_overlap": 0,
+    "text_sha256_overlap": 0,
+    "unknown_class_overlap": 0,
+    "n_known_classes": 40,
+    "n_unknown_classes_total": 18
+  }
+}

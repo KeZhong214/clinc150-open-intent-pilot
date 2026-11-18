@@ -1,0 +1,212 @@
+{
+  "n": 400,
+  "hard_neg_cos_mean": 0.807391129732132,
+  "hard_neg_cos_p90": 0.8828041017055512,
+  "margin_mean": -0.012649550139904025,
+  "margin_negative_count": 203,
+  "margin_p10": -0.18165638446807858,
+  "duplicate_hard_negative_count": 243,
+  "unique_hard_negative_count": 157,
+  "top20": [
+    {
+      "anchor_id": "banking77:train:08290",
+      "anchor_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "positive_id": "banking77:train:08333",
+      "hard_negative_id": "banking77:train:00547",
+      "hard_negative_label": "card_payment_wrong_exchange_rate",
+      "anchor_pos_cos": 0.7687882781028748,
+      "anchor_neg_cos": 0.9656291007995604,
+      "margin": -0.19684082269668568
+    },
+    {
+      "anchor_id": "banking77:train:00547",
+      "anchor_label": "card_payment_wrong_exchange_rate",
+      "positive_id": "banking77:train:00562",
+      "hard_negative_id": "banking77:train:08290",
+      "hard_negative_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "anchor_pos_cos": 0.9553341269493104,
+      "anchor_neg_cos": 0.9656291007995604,
+      "margin": -0.010294973850250022
+    },
+    {
+      "anchor_id": "banking77:train:06719",
+      "anchor_label": "transfer_timing",
+      "positive_id": "banking77:train:06707",
+      "hard_negative_id": "banking77:train:08732",
+      "hard_negative_label": "balance_not_updated_after_bank_transfer",
+      "anchor_pos_cos": 0.7900952696800232,
+      "anchor_neg_cos": 0.9372398853302002,
+      "margin": -0.147144615650177
+    },
+    {
+      "anchor_id": "banking77:train:08732",
+      "anchor_label": "balance_not_updated_after_bank_transfer",
+      "positive_id": "banking77:train:08686",
+      "hard_negative_id": "banking77:train:06719",
+      "hard_negative_label": "transfer_timing",
+      "anchor_pos_cos": 0.8699735999107361,
+      "anchor_neg_cos": 0.9372398853302002,
+      "margin": -0.06726628541946411
+    },
+    {
+      "anchor_id": "banking77:train:02699",
+      "anchor_label": "transfer_not_received_by_recipient",
+      "positive_id": "banking77:train:02725",
+      "hard_negative_id": "banking77:train:06719",
+      "hard_negative_label": "transfer_timing",
+      "anchor_pos_cos": 0.7648831009864807,
+      "anchor_neg_cos": 0.9344936609268188,
+      "margin": -0.16961055994033813
+    },
+    {
+      "anchor_id": "banking77:train:00562",
+      "anchor_label": "card_payment_wrong_exchange_rate",
+      "positive_id": "banking77:train:00453",
+      "hard_negative_id": "banking77:train:08290",
+      "hard_negative_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "anchor_pos_cos": 0.9371992349624634,
+      "anchor_neg_cos": 0.9338051080703736,
+      "margin": 0.0033941268920897327
+    },
+    {
+      "anchor_id": "banking77:train:08036",
+      "anchor_label": "top_up_by_cash_or_cheque",
+      "positive_id": "banking77:train:08008",
+      "hard_negative_id": "banking77:train:03400",
+      "hard_negative_label": "balance_not_updated_after_cheque_or_cash_deposit",
+      "anchor_pos_cos": 0.5710957050323486,
+      "anchor_neg_cos": 0.929198145866394,
+      "margin": -0.3581024408340454
+    },
+    {
+      "anchor_id": "banking77:train:03400",
+      "anchor_label": "balance_not_updated_after_cheque_or_cash_deposit",
+      "positive_id": "banking77:train:03427",
+      "hard_negative_id": "banking77:train:08036",
+      "hard_negative_label": "top_up_by_cash_or_cheque",
+      "anchor_pos_cos": 0.7406062483787537,
+      "anchor_neg_cos": 0.929198145866394,
+      "margin": -0.18859189748764038
+    },
+    {
+      "anchor_id": "banking77:train:08575",
+      "anchor_label": "top_up_failed",
+      "positive_id": "banking77:train:08541",
+      "hard_negative_id": "banking77:train:02062",
+      "hard_negative_label": "pending_top_up",
+      "anchor_pos_cos": 0.8394373655319214,
+      "anchor_neg_cos": 0.9266248941421508,
+      "margin": -0.08718752861022938
+    },
+    {
+      "anchor_id": "banking77:train:02062",
+      "anchor_label": "pending_top_up",
+      "positive_id": "banking77:train:02000",
+      "hard_negative_id": "banking77:train:08575",
+      "hard_negative_label": "top_up_failed",
+      "anchor_pos_cos": 0.6665595769882202,
+      "anchor_neg_cos": 0.9266248941421508,
+      "margin": -0.26006531715393055
+    },
+    {
+      "anchor_id": "banking77:train:07175",
+      "anchor_label": "transfer_fee_charged",
+      "positive_id": "banking77:train:07226",
+      "hard_negative_id": "banking77:train:02545",
+      "hard_negative_label": "card_payment_fee_charged",
+      "anchor_pos_cos": 0.6312540769577026,
+      "anchor_neg_cos": 0.923231840133667,
+      "margin": -0.29197776317596436
+    },
+    {
+      "anchor_id": "banking77:train:02545",
+      "anchor_label": "card_payment_fee_charged",
+      "positive_id": "banking77:train:02628",
+      "hard_negative_id": "banking77:train:07175",
+      "hard_negative_label": "transfer_fee_charged",
+      "anchor_pos_cos": 0.8441400527954102,
+      "anchor_neg_cos": 0.923231840133667,
+      "margin": -0.07909178733825684
+    },
+    {
+      "anchor_id": "banking77:train:08548",
+      "anchor_label": "top_up_failed",
+      "positive_id": "banking77:train:08485",
+      "hard_negative_id": "banking77:train:02062",
+      "hard_negative_label": "pending_top_up",
+      "anchor_pos_cos": 0.8523478507995605,
+      "anchor_neg_cos": 0.9169461727142334,
+      "margin": -0.06459832191467285
+    },
+    {
+      "anchor_id": "banking77:train:01930",
+      "anchor_label": "pending_top_up",
+      "positive_id": "banking77:train:01955",
+      "hard_negative_id": "banking77:train:06707",
+      "hard_negative_label": "transfer_timing",
+      "anchor_pos_cos": 0.6816294193267822,
+      "anchor_neg_cos": 0.9076932072639464,
+      "margin": -0.2260637879371642
+    },
+    {
+      "anchor_id": "banking77:train:06707",
+      "anchor_label": "transfer_timing",
+      "positive_id": "banking77:train:06657",
+      "hard_negative_id": "banking77:train:01930",
+      "hard_negative_label": "pending_top_up",
+      "anchor_pos_cos": 0.7370450496673584,
+      "anchor_neg_cos": 0.9076932072639464,
+      "margin": -0.17064815759658802
+    },
+    {
+      "anchor_id": "banking77:train:00906",
+      "anchor_label": "fiat_currency_support",
+      "positive_id": "banking77:train:00978",
+      "hard_negative_id": "banking77:train:01357",
+      "hard_negative_label": "exchange_via_app",
+      "anchor_pos_cos": 0.8941178321838379,
+      "anchor_neg_cos": 0.9064005613327026,
+      "margin": -0.012282729148864746
+    },
+    {
+      "anchor_id": "banking77:train:01357",
+      "anchor_label": "exchange_via_app",
+      "positive_id": "banking77:train:01417",
+      "hard_negative_id": "banking77:train:00906",
+      "hard_negative_label": "fiat_currency_support",
+      "anchor_pos_cos": 0.7775160074234009,
+      "anchor_neg_cos": 0.9064005613327026,
+      "margin": -0.12888455390930176
+    },
+    {
+      "anchor_id": "banking77:train:03177",
+      "anchor_label": "top_up_reverted",
+      "positive_id": "banking77:train:03179",
+      "hard_negative_id": "banking77:train:08551",
+      "hard_negative_label": "top_up_failed",
+      "anchor_pos_cos": 0.6896075010299683,
+      "anchor_neg_cos": 0.903039574623108,
+      "margin": -0.21343207359313976
+    },
+    {
+      "anchor_id": "banking77:train:08551",
+      "anchor_label": "top_up_failed",
+      "positive_id": "banking77:train:08485",
+      "hard_negative_id": "banking77:train:03177",
+      "hard_negative_label": "top_up_reverted",
+      "anchor_pos_cos": 0.8588159680366516,
+      "anchor_neg_cos": 0.903039574623108,
+      "margin": -0.04422360658645641
+    },
+    {
+      "anchor_id": "banking77:train:02669",
+      "anchor_label": "card_payment_fee_charged",
+      "positive_id": "banking77:train:02678",
+      "hard_negative_id": "banking77:train:07175",
+      "hard_negative_label": "transfer_fee_charged",
+      "anchor_pos_cos": 0.9151248931884766,
+      "anchor_neg_cos": 0.9029436111450196,
+      "margin": 0.01218128204345692
+    }
+  ]
+}

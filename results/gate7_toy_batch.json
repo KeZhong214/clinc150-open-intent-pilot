@@ -1,0 +1,16 @@
+{
+  "microbatch_2_three_roles_n": 6,
+  "microbatch_similarity_shape": [
+    6,
+    6
+  ],
+  "grad_accum_8_hypothetical_shape": [
+    48,
+    48
+  ],
+  "actual_current_code": "each microbatch calls supcon_loss(z[6], y[6]); gradients accumulate, logits are never 48x48",
+  "microbatches_per_epoch": 200,
+  "optimizer_steps_per_epoch": 25,
+  "leftover_microbatches": 0,
+  "leftover_bug": "If microbatches % grad_accum != 0, the original loop drops the final partial accumulation; the Gate6 400/2/8 config has remainder 0."
+}
