@@ -23,3 +23,5 @@ data/gate6/demo_sessions/
 data/gate6_qwen_benchmark_sessions/
 data/gate7/sessions/
 data/gate7_agent_sessions/
+data/gate8/sessions/
+data/gate8/ui_sessions/

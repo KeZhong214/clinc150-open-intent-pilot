@@ -1,0 +1,56 @@
+{
+  "frozen": true,
+  "label": "new_frozen_simulated_test_not_external_blind",
+  "file": "data/gate8/benchmark_cases.jsonl",
+  "sha256": "7ca2a276fc9b0be0e9c19113c4181359d31c013982d9615793df28c2079166e1",
+  "n_cases": 102,
+  "families": {
+    "policy_faq": 16,
+    "oos": 12,
+    "dispute_ticket": 10,
+    "transfer_status": 8,
+    "cancel_transfer": 6,
+    "card_activation": 6,
+    "cancel_refusal": 6,
+    "card_status": 6,
+    "dispute_ineligible": 6,
+    "permission": 6,
+    "permission_transfer": 6,
+    "multi_slot": 4,
+    "multi_correction": 3,
+    "multi_topic_switch": 3,
+    "multi_reset": 2,
+    "multi_confirmation_correction": 2
+  },
+  "routers": {
+    "GTE-Frozen-RejectOnly": {
+      "name": "GTE-Frozen-RejectOnly",
+      "encoder": "GTE-ModernBERT Frozen",
+      "threshold_source": "gate7_stability_b4_results.csv:gte_frozen/reject/seed42",
+      "threshold": 0.4245788127183914,
+      "checkpoint": "results/gate5_reject_only_frozen.pt",
+      "checkpoint_sha256": "0e920d0fed6b13d30dd3e84c53cb9e49747760823b9f20c61df2cbdd7d89cf0f",
+      "adapter_sha256": null
+    },
+    "Qwen-Frozen-RejectOnly": {
+      "name": "Qwen-Frozen-RejectOnly",
+      "encoder": "Qwen3-Embedding-0.6B Frozen",
+      "threshold_source": "gate7_dev_frozen.csv:B4-RejectOnly",
+      "threshold": 0.442459625005722,
+      "checkpoint": "results/gate6_qwen_frozen_reject.pt",
+      "checkpoint_sha256": "d7512e525c3af6c6dc8909f961d200578e8d970650afe6336c21121de9dd7c37",
+      "adapter_sha256": null
+    },
+    "Qwen-Plain42-RejectOnly": {
+      "name": "Qwen-Plain42-RejectOnly",
+      "encoder": "Qwen3-Embedding-0.6B Plain LoRA seed42",
+      "threshold_source": "gate7_dev_plain42.csv:B4-RejectOnly",
+      "threshold": 0.4168315291404724,
+      "checkpoint": "results/gate6_qwen_plain_reject.pt",
+      "checkpoint_sha256": "d222f9686acb931646adc4634036540e270fe4b48c48cd639c6be07a4c94da5c",
+      "adapter_sha256": "4efaee5c891e26058764b4a7ec999dec718436f57b724841650831ddc01c3818"
+    }
+  },
+  "threshold_protocol": "Gate7 dev_threshold for all three routers",
+  "note": "Cases/models/thresholds frozen before the final three-router run; no test-based tuning."
+}
