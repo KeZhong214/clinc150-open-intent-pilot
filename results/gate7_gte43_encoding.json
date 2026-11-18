@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "dataset": "banking77",
+    "base_model": "Alibaba-NLP/gte-modernbert-base",
+    "base_revision": "e7f32e3c00f91d699e8c43b53106206bcc72bb22",
+    "adapter_path": "results\\gate7_gte43_adapter",
+    "adapter_sha256": "23089598665b0fce46a93e9f7f4044c5e23bd52b792aa77c961598e7e3dbd9c9",
+    "prompt": "",
+    "max_length": 128,
+    "n_texts": 4280,
+    "embedding_dim": 768,
+    "encode_seconds": 23.928,
+    "texts_per_second": 178.866,
+    "cuda_peak_mib": 618.2,
+    "norm_max_abs_error": 1.1920928955078125e-07,
+    "reload_max_abs": 0.0,
+    "cache_path": "data\\cache_embeddings\\gate5\\lora_gte\\banking77\\e7f32e3c00f91d699e8c43b53106206bcc72bb22_23089598665b0fce46a93e9f7f4044c5e23bd52b792aa77c961598e7e3dbd9c9\\L128\\embeddings.npz",
+    "roles": {
+      "calibration_known": 800,
+      "dev_unknown": 720,
+      "final_unknown": 760,
+      "known_test": 1600,
+      "support": 400
+    }
+  },
+  "vector_shift": {
+    "support_max_abs": 0.38252127170562744,
+    "support_mean_abs": 0.01917526312172413,
+    "support_mean_cosine": 0.7447236776351929,
+    "probe_reload_max_abs": 0.0
+  }
+}
