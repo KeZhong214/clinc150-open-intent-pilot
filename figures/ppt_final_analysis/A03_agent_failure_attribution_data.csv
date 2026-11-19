@@ -1,0 +1,10 @@
+model,category,count
+GTE-Frozen-RejectOnly,FAQ 事实/引用不足,6
+GTE-Frozen-RejectOnly,工具选择/参数,2
+GTE-Frozen-RejectOnly,路由/意图错误,40
+Qwen-Frozen-RejectOnly,FAQ 事实/引用不足,6
+Qwen-Frozen-RejectOnly,工具选择/参数,3
+Qwen-Frozen-RejectOnly,路由/意图错误,39
+Qwen-Plain42-RejectOnly,FAQ 事实/引用不足,7
+Qwen-Plain42-RejectOnly,工具选择/参数,1
+Qwen-Plain42-RejectOnly,路由/意图错误,27

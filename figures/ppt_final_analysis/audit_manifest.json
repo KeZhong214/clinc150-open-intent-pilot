@@ -1,0 +1,135 @@
+{
+  "commit": "4c674cbc19ca3c623535033393878d20b5f04ad9",
+  "generated_utc": "2026-11-19T13:12:50.209936+00:00",
+  "source_sha256": {
+    "results/gate3_matrix.csv": "6c0e38473fe68ca1638f180effa35c2660664f7b9cbc427afd284647cc546168",
+    "results/gate5_method_matrix_val.csv": "269f81f643b6977e8d2097c435269ed0b56d4adcf297a8cc083936e466f253d6",
+    "results/gate7_stability_b4_results.csv": "319808b63908ae9f2cf70e268b6a91e6523169361b2b8600236eaf2d26491287",
+    "results/gate7_final_historical_test_v2.csv": "f204634dd9c1dba4b66b097078c8881c70d6451e2d1686f44661083ccd8603ab",
+    "results/gate8_2_v1_rescore_summary.csv": "db69f5dae8e47337f4456d86a346691b866d092bf6ff232dc37d7de2e54c7ea9",
+    "results/gate8_2_v1_rescore_per_case.csv": "bb9bcb7122d62da7ed5af5199475437d2cf7401d934958aeabf89c8abcb826a3"
+  },
+  "files": [
+    {
+      "stem": "P04_baseline_heatmap_10shot_B0",
+      "png": "figures\\ppt_final_analysis\\P04_baseline_heatmap_10shot_B0.png",
+      "svg": "figures\\ppt_final_analysis\\P04_baseline_heatmap_10shot_B0.svg",
+      "data_csv": "figures\\ppt_final_analysis\\P04_baseline_heatmap_10shot_B0_data.csv",
+      "notes": "figures\\ppt_final_analysis\\P04_baseline_heatmap_10shot_B0_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 12,
+      "png_sha256": "75a3f02c8094df3b84007f2d13813c270f49cfe572540fe9d46c8ffd0dd2d036",
+      "svg_sha256": "2a5d22980d4a18972ee1fefe1d90126aeee2b28008519fe8bffcafd76ae98fec",
+      "data_sha256": "364dab11902729d6ff1903e558aa3aac9273305a9c4f191b40b5e0d5cc6280b5"
+    },
+    {
+      "stem": "A01_oos_heatmap_10shot_B0",
+      "png": "figures\\ppt_final_analysis\\A01_oos_heatmap_10shot_B0.png",
+      "svg": "figures\\ppt_final_analysis\\A01_oos_heatmap_10shot_B0.svg",
+      "data_csv": "figures\\ppt_final_analysis\\A01_oos_heatmap_10shot_B0_data.csv",
+      "notes": "figures\\ppt_final_analysis\\A01_oos_heatmap_10shot_B0_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 12,
+      "png_sha256": "901541453373138e8cc239bd43499ea2be13262378ae4b19f2c4456dcfa01dc0",
+      "svg_sha256": "96dfded68d11efe145ccda19e77430649959adb0918008caa04cd1393ceeaa17",
+      "data_sha256": "23c67c4466e89fcf1a57782bc9338ff3d086a9d93958ceffe89e5b660967a41b"
+    },
+    {
+      "stem": "P06_b4_module_ablation_dev",
+      "png": "figures\\ppt_final_analysis\\P06_b4_module_ablation_dev.png",
+      "svg": "figures\\ppt_final_analysis\\P06_b4_module_ablation_dev.svg",
+      "data_csv": "figures\\ppt_final_analysis\\P06_b4_module_ablation_dev_data.csv",
+      "notes": "figures\\ppt_final_analysis\\P06_b4_module_ablation_dev_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 5,
+      "png_sha256": "8c986b28ac4f32b2121c5199e0cdba633c36ab342a363e5b0f4ff12628499a4a",
+      "svg_sha256": "c53b5589bec69a382f30b4e584cb7bcf30c650b2643fab5fdaa5a899ccc510d0",
+      "data_sha256": "1bb578e6b76d1692e224d1d33051d2fbadce7588d25745e0463d54e94bc75172"
+    },
+    {
+      "stem": "P08_b4_paired_seed_deltas",
+      "png": "figures\\ppt_final_analysis\\P08_b4_paired_seed_deltas.png",
+      "svg": "figures\\ppt_final_analysis\\P08_b4_paired_seed_deltas.svg",
+      "data_csv": "figures\\ppt_final_analysis\\P08_b4_paired_seed_deltas_data.csv",
+      "notes": "figures\\ppt_final_analysis\\P08_b4_paired_seed_deltas_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 18,
+      "png_sha256": "811aa0e20895bbdf093c0e10b5b4d8a69ac154cbbbf72c5cbefac36b4fe23c6d",
+      "svg_sha256": "16a40c659f84c196e73b3cbb6f4577d183858b217a2ed67270a59ab17cef33ec",
+      "data_sha256": "2266995e07d88f8c6e05aefea325a66f8fe527798ef80ee290651ffeebf5fbc7"
+    },
+    {
+      "stem": "P10_agent_v1_corrected_tsr",
+      "png": "figures\\ppt_final_analysis\\P10_agent_v1_corrected_tsr.png",
+      "svg": "figures\\ppt_final_analysis\\P10_agent_v1_corrected_tsr.svg",
+      "data_csv": "figures\\ppt_final_analysis\\P10_agent_v1_corrected_tsr_data.csv",
+      "notes": "figures\\ppt_final_analysis\\P10_agent_v1_corrected_tsr_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 3,
+      "png_sha256": "32939edd1edac3fa81fe5862a1532b02cbacdb1441b931cd24c96c9564d116a0",
+      "svg_sha256": "cd8d4185bd50a560be00a1aa0fe1406cbc14fe2ea6bc763cdaf97a79270f3266",
+      "data_sha256": "8c377832e37b437f732139d48a42691b705563bc39c8360d7102883f5320e9bd"
+    },
+    {
+      "stem": "P07_qwen_lora_three_seeds_historical",
+      "png": "figures\\ppt_final_analysis\\P07_qwen_lora_three_seeds_historical.png",
+      "svg": "figures\\ppt_final_analysis\\P07_qwen_lora_three_seeds_historical.svg",
+      "data_csv": "figures\\ppt_final_analysis\\P07_qwen_lora_three_seeds_historical_data.csv",
+      "notes": "figures\\ppt_final_analysis\\P07_qwen_lora_three_seeds_historical_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 4,
+      "png_sha256": "890e3c34df8ca8f3f799120a2b259aed7f26653531ae9e17ebdd5c3afeb91624",
+      "svg_sha256": "66ad91751adf3866ec7eb8c60cadeb3731767c2acfea97eb9dc0c95df4440c57",
+      "data_sha256": "347b2b65779f512818a7120bb3a1b4e2fcbea959649d71d550468a3fe9dcd37a"
+    },
+    {
+      "stem": "A02_agent_family_regraded",
+      "png": "figures\\ppt_final_analysis\\A02_agent_family_regraded.png",
+      "svg": "figures\\ppt_final_analysis\\A02_agent_family_regraded.svg",
+      "data_csv": "figures\\ppt_final_analysis\\A02_agent_family_regraded_data.csv",
+      "notes": "figures\\ppt_final_analysis\\A02_agent_family_regraded_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 24,
+      "png_sha256": "73eb23175f8744c3c666adf381e7296ec90050682639fe88424f44924becf1fc",
+      "svg_sha256": "acb4b3897b16d6b1f08abbfab00605b17a94c3829469d7795c10465f00ff7838",
+      "data_sha256": "95b6254f91033b57a58bb85d317903ad368a418b8158d68cb8a3f79d8065cc3e"
+    },
+    {
+      "stem": "A03_agent_failure_attribution",
+      "png": "figures\\ppt_final_analysis\\A03_agent_failure_attribution.png",
+      "svg": "figures\\ppt_final_analysis\\A03_agent_failure_attribution.svg",
+      "data_csv": "figures\\ppt_final_analysis\\A03_agent_failure_attribution_data.csv",
+      "notes": "figures\\ppt_final_analysis\\A03_agent_failure_attribution_notes.md",
+      "width": 3999,
+      "height": 2250,
+      "rows": 9,
+      "png_sha256": "3fcff3ff2f264fbb0a79d2811170e43ff4fe7c983be5f224b79ad480168d3bc2",
+      "svg_sha256": "c7a7a7905fbeff2ba1ca70aa73e69198ce17ca913236df79f5813fef5d7a7bfe",
+      "data_sha256": "e4658177147ddf2be01c3074dffe25ce8703f3359a0166bb8ac7c0276e3345cc"
+    }
+  ],
+  "checks": {
+    "all_png_16_9_3999x2250": true,
+    "all_have_data_svg_notes": true,
+    "p04_12_cells_3_row_best": true,
+    "p06_deltas_pp": [
+      2.3154176011595085,
+      0.9327001705102367
+    ],
+    "p08_18_paired_rows_6_encoders": true,
+    "p10_counts": [
+      72,
+      72,
+      85
+    ],
+    "a03_failure_rows_sum": 131,
+    "historical_data_untouched": true
+  }
+}

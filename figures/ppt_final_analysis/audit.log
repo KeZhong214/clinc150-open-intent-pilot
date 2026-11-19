@@ -1,0 +1,13 @@
+# PPT analysis audit
+Commit: 4c674cbc19ca3c623535033393878d20b5f04ad9
+
+P04_baseline_heatmap_10shot_B0: 3999x2250, rows=12, data=figures\ppt_final_analysis\P04_baseline_heatmap_10shot_B0_data.csv
+A01_oos_heatmap_10shot_B0: 3999x2250, rows=12, data=figures\ppt_final_analysis\A01_oos_heatmap_10shot_B0_data.csv
+P06_b4_module_ablation_dev: 3999x2250, rows=5, data=figures\ppt_final_analysis\P06_b4_module_ablation_dev_data.csv
+P08_b4_paired_seed_deltas: 3999x2250, rows=18, data=figures\ppt_final_analysis\P08_b4_paired_seed_deltas_data.csv
+P10_agent_v1_corrected_tsr: 3999x2250, rows=3, data=figures\ppt_final_analysis\P10_agent_v1_corrected_tsr_data.csv
+P07_qwen_lora_three_seeds_historical: 3999x2250, rows=4, data=figures\ppt_final_analysis\P07_qwen_lora_three_seeds_historical_data.csv
+A02_agent_family_regraded: 3999x2250, rows=24, data=figures\ppt_final_analysis\A02_agent_family_regraded_data.csv
+A03_agent_failure_attribution: 3999x2250, rows=9, data=figures\ppt_final_analysis\A03_agent_failure_attribution_data.csv
+
+ALL_CHECKS_OK

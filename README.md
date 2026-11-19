@@ -218,6 +218,7 @@ Demo：[app_gate8.py](app_gate8.py) ·
 [Gate8 dispute 截图](figures/gate8_ui_dispute.png) ·
 [Gate8 越权拒绝截图](figures/gate8_ui_ownership.png) ·
 [Gate8.1 截图画廊](reports/gate8_1_ui_gallery.md) ·
+[PPT 主讲分析图](figures/ppt_final_analysis/README.md) ·
 [卡状态](figures/gate8_1_ui_card.png) ·
 [激活](figures/gate8_1_ui_activation.png) ·
 [转账](figures/gate8_1_ui_transfer.png) ·
