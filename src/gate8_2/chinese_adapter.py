@@ -41,6 +41,9 @@ class ChineseTranslationAdapter:
     def translate(self, text: str) -> TranslationResult:
         if not self.has_chinese(text):
             return TranslationResult(text, "passthrough", "ok")
+        status = self.client.status() if hasattr(self.client, "status") else {}
+        if status.get("config_error"):
+            return TranslationResult("", "config_error", "CONFIG_ERROR", error=status["config_error"])
         if not self.available:
             return TranslationResult("", "blocked", "NOT RUN_API_BLOCKED", error="DEEPSEEK_API_KEY not configured")
         ids = {x.upper() for x in CARD_TXN.findall(text)}

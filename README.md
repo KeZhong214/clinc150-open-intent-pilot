@@ -79,7 +79,7 @@ Gate 7 的核心结果（双层 dev + 3-seed；历史探索性 test）：
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 B4-Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 108 个测试通过。
+- 109 个测试通过。
 
 Gate 7.1 修复：
 
@@ -210,7 +210,7 @@ Gate 1/2 历史结果保持冻结：
 [Gate8.1 失败热力图](figures/gate8_1_failure_heatmap.png)  
 Demo：[app_gate8.py](app_gate8.py) ·
 [Gate8.2 中文离线界面](figures/gate8_2_ui_chinese_offline.png) ·
-[Gate8.2 中文 DeepSeek 阻塞](figures/gate8_2_ui_chinese_blocked.png) ·
+[Gate8.2 中文 API 配置错误演示](figures/gate8_2_ui_chinese_blocked.png) ·
 [Gate8.2 离线模式](figures/gate8_2_ui_offline.png) ·
 [Gate8.2 DeepSeek 无 Key 阻塞](figures/gate8_2_ui_deepseek_blocked.png) ·
 [Gate8 卡状态截图](figures/gate8_ui_card.png) ·
@@ -544,7 +544,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 108 tests in ...s
+Ran 109 tests in ...s
 OK
 ```
 
@@ -572,7 +572,7 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 108 个测试。请反馈
+预期最后一行是 `OK`，共 109 个测试。请反馈
 `logs/gate7_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
@@ -932,7 +932,7 @@ Gate 7 的主要判断：
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE Frozen、GTE-LoRA、Qwen Frozen 上稳定优于 Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 108 个测试通过。
+- 109 个测试通过。
 
 尚未做：
 

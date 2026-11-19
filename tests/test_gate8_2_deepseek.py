@@ -122,6 +122,15 @@ class Gate82DeepSeekTest(unittest.TestCase):
                 c.chat([{"role": "user", "content": "hi"}])
         self.assertNotIn("secret-key-value", str(ctx.exception))
 
+    def test_key_shape_error_detected_without_request(self):
+        c = DeepSeekClient(api_key=" <sk-test-key> ", base_url="https://api.deepseek.com", model="deepseek-flash")
+        self.assertFalse(c.available)
+        self.assertIn("config_error", c.status())
+        self.assertEqual(c.status()["mode"], "config_error")
+        with self.assertRaises(DeepSeekUnavailable) as ctx:
+            c.chat([{"role": "user", "content": "hi"}])
+        self.assertIn("DEEPSEEK_CONFIG_ERROR", str(ctx.exception))
+
     def test_app_modes_and_blocked_label(self):
         text = (ROOT / "app_gate8.py").read_text(encoding="utf-8")
         self.assertIn("Offline Router-driven", text)
@@ -129,6 +138,7 @@ class Gate82DeepSeekTest(unittest.TestCase):
         self.assertIn("NOT RUN_API_BLOCKED", text)
         self.assertIn("reply_source", text)
         self.assertIn("usage", text)
+        self.assertIn("api_auth_error", text)
 
 
 if __name__ == "__main__":

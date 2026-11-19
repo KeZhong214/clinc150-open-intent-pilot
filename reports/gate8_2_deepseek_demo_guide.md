@@ -52,6 +52,21 @@ if ([string]::IsNullOrWhiteSpace($env:DEEPSEEK_API_KEY)) {
 
 只应看到 `SET (value hidden)`，不能看到 `sk-...`。
 
+再检查 key 的形状（不打印完整值）：
+
+```powershell
+$k = $env:DEEPSEEK_API_KEY
+"length              = $($k.Length)"
+"starts_with_sk      = $($k.StartsWith('sk-'))"
+"contains_angle      = $($k.Contains('<') -or $k.Contains('>'))"
+"contains_quote      = $($k.Contains('"') -or $k.Contains("'"))"
+"contains_whitespace = $($k -match '\s')"
+"last4               = $($k.Substring([Math]::Max(0, $k.Length - 4)))"
+```
+
+如果 `contains_angle=True`，说明把 `<...>` 也写进去了；如果 `last4` 是 `866>`，就是这种情况。
+只设置真实 Key 本身，不要带尖括号/引号/空格。
+
 ## 4. 先做一次极短真实 smoke test
 
 这一步会产生一次很小的 API 调用。`src/gate8_2/deepseek_smoke.py` 只发一句短请求，
@@ -59,6 +74,13 @@ if ([string]::IsNullOrWhiteSpace($env:DEEPSEEK_API_KEY)) {
 
 ```powershell
 .\.venv\Scripts\python.exe -m src.gate8_2.deepseek_smoke
+```
+
+如果 Key 形状明显错误，**不会发 HTTP 请求**，会直接输出：
+
+```text
+{'available': False, 'key_format_ok': False, 'mode': 'config_error', ...}
+DEEPSEEK_CONFIG_ERROR: DEEPSEEK_API_KEY contains angle brackets; remove the <...> placeholders
 ```
 
 成功时类似：
@@ -150,7 +172,9 @@ $env:TRANSFORMERS_OFFLINE = "1"
 | 现象 | 处理 |
 |---|---|
 | `available: false` | 检查是否同一 PowerShell、三个变量是否设置 |
-| 401 | 重新创建/确认 Key；不要打印 Key |
+| 401 / `Authentication Fails` | Key 无效、被撤销、复制不完整，或包含 `<>`/引号/空格；重新创建并只设置 Key 本身 |
+| `last4` 显示 `866>` | 说明 Key 末尾多了 `>`；删除尖括号后重启 PowerShell |
+| `config_error` / angle brackets | 代码在发请求前拒绝；不会再被误报为“翻译歧义” |
 | 402/余额 | 充值/检查计费 |
 | 404 | base URL 不要包含 `/chat/completions`；默认 `https://api.deepseek.com` |
 | 429 | 停止重试，稍后再试 |

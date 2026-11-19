@@ -15,6 +15,17 @@ class DeepSeekUnavailable(RuntimeError):
     pass
 
 
+def key_shape_error(key: str) -> str | None:
+    """Detect obvious copy/paste mistakes without ever echoing the value."""
+    if key != key.strip():
+        return "DEEPSEEK_API_KEY has leading/trailing whitespace"
+    if "<" in key or ">" in key:
+        return "DEEPSEEK_API_KEY contains angle brackets; remove the <...> placeholders"
+    if key[:1] in {'"', "'"} or key[-1:] in {'"', "'"}:
+        return "DEEPSEEK_API_KEY contains quote characters; set only the key value"
+    return None
+
+
 @dataclass
 class DeepSeekResult:
     text: str
@@ -29,10 +40,11 @@ class DeepSeekClient:
         self.base_url = (base_url if base_url is not None else os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")).rstrip("/")
         self.model = model if model is not None else os.environ.get("DEEPSEEK_MODEL", "deepseek-flash")
         self.timeout = float(timeout if timeout is not None else os.environ.get("DEEPSEEK_TIMEOUT", "12"))
+        self.config_error = key_shape_error(self.api_key)
 
     @property
     def available(self) -> bool:
-        return bool(self.api_key and self.base_url and self.model)
+        return bool(self.api_key and self.base_url and self.model and not self.config_error)
 
     def status(self) -> dict[str, Any]:
         # Deliberately never return the key or an Authorization header.
@@ -42,8 +54,10 @@ class DeepSeekClient:
             "base_url": self.base_url,
             "model": self.model,
             "api_key_set": bool(self.api_key),
+            "key_format_ok": not bool(self.config_error),
+            "config_error": self.config_error,
             "timeout_seconds": self.timeout,
-            "mode": "deepseek" if self.available else "NOT RUN_API_BLOCKED",
+            "mode": "config_error" if self.config_error else ("deepseek" if self.available else "NOT RUN_API_BLOCKED"),
         }
 
     def _endpoint(self) -> str:
@@ -52,6 +66,8 @@ class DeepSeekClient:
         return self.base_url + "/chat/completions"
 
     def chat(self, messages: list[dict[str, str]], *, temperature: float = 0.2, max_tokens: int = 300, json_mode: bool = False) -> DeepSeekResult:
+        if self.config_error:
+            raise DeepSeekUnavailable(f"DEEPSEEK_CONFIG_ERROR: {self.config_error}")
         if not self.available:
             raise DeepSeekUnavailable("DEEPSEEK_API_KEY / DEEPSEEK_BASE_URL / DEEPSEEK_MODEL not configured")
         max_tokens = max(1, min(int(max_tokens), 512))

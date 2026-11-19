@@ -87,6 +87,9 @@ Reply mode
 - `figures/gate8_2_ui_chinese_offline.png`
 - `figures/gate8_2_ui_chinese_blocked.png`
 
+`gate8_2_ui_chinese_blocked.png` 使用本地合成 malformed key 演示 Key 格式拦截，
+没有真实请求；真实 401 由 API 返回，不属于“翻译歧义”。
+
 ---
 
 ## 4. 安全测试（Mock）
@@ -105,11 +108,23 @@ Reply mode
 
 中文专项 `tests/test_gate8_2_chinese.py` 7 项：20 案例、直接探针、ID 保真、
 翻译拒绝新增/遗漏 ID、中文模板、中文 writer 拒绝虚假操作、中文 UI。
-全量 **108 tests OK**。
+全量 **109 tests OK**。
 
 日志：`logs/gate8_2_tests_b.log`、`logs/gate8_2_chinese_all_tests.log`。
 
 ---
+
+## 4.5 401/Key 格式诊断
+
+已修复两个误报来源：
+
+1. **Key 形状检查**：`DEEPSEEK_API_KEY` 含尖括号 `< >`、引号或首尾空格时，
+   `DeepSeekClient.available=False`、`mode=config_error`，在发出 HTTP 前拒绝；
+2. **UI 错误分类**：401 显示“API 认证失败”，402 显示余额、429 显示限流、
+   timeout 显示网络；只有真正的 `AMBIGUOUS`/ID mismatch 才显示“翻译歧义”。
+
+用户截图中的 `****866>` 和 HTTP 401 属于 Key 被 API 拒绝，不是中文翻译歧义，
+也未执行任何工具。处理：去掉尖括号/引号/空格，重新创建 Key，重启 PowerShell 与 Streamlit。
 
 ## 5. 真实 API 状态
 

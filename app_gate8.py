@@ -52,7 +52,27 @@ SOURCE_LABELS = {
     "offline_blocked": "离线回退（API 未配置）",
     "translation_blocked": "中文翻译不可用",
     "translation_fallback": "翻译/歧义回退",
+    "api_config_error": "API 配置错误",
+    "api_auth_error": "API 认证失败",
+    "api_billing_error": "API 余额/计费问题",
+    "api_rate_error": "API 限流",
+    "api_timeout": "API 超时/网络",
 }
+
+
+def classify_api_error(error: str | None) -> str | None:
+    e = (error or "").lower()
+    if "config_error" in e or "angle brackets" in e or "quote characters" in e or "whitespace" in e:
+        return "api_config_error"
+    if "http 401" in e or "authentication" in e or "invalid" in e and "api key" in e:
+        return "api_auth_error"
+    if "http 402" in e or "balance" in e or "billing" in e:
+        return "api_billing_error"
+    if "http 429" in e or "rate" in e:
+        return "api_rate_error"
+    if "timeout" in e or "timed out" in e or "network" in e:
+        return "api_timeout"
+    return None
 
 DEMOS = {
     "1. Card delivery": [
@@ -214,9 +234,25 @@ def send(name: str, mode: str, text: str) -> None:
             "error": tr.error,
         }
         if tr.status != "ok":
+            kind = classify_api_error(tr.error)
             if tr.status == "NOT RUN_API_BLOCKED":
-                reply = "当前未配置 DeepSeek API，中文翻译不可用。你可以切换到“离线路由模式”，或先按配置指南设置 Key 后再使用 DeepSeek 增强模式。"
+                reply = "当前未配置 DeepSeek API，中文翻译不可用。你可以切换到“离线客服模式”，或先按配置指南设置 Key 后再使用 DeepSeek 增强模式。"
                 source = "translation_blocked"
+            elif tr.status == "CONFIG_ERROR":
+                reply = "DeepSeek API Key 格式明显不正确（可能包含尖括号、引号或首尾空格）。请只把真实 Key 本身写入环境变量，然后重启 PowerShell 与 Streamlit；本次没有执行任何工具。"
+                source = "api_config_error"
+            elif kind == "api_auth_error":
+                reply = "DeepSeek API 认证失败（HTTP 401），说明 Key 无效、被撤销或复制不完整。请重新创建/核对 Key，确认没有尖括号、引号或多余字符；本次没有执行任何工具。"
+                source = "api_auth_error"
+            elif kind == "api_billing_error":
+                reply = "DeepSeek 返回余额/计费问题（HTTP 402）。请检查账户余额；本次没有执行任何工具。"
+                source = "api_billing_error"
+            elif kind == "api_rate_error":
+                reply = "DeepSeek 返回限流（HTTP 429）。请停止重试，稍后再试；本次没有执行任何工具。"
+                source = "api_rate_error"
+            elif kind == "api_timeout":
+                reply = "DeepSeek 请求超时或网络不可达。请检查代理/网络或稍后重试；本次没有执行任何工具。"
+                source = "api_timeout"
             else:
                 reply = "这条中文请求无法可靠翻译或存在歧义。为避免误触发银行业务，尚未执行任何工具；请换一种说法或补充业务编号。"
                 source = "translation_fallback"
@@ -240,7 +276,11 @@ def send(name: str, mode: str, text: str) -> None:
     reply_source = "offline"
     reply_meta = {"status": "offline", "error": None, "elapsed_seconds": 0.0, "usage": {}}
     if mode == "DeepSeek-assisted":
-        if not deepseek_writer().available:
+        ds_cfg = deepseek_client().status()
+        if ds_cfg.get("config_error"):
+            reply_source = "api_config_error"
+            reply_meta = {"status": "CONFIG_ERROR", "error": ds_cfg["config_error"], "elapsed_seconds": 0.0, "usage": {}}
+        elif not deepseek_writer().available:
             reply_source = "offline_blocked"
             reply_meta = {"status": "NOT RUN_API_BLOCKED", "error": "DEEPSEEK_API_KEY not configured", "elapsed_seconds": 0.0, "usage": {}}
         else:
@@ -257,6 +297,8 @@ def send(name: str, mode: str, text: str) -> None:
             )
             reply = rr.text
             reply_source = rr.source
+            if rr.status != "ok":
+                reply_source = classify_api_error(rr.error) or "fallback"
             reply_meta = {"status": rr.status, "error": rr.error, "elapsed_seconds": rr.elapsed_seconds, "usage": rr.usage}
     msgs.append(
         {
@@ -305,7 +347,9 @@ def main() -> None:
         st.caption("中文输入说明：离线模式为中文固定模板；DeepSeek 增强模式会先翻译成英文，再交给原英文路由模型。")
         if st.session_state.get("last_release"):
             st.caption(f"上次模型切换显存：{st.session_state['last_release']}")
-        if mode == "DeepSeek-assisted" and not ds_status["available"]:
+        if mode == "DeepSeek-assisted" and ds_status.get("config_error"):
+            st.error(f"DeepSeek API Key 格式错误：{ds_status['config_error']}。请只设置 Key 本身，不要包含尖括号、引号或空格。")
+        elif mode == "DeepSeek-assisted" and not ds_status["available"]:
             st.error("已选择 DeepSeek 增强模式，但未配置 DEEPSEEK_API_KEY。当前为 NOT RUN_API_BLOCKED，回复会回退到离线中文模板。")
         st.markdown(f"**当前模式**：{MODE_LABELS[mode]}")
         st.caption("意图/OOS、业务工具、确认和权限始终由本地 Agent 决定；DeepSeek 只负责翻译和中文措辞。")

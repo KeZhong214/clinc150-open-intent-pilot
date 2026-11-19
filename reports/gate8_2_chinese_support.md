@@ -36,6 +36,9 @@
 - `figures/gate8_2_ui_chinese_offline.png`
 - `figures/gate8_2_ui_chinese_blocked.png`
 
+其中 blocked 截图使用**本地合成的 malformed key**（`<sk-dummy-866>`）演示
+Key 形状错误会被拦截；没有向 DeepSeek 发请求，也不是真实 Key。
+
 ## 3. 中文离线模板
 
 `src/gate8_2/chinese_templates.py`：
@@ -133,7 +136,7 @@
 ## 8. 测试
 
 - 中文专项 7 项：`tests/test_gate8_2_chinese.py`；
-- 全量 **108 tests OK**：`logs/gate8_2_chinese_all_tests.log`；
+- 全量 **109 tests OK**：`logs/gate8_2_chinese_all_tests.log`；
 - 覆盖 20 案例、直接探针 60 行、ID 保真、翻译拒绝新增/遗漏 ID、中文模板、
   中文 writer 拒绝虚假“已取消”、中文 UI 标签。
 
