@@ -276,3 +276,16 @@ See `../reports/gate8_agent_final_report.md` and `../reports/gate8_benchmark_pro
 
 v2 is a test-metadata correction, not a second independent blind test.
 See `../reports/gate8_1_final_report.md` and `../reports/gate8_1_benchmark_protocol.md`.
+
+# Gate 8.2 evaluation finalization
+
+| File | Content |
+|---|---|
+| `gate8_2_v1_rescore_per_case.csv` | 360 rows: v1 original / same-trace corrected / v2 exploratory |
+| `gate8_2_v1_rescore_summary.csv` | per-model v1 original, corrected, v2, FAQ |
+| `gate8_2_faq_grounding_audit.csv` | 12 FAQ × 3 models grounding audit |
+| `gate8_2_v1_v2_diff.csv` | 12 expected_terms + G81-F009 text changes |
+| `gate8_2_v1_source_manifest.json` | commit/hash discrepancy and offline rule |
+
+Official A result is the **v1 same-trace corrected** score; v2 is exploratory.
+See `../reports/gate8_2_eval_finalization.md`.

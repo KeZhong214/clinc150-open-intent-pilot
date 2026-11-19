@@ -97,7 +97,7 @@ class Gate81Test(unittest.TestCase):
         text = (ROOT / "app_gate8.py").read_text(encoding="utf-8")
         self.assertIn("release_sessions", text)
         self.assertIn("memory_allocated", text)
-        self.assertIn("Gate 8.1", text)
+        self.assertIn("Gate 8.2", text)
 
 
 if __name__ == "__main__":

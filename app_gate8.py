@@ -24,6 +24,10 @@ from src.gate5.llm_client import LLMClient  # noqa: E402
 from src.gate8.agent import Gate8Agent  # noqa: E402
 from src.gate8.llm_assist import LLMAssistant  # noqa: E402
 from src.gate8_1.routers import ROUTER_NAMES, build  # noqa: E402
+from src.gate8_2.deepseek_client import DeepSeekClient  # noqa: E402
+from src.gate8_2.grounded_writer import GroundedReplyWriter  # noqa: E402
+
+MODES = ["Offline Router-driven", "DeepSeek-assisted"]
 
 DEMOS = {
     "1. Card delivery": [
@@ -76,6 +80,16 @@ def assistant():
     return LLMAssistant()
 
 
+@st.cache_resource
+def deepseek_client():
+    return DeepSeekClient()
+
+
+@st.cache_resource
+def deepseek_writer():
+    return GroundedReplyWriter(deepseek_client())
+
+
 def release_sessions() -> dict:
     """Close every session and drop its encoder/router references."""
     import torch
@@ -123,42 +137,67 @@ def get_router(name: str):
     return cache["router"], cache["meta"]
 
 
-def get_agent(name: str) -> Gate8Agent:
+def get_agent(name: str, mode: str) -> Gate8Agent:
+    key = f"{name}|{mode}"
     sessions = st.session_state.setdefault("sessions", {})
-    if name not in sessions:
+    if key not in sessions:
         router, meta = get_router(name)
-        sessions[name] = Gate8Agent(
+        llm = LLMAssistant(deepseek_client()) if mode == "DeepSeek-assisted" else None
+        sessions[key] = Gate8Agent(
             router,
-            session_id=f"G8-{uuid.uuid4().hex[:10]}",
-            db_dir=ROOT / "data" / "gate8" / "ui_sessions",
+            session_id=f"G82-{uuid.uuid4().hex[:10]}",
+            db_dir=ROOT / "data" / "gate8_2" / "ui_sessions",
             kb=kb(),
-            llm_assistant=assistant(),
+            llm_assistant=llm,
         )
-        st.session_state.setdefault("messages", {})[name] = []
-        st.session_state.setdefault("initial", {})[name] = sessions[name].snapshot()
-    return sessions[name]
+        st.session_state.setdefault("messages", {})[key] = []
+        st.session_state.setdefault("initial", {})[key] = sessions[key].snapshot()
+    return sessions[key]
 
 
-def reset(name: str) -> None:
+def reset(name: str, mode: str) -> None:
+    key = f"{name}|{mode}"
     sessions = st.session_state.setdefault("sessions", {})
-    old = sessions.pop(name, None)
+    old = sessions.pop(key, None)
     if old is not None:
         old.close()
-    st.session_state.setdefault("messages", {})[name] = []
-    st.session_state.setdefault("initial", {})[name] = None
-    get_agent(name)
+    st.session_state.setdefault("messages", {})[key] = []
+    st.session_state.setdefault("initial", {})[key] = None
+    get_agent(name, mode)
 
 
-def send(name: str, text: str) -> None:
-    agent = get_agent(name)
-    msgs = st.session_state.setdefault("messages", {})[name]
+def send(name: str, mode: str, text: str) -> None:
+    agent = get_agent(name, mode)
+    key = f"{name}|{mode}"
+    msgs = st.session_state.setdefault("messages", {})[key]
     msgs.append({"role": "user", "content": text})
     turn = agent.handle(text)
     route = turn.route
+    reply = turn.response
+    reply_source = "offline"
+    reply_meta = {"status": "offline", "error": None, "elapsed_seconds": 0.0, "usage": {}}
+    if mode == "DeepSeek-assisted":
+        if not deepseek_writer().available:
+            reply_source = "offline_blocked"
+            reply_meta = {"status": "NOT RUN_API_BLOCKED", "error": "DEEPSEEK_API_KEY not configured", "elapsed_seconds": 0.0, "usage": {}}
+        else:
+            rr = deepseek_writer().rewrite(
+                user_text=text,
+                template=turn.response,
+                intent=route.intent if route else None,
+                accepted=route.accepted if route else False,
+                tool_results=turn.tools,
+                allowed_doc_ids=[c.get("doc_id") for c in turn.citations],
+                pending_confirmation=bool(turn.state.get("awaiting_confirmation")),
+                state=turn.state,
+            )
+            reply = rr.text
+            reply_source = rr.source
+            reply_meta = {"status": rr.status, "error": rr.error, "elapsed_seconds": rr.elapsed_seconds, "usage": rr.usage}
     msgs.append(
         {
             "role": "assistant",
-            "content": turn.response,
+            "content": reply,
             "route": {
                 "method": route.method if route else None,
                 "intent": route.intent if route else None,
@@ -171,49 +210,54 @@ def send(name: str, text: str) -> None:
             "tools": turn.tools,
             "citations": turn.citations,
             "state": turn.state,
+            "reply_source": reply_source,
+            "reply_meta": reply_meta,
         }
     )
 
 
-def run_demo(name: str, prompt: str) -> None:
-    reset(name)
+def run_demo(name: str, mode: str, prompt: str) -> None:
+    reset(name, mode)
     for text in DEMOS[prompt]:
-        send(name, text)
+        send(name, mode, text)
     st.session_state["last_demo"] = prompt
 
 
 def main() -> None:
-    st.set_page_config(page_title="Gate 8 Bank Agent", page_icon="🏦", layout="wide")
-    st.title("Gate 8.1 · Bank Customer-Service Agent")
-    st.caption("Offline Router-driven Agent · paired Gate8.1 routers · RAG citations · SQLite tools · session isolation")
-    llm_status = LLMClient().status()
+    st.set_page_config(page_title="Gate 8.2 Bank Agent", page_icon="🏦", layout="wide")
+    st.title("Gate 8.2 · Bank Customer-Service Agent")
+    st.caption("Offline Router-driven vs DeepSeek-assisted · paired Gate8.1 routers · RAG citations · SQLite tools · session isolation")
+    ds_status = deepseek_client().status()
     if "pending_method" in st.session_state:
         st.session_state["router_choice"] = st.session_state.pop("pending_method")
 
     with st.sidebar:
         st.header("Model & run mode")
         name = st.radio("Intent router", ROUTER_NAMES, index=0, key="router_choice")
+        mode = st.radio("Reply mode", MODES, index=0, key="reply_mode")
         st.caption("One encoder is loaded at a time to stay within 8 GB. Switching may reload the model.")
         if st.session_state.get("last_release"):
             st.caption(f"Last switch memory: {st.session_state['last_release']}")
-        st.markdown("**Mode**: Offline Router-driven Agent")
-        st.caption("LLM-assisted mode is optional and constrained; it is NOT RUN without API credentials.")
-        st.json(llm_status, expanded=False)
+        if mode == "DeepSeek-assisted" and not ds_status["available"]:
+            st.error("DeepSeek-assisted selected, but DEEPSEEK_API_KEY is not configured. This run is NOT RUN_API_BLOCKED; replies fall back to offline templates.")
+        st.markdown(f"**Mode**: {mode}")
+        st.caption("Router/OOS and tool execution remain server-side; DeepSeek may only edit grounded wording.")
+        st.json(ds_status, expanded=False)
         if st.button("Reset session + fictional DB", use_container_width=True):
-            reset(name)
+            reset(name, mode)
             st.rerun()
         st.divider()
         st.header("8+ live demos")
         for label in DEMOS:
             if st.button(label, use_container_width=True):
-                run_demo(name, label)
+                run_demo(name, mode, label)
                 st.rerun()
         st.divider()
         st.caption("All data is fictional. No real bank, credential, card number, or money is used.")
 
     router, meta = get_router(name)
-    agent = get_agent(name)
-    msgs = st.session_state.setdefault("messages", {})[name]
+    agent = get_agent(name, mode)
+    msgs = st.session_state.setdefault("messages", {})[f"{name}|{mode}"]
     chat_col, side_col = st.columns([1.45, 1.0], gap="large")
 
     with chat_col:
@@ -241,6 +285,12 @@ def main() -> None:
                         hide_index=True,
                         use_container_width=True,
                     )
+                rm = msg.get("reply_meta") or {}
+                st.caption(f"Reply source: **{msg.get('reply_source', 'offline')}** · status: `{rm.get('status', 'offline')}` · elapsed: {rm.get('elapsed_seconds', 0.0):.3f}s")
+                if rm.get("usage"):
+                    st.json({"usage": rm["usage"]}, expanded=False)
+                if rm.get("error"):
+                    st.caption(f"DeepSeek fallback reason: {rm['error']}")
                 if msg.get("citations"):
                     with st.expander(f"KB citations ({len(msg['citations'])})", expanded=True):
                         for c in msg["citations"]:
@@ -253,7 +303,7 @@ def main() -> None:
                             st.json(t["result"])
         prompt = st.chat_input("Ask about a fictional card, transfer, dispute, fee, or policy...")
         if prompt:
-            send(name, prompt)
+            send(name, mode, prompt)
             st.rerun()
 
     with side_col:

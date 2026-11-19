@@ -2,14 +2,15 @@
 
 课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测、LoRA/B4 归因与真实工具 Agent**
 
-当前状态：**Gate 0–8.1 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
+当前状态：**Gate 0–8.2 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
 5/10-shot、B0/B3-P/B3-H 的 72 格矩阵；Gate 4 完成 BANKING77 GTE 10-shot
 的 B4-AR 与 SQLite Agent；Gate 5 完成真实 LoRA-GTE、RejectOnly 归因、
 30 条虚构银行政策 RAG、120 条业务 benchmark；Gate 6 完成 Qwen3-Embedding
 0.6B LoRA；Gate 7 完成双层开发集诊断、3-seed 复验和核心 B4 稳定性实验；
 Gate 7.1 完成阈值协议修复与 36 组稳定性；Gate 8 完成多轮客服 Agent、
 统一 UI 和 102 例新冻结模拟评测；Gate 8.1 完成 GTE 权重—阈值配对、
-OOS/LLM 安全修复和 120 例新模拟测试。
+OOS/LLM 安全修复和 120 例新模拟测试；Gate 8.2 完成 v1 轨迹离线复评、
+FAQ 证据审核和 DeepSeek-assisted 双模式（无 Key，NOT RUN_API_BLOCKED）。
 
 Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 
@@ -78,7 +79,7 @@ Gate 7 的核心结果（双层 dev + 3-seed；历史探索性 test）：
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 B4-Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 86 个测试通过。
+- 101 个测试通过。
 
 Gate 7.1 修复：
 
@@ -135,6 +136,21 @@ Gate 8.1 修复（新冻结 120 例模拟测试；不是外部盲测）：
   [`reports/gate8_1_failure_analysis.md`](reports/gate8_1_failure_analysis.md)、
   [`reports/gate8_1_demo_guide.md`](reports/gate8_1_demo_guide.md)。
 
+Gate 8.2 评测定稿 + DeepSeek 双模式：
+
+- v1 首次冻结从 commit `7824bb7` 重新读取；发现 freeze_v1 记录 SHA 与实际案例 SHA 不一致，已保留并在
+  `results/gate8_2_v1_source_manifest.json` 记录，未覆盖旧 freeze；
+- 12 条 FAQ 期望词 + **G81-F009 用户文本发生变化**，已逐项记录；
+- 仅使用 v1 原始轨迹离线复评；只修正“回答 grounded 但旧 expected_terms 是第一个词”的评分 bug；
+- v1 同轨迹修正：GTE **0.600**、Qwen Frozen **0.600**、Qwen Plain42 **0.708**；
+  v2 换文/改规则：0.633/0.633/0.742；v2 不是新盲测；
+- FAQ 12 条 rubric + 30 篇真实 KB 事实审核；F009 没有被错误补分；
+- DeepSeek-assisted 双模式已完成，意图/OOS/工具权限仍由原系统控制；
+- 无 Key：`NOT RUN_API_BLOCKED`，不伪造调用；Mock 安全测试通过；
+- 详细：[`reports/gate8_2_eval_finalization.md`](reports/gate8_2_eval_finalization.md)、
+  [`reports/gate8_2_deepseek_integration.md`](reports/gate8_2_deepseek_integration.md)、
+  [`reports/gate8_2_deepseek_demo_guide.md`](reports/gate8_2_deepseek_demo_guide.md)。
+
 B3-H 的场景差异：
 
 - BANKING77：相对 B0 平均 OOS recall +5.21 pp，open-set F1 +0.99 pp；
@@ -172,6 +188,9 @@ Gate 1/2 历史结果保持冻结：
 [Gate 8.1 评测协议](reports/gate8_1_benchmark_protocol.md) ·
 [Gate 8.1 失败分析](reports/gate8_1_failure_analysis.md) ·
 [Gate 8.1 Demo Guide](reports/gate8_1_demo_guide.md) ·
+[Gate 8.2 评测定稿](reports/gate8_2_eval_finalization.md) ·
+[Gate 8.2 DeepSeek 集成](reports/gate8_2_deepseek_integration.md) ·
+[Gate 8.2 API 配置指南](reports/gate8_2_deepseek_demo_guide.md) ·
 [项目最终研究总结](reports/project_final_research_summary.md)  
 结果索引：[results/gate6_qwen_method_matrix_historical_test.csv](results/gate6_qwen_method_matrix_historical_test.csv) ·
 [results/gate6_qwen_benchmark_summary.csv](results/gate6_qwen_benchmark_summary.csv) ·
@@ -184,6 +203,9 @@ Gate 1/2 历史结果保持冻结：
 [Gate8.1 benchmark](figures/gate8_1_benchmark.png) ·
 [Gate8.1 失败热力图](figures/gate8_1_failure_heatmap.png)  
 Demo：[app_gate8.py](app_gate8.py) ·
+[Gate8.2 离线模式](figures/gate8_2_ui_offline.png) ·
+[Gate8.2 DeepSeek 无 Key 阻塞](figures/gate8_2_ui_deepseek_blocked.png) ·
+[Gate8.2 回退来源](figures/gate8_2_ui_assisted_blocked_demo.png) ·
 [Gate8 卡状态截图](figures/gate8_ui_card.png) ·
 [Gate8 激活截图](figures/gate8_ui_activation.png) ·
 [Gate8 dispute 截图](figures/gate8_ui_dispute.png) ·
@@ -515,7 +537,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 86 tests in ...s
+Ran 101 tests in ...s
 OK
 ```
 
@@ -543,7 +565,7 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 86 个测试。请反馈
+预期最后一行是 `OK`，共 101 个测试。请反馈
 `logs/gate7_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
@@ -903,7 +925,7 @@ Gate 7 的主要判断：
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE Frozen、GTE-LoRA、Qwen Frozen 上稳定优于 Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 86 个测试通过。
+- 101 个测试通过。
 
 尚未做：
 

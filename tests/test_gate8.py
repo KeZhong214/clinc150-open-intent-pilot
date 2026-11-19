@@ -174,7 +174,8 @@ class Gate8Test(unittest.TestCase):
 
     def test_app_visible_provenance(self):
         text = (ROOT / "app_gate8.py").read_text(encoding="utf-8")
-        self.assertIn("Offline Router-driven Agent", text)
+        self.assertIn("Offline Router-driven", text)
+        self.assertIn("DeepSeek-assisted", text)
         self.assertIn("threshold_source", text)
         self.assertIn("Tool timeline", text)
         self.assertIn("KB citations", text)

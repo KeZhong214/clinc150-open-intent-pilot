@@ -286,6 +286,19 @@ Gate8 把分类/拒识模块接成可操作的多轮银行 Agent：
 - 三模型安全率 1.000；Qwen Plain 优势不显著；
 - 详细：`reports/gate8_1_final_report.md`。
 
+## 9.9 Gate 8.2：评测定稿与 DeepSeek 辅助
+
+- v1 从 commit `7824bb7` 重取；发现 freeze_v1 SHA 与实际案例 SHA 不一致，保留并记录；
+- v1/v2 实际差异 13 行：12 个 FAQ expected_terms + G81-F009 用户文本变化；
+- 只用 v1 原始 trace 离线复评；只修正 grounded FAQ 的评分 bug；
+- v1 同轨迹：GTE .600、Qwen Frozen .600、Qwen Plain .708；
+- v2：.633/.633/.742，仅探索性，不是新盲测；
+- FAQ 12 条事实 rubric；F009 未被错误补分；
+- DeepSeek-assisted 双模式：仅改自然措辞，不接管 OOS/工具/权限；
+- 无 Key：`NOT RUN_API_BLOCKED`，Mock 安全测试通过；
+- 详细：`reports/gate8_2_eval_finalization.md`、
+  `reports/gate8_2_deepseek_integration.md`。
+
 ## 10. 最终研究结论
 
 ### 可以支持的结论

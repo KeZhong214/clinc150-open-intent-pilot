@@ -27,3 +27,8 @@ data/gate8/sessions/
 data/gate8/ui_sessions/
 
 data/gate8_1/sessions/
+.env
+.env.local
+*.key
+data/gate8_2/sessions/
+data/gate8_2/ui_sessions/
