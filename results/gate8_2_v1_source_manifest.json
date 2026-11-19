@@ -1,0 +1,15 @@
+{
+  "v1_commit": "7824bb70d8b41e395cefee0a108b7060557180ef",
+  "v1_case_file": "data/gate8_1/benchmark_cases_v1.jsonl",
+  "v1_case_sha256": "b653000c5c7ea4347053afc8d042c4358918a588f3cf897b13f0f75dbbf0959a",
+  "v1_freeze_manifest_sha256": "cb8af024c41b04df9f5e4469bce70057fb7bb5796c3b435f177b25bbd6d95ff3",
+  "freeze_declared_case_sha256": "d2e934b1c4b03d7214903d824181186c6415d0504b981ece203f8c0e310d34c9",
+  "discrepancy": "The v1 freeze manifest records d2e934... while the case file at commit 7824bb7 is b65300...; this audit uses the commit-7824 file requested by the task and records the discrepancy rather than overwriting either.",
+  "v1_trace_files": {
+    "GTE-Frozen-RejectOnly": "D:\\code\\intent-open-set\\results\\gate8_1_agent_gte_frozen_rejectonly_v1_results.csv",
+    "Qwen-Frozen-RejectOnly": "D:\\code\\intent-open-set\\results\\gate8_1_agent_qwen_frozen_rejectonly_v1_results.csv",
+    "Qwen-Plain42-RejectOnly": "D:\\code\\intent-open-set\\results\\gate8_1_agent_qwen_plain42_rejectonly_v1_results.csv"
+  },
+  "rule": "Only expected_terms scoring bug for grounded FAQ answers; no inference or DB changes.",
+  "label": "same-author frozen simulated test; post-hoc offline audit"
+}

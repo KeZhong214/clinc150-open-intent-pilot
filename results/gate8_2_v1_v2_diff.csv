@@ -1,0 +1,14 @@
+case_id,field,v1,v2,reason
+G81-F001,expected_terms,"[""could""]","[""policy""]",scoring metadata changed
+G81-F002,expected_terms,"[""how""]","[""policy""]",scoring metadata changed
+G81-F003,expected_terms,"[""what""]","[""policy""]",scoring metadata changed
+G81-F004,expected_terms,"[""when""]","[""policy""]",scoring metadata changed
+G81-F005,expected_terms,"[""which""]","[""policy""]",scoring metadata changed
+G81-F006,expected_terms,"[""how""]","[""policy""]",scoring metadata changed
+G81-F007,expected_terms,"[""what""]","[""policy""]",scoring metadata changed
+G81-F008,expected_terms,"[""which""]","[""policy""]",scoring metadata changed
+G81-F009,turns,"[""What happens if a top-up fails?""]","[""If a top-up does not go through, what should I do?""]",user text changed in v2
+G81-F009,expected_terms,"[""what""]","[""policy""]",scoring metadata changed
+G81-F010,expected_terms,"[""where""]","[""policy""]",scoring metadata changed
+G81-F011,expected_terms,"[""how""]","[""policy""]",scoring metadata changed
+G81-F012,expected_terms,"[""what""]","[""policy""]",scoring metadata changed

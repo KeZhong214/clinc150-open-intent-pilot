@@ -1,0 +1,4 @@
+model,n,v1_original_tsr,v1_corrected_tsr,delta,faq_n,faq_v1_original,faq_v1_corrected,faq_grounded,corrections,v2_tsr,v1_false_positive,v1_false_negative
+GTE-Frozen-RejectOnly,120,0.575,0.6,0.025000000000000022,12,3,6,6,3,0.6333333333333333,0,3
+Qwen-Frozen-RejectOnly,120,0.575,0.6,0.025000000000000022,12,3,6,6,3,0.6333333333333333,0,3
+Qwen-Plain42-RejectOnly,120,0.6916666666666667,0.7083333333333334,0.01666666666666672,12,3,5,5,2,0.7416666666666667,0,2
