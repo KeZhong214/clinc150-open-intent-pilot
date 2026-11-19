@@ -1,4 +1,4 @@
-"""One-shot, low-cost DeepSeek smoke test; never prints the key."""
+﻿"""One-shot, low-cost DeepSeek smoke test; never prints the key."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ def main() -> int:
                 {"role": "user", "content": "Return a short greeting for a fictional bank support demo."},
             ],
             temperature=0.0,
-            max_tokens=24,
+            max_tokens=256,
         )
     except DeepSeekUnavailable as exc:
         print(f"DEEPSEEK_SMOKE_FAILED: {type(exc).__name__}: {exc}")
@@ -38,3 +38,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

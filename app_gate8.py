@@ -341,8 +341,12 @@ def main() -> None:
 
     with st.sidebar:
         st.header("模型与运行模式")
-        name = st.radio("意图路由模型（技术标识保持原样）", ROUTER_NAMES, index=0, key="router_choice")
-        mode = st.radio("回复模式", MODES, index=0, key="reply_mode", format_func=lambda x: MODE_LABELS[x])
+        default_router = os.environ.get("OPENINTENT_DEFAULT_ROUTER", "GTE-Frozen-RejectOnly")
+        default_router = default_router if default_router in ROUTER_NAMES else "GTE-Frozen-RejectOnly"
+        default_mode = os.environ.get("OPENINTENT_DEFAULT_MODE", "Offline Router-driven")
+        default_mode = default_mode if default_mode in MODES else "Offline Router-driven"
+        name = st.radio("意图路由模型（技术标识保持原样）", ROUTER_NAMES, index=ROUTER_NAMES.index(default_router), key="router_choice")
+        mode = st.radio("回复模式", MODES, index=MODES.index(default_mode), key="reply_mode", format_func=lambda x: MODE_LABELS[x])
         st.caption("同一时间只加载一个编码器，避免 8GB 显存不足；切换模型会释放旧会话。")
         st.caption("中文输入说明：离线模式为中文固定模板；DeepSeek 增强模式会先翻译成英文，再交给原英文路由模型。")
         if st.session_state.get("last_release"):

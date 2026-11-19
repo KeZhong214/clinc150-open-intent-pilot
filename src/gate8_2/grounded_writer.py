@@ -1,4 +1,4 @@
-"""Grounded DeepSeek reply writer: language only, never authority."""
+﻿"""Grounded DeepSeek reply writer: language only, never authority."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ class RewriteResult:
 
 
 class GroundedReplyWriter:
-    def __init__(self, client: DeepSeekClient | None = None, *, temperature: float = 0.2, max_tokens: int = 260):
+    def __init__(self, client: DeepSeekClient | None = None, *, temperature: float = 0.2, max_tokens: int = 420):
         self.client = client or DeepSeekClient()
         self.temperature = temperature
         self.max_tokens = max_tokens
@@ -118,3 +118,4 @@ class GroundedReplyWriter:
         if err:
             return RewriteResult(template, "fallback", "rejected", elapsed_seconds=result.elapsed_seconds, usage=result.usage, error=err)
         return RewriteResult(result.text, "deepseek", "ok", elapsed_seconds=result.elapsed_seconds, usage=result.usage)
+

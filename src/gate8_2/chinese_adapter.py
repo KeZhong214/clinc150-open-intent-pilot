@@ -1,4 +1,4 @@
-"""Optional DeepSeek Chinese-to-English semantic adapter.
+﻿"""Optional DeepSeek Chinese-to-English semantic adapter.
 
 The translator never chooses an intent. It only returns English text for the
 existing English router, preserving all CARD/TXN identifiers.
@@ -57,7 +57,7 @@ class ChineseTranslationAdapter:
             r = self.client.chat(
                 [{"role": "system", "content": "You are a faithful Chinese-to-English translation component."}, {"role": "user", "content": prompt}],
                 temperature=0.0,
-                max_tokens=180,
+                max_tokens=320,
             )
         except DeepSeekUnavailable as exc:
             return TranslationResult("", "error", "error", error=str(exc))
@@ -70,3 +70,4 @@ class ChineseTranslationAdapter:
         if not re.search(r"[A-Za-z]", out):
             return TranslationResult("", "fallback", "not_english", elapsed_seconds=r.elapsed_seconds, usage=r.usage, error="translation is not English")
         return TranslationResult(out, "deepseek", "ok", elapsed_seconds=r.elapsed_seconds, usage=r.usage)
+

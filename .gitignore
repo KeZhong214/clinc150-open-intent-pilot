@@ -42,3 +42,9 @@ projects/
 
 data/gate8_2/demo_sessions/
 validation/probe_demo_ui.py
+
+configs/demo_api.env
+
+.full_release_test/
+validation/probe_full_api.py
+validation/probe_full_cancel.py
