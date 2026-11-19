@@ -32,3 +32,13 @@ data/gate8_1/sessions/
 *.key
 data/gate8_2/sessions/
 data/gate8_2/ui_sessions/
+
+# release build outputs and local demo artifacts
+dist/
+.release_staging/
+.release_test/
+exports/
+projects/
+
+data/gate8_2/demo_sessions/
+validation/probe_demo_ui.py

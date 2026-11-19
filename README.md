@@ -197,6 +197,7 @@ Gate 1/2 历史结果保持冻结：
 [Gate 8.2 中文支持](reports/gate8_2_chinese_support.md) ·
 [Gate 8.2 DeepSeek 集成](reports/gate8_2_deepseek_integration.md) ·
 [Gate 8.2 API 配置指南](reports/gate8_2_deepseek_demo_guide.md) ·
+[课堂演示与发行封装](reports/demo_release_final.md) ·
 [项目最终研究总结](reports/project_final_research_summary.md)  
 结果索引：[results/gate6_qwen_method_matrix_historical_test.csv](results/gate6_qwen_method_matrix_historical_test.csv) ·
 [results/gate6_qwen_benchmark_summary.csv](results/gate6_qwen_benchmark_summary.csv) ·
@@ -208,7 +209,7 @@ Gate 1/2 历史结果保持冻结：
 [figures/gate7_stability.png](figures/gate7_stability.png) ·
 [Gate8.1 benchmark](figures/gate8_1_benchmark.png) ·
 [Gate8.1 失败热力图](figures/gate8_1_failure_heatmap.png)  
-Demo：[app_gate8.py](app_gate8.py) ·
+Demo：[app_gate8.py](app_gate8.py) · [课堂演示入口 app_demo.py](app_demo.py) · [启动脚本](start_demo.ps1) ·
 [Gate8.2 中文离线界面](figures/gate8_2_ui_chinese_offline.png) ·
 [Gate8.2 中文 API 配置错误演示](figures/gate8_2_ui_chinese_blocked.png) ·
 [Gate8.2 离线模式](figures/gate8_2_ui_offline.png) ·

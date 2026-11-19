@@ -10,6 +10,8 @@ from src.gate5.kb import KBRetriever
 from src.gate8.llm_assist import LLMAssistant
 from src.gate5.llm_client import LLMUnavailable
 
+_CONTROL_PUNCT = " \t\r\n。.!！?？,，;；:：\"'“”‘’"
+
 
 class Gate8Agent(BankAgentV2):
     """Adds context reset/correction/topic-switch and dispute state checks.
@@ -26,12 +28,26 @@ class Gate8Agent(BankAgentV2):
         self.context_resets = 0
 
     @staticmethod
-    def _reset_command(text: str) -> bool:
-        return clean_text(text) in {"reset", "start over", "restart", "clear context", "new conversation"}
+    def _normalize_control(text: str) -> str:
+        return (text or "").strip().strip(_CONTROL_PUNCT).lower()
 
-    @staticmethod
-    def _cancel_command(text: str) -> bool:
-        return clean_text(text) in {"cancel", "never mind", "nevermind", "stop", "forget it", "abort"}
+    @classmethod
+    def _confirmation_command(cls, text: str) -> str | None:
+        """Map only finite Chinese/English control words when a pending action exists."""
+        c = cls._normalize_control(text)
+        if c in {"确认", "确定", "确认取消", "是的", "是", "好的", "继续", "yes", "y", "confirm", "confirmed", "go ahead", "do it", "please do", "sure", "ok", "okay"}:
+            return "yes"
+        if c in {"取消", "不用了", "不要", "否", "不", "停止", "no", "n", "stop", "don't", "do not", "not now"}:
+            return "no"
+        return None
+
+    @classmethod
+    def _reset_command(cls, text: str) -> bool:
+        return cls._normalize_control(text) in {"reset", "start over", "restart", "clear context", "new conversation", "重新开始", "重来", "新会话"}
+
+    @classmethod
+    def _cancel_command(cls, text: str) -> bool:
+        return cls._normalize_control(text) in {"cancel", "never mind", "nevermind", "stop", "forget it", "abort"}
 
     @staticmethod
     def _topic_switch(text: str) -> bool:
@@ -48,6 +64,15 @@ class Gate8Agent(BankAgentV2):
 
     def handle(self, text: str) -> TurnV2:
         text = text.strip()
+        # A confirm/deny word is a trusted control command only when the state
+        # machine already has a concrete pending action.  Never add these to the
+        # free-text yes/no vocabulary used by intent classification.
+        if self.state.awaiting_confirmation:
+            command = self._confirmation_command(text)
+            if command:
+                turn = super().handle(command)
+                self._remember(text, turn)
+                return turn
         if self._reset_command(text):
             turn = self._clear_context("Session context cleared. Your fictional database records were not changed.", text)
             self._remember(text, turn)

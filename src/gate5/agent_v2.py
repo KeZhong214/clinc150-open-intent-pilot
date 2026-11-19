@@ -17,8 +17,8 @@ from src.gate4.db import BankingTools, ToolError, seed
 from src.gate4.router import RouteResult
 from src.gate5.kb import KBRetriever
 
-CARD_RE = re.compile(r"\bCARD-\d{4,}\b", re.IGNORECASE)
-TXN_RE = re.compile(r"\bTXN-\d{4,}\b", re.IGNORECASE)
+CARD_RE = re.compile(r"(?<![A-Za-z0-9])CARD-\d{4,}(?![A-Za-z0-9])", re.IGNORECASE)
+TXN_RE = re.compile(r"(?<![A-Za-z0-9])TXN-\d{4,}(?![A-Za-z0-9])", re.IGNORECASE)
 YES_WORDS = {"yes", "y", "confirm", "confirmed", "go ahead", "do it", "please do", "sure", "ok", "okay"}
 NO_WORDS = {"no", "n", "cancel", "stop", "don't", "do not", "not now"}
 

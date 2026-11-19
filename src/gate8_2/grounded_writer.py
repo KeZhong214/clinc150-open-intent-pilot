@@ -8,8 +8,8 @@ from typing import Any
 
 from src.gate8_2.deepseek_client import DeepSeekClient, DeepSeekResult, DeepSeekUnavailable
 
-CARD_TXN = re.compile(r"\b(?:CARD|TXN)-\d{4,}\b", re.IGNORECASE)
-KB_ID = re.compile(r"\bKB-\d{3}\b", re.IGNORECASE)
+CARD_TXN = re.compile(r"(?<![A-Za-z0-9])(?:CARD|TXN)-\d{4,}(?![A-Za-z0-9])", re.IGNORECASE)
+KB_ID = re.compile(r"(?<![A-Za-z0-9])KB-\d{3}(?![A-Za-z0-9])", re.IGNORECASE)
 UNSAFE_ACTION_WORDS = ("credited", "refunded", "reversed", "already cancelled", "successfully cancelled", "successfully activated")
 
 

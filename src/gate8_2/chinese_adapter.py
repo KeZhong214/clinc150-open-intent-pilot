@@ -13,7 +13,7 @@ from dataclasses import dataclass, field
 from src.gate8_2.deepseek_client import DeepSeekClient, DeepSeekUnavailable
 
 CJK = re.compile(r"[\u4e00-\u9fff]")
-CARD_TXN = re.compile(r"\b(?:CARD|TXN)-\d{4,}\b", re.IGNORECASE)
+CARD_TXN = re.compile(r"(?<![A-Za-z0-9])(?:CARD|TXN)-\d{4,}(?![A-Za-z0-9])", re.IGNORECASE)
 
 
 @dataclass
