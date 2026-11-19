@@ -5,10 +5,10 @@
   "n_families": 18,
   "exact_duplicates_against_gate5_or_gate8": [],
   "exact_duplicates_within_new": [],
-  "max_char_similarity_to_old": 0.95082,
+  "max_char_similarity_to_old": 0.925373,
   "max_similarity_pair": [
-    "G81-F009",
-    "B080"
+    "G81-F008",
+    "B078"
   ],
   "template_ids_unique": true,
   "label": "new_frozen_simulated_test_not_external_blind",

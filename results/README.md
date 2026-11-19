@@ -257,3 +257,22 @@ See `../reports/gate7_final_report.md` and `../reports/gate7_1_fix_report.md`.
 
 Gate8 uses Gate7 `dev_threshold`; it is a new frozen simulated test, not external blind.
 See `../reports/gate8_agent_final_report.md` and `../reports/gate8_benchmark_protocol.md`.
+
+# Gate 8.1 paired-router and new frozen test
+
+| File | Content |
+|---|---|
+| `gate8_1_gte_recalibrated_threshold.json` | Gate5 GTE weights + Gate7 dev recalibration |
+| `gate8_1_model_registry.json` | checkpoint/adapter/threshold SHA registry |
+| `gate8_1_benchmark_freeze_v1.json` | strict first frozen 120-case manifest |
+| `gate8_1_benchmark_freeze_v2.json` | FAQ expected-term regression manifest |
+| `gate8_1_case_audit.json` | no exact dup; 120 templates; similarity diagnostics |
+| `gate8_1_agent_*_v1_results.csv` | first frozen run, preserved |
+| `gate8_1_agent_results.csv` | v2 corrected-expectation regression |
+| `gate8_1_agent_summary.csv` | TSR/tool/safe/routing + case/cluster CI |
+| `gate8_1_agent_cluster_bootstrap.csv` | family-cluster paired difference |
+| `gate8_1_switch_memory.json` | actual GTE/Qwen load/release memory |
+| `gate8_1_old102_comparison.json` | Gate8 GTE 102 regression old/new tau |
+
+v2 is a test-metadata correction, not a second independent blind test.
+See `../reports/gate8_1_final_report.md` and `../reports/gate8_1_benchmark_protocol.md`.

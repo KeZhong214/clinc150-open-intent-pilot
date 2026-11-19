@@ -1,0 +1,11 @@
+{
+  "label": "Gate8 historical regression after GTE weight-threshold pairing",
+  "old_gate8_tsr": 0.9509803921568627,
+  "new_tsr": 0.9705882352941176,
+  "old_rows": 102,
+  "new_rows": 102,
+  "old_tau": 0.4245788127183914,
+  "new_tau": 0.43883611261844635,
+  "checkpoint_sha256": "0e920d0fed6b13d30dd3e84c53cb9e49747760823b9f20c61df2cbdd7d89cf0f",
+  "note": "Histororical protocol regression, not a new blind test; no model/seed selection."
+}

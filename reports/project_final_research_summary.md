@@ -274,6 +274,18 @@ Gate8 把分类/拒识模块接成可操作的多轮银行 Agent：
 - LLM API 无凭据 `NOT RUN_API_BLOCKED`；
 - 详细：`reports/gate8_agent_final_report.md`。
 
+## 9.8 Gate 8.1：权重—阈值配对与最终质量修复
+
+- Gate8 原 GTE 使用 Gate5 权重 + Gate7 另一份 checkpoint 的阈值，已修复为
+  Gate5 权重 + Gate7 dev_threshold 重校准 tau 0.438836；
+- 三模型 SHA/阈值注册表，程序拒绝不配套配置；
+- OOS word-boundary、LLM 槽位证据、模型切换释放均已修复；
+- 新 120 条模拟测试：120 templates、18 families、与旧集无完全重复；
+- v1 首次冻结：GTE .575、Qwen Frozen .575、Qwen Plain .692；
+- v2 仅修复 FAQ 期望词：.633/.633/.742；v1 保留，v2 不是第二次盲测；
+- 三模型安全率 1.000；Qwen Plain 优势不显著；
+- 详细：`reports/gate8_1_final_report.md`。
+
 ## 10. 最终研究结论
 
 ### 可以支持的结论

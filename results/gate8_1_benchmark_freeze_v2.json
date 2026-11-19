@@ -1,0 +1,73 @@
+{
+  "frozen": true,
+  "label": "new_frozen_simulated_test_not_external_blind",
+  "file": "data/gate8_1/benchmark_cases.jsonl",
+  "sha256": "2eb718b454f4b42c317a4727f8dfc9a91f3641c1383b7cafbc68104791d2ceb2",
+  "n_cases": 120,
+  "n_templates": 120,
+  "families": {
+    "policy_faq": 12,
+    "card_status": 10,
+    "card_activation": 10,
+    "transfer_status": 10,
+    "dispute_ticket": 10,
+    "cancel_transfer": 10,
+    "oos": 10,
+    "cancel_refusal": 8,
+    "dispute_ineligible": 8,
+    "boundary": 7,
+    "permission": 5,
+    "permission_transfer": 5,
+    "multi_slot": 4,
+    "multi_correction": 3,
+    "multi_topic_switch": 3,
+    "multi_reset": 2,
+    "multi_confirmation_correction": 2,
+    "cancel_idempotent": 1
+  },
+  "routers": {
+    "GTE-Frozen-RejectOnly": {
+      "name": "GTE-Frozen-RejectOnly",
+      "encoder": "GTE-ModernBERT Frozen",
+      "checkpoint": "results\\gate5_reject_only_frozen.pt",
+      "checkpoint_sha256": "0e920d0fed6b13d30dd3e84c53cb9e49747760823b9f20c61df2cbdd7d89cf0f",
+      "adapter_sha256": null,
+      "tau": 0.43883611261844635,
+      "threshold_file": "results\\gate8_1_gte_recalibrated_threshold.json",
+      "threshold_sha256": "2c8cdce214d71da119d25d4e18e81c215456ae89b2349bfe23b1835866c85ed8",
+      "calibration_split": "data/manifest/gate7_dev_threshold.csv",
+      "calibration_split_sha256": "a6821544df31e95ba93a6f8b79ca4289ffd91f7a5e69d3a7a4315d71592f564a",
+      "paired": true
+    },
+    "Qwen-Frozen-RejectOnly": {
+      "name": "Qwen-Frozen-RejectOnly",
+      "encoder": "Qwen3-Embedding-0.6B Frozen",
+      "checkpoint": "results/gate6_qwen_frozen_reject.pt",
+      "checkpoint_sha256": "d7512e525c3af6c6dc8909f961d200578e8d970650afe6336c21121de9dd7c37",
+      "adapter_sha256": null,
+      "tau": 0.442459625005722,
+      "threshold_file": "results/gate7_dev_frozen.csv",
+      "threshold_sha256": "5807376beead503ff47e0a017a7483f46677f792c2c422a2c7d7830133c3117d",
+      "calibration_split": "data/manifest/gate7_dev_threshold.csv",
+      "calibration_split_sha256": "a6821544df31e95ba93a6f8b79ca4289ffd91f7a5e69d3a7a4315d71592f564a",
+      "paired": true
+    },
+    "Qwen-Plain42-RejectOnly": {
+      "name": "Qwen-Plain42-RejectOnly",
+      "encoder": "Qwen3-Embedding-0.6B Plain LoRA seed42",
+      "checkpoint": "results/gate6_qwen_plain_reject.pt",
+      "checkpoint_sha256": "d222f9686acb931646adc4634036540e270fe4b48c48cd639c6be07a4c94da5c",
+      "adapter_sha256": "4efaee5c891e26058764b4a7ec999dec718436f57b724841650831ddc01c3818",
+      "tau": 0.4168315291404724,
+      "threshold_file": "results/gate7_dev_plain42.csv",
+      "threshold_sha256": "9db8d55a13767ceadeccfd5afbe580795b31ca4f3419a7e5b6c868a504f55e5e",
+      "calibration_split": "data/manifest/gate7_dev_threshold.csv",
+      "calibration_split_sha256": "a6821544df31e95ba93a6f8b79ca4289ffd91f7a5e69d3a7a4315d71592f564a",
+      "paired": true
+    }
+  },
+  "note": "Cases, paired model registry and code commit frozen before the final three-router run; no test-based tuning.",
+  "code_commit": "7824bb70d8b41e395cefee0a108b7060557180ef",
+  "evaluation_status": "v2_expected_terms_correction_after_v1",
+  "version": "v2"
+}

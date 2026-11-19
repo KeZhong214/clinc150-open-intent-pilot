@@ -1,0 +1,65 @@
+{
+  "rows": [
+    {
+      "step": "build:GTE-Frozen-RejectOnly",
+      "before_release": null,
+      "after_build": {
+        "allocated_mb": 294.1,
+        "reserved_mb": 296.0
+      }
+    },
+    {
+      "step": "release:GTE-Frozen-RejectOnly",
+      "after_release": {
+        "allocated_mb": 0.0,
+        "reserved_mb": 0.0
+      }
+    },
+    {
+      "step": "build:Qwen-Frozen-RejectOnly",
+      "before_release": null,
+      "after_build": {
+        "allocated_mb": 1136.4,
+        "reserved_mb": 1160.0
+      }
+    },
+    {
+      "step": "release:Qwen-Frozen-RejectOnly",
+      "after_release": {
+        "allocated_mb": 0.0,
+        "reserved_mb": 0.0
+      }
+    },
+    {
+      "step": "build:Qwen-Plain42-RejectOnly",
+      "before_release": null,
+      "after_build": {
+        "allocated_mb": 1145.1,
+        "reserved_mb": 1176.0
+      }
+    },
+    {
+      "step": "release:Qwen-Plain42-RejectOnly",
+      "after_release": {
+        "allocated_mb": 0.0,
+        "reserved_mb": 0.0
+      }
+    },
+    {
+      "step": "build:GTE-Frozen-RejectOnly",
+      "before_release": null,
+      "after_build": {
+        "allocated_mb": 294.1,
+        "reserved_mb": 296.0
+      }
+    },
+    {
+      "step": "release:GTE-Frozen-RejectOnly",
+      "after_release": {
+        "allocated_mb": 0.0,
+        "reserved_mb": 0.0
+      }
+    }
+  ],
+  "note": "Actual sequential loads in one process; no stub models."
+}

@@ -2,13 +2,14 @@
 
 课程项目：**面向智能客服的少样本开放意图识别：多模型跨场景评测、LoRA/B4 归因与真实工具 Agent**
 
-当前状态：**Gate 0–8 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
+当前状态：**Gate 0–8.1 均已完成真实运行。** Gate 3 完成 3 数据集、4 编码器、
 5/10-shot、B0/B3-P/B3-H 的 72 格矩阵；Gate 4 完成 BANKING77 GTE 10-shot
 的 B4-AR 与 SQLite Agent；Gate 5 完成真实 LoRA-GTE、RejectOnly 归因、
 30 条虚构银行政策 RAG、120 条业务 benchmark；Gate 6 完成 Qwen3-Embedding
 0.6B LoRA；Gate 7 完成双层开发集诊断、3-seed 复验和核心 B4 稳定性实验；
 Gate 7.1 完成阈值协议修复与 36 组稳定性；Gate 8 完成多轮客服 Agent、
-统一 UI 和 102 例新冻结模拟评测。
+统一 UI 和 102 例新冻结模拟评测；Gate 8.1 完成 GTE 权重—阈值配对、
+OOS/LLM 安全修复和 120 例新模拟测试。
 
 Gate 3 的核心结果（best config per dataset；CLINC 为历史测试）：
 
@@ -77,7 +78,7 @@ Gate 7 的核心结果（双层 dev + 3-seed；历史探索性 test）：
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE/Qwen、Frozen/LoRA 上稳定优于 B4-Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 78 个测试通过。
+- 86 个测试通过。
 
 Gate 7.1 修复：
 
@@ -109,6 +110,30 @@ Gate 8 的核心结果（新冻结 102 例模拟测试；不是外部盲测）�
   [`reports/gate8_benchmark_protocol.md`](reports/gate8_benchmark_protocol.md)、
   [`reports/gate8_failure_analysis.md`](reports/gate8_failure_analysis.md)、
   [`reports/gate8_demo_script.md`](reports/gate8_demo_script.md)。
+
+Gate 8.1 修复（新冻结 120 例模拟测试；不是外部盲测）：
+
+- GTE 改为 **Gate5 权重 + Gate7 dev_threshold 重校准**，tau 0.4388361126；
+  checkpoint SHA `0e920d0f...`；不再混用 Gate7 另一份 checkpoint 的阈值；
+- 三模型注册表与 SHA 校验：`results/gate8_1_model_registry.json`；
+- OOS `currency` 子串改为 word-boundary，不再把 cryptocurrency 引导到 KB；
+- LLM 槽位必须有原文/可信历史证据；
+- 模型切换前关闭旧 sessions，实测 GPU allocated/reserved 回到 0 MB；
+- 120 条新案例、120 个 template、18 families；与 Gate5/Gate8 无完全重复；
+- 严格 v1 首次运行保留；v2 仅修复 FAQ 期望词后回归，不是第二次盲测。
+
+| 版本 | GTE | Qwen Frozen | Qwen Plain42 |
+|---|---:|---:|---:|
+| v1 首次冻结 | 0.575 | 0.575 | 0.692 |
+| **v2 期望词修复后** | **0.633** | **0.633** | **0.742** |
+
+- 三模型 safe_action_rate 均为 1.000；
+- Qwen Plain42 vs GTE +10.83 pp，family-cluster 95% CI −0.64～+23.90，不显著；
+- 详细：[`reports/gate8_1_final_report.md`](reports/gate8_1_final_report.md)、
+  [`reports/gate8_1_protocol_audit.md`](reports/gate8_1_protocol_audit.md)、
+  [`reports/gate8_1_benchmark_protocol.md`](reports/gate8_1_benchmark_protocol.md)、
+  [`reports/gate8_1_failure_analysis.md`](reports/gate8_1_failure_analysis.md)、
+  [`reports/gate8_1_demo_guide.md`](reports/gate8_1_demo_guide.md)。
 
 B3-H 的场景差异：
 
@@ -142,6 +167,11 @@ Gate 1/2 历史结果保持冻结：
 [Gate 8 评测协议](reports/gate8_benchmark_protocol.md) ·
 [Gate 8 失败分析](reports/gate8_failure_analysis.md) ·
 [Gate 8 Demo 脚本](reports/gate8_demo_script.md) ·
+[Gate 8.1 最终报告](reports/gate8_1_final_report.md) ·
+[Gate 8.1 协议审计](reports/gate8_1_protocol_audit.md) ·
+[Gate 8.1 评测协议](reports/gate8_1_benchmark_protocol.md) ·
+[Gate 8.1 失败分析](reports/gate8_1_failure_analysis.md) ·
+[Gate 8.1 Demo Guide](reports/gate8_1_demo_guide.md) ·
 [项目最终研究总结](reports/project_final_research_summary.md)  
 结果索引：[results/gate6_qwen_method_matrix_historical_test.csv](results/gate6_qwen_method_matrix_historical_test.csv) ·
 [results/gate6_qwen_benchmark_summary.csv](results/gate6_qwen_benchmark_summary.csv) ·
@@ -156,6 +186,10 @@ Demo：[app_gate8.py](app_gate8.py) ·
 [Gate8 激活截图](figures/gate8_ui_activation.png) ·
 [Gate8 dispute 截图](figures/gate8_ui_dispute.png) ·
 [Gate8 越权拒绝截图](figures/gate8_ui_ownership.png) ·
+[Gate8.1 卡状态截图](figures/gate8_1_ui_card.png) ·
+[Gate8.1 激活截图](figures/gate8_1_ui_activation.png) ·
+[Gate8.1 dispute 截图](figures/gate8_1_ui_dispute.png) ·
+[Gate8.1 越权截图](figures/gate8_1_ui_ownership.png) ·
 [app_gate5.py](app_gate5.py) ·
 [app_gate6.py](app_gate6.py) ·
 [Gate5 B4 查卡截图](figures/gate5_agent_card_b4.png) ·
@@ -473,7 +507,7 @@ PREPARE_DATA_OK
 成功输出末尾：
 
 ```text
-Ran 78 tests in ...s
+Ran 86 tests in ...s
 OK
 ```
 
@@ -501,7 +535,7 @@ cd D:\code\intent-open-set
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-预期最后一行是 `OK`，共 78 个测试。请反馈
+预期最后一行是 `OK`，共 86 个测试。请反馈
 `logs/gate7_all_tests.log`；如需环境信息，再反馈
 `data/manifest/environment.json`。
 
@@ -861,7 +895,7 @@ Gate 7 的主要判断：
 - P1/P2 没有超过 P0；P3 完成但未选中（dev B3-H 低于 P0）；
 - B4-RejectOnly 在 GTE Frozen、GTE-LoRA、Qwen Frozen 上稳定优于 Full；
 - Agent 修复 5 条澄清后，Qwen RejectOnly 81/120、GTE RejectOnly 73/120；
-- 78 个测试通过。
+- 86 个测试通过。
 
 尚未做：
 

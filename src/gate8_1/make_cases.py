@@ -144,7 +144,7 @@ def build() -> list[dict]:
         "What documents are needed for identity checks?",
     ]
     for i, q in enumerate(faqs):
-        r.append(c("G81-F%03d" % (i + 1), "faq_%02d" % (i + 1), "policy_faq", [q], [], {"tickets_min": 0}, [q.split()[0].lower()], notes="real KB citation; no exact doc forced"))
+        r.append(c("G81-F%03d" % (i + 1), "faq_%02d" % (i + 1), "policy_faq", [q], [], {"tickets_min": 0}, ["policy"], notes="real KB citation; no exact doc forced"))
 
     # 10 OOS.
     oos = [

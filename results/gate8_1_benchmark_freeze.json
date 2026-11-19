@@ -2,7 +2,7 @@
   "frozen": true,
   "label": "new_frozen_simulated_test_not_external_blind",
   "file": "data/gate8_1/benchmark_cases.jsonl",
-  "sha256": "d2e934b1c4b03d7214903d824181186c6415d0504b981ece203f8c0e310d34c9",
+  "sha256": "2eb718b454f4b42c317a4727f8dfc9a91f3641c1383b7cafbc68104791d2ceb2",
   "n_cases": 120,
   "n_templates": 120,
   "families": {
@@ -68,5 +68,6 @@
   },
   "note": "Cases, paired model registry and code commit frozen before the final three-router run; no test-based tuning.",
   "code_commit": "7824bb70d8b41e395cefee0a108b7060557180ef",
-  "evaluation_status": "frozen_before_final_three_router_run"
+  "evaluation_status": "v2_expected_terms_correction_after_v1",
+  "version": "v2"
 }

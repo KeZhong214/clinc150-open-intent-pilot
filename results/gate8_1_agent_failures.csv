@@ -1,0 +1,10 @@
+router,failure_reason,n
+GTE-Frozen-RejectOnly,response_terms,1
+GTE-Frozen-RejectOnly,routing,40
+GTE-Frozen-RejectOnly,tool_selection_or_args,3
+Qwen-Frozen-RejectOnly,response_terms,1
+Qwen-Frozen-RejectOnly,routing,39
+Qwen-Frozen-RejectOnly,tool_selection_or_args,4
+Qwen-Plain42-RejectOnly,response_terms,2
+Qwen-Plain42-RejectOnly,routing,27
+Qwen-Plain42-RejectOnly,tool_selection_or_args,2
