@@ -43,6 +43,18 @@
 
 ![Ownership](../figures/gate8_1_ui_ownership.png)
 
+## 11. 三模型指标图
+
+![Gate8.1 benchmark](../figures/gate8_1_benchmark.png)
+
+## 12. 失败热力图
+
+![Gate8.1 failure heatmap](../figures/gate8_1_failure_heatmap.png)
+
+说明：热力图是 **v2 三模型 × 18 个 family 的 TSR**；红色格是失败集中区域。
+Qwen Frozen/Plain42 在 dispute 两族明显失败，GTE 在 permission 族失败；
+这不是 UI 截图，而是由 `results/gate8_1_agent_by_family.csv` 生成的真实统计图。
+
 ## 说明
 
 - 截图是实际 Streamlit 页面；

@@ -180,7 +180,9 @@ Gate 1/2 历史结果保持冻结：
 图表：[figures/gate6_qwen_matrix.png](figures/gate6_qwen_matrix.png) ·
 [figures/gate6_qwen_benchmark.png](figures/gate6_qwen_benchmark.png) ·
 [figures/gate7_final_test.png](figures/gate7_final_test.png) ·
-[figures/gate7_stability.png](figures/gate7_stability.png)  
+[figures/gate7_stability.png](figures/gate7_stability.png) ·
+[Gate8.1 benchmark](figures/gate8_1_benchmark.png) ·
+[Gate8.1 失败热力图](figures/gate8_1_failure_heatmap.png)  
 Demo：[app_gate8.py](app_gate8.py) ·
 [Gate8 卡状态截图](figures/gate8_ui_card.png) ·
 [Gate8 激活截图](figures/gate8_ui_activation.png) ·
