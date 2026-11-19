@@ -56,6 +56,22 @@ $env:TRANSFORMERS_OFFLINE = "1"
 - 旧模型释放；`results/gate8_1_switch_memory.json` 显示 release 后 0 MB；
 - 不出现 CUDA OOM。
 
+## 截图画廊
+
+完整 10 张（总览 + 9 个 Demo）在
+`reports/gate8_1_ui_gallery.md`；对应文件：
+
+- `figures/gate8_1_ui_overview.png`
+- `figures/gate8_1_ui_card.png`
+- `figures/gate8_1_ui_activation.png`
+- `figures/gate8_1_ui_transfer.png`
+- `figures/gate8_1_ui_cancel.png`
+- `figures/gate8_1_ui_policy.png`
+- `figures/gate8_1_ui_dispute.png`
+- `figures/gate8_1_ui_multiturn.png`
+- `figures/gate8_1_ui_oos.png`
+- `figures/gate8_1_ui_ownership.png`
+
 ## 注意
 
 - Gate8.1 新集 120 例比 Gate8 102 例更分散，TSR 不是同一难度；

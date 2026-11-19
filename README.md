@@ -186,10 +186,16 @@ Demo：[app_gate8.py](app_gate8.py) ·
 [Gate8 激活截图](figures/gate8_ui_activation.png) ·
 [Gate8 dispute 截图](figures/gate8_ui_dispute.png) ·
 [Gate8 越权拒绝截图](figures/gate8_ui_ownership.png) ·
-[Gate8.1 卡状态截图](figures/gate8_1_ui_card.png) ·
-[Gate8.1 激活截图](figures/gate8_1_ui_activation.png) ·
-[Gate8.1 dispute 截图](figures/gate8_1_ui_dispute.png) ·
-[Gate8.1 越权截图](figures/gate8_1_ui_ownership.png) ·
+[Gate8.1 截图画廊](reports/gate8_1_ui_gallery.md) ·
+[卡状态](figures/gate8_1_ui_card.png) ·
+[激活](figures/gate8_1_ui_activation.png) ·
+[转账](figures/gate8_1_ui_transfer.png) ·
+[取消](figures/gate8_1_ui_cancel.png) ·
+[FAQ](figures/gate8_1_ui_policy.png) ·
+[dispute](figures/gate8_1_ui_dispute.png) ·
+[多轮纠正](figures/gate8_1_ui_multiturn.png) ·
+[OOS](figures/gate8_1_ui_oos.png) ·
+[越权](figures/gate8_1_ui_ownership.png) ·
 [app_gate5.py](app_gate5.py) ·
 [app_gate6.py](app_gate6.py) ·
 [Gate5 B4 查卡截图](figures/gate5_agent_card_b4.png) ·

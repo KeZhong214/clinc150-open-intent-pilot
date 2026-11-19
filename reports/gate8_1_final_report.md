@@ -171,10 +171,18 @@ Paired family-cluster bootstrap vs GTE：
 
 截图：
 
+- `figures/gate8_1_ui_overview.png`
 - `figures/gate8_1_ui_card.png`
 - `figures/gate8_1_ui_activation.png`
+- `figures/gate8_1_ui_transfer.png`
+- `figures/gate8_1_ui_cancel.png`
+- `figures/gate8_1_ui_policy.png`
 - `figures/gate8_1_ui_dispute.png`
+- `figures/gate8_1_ui_multiturn.png`
+- `figures/gate8_1_ui_oos.png`
 - `figures/gate8_1_ui_ownership.png`
+
+完整画廊：[`gate8_1_ui_gallery.md`](gate8_1_ui_gallery.md)
 
 ---
 
