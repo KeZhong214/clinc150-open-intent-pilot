@@ -1,0 +1,38 @@
+{
+  "checkpoint": "results\\gate5_reject_only_frozen.pt",
+  "checkpoint_sha256": "0e920d0fed6b13d30dd3e84c53cb9e49747760823b9f20c61df2cbdd7d89cf0f",
+  "encoder": "GTE-ModernBERT Frozen",
+  "calibration_split": "data/manifest/gate7_dev_threshold.csv",
+  "calibration_split_sha256": "a6821544df31e95ba93a6f8b79ca4289ffd91f7a5e69d3a7a4315d71592f564a",
+  "target_acceptance": 0.9,
+  "tau": 0.43883611261844635,
+  "metrics": {
+    "known_acceptance": 0.9,
+    "known_correct_routing": 0.8625,
+    "known_macro_f1": 0.9038267637337162,
+    "top1_closed_set_accuracy": 0.92,
+    "oos_recall": 0.5444444444444444,
+    "oos_false_acceptance": 0.45555555555555555,
+    "unknown_auroc": 0.8754583333333333,
+    "open_set_macro_f1": 0.7961405485681585,
+    "open_set_accuracy": 0.7118421052631579,
+    "n_known": 400,
+    "n_unknown": 360,
+    "known_rejected": 40,
+    "unknown_rejected": 196,
+    "unknown_accepted": 164
+  },
+  "selection": {
+    "tau": 0.43883611261844635,
+    "known_acceptance_val": 0.9,
+    "oos_recall_val": 0.5444444444444444,
+    "open_set_macro_f1_val": 0.7961405485681585,
+    "constraint_met": true,
+    "n_candidates": 101,
+    "target_acceptance": 0.9,
+    "objective": "max validation open-set macro-F1 subject to known acceptance >= 0.90"
+  },
+  "n_candidates": 101,
+  "source": "Gate8.1 paired recalibration of Gate5 GTE weights",
+  "not_used": "Gate7 stability gte_frozen seed42 checkpoint (different SHA) is not used by this router"
+}

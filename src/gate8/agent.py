@@ -85,9 +85,10 @@ class Gate8Agent(BankAgentV2):
         if self.state.pending_slot and self.assistant and self.assistant.available:
             try:
                 suggested = self.assistant.parse_slots(text, ["card_arrival", "activate_my_card", "transfer_timing", "cancel_transfer", "card_payment_not_recognised"])
-                if suggested.get("card_id") and not CARD_RE.search(text):
+                trusted = " ".join([text, self.state.pending_text, *[h.get("user", "") for h in self.history[-6:]]]).upper()
+                if suggested.get("card_id") and not CARD_RE.search(text) and str(suggested["card_id"]).upper() in trusted:
                     text = text + " " + suggested["card_id"]
-                if suggested.get("transfer_id") and not TXN_RE.search(text):
+                if suggested.get("transfer_id") and not TXN_RE.search(text) and str(suggested["transfer_id"]).upper() in trusted:
                     text = text + " " + suggested["transfer_id"]
             except LLMUnavailable:
                 pass

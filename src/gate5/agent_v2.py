@@ -60,6 +60,11 @@ POLICY_TERMS = (
     "not recognise",
     "dispute",
 )
+POLICY_RE = re.compile(r"\b(?:" + "|".join(re.escape(t) for t in POLICY_TERMS) + r")\b", re.IGNORECASE)
+
+
+def has_policy_terms(text: str) -> bool:
+    return bool(POLICY_RE.search(clean_text(text)))
 
 DESCRIPTIONS = {
     "card_arrival": "checking whether a card has arrived",
@@ -194,7 +199,7 @@ class BankAgentV2:
         if not route.accepted:
             # Policy/FAQ questions can still be answered from the local fictional KB;
             # no tool or financial action is allowed on this path.
-            if not CARD_RE.search(text) and not TXN_RE.search(text) and any(term in clean_text(text) for term in POLICY_TERMS):
+            if not CARD_RE.search(text) and not TXN_RE.search(text) and has_policy_terms(text):
                 body, hits = self.kb.render(text, k=2)
                 if hits:
                     return TurnV2("Here is what the **fictional demo policy** says:\n\n" + body, route, [], hits, self.state.__dict__)
@@ -265,7 +270,7 @@ class BankAgentV2:
                 self.state.__dict__,
             )
 
-        if not card and not txn and intent not in (CARD_INTENTS | TRANSFER_INTENTS | DISPUTE_INTENTS) and any(term in clean_text(text) for term in POLICY_TERMS):
+        if not card and not txn and intent not in (CARD_INTENTS | TRANSFER_INTENTS | DISPUTE_INTENTS) and has_policy_terms(text):
             body, hits = self.kb.render(text, k=2)
             if hits:
                 return TurnV2("Here is what the **fictional demo policy** says:\n\n" + body, route, [], hits, self.state.__dict__)

@@ -23,7 +23,7 @@ from src.gate5.kb import KBRetriever  # noqa: E402
 from src.gate5.llm_client import LLMClient  # noqa: E402
 from src.gate8.agent import Gate8Agent  # noqa: E402
 from src.gate8.llm_assist import LLMAssistant  # noqa: E402
-from src.gate8.routers import ROUTER_NAMES, build  # noqa: E402
+from src.gate8_1.routers import ROUTER_NAMES, build  # noqa: E402
 
 DEMOS = {
     "1. Card delivery": [
@@ -76,14 +76,45 @@ def assistant():
     return LLMAssistant()
 
 
+def release_sessions() -> dict:
+    """Close every session and drop its encoder/router references."""
+    import torch
+
+    before = {}
+    if torch.cuda.is_available():
+        before = {"allocated_mb": round(torch.cuda.memory_allocated() / 1024**2, 1), "reserved_mb": round(torch.cuda.memory_reserved() / 1024**2, 1)}
+    sessions = st.session_state.get("sessions", {})
+    for agent in list(sessions.values()):
+        try:
+            agent.close()
+        except Exception:
+            pass
+    sessions.clear()
+    st.session_state["messages"] = {}
+    st.session_state["initial"] = {}
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
+        torch.cuda.empty_cache()
+    after = {}
+    if torch.cuda.is_available():
+        after = {"allocated_mb": round(torch.cuda.memory_allocated() / 1024**2, 1), "reserved_mb": round(torch.cuda.memory_reserved() / 1024**2, 1)}
+    st.session_state["last_release"] = {"before": before, "after": after}
+    return {"before": before, "after": after}
+
+
 def get_router(name: str):
     cache = router_cache()
     if cache.get("name") != name:
+        # Important: sessions hold encoder references; close them *before*
+        # dropping the cached router/model, otherwise CUDA memory is not freed.
+        release_sessions()
         cache.clear()
         gc.collect()
         try:
             import torch
 
+            torch.cuda.synchronize()
             torch.cuda.empty_cache()
         except Exception:
             pass
@@ -153,8 +184,8 @@ def run_demo(name: str, prompt: str) -> None:
 
 def main() -> None:
     st.set_page_config(page_title="Gate 8 Bank Agent", page_icon="🏦", layout="wide")
-    st.title("Gate 8 · Bank Customer-Service Agent")
-    st.caption("Offline Router-driven Agent · real Gate7 RejectOnly routers · RAG citations · SQLite tools · session isolation")
+    st.title("Gate 8.1 · Bank Customer-Service Agent")
+    st.caption("Offline Router-driven Agent · paired Gate8.1 routers · RAG citations · SQLite tools · session isolation")
     llm_status = LLMClient().status()
     if "pending_method" in st.session_state:
         st.session_state["router_choice"] = st.session_state.pop("pending_method")
@@ -163,6 +194,8 @@ def main() -> None:
         st.header("Model & run mode")
         name = st.radio("Intent router", ROUTER_NAMES, index=0, key="router_choice")
         st.caption("One encoder is loaded at a time to stay within 8 GB. Switching may reload the model.")
+        if st.session_state.get("last_release"):
+            st.caption(f"Last switch memory: {st.session_state['last_release']}")
         st.markdown("**Mode**: Offline Router-driven Agent")
         st.caption("LLM-assisted mode is optional and constrained; it is NOT RUN without API credentials.")
         st.json(llm_status, expanded=False)
