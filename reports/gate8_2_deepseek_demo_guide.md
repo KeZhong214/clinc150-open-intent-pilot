@@ -94,40 +94,46 @@ $env:TRANSFORMERS_OFFLINE = "1"
 
 打开 `http://localhost:8506`。
 
-侧栏：
+侧栏现在是中文：
 
 ```text
-Reply mode
-  ○ Offline Router-driven
-  ○ DeepSeek-assisted
+回复模式
+  ○ 离线客服模式（Offline Router-driven）
+  ○ DeepSeek 增强模式（DeepSeek-assisted）
 ```
 
-选择 `DeepSeek-assisted`。每轮回复下方应显示：
+选择 `DeepSeek 增强模式`。每轮回复下方应显示：
 
 ```text
-Reply source: deepseek · status: ok · elapsed: ...
-{ usage: {...} }
+回复来源：DeepSeek 润色 · 状态：ok · 耗时：...
+服务端 usage: {...}
 ```
 
-如果显示 `offline_blocked` / `NOT RUN_API_BLOCKED`，说明当前 Streamlit 进程没有继承 Key；
+如果显示 `中文翻译不可用` / `NOT RUN_API_BLOCKED`，说明当前 Streamlit 进程没有继承 Key；
 重启 PowerShell 和 Streamlit。
 
-## 6. 建议试的 5 个双模式场景
+中文输入会显示“中文翻译适配”：
+- 中文原文；
+- 翻译后的英文；
+- 翻译状态/耗时/usage；
+- 模型仍按翻译后的英文路由。
+
+## 6. 建议试的 5 个双模式场景（可用中文）
 
 1. **卡查询 + 补卡号**  
-   `I still have not received my card.` → `CARD-1001`  
-   看工具结果与自然措辞是否一致。
+   `我的银行卡 CARD-1001 还没有收到。` → `CARD-1001`  
+   看工具结果与中文措辞是否一致。
 2. **转账状态 + 追问**  
-   `My transfer has not arrived. Can you check it?` → `TXN-2001`
+   `我的转账 TXN-2001 还没到账。` → `TXN-2001`
 3. **取消确认前后**  
-   `Please cancel my transfer TXN-2002.` 先看确认提示；再输入 `yes`。  
+   `请取消转账 TXN-2002。` 先看确认提示；再输入 `确认`。  
    必须仍显示 `cancel_transfer` 先 `confirmed=false` 再 `true`。
 4. **FAQ/RAG**  
-   `What is the policy on transfer fees?`  
+   `转账手续费的政策是什么？`  
    必须保留 KB-013 等真实引用；DeepSeek 不能造新条款。
 5. **OOS/越权**  
-   `Can you book a flight to Paris?`  
-   `Please activate CARD-2001 now.`  
+   `帮我订一张去巴黎的机票。`  
+   `请激活 CARD-2001。`  
    必须仍 handoff/拒绝，不允许 DeepSeek 绕过。
 
 ## 7. 费用控制

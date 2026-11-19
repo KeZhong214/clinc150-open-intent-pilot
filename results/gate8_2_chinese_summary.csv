@@ -1,0 +1,4 @@
+router,n_cases,direct_accepted,direct_route_match,direct_oos_ok,translation_status,translated_route_match,note
+GTE-Frozen-RejectOnly,20,0,2,20,NOT RUN_API_BLOCKED,,Direct Chinese routing probe; translated routing requires a real DeepSeek key and was NOT RUN.
+Qwen-Frozen-RejectOnly,20,12,13,20,NOT RUN_API_BLOCKED,,Direct Chinese routing probe; translated routing requires a real DeepSeek key and was NOT RUN.
+Qwen-Plain42-RejectOnly,20,12,14,20,NOT RUN_API_BLOCKED,,Direct Chinese routing probe; translated routing requires a real DeepSeek key and was NOT RUN.

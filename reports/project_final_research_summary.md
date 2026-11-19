@@ -299,6 +299,16 @@ Gate8 把分类/拒识模块接成可操作的多轮银行 Agent：
 - 详细：`reports/gate8_2_eval_finalization.md`、
   `reports/gate8_2_deepseek_integration.md`。
 
+## 9.10 Gate 8.2 中文支持
+
+- Streamlit 工作台已改为简体中文；内部 intent/工具/权重标识保持原样；
+- 20 条中文探针：GTE 直接 accepted 0/20，Qwen Frozen 12/20，Qwen Plain 12/20；
+  不能把英文模型当可靠中文开放集模型；
+- DeepSeek 增强模式：中文→英文翻译（保留 CARD/TXN）→原 GTE/Qwen RejectOnly；
+  翻译不能指定 intent、不能覆盖 OOS；
+- 离线中文模板；DeepSeek 中文润色；无 Key 时翻译后路由 `NOT RUN_API_BLOCKED`；
+- 不修改 Gate8.1 冻结算法实验。
+
 ## 10. 最终研究结论
 
 ### 可以支持的结论

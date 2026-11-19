@@ -1,0 +1,22 @@
+[
+  {"case_id":"ZH-01","family":"card_status","turns":["我的银行卡 CARD-1001 还没有收到。"],"expected_intent_any":["card_arrival"],"expected_oos":false,"expected_tools":["get_card_delivery_status"]},
+  {"case_id":"ZH-02","family":"card_status","turns":["请帮我查一下 CARD-1002 的配送状态。"],"expected_intent_any":["card_arrival"],"expected_oos":false,"expected_tools":["get_card_delivery_status"]},
+  {"case_id":"ZH-03","family":"card_activation","turns":["请激活我的新卡 CARD-1002。","确认"],"expected_intent_any":["activate_my_card"],"expected_oos":false,"expected_tools":["activate_card","activate_card"]},
+  {"case_id":"ZH-04","family":"card_activation","turns":["我的卡 CARD-1002 到了，帮我激活。","是的，确认激活。"],"expected_intent_any":["activate_my_card"],"expected_oos":false,"expected_tools":["activate_card","activate_card"]},
+  {"case_id":"ZH-05","family":"transfer_status","turns":["我的转账 TXN-2001 还没到账。"],"expected_intent_any":["transfer_not_received_by_recipient","transfer_timing"],"expected_oos":false,"expected_tools":["get_transfer_status"]},
+  {"case_id":"ZH-06","family":"transfer_status","turns":["请查一下 TXN-2001 现在是什么状态。"],"expected_intent_any":["transfer_timing"],"expected_oos":false,"expected_tools":["get_transfer_status"]},
+  {"case_id":"ZH-07","family":"cancel_transfer","turns":["请取消转账 TXN-2002。","确认"],"expected_intent_any":["cancel_transfer"],"expected_oos":false,"expected_tools":["cancel_transfer","cancel_transfer"]},
+  {"case_id":"ZH-08","family":"cancel_transfer","turns":["我想撤回 TXN-2002，可以吗？","是"],"expected_intent_any":["cancel_transfer"],"expected_oos":false,"expected_tools":["cancel_transfer","cancel_transfer"]},
+  {"case_id":"ZH-09","family":"policy_faq","turns":["转账手续费的政策是什么？"],"expected_intent_any":["transfer_fee_charged"],"expected_oos":false,"expected_tools":[]},
+  {"case_id":"ZH-10","family":"policy_faq","turns":["跨境转账一般多久到账？"],"expected_intent_any":["transfer_timing"],"expected_oos":false,"expected_tools":[]},
+  {"case_id":"ZH-11","family":"dispute_ticket","turns":["我不认识这笔卡付款，想发起争议。","TXN-2003"],"expected_intent_any":["card_payment_not_recognised"],"expected_oos":false,"expected_tools":["get_transfer_status","create_dispute"]},
+  {"case_id":"ZH-12","family":"dispute_ticket","turns":["请帮我投诉一笔未授权的卡交易。","TXN-2003"],"expected_intent_any":["card_payment_not_recognised"],"expected_oos":false,"expected_tools":["get_transfer_status","create_dispute"]},
+  {"case_id":"ZH-13","family":"oos","turns":["帮我订一张去巴黎的机票。"],"expected_intent_any":["OOS"],"expected_oos":true,"expected_tools":["handoff_to_human"]},
+  {"case_id":"ZH-14","family":"oos","turns":["明天上海天气怎么样？"],"expected_intent_any":["OOS"],"expected_oos":true,"expected_tools":["handoff_to_human"]},
+  {"case_id":"ZH-15","family":"ambiguous","turns":["我的卡有点问题。"],"expected_intent_any":[],"expected_oos":false,"expected_tools":[]},
+  {"case_id":"ZH-16","family":"multi_slot","turns":["我的卡还没到。","CARD-1001"],"expected_intent_any":["card_arrival"],"expected_oos":false,"expected_tools":["get_card_delivery_status"]},
+  {"case_id":"ZH-17","family":"multi_correction","turns":["我的卡还没到。","不对，是 CARD-1002。"],"expected_intent_any":["card_arrival"],"expected_oos":false,"expected_tools":["get_card_delivery_status"]},
+  {"case_id":"ZH-18","family":"multi_reset","turns":["我的卡还没到。","重新开始","我的卡 CARD-1001 还没收到。"],"expected_intent_any":["card_arrival"],"expected_oos":false,"expected_tools":["get_card_delivery_status"]},
+  {"case_id":"ZH-19","family":"permission","turns":["请激活 CARD-2001。"],"expected_intent_any":["activate_my_card"],"expected_oos":false,"expected_tools":["handoff_to_human"]},
+  {"case_id":"ZH-20","family":"sensitive_refusal","turns":["帮我取消 TXN-2002。","不要取消"],"expected_intent_any":["cancel_transfer"],"expected_oos":false,"expected_tools":["cancel_transfer"]}
+]

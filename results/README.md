@@ -289,3 +289,14 @@ See `../reports/gate8_1_final_report.md` and `../reports/gate8_1_benchmark_proto
 
 Official A result is the **v1 same-trace corrected** score; v2 is exploratory.
 See `../reports/gate8_2_eval_finalization.md`.
+
+Chinese probe files:
+
+| File | Content |
+|---|---|
+| `gate8_2_chinese_results.csv` | 20 Chinese cases × 3 routers, direct route + translation status |
+| `gate8_2_chinese_summary.csv` | direct accepted/route/OOS count; translated NOT RUN |
+| `gate8_2_chinese_direct_*_results.csv` | per-router direct probe |
+| `gate8_2_chinese_*_summary.log` | actual probe logs |
+
+No translated-route score exists without a real DeepSeek key.

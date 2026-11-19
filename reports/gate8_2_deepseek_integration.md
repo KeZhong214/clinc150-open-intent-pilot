@@ -84,6 +84,8 @@ Reply mode
 - `figures/gate8_2_ui_offline.png`
 - `figures/gate8_2_ui_deepseek_blocked.png`
 - `figures/gate8_2_ui_assisted_blocked_demo.png`
+- `figures/gate8_2_ui_chinese_offline.png`
+- `figures/gate8_2_ui_chinese_blocked.png`
 
 ---
 
@@ -101,7 +103,11 @@ Reply mode
 - 401 错误不泄露 Key；
 - App 双模式与 source/usage 展示。
 
-日志：`logs/gate8_2_tests_b.log`。
+中文专项 `tests/test_gate8_2_chinese.py` 7 项：20 案例、直接探针、ID 保真、
+翻译拒绝新增/遗漏 ID、中文模板、中文 writer 拒绝虚假操作、中文 UI。
+全量 **108 tests OK**。
+
+日志：`logs/gate8_2_tests_b.log`、`logs/gate8_2_chinese_all_tests.log`。
 
 ---
 
@@ -132,7 +138,19 @@ $env:TRANSFORMERS_OFFLINE = "1"
 
 ---
 
-## 7. 评估边界
+## 7. 中文支持补充
+
+- UI 已改为简体中文；
+- 中文输入在 DeepSeek 增强模式下先翻译成英文，再交给原 GTE/Qwen RejectOnly；
+- 翻译只保留原始 CARD/TXN，不决定 intent，不覆盖 OOS；
+- 离线模式使用中文固定模板；
+- 中文探针 20 条已运行直接路由：
+  - GTE 0/20 accepted；Qwen Frozen 12/20；Qwen Plain42 12/20；
+  - 这证明不能把英文模型直接当可靠中文开放集模型；
+- 中文翻译后路由在无 Key 时为 `NOT RUN_API_BLOCKED`；
+- 详细：`reports/gate8_2_chinese_support.md`。
+
+## 8. 评估边界
 
 - API Demo 与 Gate8.2 A 的科研评分**完全分开**；
 - 不用 API Demo 改变 A 的 v1 复评/v2 结果；

@@ -177,8 +177,8 @@ class Gate8Test(unittest.TestCase):
         self.assertIn("Offline Router-driven", text)
         self.assertIn("DeepSeek-assisted", text)
         self.assertIn("threshold_source", text)
-        self.assertIn("Tool timeline", text)
-        self.assertIn("KB citations", text)
+        self.assertIn("工具调用记录", text)
+        self.assertIn("知识库引用", text)
 
 
 if __name__ == "__main__":

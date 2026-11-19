@@ -26,8 +26,33 @@ from src.gate8.llm_assist import LLMAssistant  # noqa: E402
 from src.gate8_1.routers import ROUTER_NAMES, build  # noqa: E402
 from src.gate8_2.deepseek_client import DeepSeekClient  # noqa: E402
 from src.gate8_2.grounded_writer import GroundedReplyWriter  # noqa: E402
+from src.gate8_2.chinese_adapter import ChineseTranslationAdapter  # noqa: E402
+from src.gate8_2.chinese_templates import chinese_reply  # noqa: E402
 
 MODES = ["Offline Router-driven", "DeepSeek-assisted"]
+MODE_LABELS = {
+    "Offline Router-driven": "离线客服模式（Offline Router-driven）",
+    "DeepSeek-assisted": "DeepSeek 增强模式（DeepSeek-assisted）",
+}
+DEMO_LABELS = {
+    "1. Card delivery": "1. 卡片配送查询",
+    "2. Activate card (confirm)": "2. 激活卡片（需确认）",
+    "3. Transfer status (slot)": "3. 转账状态（补充编号）",
+    "4. Cancel transfer (confirm)": "4. 取消转账（需确认）",
+    "5. Policy citation": "5. 政策/费用问答",
+    "6. Dispute completed txn": "6. 争议处理",
+    "7. Multi-turn correction": "7. 多轮纠正",
+    "8. OOS handoff": "8. OOS 转人工",
+    "9. Ownership / overreach": "9. 越权/权限拒绝",
+}
+SOURCE_LABELS = {
+    "offline": "离线模板",
+    "deepseek": "DeepSeek 润色",
+    "fallback": "安全回退",
+    "offline_blocked": "离线回退（API 未配置）",
+    "translation_blocked": "中文翻译不可用",
+    "translation_fallback": "翻译/歧义回退",
+}
 
 DEMOS = {
     "1. Card delivery": [
@@ -88,6 +113,11 @@ def deepseek_client():
 @st.cache_resource
 def deepseek_writer():
     return GroundedReplyWriter(deepseek_client())
+
+
+@st.cache_resource
+def chinese_translator():
+    return ChineseTranslationAdapter(deepseek_client())
 
 
 def release_sessions() -> dict:
@@ -171,9 +201,42 @@ def send(name: str, mode: str, text: str) -> None:
     key = f"{name}|{mode}"
     msgs = st.session_state.setdefault("messages", {})[key]
     msgs.append({"role": "user", "content": text})
-    turn = agent.handle(text)
+    translation = None
+    routing_text = text
+    if mode == "DeepSeek-assisted" and chinese_translator().has_chinese(text):
+        tr = chinese_translator().translate(text)
+        translation = {
+            "status": tr.status,
+            "original": text,
+            "translated": tr.text,
+            "elapsed_seconds": tr.elapsed_seconds,
+            "usage": tr.usage,
+            "error": tr.error,
+        }
+        if tr.status != "ok":
+            if tr.status == "NOT RUN_API_BLOCKED":
+                reply = "当前未配置 DeepSeek API，中文翻译不可用。你可以切换到“离线路由模式”，或先按配置指南设置 Key 后再使用 DeepSeek 增强模式。"
+                source = "translation_blocked"
+            else:
+                reply = "这条中文请求无法可靠翻译或存在歧义。为避免误触发银行业务，尚未执行任何工具；请换一种说法或补充业务编号。"
+                source = "translation_fallback"
+            msgs.append({
+                "role": "assistant",
+                "content": reply,
+                "route": {"method": None, "intent": None, "accepted": None, "score": None, "threshold": None, "top3": [], "gate_top1": None},
+                "tools": [],
+                "citations": [],
+                "state": {},
+                "translation": translation,
+                "reply_source": source,
+                "reply_meta": {"status": tr.status, "error": tr.error, "elapsed_seconds": tr.elapsed_seconds, "usage": tr.usage},
+            })
+            return
+        routing_text = tr.text
+    turn = agent.handle(routing_text)
     route = turn.route
-    reply = turn.response
+    template = chinese_reply(turn, text)
+    reply = template
     reply_source = "offline"
     reply_meta = {"status": "offline", "error": None, "elapsed_seconds": 0.0, "usage": {}}
     if mode == "DeepSeek-assisted":
@@ -182,14 +245,15 @@ def send(name: str, mode: str, text: str) -> None:
             reply_meta = {"status": "NOT RUN_API_BLOCKED", "error": "DEEPSEEK_API_KEY not configured", "elapsed_seconds": 0.0, "usage": {}}
         else:
             rr = deepseek_writer().rewrite(
-                user_text=text,
-                template=turn.response,
+                user_text=text + "\n[English routing text] " + routing_text,
+                template=template,
                 intent=route.intent if route else None,
                 accepted=route.accepted if route else False,
                 tool_results=turn.tools,
                 allowed_doc_ids=[c.get("doc_id") for c in turn.citations],
                 pending_confirmation=bool(turn.state.get("awaiting_confirmation")),
                 state=turn.state,
+                language="zh",
             )
             reply = rr.text
             reply_source = rr.source
@@ -198,6 +262,8 @@ def send(name: str, mode: str, text: str) -> None:
         {
             "role": "assistant",
             "content": reply,
+            "offline_template": template,
+            "translation": translation,
             "route": {
                 "method": route.method if route else None,
                 "intent": route.intent if route else None,
@@ -224,36 +290,37 @@ def run_demo(name: str, mode: str, prompt: str) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="Gate 8.2 Bank Agent", page_icon="🏦", layout="wide")
-    st.title("Gate 8.2 · Bank Customer-Service Agent")
-    st.caption("Offline Router-driven vs DeepSeek-assisted · paired Gate8.1 routers · RAG citations · SQLite tools · session isolation")
+    st.set_page_config(page_title="Gate 8.2 银行智能客服工作台", page_icon="🏦", layout="wide")
+    st.title("Gate 8.2 · 银行智能客服工作台")
+    st.caption("离线客服模式 / DeepSeek 增强模式 · Gate8.1 配对路由器 · 中文界面 · 真实工具与知识库")
     ds_status = deepseek_client().status()
     if "pending_method" in st.session_state:
         st.session_state["router_choice"] = st.session_state.pop("pending_method")
 
     with st.sidebar:
-        st.header("Model & run mode")
-        name = st.radio("Intent router", ROUTER_NAMES, index=0, key="router_choice")
-        mode = st.radio("Reply mode", MODES, index=0, key="reply_mode")
-        st.caption("One encoder is loaded at a time to stay within 8 GB. Switching may reload the model.")
+        st.header("模型与运行模式")
+        name = st.radio("意图路由模型（技术标识保持原样）", ROUTER_NAMES, index=0, key="router_choice")
+        mode = st.radio("回复模式", MODES, index=0, key="reply_mode", format_func=lambda x: MODE_LABELS[x])
+        st.caption("同一时间只加载一个编码器，避免 8GB 显存不足；切换模型会释放旧会话。")
+        st.caption("中文输入说明：离线模式为中文固定模板；DeepSeek 增强模式会先翻译成英文，再交给原英文路由模型。")
         if st.session_state.get("last_release"):
-            st.caption(f"Last switch memory: {st.session_state['last_release']}")
+            st.caption(f"上次模型切换显存：{st.session_state['last_release']}")
         if mode == "DeepSeek-assisted" and not ds_status["available"]:
-            st.error("DeepSeek-assisted selected, but DEEPSEEK_API_KEY is not configured. This run is NOT RUN_API_BLOCKED; replies fall back to offline templates.")
-        st.markdown(f"**Mode**: {mode}")
-        st.caption("Router/OOS and tool execution remain server-side; DeepSeek may only edit grounded wording.")
+            st.error("已选择 DeepSeek 增强模式，但未配置 DEEPSEEK_API_KEY。当前为 NOT RUN_API_BLOCKED，回复会回退到离线中文模板。")
+        st.markdown(f"**当前模式**：{MODE_LABELS[mode]}")
+        st.caption("意图/OOS、业务工具、确认和权限始终由本地 Agent 决定；DeepSeek 只负责翻译和中文措辞。")
         st.json(ds_status, expanded=False)
-        if st.button("Reset session + fictional DB", use_container_width=True):
+        if st.button("重置当前会话与虚构数据库", use_container_width=True):
             reset(name, mode)
             st.rerun()
         st.divider()
-        st.header("8+ live demos")
+        st.header("现场演示")
         for label in DEMOS:
-            if st.button(label, use_container_width=True):
+            if st.button(DEMO_LABELS[label], use_container_width=True):
                 run_demo(name, mode, label)
                 st.rerun()
         st.divider()
-        st.caption("All data is fictional. No real bank, credential, card number, or money is used.")
+        st.caption("所有业务数据均为模拟；没有真实银行、客户、卡号或资金。")
 
     router, meta = get_router(name)
     agent = get_agent(name, mode)
@@ -261,9 +328,9 @@ def main() -> None:
     chat_col, side_col = st.columns([1.45, 1.0], gap="large")
 
     with chat_col:
-        st.subheader("Conversation")
+        st.subheader("客服对话")
         if not msgs:
-            st.info("Pick a demo on the left, or type a request. Try `Hi, I still have not received my card. The reference is CARD-1001.`")
+            st.info("从左侧选择一个演示，或直接输入中文/英文请求。例如：`我的银行卡 CARD-1001 还没收到。`")
         for msg in msgs:
             with st.chat_message(msg["role"]):
                 st.markdown(msg["content"])
@@ -273,41 +340,50 @@ def main() -> None:
                 c1, c2, c3, c4 = st.columns(4)
                 score = f"{r['score']:.4f}" if r.get("score") is not None else "—"
                 threshold = f"{r['threshold']:.4f}" if r.get("threshold") is not None else "—"
-                c1.markdown(f"**Intent**  \n`{r.get('intent') or '—'}`")
-                c2.markdown(f"**Accepted**  \n`{r.get('accepted')}`")
-                c3.markdown(f"**Score**  \n`{score}`")
-                c4.markdown(f"**Threshold**  \n`{threshold}`")
+                c1.markdown(f"**意图**  \n`{r.get('intent') or '—'}`")
+                c2.markdown(f"**是否接受**  \n`{r.get('accepted')}`")
+                c3.markdown(f"**分数**  \n`{score}`")
+                c4.markdown(f"**阈值**  \n`{threshold}`")
+                if msg.get("translation"):
+                    tr = msg["translation"]
+                    with st.expander(f"中文翻译适配（{tr.get('status')}）", expanded=False):
+                        st.write("中文原文：", tr.get("original"))
+                        st.write("翻译后英文：", tr.get("translated") or "—")
+                        st.json({"status": tr.get("status"), "elapsed_seconds": tr.get("elapsed_seconds"), "usage": tr.get("usage"), "error": tr.get("error")})
                 if r.get("top3"):
                     st.dataframe(
                         pd.DataFrame(
-                            [{"rank": i + 1, "intent": n, "score": round(float(s), 5)} for i, (n, s) in enumerate(r["top3"])]
+                            [{"排名": i + 1, "意图": n, "分数": round(float(s), 5)} for i, (n, s) in enumerate(r["top3"])]
                         ),
                         hide_index=True,
                         use_container_width=True,
                     )
                 rm = msg.get("reply_meta") or {}
-                st.caption(f"Reply source: **{msg.get('reply_source', 'offline')}** · status: `{rm.get('status', 'offline')}` · elapsed: {rm.get('elapsed_seconds', 0.0):.3f}s")
+                st.caption(f"回复来源：**{SOURCE_LABELS.get(msg.get('reply_source', 'offline'), msg.get('reply_source'))}** · 状态：`{rm.get('status', 'offline')}` · 耗时：{rm.get('elapsed_seconds', 0.0):.3f}s")
                 if rm.get("usage"):
-                    st.json({"usage": rm["usage"]}, expanded=False)
+                    st.json({"服务端 usage": rm["usage"]}, expanded=False)
                 if rm.get("error"):
-                    st.caption(f"DeepSeek fallback reason: {rm['error']}")
+                    st.caption(f"安全回退原因：{rm['error']}")
+                if msg.get("offline_template") and msg.get("reply_source") in {"deepseek", "fallback"}:
+                    with st.expander("离线中文模板（对照）", expanded=False):
+                        st.write(msg["offline_template"])
                 if msg.get("citations"):
-                    with st.expander(f"KB citations ({len(msg['citations'])})", expanded=True):
+                    with st.expander(f"知识库引用（{len(msg['citations'])} 条）", expanded=True):
                         for c in msg["citations"]:
                             st.markdown(f"**{c['doc_id']}** · {c['title']} · {c['citation']}")
                             st.caption(c["text"])
                 if msg.get("tools"):
-                    with st.expander(f"Tool timeline ({len(msg['tools'])} calls)", expanded=True):
+                    with st.expander(f"工具调用记录（{len(msg['tools'])} 次）", expanded=True):
                         for t in msg["tools"]:
                             st.markdown(f"**{t['tool']}** `{t['args']}`")
                             st.json(t["result"])
-        prompt = st.chat_input("Ask about a fictional card, transfer, dispute, fee, or policy...")
+        prompt = st.chat_input("请输入中文银行客服请求，例如：我的卡还没收到 / 帮我取消转账 TXN-2002")
         if prompt:
             send(name, mode, prompt)
             st.rerun()
 
     with side_col:
-        st.subheader("Model decision provenance")
+        st.subheader("模型决策来源")
         st.json(
             {
                 "router": meta["name"],
@@ -316,13 +392,14 @@ def main() -> None:
                 "threshold_source": meta["threshold_source"],
                 "checkpoint_sha256": meta["checkpoint_sha256"],
                 "adapter_sha256": meta["adapter_sha256"],
-                "mode": "OFFLINE_ROUTER_DRIVEN",
+                "mode": MODE_LABELS[mode],
+                "deepseek_model": ds_status["model"],
             },
             expanded=False,
         )
-        st.subheader("Business state")
+        st.subheader("业务状态")
         snap = agent.snapshot()
-        tabs = st.tabs(["Cards", "Transfers", "Tickets", "Disputes", "Audit"])
+        tabs = st.tabs(["银行卡", "转账", "工单", "争议", "审计"])
         with tabs[0]:
             st.dataframe(pd.DataFrame(snap["cards"]), hide_index=True, use_container_width=True)
         with tabs[1]:
@@ -333,12 +410,12 @@ def main() -> None:
             st.dataframe(pd.DataFrame(snap["disputes"]), hide_index=True, use_container_width=True)
         with tabs[4]:
             st.dataframe(pd.DataFrame(snap["audit_events"]).head(25), hide_index=True, use_container_width=True)
-        st.subheader("Policy KB")
-        q = st.text_input("Search fictional policy", value="transfer fee")
+        st.subheader("虚构政策知识库")
+        q = st.text_input("检索虚构政策（英文关键词）", value="transfer fee")
         if q:
             hits = kb().search(q, k=3)
             st.dataframe(
-                pd.DataFrame([{"doc_id": h["doc_id"], "title": h["title"], "score": round(h["score"], 4)} for h in hits]),
+                pd.DataFrame([{"文档编号": h["doc_id"], "标题": h["title"], "相关度": round(h["score"], 4)} for h in hits]),
                 hide_index=True,
                 use_container_width=True,
             )
