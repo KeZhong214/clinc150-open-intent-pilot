@@ -1,4 +1,4 @@
-"""Build the full rich-UI Agent project ZIP, including the local API env.
+﻿"""Build the full rich-UI Agent project ZIP, including the local API env.
 
 The API env file is local-only and must be created by the owner. This builder
 never prints the key and refuses to build when the file is absent or contains
@@ -130,7 +130,7 @@ def main() -> int:
     full = copy_tree("full", files + adapter)
     (full / "README_RELEASE.md").write_text((ROOT / "README_FULL.md").read_text(encoding="utf-8"), encoding="utf-8")
     (full / "deliverables").mkdir(exist_ok=True)
-    pptx = ROOT / "exports" / "少样本开放意图识别与智能客服_12页.pptx"
+    pptx = ROOT / "exports" / "少样本开放意图识别与智能客服_13页.pptx"
     if pptx.exists():
         shutil.copy2(pptx, full / "deliverables" / pptx.name)
     write_manifest(full)
@@ -145,3 +145,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

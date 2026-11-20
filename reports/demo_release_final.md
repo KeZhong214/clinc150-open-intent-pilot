@@ -163,7 +163,7 @@ OK
 
 | 文件 | 大小 | SHA256 |
 |---|---:|---|
-| `dist/OpenIntent_full_demo_project.zip` | 55,225,519 B | `7a69489bb590b03be3eeaa6176990c80feb84dc295b885b4f176a12e5de6f05d` |
+| `dist/OpenIntent_full_demo_project.zip` | 54,902,684 B | `278255aee747ea5ec97772848ca09e30fde211397c1ac0e5c193e034d228eddd` |
 
 `zipfile.testzip()`：`OK`。  
 包含：
@@ -176,7 +176,7 @@ OK
 - 3 个 embedding 缓存；
 - 30 条虚构政策；
 - 核心结果 CSV、5 张最终分析图；
-- 12 页最终 PPTX；
+- 13 页最终 PPTX（新增文献调研页）；
 - 完整 API 环境配置 `configs/demo_api.env`（本地敏感）；
 - 完整 API 卡片/取消成功截图；
 - 两页操作卡和 README。

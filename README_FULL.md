@@ -15,7 +15,7 @@ It includes:
 - the Chinese translation adapter and grounded DeepSeek writer;
 - the 30-document fictional policy KB;
 - selected model heads, Qwen Plain42 adapter and selected embedding caches;
-- the final 12-page PPTX under `deliverables/`;
+- the final 13-page PPTX under `deliverables/`;
 - tests, reports, the PPT analysis figures and the two-page operation card.
 
 ## API-first launch
