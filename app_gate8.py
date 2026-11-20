@@ -9,6 +9,7 @@ os.environ["TRANSFORMERS_OFFLINE"] = "1"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import gc
+import hmac
 import sys
 import uuid
 from pathlib import Path
@@ -331,8 +332,20 @@ def run_demo(name: str, mode: str, prompt: str) -> None:
     st.session_state["last_demo"] = prompt
 
 
+def _access_allowed() -> bool:
+    """Optional shared-token gate for a temporary public tunnel."""
+    expected = os.environ.get("OPENINTENT_ACCESS_TOKEN", "")
+    if not expected:
+        return True
+    supplied = st.query_params.get("token", "")
+    return hmac.compare_digest(str(supplied), expected)
+
+
 def main() -> None:
     st.set_page_config(page_title="Gate 8.2 银行智能客服工作台", page_icon="🏦", layout="wide")
+    if not _access_allowed():
+        st.error("演示访问令牌缺失或无效。请使用包含 token 的完整链接。")
+        st.stop()
     st.title("Gate 8.2 · 银行智能客服工作台")
     st.caption("离线客服模式 / DeepSeek 增强模式 · Gate8.1 配对路由器 · 中文界面 · 真实工具与知识库")
     ds_status = deepseek_client().status()

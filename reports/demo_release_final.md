@@ -163,7 +163,7 @@ OK
 
 | 文件 | 大小 | SHA256 |
 |---|---:|---|
-| `dist/OpenIntent_full_demo_project.zip` | 54,902,684 B | `278255aee747ea5ec97772848ca09e30fde211397c1ac0e5c193e034d228eddd` |
+| `dist/OpenIntent_full_demo_project.zip` | 54,903,335 B | `6058974ab92a76b13411106cd69658bf96eb2b81b6a7d93713b421d30a4d8550` |
 
 `zipfile.testzip()`：`OK`。  
 包含：

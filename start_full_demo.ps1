@@ -1,5 +1,6 @@
 param(
     [switch]$PreflightOnly,
+    [switch]$Lan,
     [int]$Port = 8506
 )
 
@@ -52,6 +53,15 @@ $env:TOKENIZERS_PARALLELISM = "false"
 $env:OPENINTENT_DEFAULT_MODE = "DeepSeek-assisted"
 $env:OPENINTENT_DEFAULT_ROUTER = "Qwen-Plain42-RejectOnly"
 
+$TokenFile = Join-Path $Root "configs\demo_access_token.txt"
+if (Test-Path $TokenFile) {
+    $DemoToken = (Get-Content -LiteralPath $TokenFile -Raw -Encoding utf8).Trim()
+} else {
+    $DemoToken = [guid]::NewGuid().ToString("N")
+    Set-Content -LiteralPath $TokenFile -Value $DemoToken -Encoding utf8
+}
+$env:OPENINTENT_ACCESS_TOKEN = $DemoToken
+
 Write-Host "=== Full rich demo preflight ===" -ForegroundColor Cyan
 & $Python (Join-Path $Root "preflight_demo.py")
 if ($LASTEXITCODE -ne 0) {
@@ -60,6 +70,20 @@ if ($LASTEXITCODE -ne 0) {
 }
 if ($PreflightOnly) { Write-Host "Preflight-only complete."; exit 0 }
 
-Write-Host "=== Full rich demo: http://127.0.0.1:$Port ===" -ForegroundColor Green
+$BindAddress = if ($Lan) { "0.0.0.0" } else { "127.0.0.1" }
+if ($Lan) {
+    try {
+        New-NetFirewallRule -DisplayName "OpenIntent Demo 8506" -Direction Inbound -Action Allow -Protocol TCP -LocalPort $Port -Profile Private -ErrorAction Stop | Out-Null
+        Write-Host "Firewall: allowed TCP $Port on the Private profile." -ForegroundColor Cyan
+    } catch {
+        Write-Host "Firewall rule not changed (run PowerShell as Administrator if teammates cannot connect)." -ForegroundColor Yellow
+    }
+    $LanIP = (Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -and $_.NetAdapter.Status -eq "Up" } | Select-Object -First 1).IPv4Address.IPAddress
+    if ($LanIP) {
+        Write-Host "LAN URL: http://$LanIP`:$Port/?token=$DemoToken" -ForegroundColor Green
+    }
+}
+
+Write-Host "=== Full rich demo: http://127.0.0.1:$Port/?token=$DemoToken ===" -ForegroundColor Green
 Write-Host "Model: Qwen-Plain42-RejectOnly | default mode: DeepSeek-assisted"
-& $Python -m streamlit run (Join-Path $Root "app_gate8.py") --server.address 127.0.0.1 --server.port $Port --server.headless true --server.fileWatcherType none
+& $Python -m streamlit run (Join-Path $Root "app_gate8.py") --server.address $BindAddress --server.port $Port --server.headless true --server.fileWatcherType none
